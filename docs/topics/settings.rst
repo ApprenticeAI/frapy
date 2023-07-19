@@ -4,14 +4,14 @@
 Settings
 ========
 
-The Scrapy settings allows you to customize the behaviour of all Scrapy
+The Frapy settings allows you to customize the behaviour of all Frapy
 components, including the core, extensions, pipelines and spiders themselves.
 
 The infrastructure of the settings provides a global namespace of key-value mappings
 that the code can use to pull configuration values from. The settings can be
 populated through different mechanisms, which are described below.
 
-The settings are also the mechanism for selecting the currently active Scrapy
+The settings are also the mechanism for selecting the currently active Frapy
 project (in case you have many).
 
 For a list of available built-in settings see: :ref:`topics-settings-ref`.
@@ -21,10 +21,10 @@ For a list of available built-in settings see: :ref:`topics-settings-ref`.
 Designating the settings
 ========================
 
-When you use Scrapy, you have to tell it which settings you're using. You can
-do this by using an environment variable, ``SCRAPY_SETTINGS_MODULE``.
+When you use Frapy, you have to tell it which settings you're using. You can
+do this by using an environment variable, ``FRAPY_SETTINGS_MODULE``.
 
-The value of ``SCRAPY_SETTINGS_MODULE`` should be in Python path syntax, e.g.
+The value of ``FRAPY_SETTINGS_MODULE`` should be in Python path syntax, e.g.
 ``myproject.settings``. Note that the settings module should be on the
 Python :ref:`import search path <tut-searchpath>`.
 
@@ -84,15 +84,15 @@ do so by setting their :attr:`~frapy.Spider.custom_settings` attribute:
 3. Project settings module
 --------------------------
 
-The project settings module is the standard configuration file for your Scrapy
+The project settings module is the standard configuration file for your Frapy
 project, it's where most of your custom settings will be populated. For a
-standard Scrapy project, this means you'll be adding or changing the settings
+standard Frapy project, this means you'll be adding or changing the settings
 in the ``settings.py`` file created for your project.
 
 4. Default settings per-command
 -------------------------------
 
-Each :doc:`Scrapy tool </topics/commands>` command can have its own default
+Each :doc:`Frapy tool </topics/commands>` command can have its own default
 settings, which override the global default settings. Those custom command
 settings are specified in the ``default_settings`` attribute of the command
 class.
@@ -113,7 +113,7 @@ Import paths and classes
 
 .. versionadded:: 2.4.0
 
-When a setting references a callable object to be imported by Scrapy, such as a
+When a setting references a callable object to be imported by Frapy, such as a
 class or a function, there are two different ways you can specify that object:
 
 -   As a string containing the import path of that object
@@ -193,7 +193,7 @@ example, proper setting names for a fictional robots.txt extension would be
 Built-in settings reference
 ===========================
 
-Here's a list of all available Scrapy settings, in alphabetical order, along
+Here's a list of all available Frapy settings, in alphabetical order, along
 with their default values and the scope where they apply.
 
 The scope, where available, shows where the setting is being used, if it's tied
@@ -260,7 +260,7 @@ AWS_VERIFY
 
 Default: ``None``
 
-Verify SSL connection between Scrapy and S3 or S3-like storage. By default
+Verify SSL connection between Frapy and S3 or S3-like storage. By default
 SSL verification will occur.
 
 .. setting:: AWS_REGION_NAME
@@ -294,7 +294,7 @@ Note that the event loop class must inherit from :class:`asyncio.AbstractEventLo
 
 .. caution:: Please be aware that, when using a non-default event loop
     (either defined via :setting:`ASYNCIO_EVENT_LOOP` or installed with
-    :func:`~frapy.utils.reactor.install_reactor`), Scrapy will call
+    :func:`~frapy.utils.reactor.install_reactor`), Frapy will call
     :func:`asyncio.set_event_loop`, which will set the specified event loop
     as the current loop for the current OS thread.
 
@@ -305,7 +305,7 @@ BOT_NAME
 
 Default: ``'frapybot'``
 
-The name of the bot implemented by this Scrapy project (also known as the
+The name of the bot implemented by this Frapy project (also known as the
 project name). This name will be used for the logging too.
 
 It's automatically populated with your project name when you create your
@@ -329,7 +329,7 @@ CONCURRENT_REQUESTS
 Default: ``16``
 
 The maximum number of concurrent (i.e. simultaneous) requests that will be
-performed by the Scrapy downloader.
+performed by the Frapy downloader.
 
 .. setting:: CONCURRENT_REQUESTS_PER_DOMAIN
 
@@ -371,7 +371,7 @@ DEFAULT_ITEM_CLASS
 Default: ``'frapy.Item'``
 
 The default class that will be used for instantiating items in the :ref:`the
-Scrapy shell <topics-shell>`.
+Frapy shell <topics-shell>`.
 
 .. setting:: DEFAULT_REQUEST_HEADERS
 
@@ -387,7 +387,7 @@ Default:
         "Accept-Language": "en",
     }
 
-The default headers used for Scrapy HTTP Requests. They're populated in the
+The default headers used for Frapy HTTP Requests. They're populated in the
 :class:`~frapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware`.
 
 .. caution:: Cookies set via the ``Cookie`` header are not considered by the
@@ -477,7 +477,7 @@ Default: ``'frapy.resolver.CachingThreadedResolver'``
 
 The class to be used to resolve DNS names. The default ``frapy.resolver.CachingThreadedResolver``
 supports specifying a timeout for DNS requests via the :setting:`DNS_TIMEOUT` setting,
-but works only with IPv4 addresses. Scrapy provides an alternative resolver,
+but works only with IPv4 addresses. Frapy provides an alternative resolver,
 ``frapy.resolver.CachingHostnameResolver``, which supports IPv4/IPv6 addresses but does not
 take the :setting:`DNS_TIMEOUT` setting into account.
 
@@ -504,7 +504,7 @@ The downloader to use for crawling.
 DOWNLOADER_HTTPCLIENTFACTORY
 ----------------------------
 
-Default: ``'frapy.core.downloader.webclient.ScrapyHTTPClientFactory'``
+Default: ``'frapy.core.downloader.webclient.FrapyHTTPClientFactory'``
 
 Defines a Twisted ``protocol.ClientFactory``  class to use for HTTP/1.0
 connections (for ``HTTP10DownloadHandler``).
@@ -521,7 +521,7 @@ connections (for ``HTTP10DownloadHandler``).
 DOWNLOADER_CLIENTCONTEXTFACTORY
 -------------------------------
 
-Default: ``'frapy.core.downloader.contextfactory.ScrapyClientContextFactory'``
+Default: ``'frapy.core.downloader.contextfactory.FrapyClientContextFactory'``
 
 Represents the classpath to the ContextFactory to use.
 
@@ -531,11 +531,11 @@ or even enable client-side authentication (and various other things).
 
 .. note::
 
-    Scrapy default context factory **does NOT perform remote server
+    Frapy default context factory **does NOT perform remote server
     certificate verification**. This is usually fine for web scraping.
 
     If you do need remote server certificate verification enabled,
-    Scrapy also has another context factory class that you can set,
+    Frapy also has another context factory class that you can set,
     ``'frapy.core.downloader.contextfactory.BrowserLikeContextFactory'``,
     which uses the platform's certificates to validate remote endpoints.
 
@@ -579,7 +579,7 @@ This setting must be one of these string values:
   which allows protocol negotiation, starting from the highest supported
   by the platform; **default, recommended**
 - ``'TLSv1.0'``: this value forces HTTPS connections to use TLS version 1.0 ;
-  set this if you want the behavior of Scrapy<1.1
+  set this if you want the behavior of Frapy<1.1
 - ``'TLSv1.1'``: forces TLS version 1.1
 - ``'TLSv1.2'``: forces TLS version 1.2
 
@@ -634,7 +634,7 @@ Default:
         "frapy.downloadermiddlewares.httpcache.HttpCacheMiddleware": 900,
     }
 
-A dict containing the downloader middlewares enabled by default in Scrapy. Low
+A dict containing the downloader middlewares enabled by default in Frapy. Low
 orders are closer to the engine, high orders are closer to the downloader. You
 should never modify this setting in your project, modify
 :setting:`DOWNLOADER_MIDDLEWARES` instead.  For more info see
@@ -721,7 +721,7 @@ Default:
     }
 
 
-A dict containing the request download handlers enabled by default in Scrapy.
+A dict containing the request download handlers enabled by default in Frapy.
 You should never modify this setting in your project, modify
 :setting:`DOWNLOAD_HANDLERS` instead.
 
@@ -752,13 +752,13 @@ The default HTTPS handler uses HTTP/1.1. To use HTTP/2:
 
 .. warning::
 
-    HTTP/2 support in Scrapy is experimental, and not yet recommended for
-    production environments. Future Scrapy versions may introduce related
+    HTTP/2 support in Frapy is experimental, and not yet recommended for
+    production environments. Future Frapy versions may introduce related
     changes without a deprecation period or warning.
 
 .. note::
 
-    Known limitations of the current HTTP/2 implementation of Scrapy include:
+    Known limitations of the current HTTP/2 implementation of Frapy include:
 
     -   No support for HTTP/2 Cleartext (h2c), since no major browser supports
         HTTP/2 unencrypted (refer `http2 faq`_).
@@ -957,7 +957,7 @@ Default:
         "frapy.extensions.throttle.AutoThrottle": 0,
     }
 
-A dict containing the extensions available by default in Scrapy, and their
+A dict containing the extensions available by default in Frapy, and their
 orders. This setting contains all stable built-in extensions. Keep in mind that
 some of them need to be enabled through a setting.
 
@@ -1057,7 +1057,7 @@ ITEM_PIPELINES_BASE
 
 Default: ``{}``
 
-A dict containing the pipelines enabled by default in Scrapy. You should never
+A dict containing the pipelines enabled by default in Frapy. You should never
 modify this setting in your project, modify :setting:`ITEM_PIPELINES` instead.
 
 .. setting:: JOBDIR
@@ -1157,7 +1157,7 @@ LOG_STDOUT
 Default: ``False``
 
 If ``True``, all standard output (and error) of your process will be redirected
-to the log. For example if you ``print('hello')`` it will appear in the Scrapy
+to the log. For example if you ``print('hello')`` it will appear in the Frapy
 log.
 
 .. setting:: LOG_SHORT_NAMES
@@ -1215,7 +1215,7 @@ Scope: ``frapy.extensions.memusage``
 
 Whether to enable the memory usage extension. This extension keeps track of
 a peak memory used by the process (it writes it to stats). It can also
-optionally shutdown the Scrapy process when it exceeds a memory limit
+optionally shutdown the Frapy process when it exceeds a memory limit
 (see :setting:`MEMUSAGE_LIMIT_MB`), and notify by email when that happened
 (see :setting:`MEMUSAGE_NOTIFY_MAIL`).
 
@@ -1231,7 +1231,7 @@ Default: ``0``
 Scope: ``frapy.extensions.memusage``
 
 The maximum amount of memory to allow (in megabytes) before shutting down
-Scrapy  (if MEMUSAGE_ENABLED is True). If zero, no check will be performed.
+Frapy  (if MEMUSAGE_ENABLED is True). If zero, no check will be performed.
 
 See :ref:`topics-extensions-ref-memusage`.
 
@@ -1302,7 +1302,7 @@ RANDOMIZE_DOWNLOAD_DELAY
 
 Default: ``True``
 
-If enabled, Scrapy will wait a random amount of time (between 0.5 * :setting:`DOWNLOAD_DELAY` and 1.5 * :setting:`DOWNLOAD_DELAY`) while fetching requests from the same
+If enabled, Frapy will wait a random amount of time (between 0.5 * :setting:`DOWNLOAD_DELAY` and 1.5 * :setting:`DOWNLOAD_DELAY`) while fetching requests from the same
 website.
 
 This randomization decreases the chance of the crawler being detected (and
@@ -1323,7 +1323,7 @@ REACTOR_THREADPOOL_MAXSIZE
 Default: ``10``
 
 The maximum limit for Twisted Reactor thread pool size. This is common
-multi-purpose thread pool used by various Scrapy components. Threaded
+multi-purpose thread pool used by various Frapy components. Threaded
 DNS Resolver, BlockingFeedStorage, S3FilesStore just to name a few. Increase
 this value if you're experiencing problems with insufficient blocking IO.
 
@@ -1350,7 +1350,7 @@ Default: ``False``
 
 Scope: ``frapy.downloadermiddlewares.robotstxt``
 
-If enabled, Scrapy will respect robots.txt policies. For more information see
+If enabled, Frapy will respect robots.txt policies. For more information see
 :ref:`topics-dlmw-robots`.
 
 .. note::
@@ -1434,12 +1434,12 @@ Type of in-memory queue used by scheduler. Other available type is:
 
 SCHEDULER_PRIORITY_QUEUE
 ------------------------
-Default: ``'frapy.pqueues.ScrapyPriorityQueue'``
+Default: ``'frapy.pqueues.FrapyPriorityQueue'``
 
 Type of priority queue used by the scheduler. Another available type is
 ``frapy.pqueues.DownloaderAwarePriorityQueue``.
 ``frapy.pqueues.DownloaderAwarePriorityQueue`` works better than
-``frapy.pqueues.ScrapyPriorityQueue`` when you crawl many different
+``frapy.pqueues.FrapyPriorityQueue`` when you crawl many different
 domains in parallel. But currently ``frapy.pqueues.DownloaderAwarePriorityQueue``
 does not work together with :setting:`CONCURRENT_REQUESTS_PER_IP`.
 
@@ -1455,7 +1455,7 @@ Default: ``5_000_000``
 Soft limit (in bytes) for response data being processed.
 
 While the sum of the sizes of all responses being processed is above this value,
-Scrapy does not process new requests.
+Frapy does not process new requests.
 
 .. setting:: SPIDER_CONTRACTS
 
@@ -1482,7 +1482,7 @@ Default:
         "frapy.contracts.default.ScrapesContract": 3,
     }
 
-A dict containing the Scrapy contracts enabled by default in Scrapy. You should
+A dict containing the Frapy contracts enabled by default in Frapy. You should
 never modify this setting in your project, modify :setting:`SPIDER_CONTRACTS`
 instead. For more info see :ref:`topics-contracts`.
 
@@ -1513,7 +1513,7 @@ SPIDER_LOADER_WARN_ONLY
 
 Default: ``False``
 
-By default, when Scrapy tries to import spider classes from :setting:`SPIDER_MODULES`,
+By default, when Frapy tries to import spider classes from :setting:`SPIDER_MODULES`,
 it will fail loudly if there is any ``ImportError`` exception.
 But you can choose to silence this exception and turn it into a simple
 warning by setting ``SPIDER_LOADER_WARN_ONLY = True``.
@@ -1554,7 +1554,7 @@ Default:
         "frapy.spidermiddlewares.depth.DepthMiddleware": 900,
     }
 
-A dict containing the spider middlewares enabled by default in Scrapy, and
+A dict containing the spider middlewares enabled by default in Frapy, and
 their orders. Low orders are closer to the engine, high orders are closer to
 the spider. For more info see :ref:`topics-spider-middleware-setting`.
 
@@ -1565,7 +1565,7 @@ SPIDER_MODULES
 
 Default: ``[]``
 
-A list of modules where Scrapy will look for spiders.
+A list of modules where Frapy will look for spiders.
 
 Example:
 
@@ -1590,7 +1590,7 @@ STATS_DUMP
 
 Default: ``True``
 
-Dump the :ref:`Scrapy stats <topics-stats>` (to the Scrapy log) once the spider
+Dump the :ref:`Frapy stats <topics-stats>` (to the Frapy log) once the spider
 finishes.
 
 For more info see: :ref:`topics-stats`.
@@ -1602,7 +1602,7 @@ STATSMAILER_RCPTS
 
 Default: ``[]`` (empty list)
 
-Send Scrapy stats after spiders finish scraping. See
+Send Frapy stats after spiders finish scraping. See
 :class:`~frapy.extensions.statsmailer.StatsMailer` for more info.
 
 .. setting:: TELNETCONSOLE_ENABLED
@@ -1640,7 +1640,7 @@ Default: ``None``
 
 Import path of a given :mod:`~twisted.internet.reactor`.
 
-Scrapy will install this reactor if no other reactor is installed yet, such as
+Frapy will install this reactor if no other reactor is installed yet, such as
 when the ``frapy`` CLI program is invoked or when using the
 :class:`~frapy.crawler.CrawlerProcess` class.
 
@@ -1657,10 +1657,10 @@ If a reactor is already installed,
 :exc:`Exception` if the installed reactor does not match the
 :setting:`TWISTED_REACTOR` setting; therefore, having top-level
 :mod:`~twisted.internet.reactor` imports in project files and imported
-third-party libraries will make Scrapy raise :exc:`Exception` when
+third-party libraries will make Frapy raise :exc:`Exception` when
 it checks which reactor is installed.
 
-In order to use the reactor installed by Scrapy:
+In order to use the reactor installed by Frapy:
 
 .. code-block:: python
 
@@ -1722,7 +1722,7 @@ which raises :exc:`Exception`, becomes:
 
 
 The default value of the :setting:`TWISTED_REACTOR` setting is ``None``, which
-means that Scrapy will use the existing reactor if one is already installed, or
+means that Frapy will use the existing reactor if one is already installed, or
 install the default reactor defined by Twisted for the current platform. This
 is to maintain backward compatibility and avoid possible problems caused by
 using a non-default reactor.
@@ -1763,7 +1763,7 @@ length`_, even though this setting exists for different reasons.
 USER_AGENT
 ----------
 
-Default: ``"Scrapy/VERSION (+https://frapy.org)"``
+Default: ``"Frapy/VERSION (+https://frapy.org)"``
 
 The default User-Agent to use when crawling, unless overridden. This user agent is
 also used by :class:`~frapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware`

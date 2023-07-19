@@ -434,7 +434,7 @@ class BaseSettings(MutableMapping):
         settings.
 
         This method can be useful for example for printing settings
-        in Scrapy shell.
+        in Frapy shell.
         """
         settings = self.copy()
         return settings._to_dict()
@@ -448,7 +448,7 @@ class BaseSettings(MutableMapping):
 
 class Settings(BaseSettings):
     """
-    This object stores Scrapy settings for the configuration of internal
+    This object stores Frapy settings for the configuration of internal
     components, and can be used for any further customization.
 
     It is a direct subclass and supports all methods of

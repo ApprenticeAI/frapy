@@ -5,20 +5,20 @@ Frequently Asked Questions
 
 .. _faq-frapy-bs-cmp:
 
-How does Scrapy compare to BeautifulSoup or lxml?
+How does Frapy compare to BeautifulSoup or lxml?
 -------------------------------------------------
 
-`BeautifulSoup`_ and `lxml`_ are libraries for parsing HTML and XML. Scrapy is
+`BeautifulSoup`_ and `lxml`_ are libraries for parsing HTML and XML. Frapy is
 an application framework for writing web spiders that crawl web sites and
 extract data from them.
 
-Scrapy provides a built-in mechanism for extracting data (called
+Frapy provides a built-in mechanism for extracting data (called
 :ref:`selectors <topics-selectors>`) but you can easily use `BeautifulSoup`_
 (or `lxml`_) instead, if you feel more comfortable working with them. After
 all, they're just parsing libraries which can be imported and used from any
 Python code.
 
-In other words, comparing `BeautifulSoup`_ (or `lxml`_) to Scrapy is like
+In other words, comparing `BeautifulSoup`_ (or `lxml`_) to Frapy is like
 comparing `jinja2`_ to `Django`_.
 
 .. _BeautifulSoup: https://www.crummy.com/software/BeautifulSoup/
@@ -26,12 +26,12 @@ comparing `jinja2`_ to `Django`_.
 .. _jinja2: https://palletsprojects.com/p/jinja/
 .. _Django: https://www.djangoproject.com/
 
-Can I use Scrapy with BeautifulSoup?
+Can I use Frapy with BeautifulSoup?
 ------------------------------------
 
 Yes, you can.
 As mentioned :ref:`above <faq-frapy-bs-cmp>`, `BeautifulSoup`_ can be used
-for parsing HTML responses in Scrapy callbacks.
+for parsing HTML responses in Frapy callbacks.
 You just have to feed the response's body into a ``BeautifulSoup`` object
 and extract whatever data you need from it.
 
@@ -62,12 +62,12 @@ Here's an example spider using BeautifulSoup API, with ``lxml`` as the HTML pars
 .. _BeautifulSoup's official documentation: https://www.crummy.com/software/BeautifulSoup/bs4/doc/#specifying-the-parser-to-use
 
 
-Did Scrapy "steal" X from Django?
+Did Frapy "steal" X from Django?
 ---------------------------------
 
 Probably, but we don't like that word. We think Django_ is a great open source
 project and an example to follow, so we've used it as an inspiration for
-Scrapy.
+Frapy.
 
 We believe that, if something is already done well, there's no need to reinvent
 it. This concept, besides being one of the foundations for open source and free
@@ -76,13 +76,13 @@ policies, etc. So, instead of going through each problem ourselves, we choose
 to copy ideas from those projects that have already solved them properly, and
 focus on the real problems we need to solve.
 
-We'd be proud if Scrapy serves as an inspiration for other projects. Feel free
+We'd be proud if Frapy serves as an inspiration for other projects. Feel free
 to steal from us!
 
-Does Scrapy work with HTTP proxies?
+Does Frapy work with HTTP proxies?
 -----------------------------------
 
-Yes. Support for HTTP proxies is provided (since Scrapy 0.8) through the HTTP
+Yes. Support for HTTP proxies is provided (since Frapy 0.8) through the HTTP
 Proxy downloader middleware. See
 :class:`~frapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware`.
 
@@ -98,10 +98,10 @@ See :ref:`topics-request-response-ref-request-userlogin`.
 
 .. _faq-bfo-dfo:
 
-Does Scrapy crawl in breadth-first or depth-first order?
+Does Frapy crawl in breadth-first or depth-first order?
 --------------------------------------------------------
 
-By default, Scrapy uses a `LIFO`_ queue for storing pending requests, which
+By default, Frapy uses a `LIFO`_ queue for storing pending requests, which
 basically means that it crawls in `DFO order`_. This order is more convenient
 in most cases.
 
@@ -122,7 +122,7 @@ desired order. Lowering those settings to ``1`` enforces the desired order, but
 it significantly slows down the crawl as a whole.
 
 
-My Scrapy crawler has memory leaks. What can I do?
+My Frapy crawler has memory leaks. What can I do?
 --------------------------------------------------
 
 See :ref:`topics-leaks`.
@@ -130,7 +130,7 @@ See :ref:`topics-leaks`.
 Also, Python has a builtin memory leak issue which is described in
 :ref:`topics-leaks-without-leaks`.
 
-How can I make Scrapy consume less memory?
+How can I make Frapy consume less memory?
 ------------------------------------------
 
 See previous question.
@@ -177,7 +177,7 @@ Can I use Basic HTTP Authentication in my spiders?
 
 Yes, see :class:`~frapy.downloadermiddlewares.httpauth.HttpAuthMiddleware`.
 
-Why does Scrapy download pages in English instead of my native language?
+Why does Frapy download pages in English instead of my native language?
 ------------------------------------------------------------------------
 
 Try changing the default `Accept-Language`_ request header by overriding the
@@ -185,7 +185,7 @@ Try changing the default `Accept-Language`_ request header by overriding the
 
 .. _Accept-Language: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
 
-Where can I find some example Scrapy projects?
+Where can I find some example Frapy projects?
 ----------------------------------------------
 
 See :ref:`intro-examples`.
@@ -213,7 +213,7 @@ domains outside the ones covered by the spider.
 For more info see:
 :class:`~frapy.spidermiddlewares.offsite.OffsiteMiddleware`.
 
-What is the recommended way to deploy a Scrapy crawler in production?
+What is the recommended way to deploy a Frapy crawler in production?
 ---------------------------------------------------------------------
 
 See :ref:`topics-deploy`.
@@ -256,7 +256,7 @@ Or by setting a global download delay in your project with the
 Can I call ``pdb.set_trace()`` from my spiders to debug them?
 -------------------------------------------------------------
 
-Yes, but you can also use the Scrapy shell which allows you to quickly analyze
+Yes, but you can also use the Frapy shell which allows you to quickly analyze
 (and even modify) the response being processed by your spider, which is, quite
 often, more useful than plain old ``pdb.set_trace()``.
 
@@ -301,15 +301,15 @@ the functions ``xmliter`` and ``csviter`` from ``frapy.utils.iterators``
 module. In fact, this is what the feed spiders (see :ref:`topics-spiders`) use
 under the cover.
 
-Does Scrapy manage cookies automatically?
+Does Frapy manage cookies automatically?
 -----------------------------------------
 
-Yes, Scrapy receives and keeps track of cookies sent by servers, and sends them
+Yes, Frapy receives and keeps track of cookies sent by servers, and sends them
 back on subsequent requests, like any regular web browser does.
 
 For more info see :ref:`topics-request-response` and :ref:`cookies-mw`.
 
-How can I see the cookies being sent and received from Scrapy?
+How can I see the cookies being sent and received from Frapy?
 --------------------------------------------------------------
 
 Enable the :setting:`COOKIES_DEBUG` setting.
@@ -320,7 +320,7 @@ How can I instruct a spider to stop itself?
 Raise the :exc:`~frapy.exceptions.CloseSpider` exception from a callback. For
 more info see: :exc:`~frapy.exceptions.CloseSpider`.
 
-How can I prevent my Scrapy bot from getting banned?
+How can I prevent my Frapy bot from getting banned?
 ----------------------------------------------------
 
 See :ref:`bans`.
@@ -373,7 +373,7 @@ method for this purpose. For example:
                     for _ in range(adapter["multiply_by"]):
                         yield deepcopy(item)
 
-Does Scrapy support IPv6 addresses?
+Does Frapy support IPv6 addresses?
 -----------------------------------
 
 Yes, by setting :setting:`DNS_RESOLVER` to ``frapy.resolver.CachingHostnameResolver``.
@@ -408,7 +408,7 @@ or :class:`~frapy.signals.headers_received` signals and raising a
 Running ``runspider`` I get ``error: No spider found in file: <filename>``
 --------------------------------------------------------------------------
 
-This may happen if your Scrapy project has a spider module with a name that
+This may happen if your Frapy project has a spider module with a name that
 conflicts with the name of one of the `Python standard library modules`_, such
 as ``csv.py`` or ``os.py``, or any `Python package`_ that you have installed.
 See :issue:`2680`.

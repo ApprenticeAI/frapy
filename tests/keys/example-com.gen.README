@@ -18,7 +18,7 @@ If you enter '.', the field will be left blank.
 Country Name (2 letter code) [US]:XW
 State or Province Name (full name) [NY]:XW
 Locality Name (eg, city) [New York]:The Internet
-Organization Name (eg, company) [Example, LLC]:Scrapy
+Organization Name (eg, company) [Example, LLC]:Frapy
 Common Name (e.g. server FQDN or YOUR name) [Example Company]:www.example.com
 Email Address [test@example.com]:
 

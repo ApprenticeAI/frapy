@@ -11,7 +11,7 @@ Once you have scraped your items, you often want to persist or export those
 items, to use the data in some other application. That is, after all, the whole
 purpose of the scraping process.
 
-For this purpose Scrapy provides a collection of Item Exporters for different
+For this purpose Frapy provides a collection of Item Exporters for different
 output formats, such as XML, CSV or JSON.
 
 Using Item Exporters
@@ -140,7 +140,7 @@ Example:
 Built-in Item Exporters reference
 =================================
 
-Here is a list of the Item Exporters bundled with Scrapy. Some of them contain
+Here is a list of the Item Exporters bundled with Frapy. Some of them contain
 output examples, which assume you're exporting these two items:
 
 .. skip: next

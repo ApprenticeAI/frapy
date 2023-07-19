@@ -11,7 +11,7 @@ from io import BytesIO
 
 from itemadapter import ItemAdapter
 
-from frapy.exceptions import DropItem, NotConfigured, ScrapyDeprecationWarning
+from frapy.exceptions import DropItem, NotConfigured, FrapyDeprecationWarning
 from frapy.http import Request
 from frapy.http.request import NO_CALLBACK
 from frapy.pipelines.files import FileException, FilesPipeline
@@ -28,7 +28,7 @@ class NoimagesDrop(DropItem):
     def __init__(self, *args, **kwargs):
         warnings.warn(
             "The NoimagesDrop class is deprecated",
-            category=ScrapyDeprecationWarning,
+            category=FrapyDeprecationWarning,
             stacklevel=2,
         )
         super().__init__(*args, **kwargs)
@@ -154,7 +154,7 @@ class ImagesPipeline(FilesPipeline):
                 warnings.warn(
                     f"{self.__class__.__name__}.convert_image() method overridden in a deprecated way, "
                     "overridden method does not accept response_body argument.",
-                    category=ScrapyDeprecationWarning,
+                    category=FrapyDeprecationWarning,
                 )
 
         if self._deprecated_convert_image:
@@ -180,7 +180,7 @@ class ImagesPipeline(FilesPipeline):
             warnings.warn(
                 f"{self.__class__.__name__}.convert_image() method called in a deprecated way, "
                 "method called without response_body argument.",
-                category=ScrapyDeprecationWarning,
+                category=FrapyDeprecationWarning,
                 stacklevel=2,
             )
 

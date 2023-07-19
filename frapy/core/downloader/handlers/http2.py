@@ -9,7 +9,7 @@ from twisted.web.client import URI
 
 from frapy.core.downloader.contextfactory import load_context_factory_from_settings
 from frapy.core.downloader.webclient import _parse
-from frapy.core.http2.agent import H2Agent, H2ConnectionPool, ScrapyProxyH2Agent
+from frapy.core.http2.agent import H2Agent, H2ConnectionPool, FrapyProxyH2Agent
 from frapy.crawler import Crawler
 from frapy.http import Request, Response
 from frapy.settings import Settings
@@ -37,7 +37,7 @@ class H2DownloadHandler:
         return cls(crawler.settings, crawler)
 
     def download_request(self, request: Request, spider: Spider) -> Deferred:
-        agent = ScrapyH2Agent(
+        agent = FrapyH2Agent(
             context_factory=self._context_factory,
             pool=self._pool,
             crawler=self._crawler,
@@ -48,9 +48,9 @@ class H2DownloadHandler:
         self._pool.close_connections()
 
 
-class ScrapyH2Agent:
+class FrapyH2Agent:
     _Agent = H2Agent
-    _ProxyAgent = ScrapyProxyH2Agent
+    _ProxyAgent = FrapyProxyH2Agent
 
     def __init__(
         self,

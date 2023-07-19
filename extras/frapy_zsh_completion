@@ -143,14 +143,14 @@ _frapy_cmds() {
     local -a commands project_commands
     commands=(
         'bench:Run quick benchmark test'
-        'fetch:Fetch a URL using the Scrapy downloader'
+        'fetch:Fetch a URL using the Frapy downloader'
         'genspider:Generate new spider using pre-defined templates'
         'runspider:Run a self-contained spider (without creating a project)'
         'settings:Get settings values'
         'shell:Interactive scraping console'
         'startproject:Create new project'
-        'version:Print Scrapy version'
-        'view:Open URL in browser, as seen by Scrapy'
+        'version:Print Frapy version'
+        'view:Open URL in browser, as seen by Frapy'
     )
     project_commands=(
 	'check:Check spider contracts'

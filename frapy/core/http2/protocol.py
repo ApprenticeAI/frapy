@@ -84,7 +84,7 @@ class H2ClientProtocol(Protocol, TimeoutMixin):
             uri -- URI of the base url to which HTTP/2 Connection will be made.
                 uri is used to verify that incoming client requests have correct
                 base URL.
-            settings -- Scrapy project settings
+            settings -- Frapy project settings
             conn_lost_deferred -- Deferred fires with the reason: Failure to notify
                 that connection was lost
         """

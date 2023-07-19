@@ -12,7 +12,7 @@ Status   Final. Partially implemented but discarded because of lack of use in
 SEP-014 - CrawlSpider v2
 ========================
 
-This SEP proposes a rewrite of Scrapy ``CrawlSpider`` and related components
+This SEP proposes a rewrite of Frapy ``CrawlSpider`` and related components
 
 Current flaws and inconsistencies
 =================================

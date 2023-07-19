@@ -10,7 +10,7 @@ Status   Draft
 SEP-007: ItemLoader processors library
 ======================================
 
-This SEP proposes a library of ``ItemLoader`` processor to ship with Scrapy.
+This SEP proposes a library of ``ItemLoader`` processor to ship with Frapy.
 
 date.py
 =======

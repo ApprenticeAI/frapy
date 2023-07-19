@@ -5,7 +5,7 @@ Spiders Contracts
 =================
 
 Testing spiders can get particularly annoying and while nothing prevents you
-from writing unit tests the task gets cumbersome quickly. Scrapy offers an
+from writing unit tests the task gets cumbersome quickly. Frapy offers an
 integrated way of testing your spiders by the means of contracts.
 
 This allows you to test each callback of your spider by hardcoding a sample url
@@ -65,7 +65,7 @@ Use the :command:`check` command to run the contract checks.
 Custom Contracts
 ================
 
-If you find you need more power than the built-in Scrapy contracts you can
+If you find you need more power than the built-in Frapy contracts you can
 create and load your own contracts in the project by using the
 :setting:`SPIDER_CONTRACTS` setting:
 
@@ -143,7 +143,7 @@ response received:
 Detecting check runs
 ====================
 
-When ``frapy check`` is running, the ``SCRAPY_CHECK`` environment variable is
+When ``frapy check`` is running, the ``FRAPY_CHECK`` environment variable is
 set to the ``true`` string. You can use :data:`os.environ` to perform any change to
 your spiders or your settings when ``frapy check`` is used:
 
@@ -157,5 +157,5 @@ your spiders or your settings when ``frapy check`` is used:
         name = "example"
 
         def __init__(self):
-            if os.environ.get("SCRAPY_CHECK"):
+            if os.environ.get("FRAPY_CHECK"):
                 pass  # Do some scraper adjustments when a check is running

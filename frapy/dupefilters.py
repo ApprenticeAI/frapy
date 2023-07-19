@@ -8,7 +8,7 @@ from twisted.internet.defer import Deferred
 from frapy.http.request import Request
 from frapy.settings import BaseSettings
 from frapy.spiders import Spider
-from frapy.utils.deprecate import ScrapyDeprecationWarning
+from frapy.utils.deprecate import FrapyDeprecationWarning
 from frapy.utils.job import job_dir
 from frapy.utils.request import RequestFingerprinter, referer_str
 
@@ -72,7 +72,7 @@ class RFPDupeFilter(BaseDupeFilter):
                 "RFPDupeFilter subclasses must either modify their '__init__' "
                 "method to support a 'fingerprinter' parameter or reimplement "
                 "the 'from_settings' class method.",
-                ScrapyDeprecationWarning,
+                FrapyDeprecationWarning,
             )
             result = cls(job_dir(settings), debug)
             result.fingerprinter = fingerprinter
@@ -91,7 +91,7 @@ class RFPDupeFilter(BaseDupeFilter):
                 "'__init__' method and 'from_settings' class method to "
                 "support a 'fingerprinter' parameter, or reimplement the "
                 "'from_crawler' class method.",
-                ScrapyDeprecationWarning,
+                FrapyDeprecationWarning,
             )
             result = cls.from_settings(crawler.settings)
             result.fingerprinter = crawler.request_fingerprinter

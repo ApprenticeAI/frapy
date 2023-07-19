@@ -2,15 +2,15 @@
    :target: https://frapy.org/
    
 ======
-Scrapy
+Frapy
 ======
 
-.. image:: https://img.shields.io/pypi/v/Scrapy.svg
-   :target: https://pypi.python.org/pypi/Scrapy
+.. image:: https://img.shields.io/pypi/v/Frapy.svg
+   :target: https://pypi.python.org/pypi/Frapy
    :alt: PyPI Version
 
-.. image:: https://img.shields.io/pypi/pyversions/Scrapy.svg
-   :target: https://pypi.python.org/pypi/Scrapy
+.. image:: https://img.shields.io/pypi/pyversions/Frapy.svg
+   :target: https://pypi.python.org/pypi/Frapy
    :alt: Supported Python Versions
 
 .. image:: https://github.com/frapy/frapy/workflows/Ubuntu/badge.svg
@@ -26,7 +26,7 @@ Scrapy
    :alt: Windows
 
 .. image:: https://img.shields.io/badge/wheel-yes-brightgreen.svg
-   :target: https://pypi.python.org/pypi/Scrapy
+   :target: https://pypi.python.org/pypi/Frapy
    :alt: Wheel Status
 
 .. image:: https://img.shields.io/codecov/c/github/frapy/frapy/master.svg
@@ -41,17 +41,17 @@ Scrapy
 Overview
 ========
 
-Scrapy is a fast high-level web crawling and web scraping framework, used to
+Frapy is a fast high-level web crawling and web scraping framework, used to
 crawl websites and extract structured data from their pages. It can be used for
 a wide range of purposes, from data mining to monitoring and automated testing.
 
-Scrapy is maintained by Zyte_ (formerly Scrapinghub) and `many other
+Frapy is maintained by Zyte_ (formerly Scrapinghub) and `many other
 contributors`_.
 
 .. _many other contributors: https://github.com/frapy/frapy/graphs/contributors
 .. _Zyte: https://www.zyte.com/
 
-Check the Scrapy homepage at https://frapy.org for more information,
+Check the Frapy homepage at https://frapy.org for more information,
 including a list of features.
 
 
@@ -102,7 +102,7 @@ Please note that this project is released with a Contributor `Code of Conduct <h
 By participating in this project you agree to abide by its terms.
 Please report unacceptable behavior to opensource@zyte.com.
 
-Companies using Scrapy
+Companies using Frapy
 ======================
 
 See https://frapy.org/companies/ for a list.

@@ -8,7 +8,7 @@ import pytest
 from w3lib.url import canonicalize_url
 
 from frapy.http import Request
-from frapy.utils.deprecate import ScrapyDeprecationWarning
+from frapy.utils.deprecate import FrapyDeprecationWarning
 from frapy.utils.python import to_bytes
 from frapy.utils.request import (
     _deprecated_fingerprint_cache,
@@ -313,10 +313,10 @@ class RequestFingerprintTest(FingerprintTest):
     )
 
     def setUp(self) -> None:
-        warnings.simplefilter("ignore", ScrapyDeprecationWarning)
+        warnings.simplefilter("ignore", FrapyDeprecationWarning)
 
     def tearDown(self) -> None:
-        warnings.simplefilter("default", ScrapyDeprecationWarning)
+        warnings.simplefilter("default", FrapyDeprecationWarning)
 
     @pytest.mark.xfail(reason="known bug kept for backward compatibility", strict=True)
     def test_part_separation(self):
@@ -325,7 +325,7 @@ class RequestFingerprintTest(FingerprintTest):
 
 class RequestFingerprintDeprecationTest(unittest.TestCase):
     def test_deprecation_default_parameters(self):
-        with pytest.warns(ScrapyDeprecationWarning) as warnings:
+        with pytest.warns(FrapyDeprecationWarning) as warnings:
             request_fingerprint(Request("http://www.example.com"))
         messages = [str(warning.message) for warning in warnings]
         self.assertTrue(
@@ -334,7 +334,7 @@ class RequestFingerprintDeprecationTest(unittest.TestCase):
         self.assertFalse(any("non-default" in message for message in messages))
 
     def test_deprecation_non_default_parameters(self):
-        with pytest.warns(ScrapyDeprecationWarning) as warnings:
+        with pytest.warns(FrapyDeprecationWarning) as warnings:
             request_fingerprint(Request("http://www.example.com"), keep_fragments=True)
         messages = [str(warning.message) for warning in warnings]
         self.assertTrue(

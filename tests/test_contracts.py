@@ -81,7 +81,7 @@ class TestSpider(Spider):
     def returns_item_cb_kwargs(self, response, name):
         """method which returns item
         @url http://frapy.org
-        @cb_kwargs {"name": "Scrapy"}
+        @cb_kwargs {"name": "Frapy"}
         @returns items 1 1
         """
         return TestItem(name=name, url=response.url)

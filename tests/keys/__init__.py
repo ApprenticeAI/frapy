@@ -40,7 +40,7 @@ def generate_keys():
     subject = issuer = Name(
         [
             NameAttribute(NameOID.COUNTRY_NAME, "IE"),
-            NameAttribute(NameOID.ORGANIZATION_NAME, "Scrapy"),
+            NameAttribute(NameOID.ORGANIZATION_NAME, "Frapy"),
             NameAttribute(NameOID.COMMON_NAME, "localhost"),
         ]
     )

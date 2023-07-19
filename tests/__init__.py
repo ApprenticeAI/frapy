@@ -1,5 +1,5 @@
 """
-tests: this package contains all Scrapy unittests
+tests: this package contains all Frapy unittests
 
 see https://docs.frapy.org/en/latest/contributing.html#running-tests
 """

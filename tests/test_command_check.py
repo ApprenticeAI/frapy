@@ -87,10 +87,10 @@ class CheckSpider(frapy.Spider):
         """
         self._test_contract(contracts, parse_def)
 
-    def test_SCRAPY_CHECK_set(self):
+    def test_FRAPY_CHECK_set(self):
         parse_def = """
         import os
-        if not os.environ.get('SCRAPY_CHECK'):
-            raise Exception('SCRAPY_CHECK not set')
+        if not os.environ.get('FRAPY_CHECK'):
+            raise Exception('FRAPY_CHECK not set')
         """
         self._test_contract(parse_def=parse_def)

@@ -7,12 +7,12 @@ from frapy.exceptions import NotConfigured
 from frapy.settings import Settings
 from frapy.utils.conf import closest_frapy_cfg, get_config, init_env
 
-ENVVAR = "SCRAPY_SETTINGS_MODULE"
+ENVVAR = "FRAPY_SETTINGS_MODULE"
 DATADIR_CFG_SECTION = "datadir"
 
 
 def inside_project():
-    frapy_module = os.environ.get("SCRAPY_SETTINGS_MODULE")
+    frapy_module = os.environ.get("FRAPY_SETTINGS_MODULE")
     if frapy_module is not None:
         try:
             import_module(frapy_module)
@@ -62,7 +62,7 @@ def data_path(path: str, createdir=False) -> str:
 
 def get_project_settings():
     if ENVVAR not in os.environ:
-        project = os.environ.get("SCRAPY_PROJECT", "default")
+        project = os.environ.get("FRAPY_PROJECT", "default")
         init_env(project)
 
     settings = Settings()
@@ -80,7 +80,7 @@ def get_project_settings():
     frapy_envvars = {
         k[7:]: v
         for k, v in os.environ.items()
-        if k.startswith("SCRAPY_") and k.replace("SCRAPY_", "") in valid_envvars
+        if k.startswith("FRAPY_") and k.replace("FRAPY_", "") in valid_envvars
     }
 
     settings.setdict(frapy_envvars, priority="project")

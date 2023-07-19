@@ -6,7 +6,7 @@ asyncio
 
 .. versionadded:: 2.0
 
-Scrapy has partial support for :mod:`asyncio`. After you :ref:`install the
+Frapy has partial support for :mod:`asyncio`. After you :ref:`install the
 asyncio reactor <install-asyncio>`, you may use :mod:`asyncio` and
 :mod:`asyncio`-powered libraries in any :doc:`coroutine <coroutines>`.
 
@@ -71,7 +71,7 @@ yourself, or in some code that runs before the reactor is installed, e.g.
 .. note:: Other libraries you use may require
           :class:`~asyncio.ProactorEventLoop`, e.g. because it supports
           subprocesses (this is the case with `playwright`_), so you cannot use
-          them together with Scrapy on Windows (but you should be able to use
+          them together with Frapy on Windows (but you should be able to use
           them on WSL or native Linux).
 
 .. _playwright: https://github.com/microsoft/playwright-python
@@ -84,16 +84,16 @@ Awaiting on Deferreds
 
 When the asyncio reactor isn't installed, you can await on Deferreds in the
 coroutines directly. When it is installed, this is not possible anymore, due to
-specifics of the Scrapy coroutine integration (the coroutines are wrapped into
+specifics of the Frapy coroutine integration (the coroutines are wrapped into
 :class:`asyncio.Future` objects, not into
 :class:`~twisted.internet.defer.Deferred` directly), and you need to wrap them into
-Futures. Scrapy provides two helpers for this:
+Futures. Frapy provides two helpers for this:
 
 .. autofunction:: frapy.utils.defer.deferred_to_future
 .. autofunction:: frapy.utils.defer.maybe_deferred_to_future
 .. tip:: If you need to use these functions in code that aims to be compatible
-         with lower versions of Scrapy that do not provide these functions,
-         down to Scrapy 2.0 (earlier versions do not support
+         with lower versions of Frapy that do not provide these functions,
+         down to Frapy 2.0 (earlier versions do not support
          :mod:`asyncio`), you can copy the implementation of these functions
          into your own code.
 
@@ -120,5 +120,5 @@ example:
                     f"{MyComponent.__qualname__} requires the asyncio Twisted "
                     f"reactor. Make sure you have it configured in the "
                     f"TWISTED_REACTOR setting. See the asyncio documentation "
-                    f"of Scrapy for more information."
+                    f"of Frapy for more information."
                 )

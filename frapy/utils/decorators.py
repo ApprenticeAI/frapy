@@ -3,7 +3,7 @@ from functools import wraps
 
 from twisted.internet import defer, threads
 
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 
 
 def deprecated(use_instead=None):
@@ -17,7 +17,7 @@ def deprecated(use_instead=None):
             message = f"Call to deprecated function {func.__name__}."
             if use_instead:
                 message += f" Use {use_instead} instead."
-            warnings.warn(message, category=ScrapyDeprecationWarning, stacklevel=2)
+            warnings.warn(message, category=FrapyDeprecationWarning, stacklevel=2)
             return func(*args, **kwargs)
 
         return wrapped

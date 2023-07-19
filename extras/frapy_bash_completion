@@ -1,4 +1,4 @@
-# bash completion for the Scrapy command-line tool
+# bash completion for the Frapy command-line tool
 
 _frapy_completion() {
     local cmd cur commands spiders

@@ -1,7 +1,7 @@
-from frapy.commands import ScrapyCommand
+from frapy.commands import FrapyCommand
 
 
-class Command(ScrapyCommand):
+class Command(FrapyCommand):
     requires_project = True
     default_settings = {"LOG_ENABLED": False}
 

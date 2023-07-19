@@ -11,7 +11,7 @@ import attr
 from itemadapter import ItemAdapter
 from twisted.trial import unittest
 
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 from frapy.http import Request, Response
 from frapy.item import Field, Item
 from frapy.pipelines.images import ImageException, ImagesPipeline, NoimagesDrop
@@ -624,7 +624,7 @@ class NoimagesDropTestCase(unittest.TestCase):
         with warnings.catch_warnings(record=True) as w:
             NoimagesDrop(arg)
             self.assertEqual(len(w), 1)
-            self.assertEqual(w[0].category, ScrapyDeprecationWarning)
+            self.assertEqual(w[0].category, FrapyDeprecationWarning)
         with warnings.catch_warnings(record=True) as w:
 
             class SubclassedNoimagesDrop(NoimagesDrop):
@@ -632,7 +632,7 @@ class NoimagesDropTestCase(unittest.TestCase):
 
             SubclassedNoimagesDrop(arg)
             self.assertEqual(len(w), 1)
-            self.assertEqual(w[0].category, ScrapyDeprecationWarning)
+            self.assertEqual(w[0].category, FrapyDeprecationWarning)
 
 
 def _create_image(format, *a, **kw):

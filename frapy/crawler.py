@@ -19,7 +19,7 @@ from zope.interface.verify import verifyClass
 
 from frapy import Spider, signals
 from frapy.core.engine import ExecutionEngine
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 from frapy.extension import ExtensionManager
 from frapy.interfaces import ISpiderLoader
 from frapy.settings import Settings, overridden_settings
@@ -152,7 +152,7 @@ class CrawlerRunner:
     The CrawlerRunner object must be instantiated with a
     :class:`~frapy.settings.Settings` object.
 
-    This class shouldn't be needed (since Scrapy is responsible of using it
+    This class shouldn't be needed (since Frapy is responsible of using it
     accordingly) unless writing scripts that manually handle the crawling
     process. See :ref:`run-from-script` for an example.
     """
@@ -178,7 +178,7 @@ class CrawlerRunner:
                 "SPIDER_LOADER_CLASS (previously named SPIDER_MANAGER_CLASS) does "
                 "not fully implement frapy.interfaces.ISpiderLoader interface. "
                 "Please add all missing methods to avoid unexpected runtime errors.",
-                category=ScrapyDeprecationWarning,
+                category=FrapyDeprecationWarning,
                 stacklevel=2,
             )
         return loader_cls.from_settings(settings.frozencopy())
@@ -197,7 +197,7 @@ class CrawlerRunner:
         warnings.warn(
             "CrawlerRunner.spiders attribute is renamed to "
             "CrawlerRunner.spider_loader.",
-            category=ScrapyDeprecationWarning,
+            category=FrapyDeprecationWarning,
             stacklevel=2,
         )
         return self.spider_loader
@@ -253,7 +253,7 @@ class CrawlerRunner:
         * If ``crawler_or_spidercls`` is a Spider subclass, a new Crawler
           is constructed for it.
         * If ``crawler_or_spidercls`` is a string, this function finds
-          a spider with this name in a Scrapy project (using spider loader),
+          a spider with this name in a Frapy project (using spider loader),
           then creates a Crawler instance for it.
         """
         if isinstance(crawler_or_spidercls, Spider):
@@ -309,7 +309,7 @@ class CrawlerProcess(CrawlerRunner):
     :param install_root_handler: whether to install root logging handler
         (default: True)
 
-    This class shouldn't be needed (since Scrapy is responsible of using it
+    This class shouldn't be needed (since Frapy is responsible of using it
     accordingly) unless writing scripts that manually handle the crawling
     process. See :ref:`run-from-script` for an example.
     """

@@ -61,7 +61,7 @@ class HTTP11DownloadHandler:
 
     def download_request(self, request, spider):
         """Return a deferred for the HTTP download"""
-        agent = ScrapyAgent(
+        agent = FrapyAgent(
             contextFactory=self._contextFactory,
             pool=self._pool,
             maxsize=getattr(spider, "download_maxsize", self._default_maxsize),
@@ -262,7 +262,7 @@ class TunnelingAgent(Agent):
         )
 
 
-class ScrapyProxyAgent(Agent):
+class FrapyProxyAgent(Agent):
     def __init__(
         self, reactor, proxyURI, connectTimeout=None, bindAddress=None, pool=None
     ):
@@ -291,9 +291,9 @@ class ScrapyProxyAgent(Agent):
         )
 
 
-class ScrapyAgent:
+class FrapyAgent:
     _Agent = Agent
-    _ProxyAgent = ScrapyProxyAgent
+    _ProxyAgent = FrapyProxyAgent
     _TunnelingAgent = TunnelingAgent
 
     def __init__(

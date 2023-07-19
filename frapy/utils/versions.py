@@ -17,7 +17,7 @@ def frapy_components_versions():
     libxml2_version = ".".join(map(str, lxml.etree.LIBXML_VERSION))
 
     return [
-        ("Scrapy", frapy.__version__),
+        ("Frapy", frapy.__version__),
         ("lxml", lxml_version),
         ("libxml2", libxml2_version),
         ("cssselect", cssselect.__version__),

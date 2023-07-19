@@ -11,7 +11,7 @@ from frapy.http.request import NO_CALLBACK
 from frapy.settings import Settings
 from frapy.utils.datatypes import SequenceExclude
 from frapy.utils.defer import defer_result, mustbe_deferred
-from frapy.utils.deprecate import ScrapyDeprecationWarning
+from frapy.utils.deprecate import FrapyDeprecationWarning
 from frapy.utils.log import failure_to_exc_info
 from frapy.utils.misc import arg_to_iter
 
@@ -167,7 +167,7 @@ class MediaPipeline:
             warn(
                 f"{func.__name__}(self, {old_params}) is deprecated, "
                 f"please use {func.__name__}(self, {new_params})",
-                ScrapyDeprecationWarning,
+                FrapyDeprecationWarning,
                 stacklevel=2,
             )
             self._expects_item[func.__name__] = False
@@ -220,7 +220,7 @@ class MediaPipeline:
             # Response and by extension, the original Request) gets encapsulated
             # within the FileException context.
             #
-            # Originally, Scrapy was using twisted.internet.defer.returnValue
+            # Originally, Frapy was using twisted.internet.defer.returnValue
             # inside functions decorated with twisted.internet.defer.inlineCallbacks,
             # encapsulating the returned Response in a _DefGen_Return exception
             # instead of a StopIteration.

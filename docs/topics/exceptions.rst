@@ -5,14 +5,14 @@ Exceptions
 ==========
 
 .. module:: frapy.exceptions
-   :synopsis: Scrapy exceptions
+   :synopsis: Frapy exceptions
 
 .. _topics-exceptions-ref:
 
 Built-in Exceptions reference
 =============================
 
-Here's a list of all exceptions included in Scrapy and their usage.
+Here's a list of all exceptions included in Frapy and their usage.
 
 
 CloseSpider

@@ -13,10 +13,10 @@ from xml.sax.saxutils import XMLGenerator
 
 from itemadapter import ItemAdapter, is_item
 
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 from frapy.item import Item
 from frapy.utils.python import is_listlike, to_bytes, to_unicode
-from frapy.utils.serialize import ScrapyJSONEncoder
+from frapy.utils.serialize import FrapyJSONEncoder
 
 __all__ = [
     "BaseItemExporter",
@@ -106,7 +106,7 @@ class JsonLinesItemExporter(BaseItemExporter):
         super().__init__(dont_fail=True, **kwargs)
         self.file = file
         self._kwargs.setdefault("ensure_ascii", not self.encoding)
-        self.encoder = ScrapyJSONEncoder(**self._kwargs)
+        self.encoder = FrapyJSONEncoder(**self._kwargs)
 
     def export_item(self, item):
         itemdict = dict(self._get_serialized_fields(item))
@@ -119,14 +119,14 @@ class JsonItemExporter(BaseItemExporter):
         super().__init__(dont_fail=True, **kwargs)
         self.file = file
         # there is a small difference between the behaviour or JsonItemExporter.indent
-        # and ScrapyJSONEncoder.indent. ScrapyJSONEncoder.indent=None is needed to prevent
+        # and FrapyJSONEncoder.indent. FrapyJSONEncoder.indent=None is needed to prevent
         # the addition of newlines everywhere
         json_indent = (
             self.indent if self.indent is not None and self.indent > 0 else None
         )
         self._kwargs.setdefault("indent", json_indent)
         self._kwargs.setdefault("ensure_ascii", not self.encoding)
-        self.encoder = ScrapyJSONEncoder(**self._kwargs)
+        self.encoder = FrapyJSONEncoder(**self._kwargs)
         self.first_item = True
 
     def _beautify_newline(self):
@@ -329,7 +329,7 @@ class PythonItemExporter(BaseItemExporter):
         if self.binary:
             warnings.warn(
                 "PythonItemExporter will drop support for binary export in the future",
-                ScrapyDeprecationWarning,
+                FrapyDeprecationWarning,
             )
         if not self.encoding:
             self.encoding = "utf-8"

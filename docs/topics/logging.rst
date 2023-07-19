@@ -9,17 +9,17 @@ Logging
     explicit calls to the Python standard logging. Keep reading to learn more
     about the new logging system.
 
-Scrapy uses :mod:`logging` for event logging. We'll
+Frapy uses :mod:`logging` for event logging. We'll
 provide some simple examples to get you started, but for more advanced
 use-cases it's strongly suggested to read thoroughly its documentation.
 
 Logging works out of the box, and can be configured to some extent with the
-Scrapy settings listed in :ref:`topics-logging-settings`.
+Frapy settings listed in :ref:`topics-logging-settings`.
 
-Scrapy calls :func:`frapy.utils.log.configure_logging` to set some reasonable
+Frapy calls :func:`frapy.utils.log.configure_logging` to set some reasonable
 defaults and handle those settings in :ref:`topics-logging-settings` when
 running commands, so it's recommended to manually call it if you're running
-Scrapy from scripts as described in :ref:`run-from-script`.
+Frapy from scripts as described in :ref:`run-from-script`.
 
 .. _topics-logging-levels:
 
@@ -108,7 +108,7 @@ path:
 Logging from Spiders
 ====================
 
-Scrapy provides a :data:`~frapy.Spider.logger` within each Spider
+Frapy provides a :data:`~frapy.Spider.logger` within each Spider
 instance, which can be accessed and used like this:
 
 .. code-block:: python
@@ -151,7 +151,7 @@ For this task, different "handlers" can be attached to any logger instance and
 they will redirect those messages to appropriate destinations, such as the
 standard output, files, emails, etc.
 
-By default, Scrapy sets and configures a handler for the root logger, based on
+By default, Frapy sets and configures a handler for the root logger, based on
 the settings below.
 
 .. _topics-logging-settings:
@@ -190,15 +190,15 @@ listed in :ref:`logging's logrecord attributes docs <logrecord-attributes>` and
 :ref:`datetime's strftime and strptime directives <strftime-strptime-behavior>`
 respectively.
 
-If :setting:`LOG_SHORT_NAMES` is set, then the logs will not display the Scrapy
+If :setting:`LOG_SHORT_NAMES` is set, then the logs will not display the Frapy
 component that prints the log. It is unset by default, hence logs contain the
-Scrapy component responsible for that log output.
+Frapy component responsible for that log output.
 
 Command-line options
 --------------------
 
 There are command-line arguments, available for all commands, that you can use
-to override some of the Scrapy settings regarding logging.
+to override some of the Frapy settings regarding logging.
 
 * ``--logfile FILE``
     Overrides :setting:`LOG_FILE`
@@ -230,7 +230,7 @@ A custom log format can be set for different actions by extending
 Advanced customization
 ----------------------
 
-Because Scrapy uses stdlib logging module, you can customize logging using
+Because Frapy uses stdlib logging module, you can customize logging using
 all features of stdlib logging.
 
 For example, let's say you're scraping a website which returns many
@@ -285,7 +285,7 @@ filter out unwanted messages:
                 return False
 
 A project-level filter may be attached to the root 
-handler created by Scrapy, this is a wieldy way to 
+handler created by Frapy, this is a wieldy way to 
 filter all loggers in different parts of the project
 (middlewares, spider, etc.):
 
@@ -325,7 +325,7 @@ frapy.utils.log module
 
 .. autofunction:: configure_logging
 
-    ``configure_logging`` is automatically called when using Scrapy commands
+    ``configure_logging`` is automatically called when using Frapy commands
     or :class:`~frapy.crawler.CrawlerProcess`, but needs to be called explicitly
     when running custom scripts using :class:`~frapy.crawler.CrawlerRunner`.
     In that case, its usage is not required but it's recommended.
@@ -347,5 +347,5 @@ frapy.utils.log module
             filename="log.txt", format="%(levelname)s: %(message)s", level=logging.INFO
         )
 
-    Refer to :ref:`run-from-script` for more details about using Scrapy this
+    Refer to :ref:`run-from-script` for more details about using Frapy this
     way.

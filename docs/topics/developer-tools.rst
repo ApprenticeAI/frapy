@@ -20,14 +20,14 @@ Caveats with inspecting the live browser DOM
 Since Developer Tools operate on a live browser DOM, what you'll actually see
 when inspecting the page source is not the original HTML, but a modified one
 after applying some browser clean up and executing JavaScript code.  Firefox,
-in particular, is known for adding ``<tbody>`` elements to tables.  Scrapy, on
+in particular, is known for adding ``<tbody>`` elements to tables.  Frapy, on
 the other hand, does not modify the original page HTML, so you won't be able to
 extract any data if you use ``<tbody>`` in your XPath expressions.
 
 Therefore, you should keep in mind the following things:
 
 * Disable JavaScript while inspecting the DOM looking for XPaths to be
-  used in Scrapy (in the Developer Tools settings click `Disable JavaScript`)
+  used in Frapy (in the Developer Tools settings click `Disable JavaScript`)
 
 * Never use full XPath paths, use relative and clever ones based on attributes
   (such as ``id``, ``class``, ``width``, etc) or any identifying features like
@@ -81,14 +81,14 @@ clicking directly on the tag. If we expand the ``span`` tag with the ``class=
 "text"`` we will see the quote-text we clicked on. The `Inspector` lets you
 copy XPaths to selected elements. Let's try it out.
 
-First open the Scrapy shell at https://quotes.toscrape.com/ in a terminal:
+First open the Frapy shell at https://quotes.toscrape.com/ in a terminal:
 
 .. code-block:: none
 
     $ frapy shell "https://quotes.toscrape.com/"
 
 Then, back to your web browser, right-click on the ``span`` tag, select
-``Copy > XPath`` and paste it in the Scrapy shell like so:
+``Copy > XPath`` and paste it in the Frapy shell like so:
 
 .. invisible-code-block: python
 
@@ -173,7 +173,7 @@ The page is quite similar to the basic `quotes.toscrape.com`_-page,
 but instead of the above-mentioned ``Next`` button, the page
 automatically loads new quotes when you scroll to the bottom. We
 could go ahead and try out different XPaths directly, but instead
-we'll check another quite useful command from the Scrapy shell:
+we'll check another quite useful command from the Frapy shell:
 
 .. skip: next
 
@@ -303,7 +303,7 @@ function to get a dictionary with the equivalent arguments:
 
 .. autofunction:: frapy.utils.curl.curl_to_request_kwargs
 
-Note that to translate a cURL command into a Scrapy request,
+Note that to translate a cURL command into a Frapy request,
 you may use `curl2frapy <https://michael-shub.github.io/curl2frapy/>`_.
 
 As you can see, with a few inspections in the `Network`-tool we

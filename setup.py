@@ -52,7 +52,7 @@ else:
 
 
 setup(
-    name="Scrapy",
+    name="Frapy",
     version=version,
     url="https://frapy.org",
     project_urls={
@@ -62,7 +62,7 @@ setup(
     },
     description="A high-level Web Crawling and Web Scraping framework",
     long_description=open("README.rst", encoding="utf-8").read(),
-    author="Scrapy developers",
+    author="Frapy developers",
     author_email="pablo@pablohoffman.com",
     maintainer="Pablo Hoffman",
     maintainer_email="pablo@pablohoffman.com",
@@ -72,7 +72,7 @@ setup(
     zip_safe=False,
     entry_points={"console_scripts": ["frapy = frapy.cmdline:execute"]},
     classifiers=[
-        "Framework :: Scrapy",
+        "Framework :: Frapy",
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
         "Intended Audience :: Developers",

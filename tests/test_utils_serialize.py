@@ -8,12 +8,12 @@ import attr
 from twisted.internet import defer
 
 from frapy.http import Request, Response
-from frapy.utils.serialize import ScrapyJSONEncoder
+from frapy.utils.serialize import FrapyJSONEncoder
 
 
 class JsonEncoderTestCase(unittest.TestCase):
     def setUp(self):
-        self.encoder = ScrapyJSONEncoder(sort_keys=True)
+        self.encoder = FrapyJSONEncoder(sort_keys=True)
 
     def test_encode_decode(self):
         dt = datetime.datetime(2010, 1, 2, 10, 11, 12)

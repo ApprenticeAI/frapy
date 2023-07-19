@@ -7,7 +7,7 @@ Jobs: pausing and resuming crawls
 Sometimes, for big sites, it's desirable to pause crawls and be able to resume
 them later.
 
-Scrapy supports this functionality out of the box by providing the following
+Frapy supports this functionality out of the box by providing the following
 facilities:
 
 * a scheduler that persists scheduled requests on disk
@@ -62,7 +62,7 @@ is omitted for brevity):
 Persistence gotchas
 ===================
 
-There are a few things to keep in mind if you want to be able to use the Scrapy
+There are a few things to keep in mind if you want to be able to use the Frapy
 persistence support:
 
 Cookies expiration

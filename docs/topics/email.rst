@@ -8,7 +8,7 @@ Sending e-mail
    :synopsis: Email sending facility
 
 Although Python makes sending e-mails relatively easy via the :mod:`smtplib`
-library, Scrapy provides its own facility for sending e-mails which is very
+library, Frapy provides its own facility for sending e-mails which is very
 easy to use and it's implemented using :doc:`Twisted non-blocking IO
 <twisted:core/howto/defer-intro>`, to avoid interfering with the non-blocking
 IO of the crawler. It also provides a simple API for sending attachments and
@@ -27,7 +27,7 @@ the standard ``__init__`` method:
 
     mailer = MailSender()
 
-Or you can instantiate it passing a Scrapy settings object, which will respect
+Or you can instantiate it passing a Frapy settings object, which will respect
 the :ref:`settings <topics-email-settings>`:
 
 .. skip: start
@@ -50,7 +50,7 @@ And here is how to use it to send an e-mail (without attachments):
 MailSender class reference
 ==========================
 
-MailSender is the preferred class to use for sending emails from Scrapy, as it
+MailSender is the preferred class to use for sending emails from Frapy, as it
 uses :doc:`Twisted non-blocking IO <twisted:core/howto/defer-intro>`, like the
 rest of the framework.
 
@@ -83,8 +83,8 @@ rest of the framework.
 
     .. classmethod:: from_settings(settings)
 
-        Instantiate using a Scrapy settings object, which will respect
-        :ref:`these Scrapy settings <topics-email-settings>`.
+        Instantiate using a Frapy settings object, which will respect
+        :ref:`these Frapy settings <topics-email-settings>`.
 
         :param settings: the e-mail recipients
         :type settings: :class:`frapy.settings.Settings` object

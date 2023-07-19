@@ -4,7 +4,7 @@ import unittest
 import queuelib
 
 from frapy.http.request import Request
-from frapy.pqueues import DownloaderAwarePriorityQueue, ScrapyPriorityQueue
+from frapy.pqueues import DownloaderAwarePriorityQueue, FrapyPriorityQueue
 from frapy.spiders import Spider
 from frapy.squeues import FifoMemoryQueue
 from frapy.utils.test import get_crawler
@@ -18,7 +18,7 @@ class PriorityQueueTest(unittest.TestCase):
 
     def test_queue_push_pop_one(self):
         temp_dir = tempfile.mkdtemp()
-        queue = ScrapyPriorityQueue.from_crawler(
+        queue = FrapyPriorityQueue.from_crawler(
             self.crawler, FifoMemoryQueue, temp_dir
         )
         self.assertIsNone(queue.pop())
@@ -36,7 +36,7 @@ class PriorityQueueTest(unittest.TestCase):
         if hasattr(queuelib.queue.FifoMemoryQueue, "peek"):
             raise unittest.SkipTest("queuelib.queue.FifoMemoryQueue.peek is defined")
         temp_dir = tempfile.mkdtemp()
-        queue = ScrapyPriorityQueue.from_crawler(
+        queue = FrapyPriorityQueue.from_crawler(
             self.crawler, FifoMemoryQueue, temp_dir
         )
         queue.push(Request("https://example.org"))
@@ -51,7 +51,7 @@ class PriorityQueueTest(unittest.TestCase):
         if not hasattr(queuelib.queue.FifoMemoryQueue, "peek"):
             raise unittest.SkipTest("queuelib.queue.FifoMemoryQueue.peek is undefined")
         temp_dir = tempfile.mkdtemp()
-        queue = ScrapyPriorityQueue.from_crawler(
+        queue = FrapyPriorityQueue.from_crawler(
             self.crawler, FifoMemoryQueue, temp_dir
         )
         self.assertEqual(len(queue), 0)
@@ -75,7 +75,7 @@ class PriorityQueueTest(unittest.TestCase):
 
     def test_queue_push_pop_priorities(self):
         temp_dir = tempfile.mkdtemp()
-        queue = ScrapyPriorityQueue.from_crawler(
+        queue = FrapyPriorityQueue.from_crawler(
             self.crawler, FifoMemoryQueue, temp_dir, [-1, -2, -3]
         )
         self.assertIsNone(queue.pop())

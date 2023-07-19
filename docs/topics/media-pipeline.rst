@@ -6,7 +6,7 @@ Downloading and processing files and images
 
 .. currentmodule:: frapy.pipelines.images
 
-Scrapy provides reusable :doc:`item pipelines </topics/item-pipeline>` for
+Frapy provides reusable :doc:`item pipelines </topics/item-pipeline>` for
 downloading files attached to a particular item (for example, when you scrape
 products and also want to download their images locally). These pipelines share
 a bit of functionality and structure (we refer to them as media pipelines), but
@@ -42,7 +42,7 @@ this:
 
 3. When the item reaches the :class:`FilesPipeline`, the URLs in the
    ``file_urls`` field are scheduled for download using the standard
-   Scrapy scheduler and downloader (which means the scheduler and downloader
+   Frapy scheduler and downloader (which means the scheduler and downloader
    middlewares are reused), but with a higher priority, processing them before other
    pages are scraped. The item remains "locked" at that particular pipeline stage
    until the files have finish downloading (or fail for some reason).
@@ -179,7 +179,7 @@ By overriding ``file_path`` like this:
   new file names.
 
   For example, if your custom file name scheme uses a product title and the
-  site changes an item's product title between scrapes, Scrapy will re-download
+  site changes an item's product title between scrapes, Frapy will re-download
   the same media using updated file names.
 
 For more information about the ``file_path`` method, see :ref:`topics-media-pipeline-override`.
@@ -215,7 +215,7 @@ FTP server storage
 .. versionadded:: 2.0
 
 :setting:`FILES_STORE` and :setting:`IMAGES_STORE` can point to an FTP server.
-Scrapy will automatically upload the files to the server.
+Frapy will automatically upload the files to the server.
 
 :setting:`FILES_STORE` and :setting:`IMAGES_STORE` should be written in one of the
 following forms::
@@ -226,7 +226,7 @@ following forms::
 If ``username`` and ``password`` are not provided, they are taken from the :setting:`FTP_USER` and
 :setting:`FTP_PASSWORD` settings respectively.
 
-FTP supports two different connection modes: active or passive. Scrapy uses
+FTP supports two different connection modes: active or passive. Frapy uses
 the passive connection mode by default. To use the active connection mode instead,
 set the :setting:`FEED_STORAGE_FTP_ACTIVE` setting to ``True``.
 
@@ -239,7 +239,7 @@ Amazon S3 storage
 .. setting:: IMAGES_STORE_S3_ACL
 
 If botocore_ >= 1.4.87 is installed, :setting:`FILES_STORE` and
-:setting:`IMAGES_STORE` can represent an Amazon S3 bucket. Scrapy will
+:setting:`IMAGES_STORE` can represent an Amazon S3 bucket. Frapy will
 automatically upload the files to the bucket.
 
 For example, this is a valid :setting:`IMAGES_STORE` value:
@@ -261,7 +261,7 @@ policy:
 For more information, see `canned ACLs`_ in the Amazon S3 Developer Guide.
 
 You can also use other S3-like storages. Storages like self-hosted `Minio`_ or
-`s3.scality`_. All you need to do is set endpoint option in you Scrapy
+`s3.scality`_. All you need to do is set endpoint option in you Frapy
 settings:
 
 .. code-block:: python
@@ -290,7 +290,7 @@ Google Cloud Storage
 .. setting:: IMAGES_STORE_GCS_ACL
 
 :setting:`FILES_STORE` and :setting:`IMAGES_STORE` can represent a Google Cloud Storage
-bucket. Scrapy will automatically upload the files to the bucket. (requires `google-cloud-storage`_ )
+bucket. Frapy will automatically upload the files to the bucket. (requires `google-cloud-storage`_ )
 
 .. _google-cloud-storage: https://cloud.google.com/storage/docs/reference/libraries#client-libraries-install-python
 

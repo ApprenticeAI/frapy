@@ -282,7 +282,7 @@ class SelectortemLoaderTest(unittest.TestCase):
     <div id="id">marta</div>
     <p>paragraph</p>
     <a href="http://www.frapy.org">homepage</a>
-    <img src="/images/logo.png" width="244" height="65" alt="Scrapy">
+    <img src="/images/logo.png" width="244" height="65" alt="Frapy">
     </body>
     </html>
     """,
@@ -460,7 +460,7 @@ class SubselectorLoaderTest(unittest.TestCase):
     </header>
     <footer class="footer">
       <a href="http://www.frapy.org">homepage</a>
-      <img src="/images/logo.png" width="244" height="65" alt="Scrapy">
+      <img src="/images/logo.png" width="244" height="65" alt="Frapy">
     </footer>
     </body>
     </html>

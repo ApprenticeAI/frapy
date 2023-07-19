@@ -7,7 +7,7 @@ from operator import itemgetter
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 
-from frapy.exceptions import ScrapyDeprecationWarning, UsageError
+from frapy.exceptions import FrapyDeprecationWarning, UsageError
 from frapy.settings import BaseSettings
 from frapy.utils.deprecate import update_classpath
 from frapy.utils.python import without_none_values
@@ -86,12 +86,12 @@ def closest_frapy_cfg(
 
 def init_env(project="default", set_syspath=True):
     """Initialize environment to use command-line tool from inside a project
-    dir. This sets the Scrapy settings module and modifies the Python path to
+    dir. This sets the Frapy settings module and modifies the Python path to
     be able to locate the project module.
     """
     cfg = get_config()
     if cfg.has_option("settings", project):
-        os.environ["SCRAPY_SETTINGS_MODULE"] = cfg.get("settings", project)
+        os.environ["FRAPY_SETTINGS_MODULE"] = cfg.get("settings", project)
     closest = closest_frapy_cfg()
     if closest:
         projdir = str(Path(closest).parent)
@@ -100,7 +100,7 @@ def init_env(project="default", set_syspath=True):
 
 
 def get_config(use_closest=True):
-    """Get Scrapy config file as a ConfigParser"""
+    """Get Frapy config file as a ConfigParser"""
     sources = get_sources(use_closest)
     cfg = ConfigParser()
     cfg.read(sources)
@@ -191,7 +191,7 @@ def feed_process_params_from_cli(
                 "frapy crawl quotes -o quotes.csv:csv   or   "
                 "frapy crawl quotes -O quotes.json:json"
             )
-            warnings.warn(message, ScrapyDeprecationWarning, stacklevel=2)
+            warnings.warn(message, FrapyDeprecationWarning, stacklevel=2)
             return {output[0]: {"format": output_format}}
         raise UsageError(
             "The -t command-line option cannot be used if multiple output "

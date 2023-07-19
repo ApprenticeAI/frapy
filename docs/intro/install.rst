@@ -9,31 +9,31 @@ Installation guide
 Supported Python versions
 =========================
 
-Scrapy requires Python 3.7+, either the CPython implementation (default) or
+Frapy requires Python 3.7+, either the CPython implementation (default) or
 the PyPy implementation (see :ref:`python:implementations`).
 
 .. _intro-install-frapy:
 
-Installing Scrapy
+Installing Frapy
 =================
 
 If you're using `Anaconda`_ or `Miniconda`_, you can install the package from
 the `conda-forge`_ channel, which has up-to-date packages for Linux, Windows
 and macOS.
 
-To install Scrapy using ``conda``, run::
+To install Frapy using ``conda``, run::
 
   conda install -c conda-forge frapy
 
 Alternatively, if you’re already familiar with installation of Python packages,
-you can install Scrapy and its dependencies from PyPI with::
+you can install Frapy and its dependencies from PyPI with::
 
-    pip install Scrapy
+    pip install Frapy
 
-We strongly recommend that you install Scrapy in :ref:`a dedicated virtualenv <intro-using-virtualenv>`,
+We strongly recommend that you install Frapy in :ref:`a dedicated virtualenv <intro-using-virtualenv>`,
 to avoid conflicting with your system packages.
 
-Note that sometimes this may require solving compilation issues for some Scrapy
+Note that sometimes this may require solving compilation issues for some Frapy
 dependencies depending on your operating system, so be sure to check the
 :ref:`intro-install-platform-notes`.
 
@@ -44,7 +44,7 @@ troubleshooting information, read on.
 Things that are good to know
 ----------------------------
 
-Scrapy is written in pure Python and depends on a few key Python packages (among others):
+Frapy is written in pure Python and depends on a few key Python packages (among others):
 
 * `lxml`_, an efficient XML and HTML parser
 * `parsel`_, an HTML/XML data extraction library written on top of lxml,
@@ -70,13 +70,13 @@ please refer to their respective installation instructions:
 Using a virtual environment (recommended)
 -----------------------------------------
 
-TL;DR: We recommend installing Scrapy inside a virtual environment
+TL;DR: We recommend installing Frapy inside a virtual environment
 on all platforms.
 
 Python packages can be installed either globally (a.k.a system wide),
-or in user-space. We do not recommend installing Scrapy system wide.
+or in user-space. We do not recommend installing Frapy system wide.
 
-Instead, we recommend that you install Scrapy within a so-called
+Instead, we recommend that you install Frapy within a so-called
 "virtual environment" (:mod:`venv`).
 Virtual environments allow you to not conflict with already-installed Python
 system packages (which could break some of your system tools and scripts),
@@ -84,7 +84,7 @@ and still install packages normally with ``pip`` (without ``sudo`` and the likes
 
 See :ref:`tut-venv` on how to create your virtual environment.
 
-Once you have created a virtual environment, you can install Scrapy inside it with ``pip``,
+Once you have created a virtual environment, you can install Frapy inside it with ``pip``,
 just like any other Python package.
 (See :ref:`platform-specific guides <intro-install-platform-notes>`
 below for non-Python dependencies that you may need to install beforehand).
@@ -100,19 +100,19 @@ Platform specific installation notes
 Windows
 -------
 
-Though it's possible to install Scrapy on Windows using pip, we recommend you
+Though it's possible to install Frapy on Windows using pip, we recommend you
 to install `Anaconda`_ or `Miniconda`_ and use the package from the
 `conda-forge`_ channel, which will avoid most installation issues.
 
-Once you've installed `Anaconda`_ or `Miniconda`_, install Scrapy with::
+Once you've installed `Anaconda`_ or `Miniconda`_, install Frapy with::
 
   conda install -c conda-forge frapy
 
-To install Scrapy on Windows using ``pip``:
+To install Frapy on Windows using ``pip``:
 
 .. warning::
     This installation method requires “Microsoft Visual C++” for installing some 
-    Scrapy dependencies, which demands significantly more disk space than Anaconda.
+    Frapy dependencies, which demands significantly more disk space than Anaconda.
 
 #. Download and execute `Microsoft C++ Build Tools`_ to install the Visual Studio Installer.
 
@@ -128,23 +128,23 @@ To install Scrapy on Windows using ``pip``:
 
 #. Install the Visual Studio Build Tools.
 
-Now, you should be able to :ref:`install Scrapy <intro-install-frapy>` using ``pip``.
+Now, you should be able to :ref:`install Frapy <intro-install-frapy>` using ``pip``.
 
 .. _intro-install-ubuntu:
 
 Ubuntu 14.04 or above
 ---------------------
 
-Scrapy is currently tested with recent-enough versions of lxml,
+Frapy is currently tested with recent-enough versions of lxml,
 twisted and pyOpenSSL, and is compatible with recent Ubuntu distributions.
 But it should support older versions of Ubuntu too, like Ubuntu 14.04,
 albeit with potential issues with TLS connections.
 
 **Don't** use the ``python-frapy`` package provided by Ubuntu, they are
-typically too old and slow to catch up with latest Scrapy.
+typically too old and slow to catch up with latest Frapy.
 
 
-To install Scrapy on Ubuntu (or Ubuntu-based) systems, you need to install
+To install Frapy on Ubuntu (or Ubuntu-based) systems, you need to install
 these dependencies::
 
     sudo apt-get install python3 python3-dev python3-pip libxml2-dev libxslt1-dev zlib1g-dev libffi-dev libssl-dev
@@ -154,12 +154,12 @@ these dependencies::
 - ``libssl-dev`` and ``libffi-dev`` are required for ``cryptography``
 
 Inside a :ref:`virtualenv <intro-using-virtualenv>`,
-you can install Scrapy with ``pip`` after that::
+you can install Frapy with ``pip`` after that::
 
     pip install frapy
 
 .. note::
-    The same non-Python dependencies can be used to install Scrapy in Debian
+    The same non-Python dependencies can be used to install Frapy in Debian
     Jessie (8.0) and above.
 
 
@@ -168,7 +168,7 @@ you can install Scrapy with ``pip`` after that::
 macOS
 -----
 
-Building Scrapy's dependencies requires the presence of a C compiler and
+Building Frapy's dependencies requires the presence of a C compiler and
 development headers. On macOS this is typically provided by Apple’s Xcode
 development tools. To install the Xcode command line tools open a terminal
 window and run::
@@ -177,7 +177,7 @@ window and run::
 
 There's a `known issue <https://github.com/pypa/pip/issues/2468>`_ that
 prevents ``pip`` from updating system packages. This has to be addressed to
-successfully install Scrapy and its dependencies. Here are some proposed
+successfully install Frapy and its dependencies. Here are some proposed
 solutions:
 
 * *(Recommended)* **Don't** use system Python. Install a new, updated version
@@ -205,15 +205,15 @@ solutions:
 
       brew update; brew upgrade python
 
-*   *(Optional)* :ref:`Install Scrapy inside a Python virtual environment
+*   *(Optional)* :ref:`Install Frapy inside a Python virtual environment
     <intro-using-virtualenv>`.
 
   This method is a workaround for the above macOS issue, but it's an overall
   good practice for managing dependencies and can complement the first method.
 
-After any of these workarounds you should be able to install Scrapy::
+After any of these workarounds you should be able to install Frapy::
 
-  pip install Scrapy
+  pip install Frapy
 
 
 PyPy
@@ -222,17 +222,17 @@ PyPy
 We recommend using the latest PyPy version.
 For PyPy3, only Linux installation was tested.
 
-Most Scrapy dependencies now have binary wheels for CPython, but not for PyPy.
+Most Frapy dependencies now have binary wheels for CPython, but not for PyPy.
 This means that these dependencies will be built during installation.
 On macOS, you are likely to face an issue with building the Cryptography
 dependency. The solution to this problem is described
 `here <https://github.com/pyca/cryptography/issues/2692#issuecomment-272773481>`_,
 that is to ``brew install openssl`` and then export the flags that this command
-recommends (only needed when installing Scrapy). Installing on Linux has no special
+recommends (only needed when installing Frapy). Installing on Linux has no special
 issues besides installing build dependencies.
-Installing Scrapy with PyPy on Windows is not tested.
+Installing Frapy with PyPy on Windows is not tested.
 
-You can check that Scrapy is installed correctly by running ``frapy bench``.
+You can check that Frapy is installed correctly by running ``frapy bench``.
 If this command gives errors such as
 ``TypeError: ... got 2 unexpected keyword arguments``, this means
 that setuptools was unable to pick up one PyPy-specific dependency.
@@ -247,7 +247,7 @@ Troubleshooting
 AttributeError: 'module' object has no attribute 'OP_NO_TLSv1_1'
 ----------------------------------------------------------------
 
-After you install or upgrade Scrapy, Twisted or pyOpenSSL, you may get an
+After you install or upgrade Frapy, Twisted or pyOpenSSL, you may get an
 exception with the following traceback::
 
     […]

@@ -7,7 +7,7 @@ import sys
 import pkg_resources
 
 import frapy
-from frapy.commands import BaseRunSpiderCommand, ScrapyCommand, ScrapyHelpFormatter
+from frapy.commands import BaseRunSpiderCommand, FrapyCommand, FrapyHelpFormatter
 from frapy.crawler import CrawlerProcess
 from frapy.exceptions import UsageError
 from frapy.utils.misc import walk_modules
@@ -15,7 +15,7 @@ from frapy.utils.project import get_project_settings, inside_project
 from frapy.utils.python import garbage_collect
 
 
-class ScrapyArgumentParser(argparse.ArgumentParser):
+class FrapyArgumentParser(argparse.ArgumentParser):
     def _parse_optional(self, arg_string):
         # if starts with -: it means that is a parameter not a argument
         if arg_string[:2] == "-:":
@@ -31,9 +31,9 @@ def _iter_command_classes(module_name):
         for obj in vars(module).values():
             if (
                 inspect.isclass(obj)
-                and issubclass(obj, ScrapyCommand)
+                and issubclass(obj, FrapyCommand)
                 and obj.__module__ == module.__name__
-                and obj not in (ScrapyCommand, BaseRunSpiderCommand)
+                and obj not in (FrapyCommand, BaseRunSpiderCommand)
             ):
                 yield obj
 
@@ -79,10 +79,10 @@ def _pop_command_name(argv):
 def _print_header(settings, inproject):
     version = frapy.__version__
     if inproject:
-        print(f"Scrapy {version} - active project: {settings['BOT_NAME']}\n")
+        print(f"Frapy {version} - active project: {settings['BOT_NAME']}\n")
 
     else:
-        print(f"Scrapy {version} - no active project\n")
+        print(f"Frapy {version} - no active project\n")
 
 
 def _print_commands(settings, inproject):
@@ -142,8 +142,8 @@ def execute(argv=None, settings=None):
         sys.exit(2)
 
     cmd = cmds[cmdname]
-    parser = ScrapyArgumentParser(
-        formatter_class=ScrapyHelpFormatter,
+    parser = FrapyArgumentParser(
+        formatter_class=FrapyHelpFormatter,
         usage=f"frapy {cmdname} {cmd.syntax()}",
         conflict_handler="resolve",
         description=cmd.long_desc(),

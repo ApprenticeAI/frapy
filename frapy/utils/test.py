@@ -77,14 +77,14 @@ def get_crawler(spidercls=None, settings_dict=None, prevent_warnings=True):
 
 def get_pythonpath() -> str:
     """Return a PYTHONPATH suitable to use in processes so that they find this
-    installation of Scrapy"""
+    installation of Frapy"""
     frapy_path = import_module("frapy").__path__[0]
     return str(Path(frapy_path).parent) + os.pathsep + os.environ.get("PYTHONPATH", "")
 
 
 def get_testenv():
     """Return a OS environment dict suitable to fork processes that need to import
-    this installation of Scrapy, instead of a system installed one.
+    this installation of Frapy, instead of a system installed one.
     """
     env = os.environ.copy()
     env["PYTHONPATH"] = get_pythonpath()

@@ -2,7 +2,7 @@ import warnings
 from typing import Optional
 
 import frapy
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 from frapy.utils.request import request_from_dict as _from_dict
 
 warnings.warn(
@@ -10,7 +10,7 @@ warnings.warn(
         "Module frapy.utils.reqser is deprecated, please use request.to_dict method"
         " and/or frapy.utils.request.request_from_dict instead"
     ),
-    category=ScrapyDeprecationWarning,
+    category=FrapyDeprecationWarning,
     stacklevel=2,
 )
 

@@ -1,5 +1,5 @@
 """
-This module contains data types used by Scrapy which are not included in the
+This module contains data types used by Frapy which are not included in the
 Python Standard Library.
 
 This module must not depend on any module outside the Standard Library.

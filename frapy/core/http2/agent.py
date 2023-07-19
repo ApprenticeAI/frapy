@@ -142,7 +142,7 @@ class H2Agent:
         return d
 
 
-class ScrapyProxyH2Agent(H2Agent):
+class FrapyProxyH2Agent(H2Agent):
     def __init__(
         self,
         reactor: ReactorBase,

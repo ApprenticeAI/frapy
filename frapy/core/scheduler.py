@@ -48,7 +48,7 @@ class BaseScheduler(metaclass=BaseSchedulerMeta):
     The order in which the scheduler returns its stored requests (via the ``next_request`` method)
     plays a great part in determining the order in which those requests are downloaded.
 
-    The methods defined in this class constitute the minimal interface that the Scrapy engine will interact with.
+    The methods defined in this class constitute the minimal interface that the Frapy engine will interact with.
     """
 
     @classmethod
@@ -94,7 +94,7 @@ class BaseScheduler(metaclass=BaseSchedulerMeta):
 
         If ``False``, the engine will fire a ``request_dropped`` signal, and
         will not make further attempts to schedule the request at a later time.
-        For reference, the default Scrapy scheduler returns ``False`` when the
+        For reference, the default Frapy scheduler returns ``False`` when the
         request is rejected by the dupefilter.
         """
         raise NotImplementedError()
@@ -117,7 +117,7 @@ SchedulerTV = TypeVar("SchedulerTV", bound="Scheduler")
 
 class Scheduler(BaseScheduler):
     """
-    Default Scrapy scheduler. This implementation also handles duplication
+    Default Frapy scheduler. This implementation also handles duplication
     filtering via the :setting:`dupefilter <DUPEFILTER_CLASS>`.
 
     This scheduler stores requests into several priority queues (defined by the

@@ -16,7 +16,7 @@ class VersionTest(ProcessTest, unittest.TestCase):
         _, out, _ = yield self.execute([])
         self.assertEqual(
             out.strip().decode(encoding),
-            f"Scrapy {frapy.__version__}",
+            f"Frapy {frapy.__version__}",
         )
 
     @defer.inlineCallbacks
@@ -30,7 +30,7 @@ class VersionTest(ProcessTest, unittest.TestCase):
         self.assertEqual(
             headers,
             [
-                "Scrapy",
+                "Frapy",
                 "lxml",
                 "libxml2",
                 "cssselect",

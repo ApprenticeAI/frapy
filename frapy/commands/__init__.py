@@ -1,5 +1,5 @@
 """
-Base class for Scrapy commands
+Base class for Frapy commands
 """
 import argparse
 import os
@@ -13,7 +13,7 @@ from frapy.exceptions import UsageError
 from frapy.utils.conf import arglist_to_dict, feed_process_params_from_cli
 
 
-class ScrapyCommand:
+class FrapyCommand:
     requires_project = False
     crawler_process: Optional[CrawlerProcess] = None
 
@@ -123,13 +123,13 @@ class ScrapyCommand:
         raise NotImplementedError
 
 
-class BaseRunSpiderCommand(ScrapyCommand):
+class BaseRunSpiderCommand(FrapyCommand):
     """
     Common class used to share functionality between the crawl, parse and runspider commands
     """
 
     def add_options(self, parser):
-        ScrapyCommand.add_options(self, parser)
+        FrapyCommand.add_options(self, parser)
         parser.add_argument(
             "-a",
             dest="spargs",
@@ -162,7 +162,7 @@ class BaseRunSpiderCommand(ScrapyCommand):
         )
 
     def process_options(self, args, opts):
-        ScrapyCommand.process_options(self, args, opts)
+        FrapyCommand.process_options(self, args, opts)
         try:
             opts.spargs = arglist_to_dict(opts.spargs)
         except ValueError:
@@ -177,7 +177,7 @@ class BaseRunSpiderCommand(ScrapyCommand):
             self.settings.set("FEEDS", feeds, priority="cmdline")
 
 
-class ScrapyHelpFormatter(argparse.HelpFormatter):
+class FrapyHelpFormatter(argparse.HelpFormatter):
     """
     Help Formatter for frapy command line help messages.
     """

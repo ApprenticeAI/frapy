@@ -5,13 +5,13 @@ AutoThrottle extension
 ======================
 
 This is an extension for automatically throttling crawling speed based on load
-of both the Scrapy server and the website you are crawling.
+of both the Frapy server and the website you are crawling.
 
 Design goals
 ============
 
 1. be nicer to sites instead of using default download delay of zero
-2. automatically adjust Scrapy to the optimum crawling speed, so the user
+2. automatically adjust Frapy to the optimum crawling speed, so the user
    doesn't have to tune the download delays to find the optimum one.
    The user only needs to specify the maximum concurrent requests
    it allows, and the extension does the rest.
@@ -63,7 +63,7 @@ AutoThrottle algorithm adjusts download delays based on the following rules:
 5. download delay can't become less than :setting:`DOWNLOAD_DELAY` or greater
    than :setting:`AUTOTHROTTLE_MAX_DELAY`
 
-.. note:: The AutoThrottle extension honours the standard Scrapy settings for
+.. note:: The AutoThrottle extension honours the standard Frapy settings for
    concurrency and delay. This means that it will respect
    :setting:`CONCURRENT_REQUESTS_PER_DOMAIN` and
    :setting:`CONCURRENT_REQUESTS_PER_IP` options and
@@ -71,13 +71,13 @@ AutoThrottle algorithm adjusts download delays based on the following rules:
 
 .. _download-latency:
 
-In Scrapy, the download latency is measured as the time elapsed between
+In Frapy, the download latency is measured as the time elapsed between
 establishing the TCP connection and receiving the HTTP headers.
 
 Note that these latencies are very hard to measure accurately in a cooperative
-multitasking environment because Scrapy may be busy processing a spider
+multitasking environment because Frapy may be busy processing a spider
 callback, for example, and unable to attend downloads. However, these latencies
-should still give a reasonable estimate of how busy Scrapy (and ultimately, the
+should still give a reasonable estimate of how busy Frapy (and ultimately, the
 server) is, and this extension builds on that premise.
 
 Settings
@@ -130,7 +130,7 @@ AUTOTHROTTLE_TARGET_CONCURRENCY
 
 Default: ``1.0``
 
-Average number of requests Scrapy should be sending in parallel to remote
+Average number of requests Frapy should be sending in parallel to remote
 websites.
 
 By default, AutoThrottle adjusts the delay to send a single
@@ -147,7 +147,7 @@ when AutoThrottle extension is enabled. This means that if
 :setting:`CONCURRENT_REQUESTS_PER_IP`, the crawler won't reach this number
 of concurrent requests.
 
-At every given time point Scrapy can be sending more or less concurrent
+At every given time point Frapy can be sending more or less concurrent
 requests than ``AUTOTHROTTLE_TARGET_CONCURRENCY``; it is a suggested
 value the crawler tries to approach, not a hard limit.
 

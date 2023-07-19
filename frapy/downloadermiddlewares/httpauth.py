@@ -8,7 +8,7 @@ import warnings
 from w3lib.http import basic_auth_header
 
 from frapy import signals
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 from frapy.utils.httpobj import urlparse_cached
 from frapy.utils.url import url_is_from_any_domain
 
@@ -34,7 +34,7 @@ class HttpAuthMiddleware:
                     "problems if the spider makes requests to several different domains. http_auth_domain "
                     "will be set to the domain of the first request, please set it to the correct value "
                     "explicitly.",
-                    category=ScrapyDeprecationWarning,
+                    category=FrapyDeprecationWarning,
                 )
                 self.domain_unset = True
             else:

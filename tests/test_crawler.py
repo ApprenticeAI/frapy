@@ -15,7 +15,7 @@ from w3lib import __version__ as w3lib_version
 
 import frapy
 from frapy.crawler import Crawler, CrawlerProcess, CrawlerRunner
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 from frapy.extensions import telnet
 from frapy.extensions.throttle import AutoThrottle
 from frapy.settings import Settings, default_settings
@@ -44,7 +44,7 @@ class CrawlerTestCase(BaseCrawlerTest):
         settings = Settings()
         settings.setdict(project_settings, priority="project")
         with warnings.catch_warnings():
-            warnings.simplefilter("ignore", ScrapyDeprecationWarning)
+            warnings.simplefilter("ignore", FrapyDeprecationWarning)
             crawler = Crawler(CustomSettingsSpider, settings)
 
         self.assertEqual(crawler.settings.get("TEST1"), "spider")
@@ -61,7 +61,7 @@ class CrawlerTestCase(BaseCrawlerTest):
 
     def test_crawler_accepts_None(self):
         with warnings.catch_warnings():
-            warnings.simplefilter("ignore", ScrapyDeprecationWarning)
+            warnings.simplefilter("ignore", FrapyDeprecationWarning)
             crawler = Crawler(DefaultSpider)
         self.assertOptionIsDefault(crawler.settings, "RETRY_ENABLED")
 

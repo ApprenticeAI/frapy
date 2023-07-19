@@ -64,9 +64,9 @@ Additionally, they may also implement the following methods:
 
    If present, this class method is called to create a pipeline instance
    from a :class:`~frapy.crawler.Crawler`. It must return a new instance
-   of the pipeline. Crawler object provides access to all Scrapy core
+   of the pipeline. Crawler object provides access to all Frapy core
    components like settings and signals; it is a way for pipeline to
-   access them and hook its functionality into Scrapy.
+   access them and hook its functionality into Frapy.
 
    :param crawler: crawler that uses this pipeline
    :type crawler: :class:`~frapy.crawler.Crawler` object
@@ -136,7 +136,7 @@ Write items to MongoDB
 ----------------------
 
 In this example we'll write items to MongoDB_ using pymongo_.
-MongoDB address and database name are specified in Scrapy settings;
+MongoDB address and database name are specified in Frapy settings;
 MongoDB collection is named after item class.
 
 The main point of this example is to show how to use :meth:`from_crawler`
@@ -205,7 +205,7 @@ item.
 
     class ScreenshotPipeline:
         """Pipeline that uses Splash to render screenshot of
-        every Scrapy item."""
+        every Frapy item."""
 
         SPLASH_URL = "http://localhost:8050/render.png?url={}"
 

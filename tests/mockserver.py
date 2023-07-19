@@ -256,7 +256,7 @@ class Root(resource.Resource):
         return self
 
     def render(self, request):
-        return b"Scrapy mock HTTP server\n"
+        return b"Frapy mock HTTP server\n"
 
 
 class MockServer:

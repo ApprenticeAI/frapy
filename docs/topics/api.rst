@@ -4,7 +4,7 @@
 Core API
 ========
 
-This section documents the Scrapy core API, and it's intended for developers of
+This section documents the Frapy core API, and it's intended for developers of
 extensions and middlewares.
 
 .. _topics-api-crawler:
@@ -12,13 +12,13 @@ extensions and middlewares.
 Crawler API
 ===========
 
-The main entry point to Scrapy API is the :class:`~frapy.crawler.Crawler`
+The main entry point to Frapy API is the :class:`~frapy.crawler.Crawler`
 object, passed to extensions through the ``from_crawler`` class method. This
-object provides access to all Scrapy core components, and it's the only way for
-extensions to access them and hook their functionality into Scrapy.
+object provides access to all Frapy core components, and it's the only way for
+extensions to access them and hook their functionality into Frapy.
 
 .. module:: frapy.crawler
-   :synopsis: The Scrapy crawler
+   :synopsis: The Frapy crawler
 
 The Extension Manager is responsible for loading and keeping track of installed
 extensions and it's configured through the :setting:`EXTENSIONS` setting which
@@ -43,10 +43,10 @@ how you :ref:`configure the downloader middlewares
 
         The settings manager of this crawler.
 
-        This is used by extensions & middlewares to access the Scrapy settings
+        This is used by extensions & middlewares to access the Frapy settings
         of this crawler.
 
-        For an introduction on Scrapy settings see :ref:`topics-settings`.
+        For an introduction on Frapy settings see :ref:`topics-settings`.
 
         For the API see :class:`~frapy.settings.Settings` class.
 
@@ -54,7 +54,7 @@ how you :ref:`configure the downloader middlewares
 
         The signals manager of this crawler.
 
-        This is used by extensions & middlewares to hook themselves into Scrapy
+        This is used by extensions & middlewares to hook themselves into Frapy
         functionality.
 
         For an introduction on signals see :ref:`topics-signals`.
@@ -79,14 +79,14 @@ how you :ref:`configure the downloader middlewares
         Most extensions won't need to access this attribute.
 
         For an introduction on extensions and a list of available extensions on
-        Scrapy see :ref:`topics-extensions`.
+        Frapy see :ref:`topics-extensions`.
 
     .. attribute:: engine
 
         The execution engine, which coordinates the core crawling logic
         between the scheduler, downloader and spiders.
 
-        Some extension may want to access the Scrapy engine, to inspect  or 
+        Some extension may want to access the Frapy engine, to inspect  or 
         modify the downloader and scheduler behaviour, although this is an
         advanced use and this API is not yet stable.
 
@@ -125,7 +125,7 @@ Settings API
 .. attribute:: SETTINGS_PRIORITIES
 
     Dictionary that sets the key name and priority level of the default
-    settings priorities used in Scrapy.
+    settings priorities used in Frapy.
 
     Each item defines a settings entry point, giving it a code name for
     identification and an integer priority. Greater priorities take more
@@ -174,7 +174,7 @@ SpiderLoader API
 
     .. method:: from_settings(settings)
 
-       This class method is used by Scrapy to create an instance of the class.
+       This class method is used by Frapy to create an instance of the class.
        It's called with the current project settings, and it loads the spiders
        found recursively in the modules of the :setting:`SPIDER_MODULES`
        setting.

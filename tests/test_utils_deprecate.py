@@ -3,7 +3,7 @@ import unittest
 import warnings
 from unittest import mock
 
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 from frapy.utils.deprecate import create_deprecated_class, update_classpath
 
 
@@ -149,7 +149,7 @@ class WarnWhenSubclassedTest(unittest.TestCase):
 
     def test_issubclass(self):
         with warnings.catch_warnings():
-            warnings.simplefilter("ignore", ScrapyDeprecationWarning)
+            warnings.simplefilter("ignore", FrapyDeprecationWarning)
             DeprecatedName = create_deprecated_class("DeprecatedName", NewName)
 
             class UpdatedUserClass1(NewName):
@@ -185,7 +185,7 @@ class WarnWhenSubclassedTest(unittest.TestCase):
 
     def test_isinstance(self):
         with warnings.catch_warnings():
-            warnings.simplefilter("ignore", ScrapyDeprecationWarning)
+            warnings.simplefilter("ignore", FrapyDeprecationWarning)
             DeprecatedName = create_deprecated_class("DeprecatedName", NewName)
 
             class UpdatedUserClass2(NewName):
@@ -219,7 +219,7 @@ class WarnWhenSubclassedTest(unittest.TestCase):
 
     def test_clsdict(self):
         with warnings.catch_warnings():
-            warnings.simplefilter("ignore", ScrapyDeprecationWarning)
+            warnings.simplefilter("ignore", FrapyDeprecationWarning)
             Deprecated = create_deprecated_class("Deprecated", NewName, {"foo": "bar"})
 
         self.assertEqual(Deprecated.foo, "bar")
@@ -287,7 +287,7 @@ class UpdateClassPathTest(unittest.TestCase):
 
     def test_sorted_replacement(self):
         with warnings.catch_warnings():
-            warnings.simplefilter("ignore", ScrapyDeprecationWarning)
+            warnings.simplefilter("ignore", FrapyDeprecationWarning)
             output = update_classpath("frapy.contrib.pipeline.Pipeline")
         self.assertEqual(output, "frapy.pipelines.Pipeline")
 

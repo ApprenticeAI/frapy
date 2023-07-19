@@ -7,7 +7,7 @@ from twisted.python import log as twisted_log
 from twisted.python.failure import Failure
 
 import frapy
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 from frapy.settings import Settings
 from frapy.utils.versions import frapy_components_versions
 
@@ -24,8 +24,8 @@ class TopLevelFormatter(logging.Filter):
     """Keep only top level loggers's name (direct children from root) from
     records.
 
-    This filter will replace Scrapy loggers' names with 'frapy'. This mimics
-    the old Scrapy log behaviour and helps shortening long names.
+    This filter will replace Frapy loggers' names with 'frapy'. This mimics
+    the old Frapy log behaviour and helps shortening long names.
 
     Since it can't be set for just one logger (it won't propagate for its
     children), it's going to be set in the root handler, with a parametrized
@@ -63,7 +63,7 @@ DEFAULT_LOGGING = {
 
 def configure_logging(settings=None, install_root_handler=True):
     """
-    Initialize logging defaults for Scrapy.
+    Initialize logging defaults for Frapy.
 
     :param settings: settings used to create and configure a handler for the
         root logger (default: None).
@@ -76,7 +76,7 @@ def configure_logging(settings=None, install_root_handler=True):
     This function does:
 
     - Route warnings and twisted logging through Python standard logging
-    - Assign DEBUG and ERROR level to Scrapy and Twisted loggers respectively
+    - Assign DEBUG and ERROR level to Frapy and Twisted loggers respectively
     - Route stdout to log if LOG_STDOUT setting is True
 
     When ``install_root_handler`` is True (default), this function also
@@ -148,13 +148,13 @@ def _get_handler(settings):
 
 def log_frapy_info(settings: Settings) -> None:
     logger.info(
-        "Scrapy %(version)s started (bot: %(bot)s)",
+        "Frapy %(version)s started (bot: %(bot)s)",
         {"version": frapy.__version__, "bot": settings["BOT_NAME"]},
     )
     versions = [
         f"{name} {version}"
         for name, version in frapy_components_versions()
-        if name != "Scrapy"
+        if name != "Frapy"
     ]
     logger.info("Versions: %(versions)s", {"versions": ", ".join(versions)})
 
@@ -213,13 +213,13 @@ def logformatter_adapter(logkws):
     handling backward compatibility as well.
     """
     if not {"level", "msg", "args"} <= set(logkws):
-        warnings.warn("Missing keys in LogFormatter method", ScrapyDeprecationWarning)
+        warnings.warn("Missing keys in LogFormatter method", FrapyDeprecationWarning)
 
     if "format" in logkws:
         warnings.warn(
             "`format` key in LogFormatter methods has been "
             "deprecated, use `msg` instead",
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
         )
 
     level = logkws.get("level", logging.INFO)

@@ -13,7 +13,7 @@ SEP-001 - API for populating item fields (comparison)
 This page shows different usage scenarios for the two new proposed API for
 populating item field values (which will replace the old deprecated !RobustItem
 API)  and compares them. One of these will be chosen as the recommended (and
-supported) mechanism in Scrapy 0.7.
+supported) mechanism in Frapy 0.7.
 
 Candidates and their API
 ========================

@@ -3,7 +3,7 @@ from collections import defaultdict
 from unittest import TextTestResult as _TextTestResult
 from unittest import TextTestRunner
 
-from frapy.commands import ScrapyCommand
+from frapy.commands import FrapyCommand
 from frapy.contracts import ContractsManager
 from frapy.utils.conf import build_component_list
 from frapy.utils.misc import load_object, set_environ
@@ -38,7 +38,7 @@ class TextTestResult(_TextTestResult):
             write("\n")
 
 
-class Command(ScrapyCommand):
+class Command(FrapyCommand):
     requires_project = True
     default_settings = {"LOG_ENABLED": False}
 
@@ -49,7 +49,7 @@ class Command(ScrapyCommand):
         return "Check spider contracts"
 
     def add_options(self, parser):
-        ScrapyCommand.add_options(self, parser)
+        FrapyCommand.add_options(self, parser)
         parser.add_argument(
             "-l",
             "--list",
@@ -78,7 +78,7 @@ class Command(ScrapyCommand):
 
         spider_loader = self.crawler_process.spider_loader
 
-        with set_environ(SCRAPY_CHECK="true"):
+        with set_environ(FRAPY_CHECK="true"):
             for spidername in args or spider_loader.list():
                 spidercls = spider_loader.load(spidername)
                 spidercls.start_requests = lambda s: conman.from_spider(s, result)

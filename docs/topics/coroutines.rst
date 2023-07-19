@@ -6,7 +6,7 @@ Coroutines
 
 .. versionadded:: 2.0
 
-Scrapy has :ref:`partial support <coroutine-support>` for the
+Frapy has :ref:`partial support <coroutine-support>` for the
 :ref:`coroutine syntax <async>`.
 
 .. _coroutine-support:
@@ -54,9 +54,9 @@ hence use coroutine syntax (e.g. ``await``, ``async for``, ``async with``):
 General usage
 =============
 
-There are several use cases for coroutines in Scrapy.
+There are several use cases for coroutines in Frapy.
 
-Code that would return Deferreds when written for previous Scrapy versions,
+Code that would return Deferreds when written for previous Frapy versions,
 such as downloader middlewares and signal handlers, can be rewritten to be
 shorter and cleaner:
 
@@ -116,7 +116,7 @@ This means you can use many useful Python libraries providing such code:
 
 .. note:: Many libraries that use coroutines, such as `aio-libs`_, require the
           :mod:`asyncio` loop and to use them you need to
-          :doc:`enable asyncio support in Scrapy<asyncio>`.
+          :doc:`enable asyncio support in Frapy<asyncio>`.
 
 .. note:: If you want to ``await`` on Deferreds while using the asyncio reactor,
           you need to :ref:`wrap them<asyncio-await-dfd>`.
@@ -128,7 +128,7 @@ Common use cases for asynchronous code include:
 * storing data in databases (in pipelines and middlewares);
 * delaying the spider initialization until some external event (in the
   :signal:`spider_opened` handler);
-* calling asynchronous Scrapy methods like :meth:`ExecutionEngine.download`
+* calling asynchronous Frapy methods like :meth:`ExecutionEngine.download`
   (see :ref:`the screenshot pipeline example<ScreenshotPipeline>`).
 
 .. _aio-libs: https://github.com/aio-libs
@@ -150,13 +150,13 @@ Then the output of that ``process_spider_output`` method is passed to the
 ``process_spider_output`` method of the next spider middleware, and so on for
 every active spider middleware.
 
-Scrapy supports mixing :ref:`coroutine methods <async>` and synchronous methods
+Frapy supports mixing :ref:`coroutine methods <async>` and synchronous methods
 in this chain of calls.
 
 However, if any of the ``process_spider_output`` methods is defined as a
 synchronous method, and the previous ``Request`` callback or
 ``process_spider_output`` method is a coroutine, there are some drawbacks to
-the asynchronous-to-synchronous conversion that Scrapy does so that the
+the asynchronous-to-synchronous conversion that Frapy does so that the
 synchronous ``process_spider_output`` method gets a synchronous iterable as its
 ``result`` parameter:
 
@@ -172,7 +172,7 @@ synchronous ``process_spider_output`` method gets a synchronous iterable as its
 
 Asynchronous-to-synchronous conversions are supported for backward
 compatibility, but they are deprecated and will stop working in a future
-version of Scrapy.
+version of Frapy.
 
 To avoid asynchronous-to-synchronous conversions, when defining ``Request``
 callbacks as coroutine methods or when using spider middlewares whose
@@ -195,9 +195,9 @@ Universal spider middlewares
 .. versionadded:: 2.7
 
 To allow writing a spider middleware that supports asynchronous execution of
-its ``process_spider_output`` method in Scrapy 2.7 and later (avoiding
+its ``process_spider_output`` method in Frapy 2.7 and later (avoiding
 :ref:`asynchronous-to-synchronous conversions <sync-async-spider-middleware>`)
-while maintaining support for older Scrapy versions, you may define
+while maintaining support for older Frapy versions, you may define
 ``process_spider_output`` as a synchronous method and define an
 :term:`asynchronous generator` version of that method with an alternative name:
 ``process_spider_output_async``.
@@ -218,12 +218,12 @@ For example:
                 yield r
 
 .. note:: This is an interim measure to allow, for a time, to write code that
-          works in Scrapy 2.7 and later without requiring
-          asynchronous-to-synchronous conversions, and works in earlier Scrapy
+          works in Frapy 2.7 and later without requiring
+          asynchronous-to-synchronous conversions, and works in earlier Frapy
           versions as well.
 
-          In some future version of Scrapy, however, this feature will be
-          deprecated and, eventually, in a later version of Scrapy, this
+          In some future version of Frapy, however, this feature will be
+          deprecated and, eventually, in a later version of Frapy, this
           feature will be removed, and all spider middlewares will be expected
           to define their ``process_spider_output`` method as an asynchronous
           generator.

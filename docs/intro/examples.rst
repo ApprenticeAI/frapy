@@ -4,9 +4,9 @@
 Examples
 ========
 
-The best way to learn is with examples, and Scrapy is no exception. For this
-reason, there is an example Scrapy project named quotesbot_, that you can use to
-play and learn more about Scrapy. It contains two spiders for
+The best way to learn is with examples, and Frapy is no exception. For this
+reason, there is an example Frapy project named quotesbot_, that you can use to
+play and learn more about Frapy. It contains two spiders for
 https://quotes.toscrape.com, one using CSS selectors and another one using XPath
 expressions.
 

@@ -4,7 +4,7 @@
 Components
 ==========
 
-A Scrapy component is any class whose objects are created using
+A Frapy component is any class whose objects are created using
 :func:`frapy.utils.misc.create_instance`.
 
 That includes the classes that you may assign to the following settings:
@@ -37,7 +37,7 @@ That includes the classes that you may assign to the following settings:
 
 -   :setting:`SPIDER_MIDDLEWARES`
 
-Third-party Scrapy components may also let you define additional Scrapy
+Third-party Frapy components may also let you define additional Frapy
 components, usually configurable through :ref:`settings <topics-settings>`, to
 modify their behavior.
 
@@ -47,7 +47,7 @@ Enforcing component requirements
 ================================
 
 Sometimes, your components may only be intended to work under certain
-conditions. For example, they may require a minimum version of Scrapy to work as
+conditions. For example, they may require a minimum version of Frapy to work as
 intended, or they may require certain settings to have specific values.
 
 In addition to describing those conditions in the documentation of your
@@ -61,11 +61,11 @@ In the case of :ref:`downloader middlewares <topics-downloader-middleware>`,
 :exc:`frapy.exceptions.NotConfigured`, passing a description of the issue as a
 parameter to the exception so that it is printed in the logs, for the user to
 see. For other components, feel free to raise whatever other exception feels
-right to you; for example, :exc:`RuntimeError` would make sense for a Scrapy
+right to you; for example, :exc:`RuntimeError` would make sense for a Frapy
 version mismatch, while :exc:`ValueError` may be better if the issue is the
 value of a setting.
 
-If your requirement is a minimum Scrapy version, you may use
+If your requirement is a minimum Frapy version, you may use
 :attr:`frapy.__version__` to enforce your requirement. For example:
 
 .. code-block:: python
@@ -79,7 +79,7 @@ If your requirement is a minimum Scrapy version, you may use
         def __init__(self):
             if parse_version(frapy.__version__) < parse_version("2.7"):
                 raise RuntimeError(
-                    f"{MyComponent.__qualname__} requires Scrapy 2.7 or "
+                    f"{MyComponent.__qualname__} requires Frapy 2.7 or "
                     f"later, which allow defining the process_spider_output "
                     f"method of spider middlewares as an asynchronous "
                     f"generator."

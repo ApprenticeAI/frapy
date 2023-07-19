@@ -4,26 +4,26 @@
 Common Practices
 ================
 
-This section documents common practices when using Scrapy. These are things
+This section documents common practices when using Frapy. These are things
 that cover many topics and don't often fall into any other specific section.
 
 .. skip: start
 
 .. _run-from-script:
 
-Run Scrapy from a script
+Run Frapy from a script
 ========================
 
-You can use the :ref:`API <topics-api>` to run Scrapy from a script, instead of
-the typical way of running Scrapy via ``frapy crawl``.
+You can use the :ref:`API <topics-api>` to run Frapy from a script, instead of
+the typical way of running Frapy via ``frapy crawl``.
 
-Remember that Scrapy is built on top of the Twisted
+Remember that Frapy is built on top of the Twisted
 asynchronous networking library, so you need to run it inside the Twisted reactor.
 
 The first utility you can use to run your spiders is
 :class:`frapy.crawler.CrawlerProcess`. This class will start a Twisted reactor
 for you, configuring the logging and setting shutdown handlers. This class is
-the one used by all Scrapy commands.
+the one used by all Frapy commands.
 
 Here's an example showing how to run a single spider with it.
 
@@ -52,7 +52,7 @@ Here's an example showing how to run a single spider with it.
 Define settings within dictionary in CrawlerProcess. Make sure to check :class:`~frapy.crawler.CrawlerProcess`
 documentation to get acquainted with its usage details.
 
-If you are inside a Scrapy project there are some additional helpers you can
+If you are inside a Frapy project there are some additional helpers you can
 use to import those components within the project. You can automatically import
 your spiders passing their name to :class:`~frapy.crawler.CrawlerProcess`, and
 use ``get_project_settings`` to get a :class:`~frapy.settings.Settings`
@@ -72,7 +72,7 @@ project as example.
     process.crawl("followall", domain="frapy.org")
     process.start()  # the script will block here until the crawling is finished
 
-There's another Scrapy utility that provides more control over the crawling
+There's another Frapy utility that provides more control over the crawling
 process: :class:`frapy.crawler.CrawlerRunner`. This class is a thin wrapper
 that encapsulates some simple helpers to run multiple crawlers, but it won't
 start or interfere with existing reactors in any way.
@@ -80,7 +80,7 @@ start or interfere with existing reactors in any way.
 Using this class the reactor should be explicitly run after scheduling your
 spiders. It's recommended you use :class:`~frapy.crawler.CrawlerRunner`
 instead of :class:`~frapy.crawler.CrawlerProcess` if your application is
-already using Twisted and you want to run Scrapy in the same reactor.
+already using Twisted and you want to run Frapy in the same reactor.
 
 Note that you will also have to shutdown the Twisted reactor yourself after the
 spider is finished. This can be achieved by adding callbacks to the deferred
@@ -117,8 +117,8 @@ reactor after ``MySpider`` has finished running.
 Running multiple spiders in the same process
 ============================================
 
-By default, Scrapy runs a single spider per process when you run ``frapy
-crawl``. However, Scrapy supports running multiple spiders per process using
+By default, Frapy runs a single spider per process when you run ``frapy
+crawl``. However, Frapy supports running multiple spiders per process using
 the :ref:`internal API <topics-api>`.
 
 Here is an example that runs multiple spiders simultaneously:
@@ -227,7 +227,7 @@ different for different settings:
   exception will be raised. These are applied when the reactor is installed.
 * For :setting:`REACTOR_THREADPOOL_MAXSIZE`, :setting:`DNS_RESOLVER` and the
   ones used by the resolver (:setting:`DNSCACHE_ENABLED`,
-  :setting:`DNSCACHE_SIZE`, :setting:`DNS_TIMEOUT` for ones included in Scrapy)
+  :setting:`DNSCACHE_SIZE`, :setting:`DNS_TIMEOUT` for ones included in Frapy)
   the first available value is used. These are applied when the reactor is
   started.
 
@@ -240,12 +240,12 @@ different for different settings:
 Distributed crawls
 ==================
 
-Scrapy doesn't provide any built-in facility for running crawls in a distribute
+Frapy doesn't provide any built-in facility for running crawls in a distribute
 (multi-server) manner. However, there are some ways to distribute crawls, which
 vary depending on how you plan to distribute them.
 
 If you have many spiders, the obvious way to distribute the load is to setup
-many Scrapyd instances and distribute spider runs among those.
+many Frapyd instances and distribute spider runs among those.
 
 If you instead want to run a single (big) spider through many machines, what
 you usually do is partition the urls to crawl and send them to each separate
@@ -258,7 +258,7 @@ files/urls::
     http://somedomain.com/urls-to-crawl/spider1/part2.list
     http://somedomain.com/urls-to-crawl/spider1/part3.list
 
-Then you fire a spider run on 3 different Scrapyd servers. The spider would
+Then you fire a spider run on 3 different Frapyd servers. The spider would
 receive a (spider) argument ``part`` with the number of the partition to
 crawl::
 

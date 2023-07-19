@@ -4,8 +4,8 @@
 Broad Crawls
 ============
 
-Scrapy defaults are optimized for crawling specific sites. These sites are
-often handled by a single Scrapy spider, although this is not necessary or
+Frapy defaults are optimized for crawling specific sites. These sites are
+often handled by a single Frapy spider, although this is not necessary or
 required (for example, there are generic spiders that handle any given site
 thrown at them).
 
@@ -32,11 +32,11 @@ These are some common properties often found in broad crawls:
   is crawled slowly to respect politeness, but many sites are crawled in
   parallel)
 
-As said above, Scrapy default settings are optimized for focused crawls, not
-broad crawls. However, due to its asynchronous architecture, Scrapy is very
+As said above, Frapy default settings are optimized for focused crawls, not
+broad crawls. However, due to its asynchronous architecture, Frapy is very
 well suited for performing fast broad crawls. This page summarizes some things
-you need to keep in mind when using Scrapy for doing broad crawls, along with
-concrete suggestions of Scrapy settings to tune in order to achieve an
+you need to keep in mind when using Frapy for doing broad crawls, along with
+concrete suggestions of Frapy settings to tune in order to achieve an
 efficient broad crawl.
 
 .. _broad-crawls-scheduler-priority-queue:
@@ -44,7 +44,7 @@ efficient broad crawl.
 Use the right :setting:`SCHEDULER_PRIORITY_QUEUE`
 =================================================
 
-Scrapy’s default scheduler priority queue is ``'frapy.pqueues.ScrapyPriorityQueue'``.
+Frapy’s default scheduler priority queue is ``'frapy.pqueues.FrapyPriorityQueue'``.
 It works best during single-domain crawl. It does not work well with crawling
 many different domains in parallel
 
@@ -68,7 +68,7 @@ IP (:setting:`CONCURRENT_REQUESTS_PER_IP`).
           <broad-crawls-scheduler-priority-queue>` does not support
           :setting:`CONCURRENT_REQUESTS_PER_IP`.
 
-The default global concurrency limit in Scrapy is not suitable for crawling
+The default global concurrency limit in Frapy is not suitable for crawling
 many different domains in parallel, so you will want to increase it. How much
 to increase it will depend on how much CPU and memory your crawler will have
 available.
@@ -80,7 +80,7 @@ A good starting point is ``100``:
     CONCURRENT_REQUESTS = 100
 
 But the best way to find out is by doing some trials and identifying at what
-concurrency your Scrapy process gets CPU bounded. For optimum performance, you
+concurrency your Frapy process gets CPU bounded. For optimum performance, you
 should pick a concurrency where CPU usage is at 80-90%.
 
 Increasing concurrency also increases memory usage. If memory usage is a
@@ -90,7 +90,7 @@ concern, you might need to lower your global concurrency limit accordingly.
 Increase Twisted IO thread pool maximum size
 ============================================
 
-Currently Scrapy does DNS resolution in a blocking way with usage of thread
+Currently Frapy does DNS resolution in a blocking way with usage of thread
 pool. With higher concurrency levels the crawling could be slow or even fail
 hitting DNS resolver timeouts. Possible solution to increase the number of
 threads handling DNS queries. The DNS queue will be processed faster speeding
@@ -114,7 +114,7 @@ Reduce log level
 ================
 
 When doing broad crawls you are often only interested in the crawl rates you
-get and any errors found. These stats are reported by Scrapy when using the
+get and any errors found. These stats are reported by Frapy when using the
 ``INFO`` log level. In order to save CPU (and log storage requirements) you
 should not use ``DEBUG`` log level when preforming large broad crawls in
 production. Using ``DEBUG`` level when developing your (broad) crawler may be
@@ -132,7 +132,7 @@ Disable cookies
 Disable cookies unless you *really* need. Cookies are often not needed when
 doing broad crawls (search engine crawlers ignore them), and they improve
 performance by saving some CPU cycles and reducing the memory footprint of your
-Scrapy crawler.
+Frapy crawler.
 
 To disable cookies use:
 
@@ -194,7 +194,7 @@ Pages can indicate it in two ways:
 2) by using a special meta tag - this way is used on
    "main", "index" website pages.
 
-Scrapy handles (1) automatically; to handle (2) enable
+Frapy handles (1) automatically; to handle (2) enable
 :ref:`AjaxCrawlMiddleware <ajaxcrawl-middleware>`:
 
 .. code-block:: python
@@ -213,7 +213,7 @@ and enabling it for focused crawls doesn't make much sense.
 Crawl in BFO order
 ==================
 
-:ref:`Scrapy crawls in DFO order by default <faq-bfo-dfo>`.
+:ref:`Frapy crawls in DFO order by default <faq-bfo-dfo>`.
 
 In broad crawls, however, page crawling tends to be faster than page
 processing. As a result, unprocessed early requests stay in memory until the

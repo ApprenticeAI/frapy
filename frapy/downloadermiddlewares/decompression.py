@@ -11,12 +11,12 @@ from io import BytesIO
 from tempfile import mktemp
 from warnings import warn
 
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 from frapy.responsetypes import responsetypes
 
 warn(
     "frapy.downloadermiddlewares.decompression is deprecated",
-    ScrapyDeprecationWarning,
+    FrapyDeprecationWarning,
     stacklevel=2,
 )
 

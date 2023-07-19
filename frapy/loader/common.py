@@ -4,7 +4,7 @@ import warnings
 
 from itemloaders import common
 
-from frapy.utils.deprecate import ScrapyDeprecationWarning
+from frapy.utils.deprecate import FrapyDeprecationWarning
 
 
 def wrap_loader_context(function, context):
@@ -14,7 +14,7 @@ def wrap_loader_context(function, context):
     warnings.warn(
         "frapy.loader.common.wrap_loader_context has moved to a new library."
         "Please update your reference to itemloaders.common.wrap_loader_context",
-        ScrapyDeprecationWarning,
+        FrapyDeprecationWarning,
         stacklevel=2,
     )
 

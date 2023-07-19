@@ -1,5 +1,5 @@
 """
-Scrapy core exceptions
+Frapy core exceptions
 
 These exceptions are documented in docs/topics/exceptions.rst. Please don't add
 new exceptions here without documenting them there.
@@ -82,7 +82,7 @@ class UsageError(Exception):
         super().__init__(*a, **kw)
 
 
-class ScrapyDeprecationWarning(Warning):
+class FrapyDeprecationWarning(Warning):
     """Warning category for deprecated features, since the default
     DeprecationWarning is silenced on Python 2.7+
     """

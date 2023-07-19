@@ -1,5 +1,5 @@
 """
-Scrapy Telnet Console extension
+Frapy Telnet Console extension
 
 See documentation in docs/topics/telnetconsole.rst
 """
@@ -108,7 +108,7 @@ class TelnetConsole(protocol.ServerFactory):
             "est": lambda: print_engine_status(self.crawler.engine),
             "p": pprint.pprint,
             "prefs": print_live_refs,
-            "help": "This is Scrapy telnet console. For more info see: "
+            "help": "This is Frapy telnet console. For more info see: "
             "https://docs.frapy.org/en/latest/topics/telnetconsole.html",
         }
         self.crawler.signals.send_catch_log(update_telnet_vars, telnet_vars=telnet_vars)

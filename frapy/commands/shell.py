@@ -1,18 +1,18 @@
 """
-Scrapy Shell
+Frapy Shell
 
 See documentation in docs/topics/shell.rst
 """
 from threading import Thread
 
-from frapy.commands import ScrapyCommand
+from frapy.commands import FrapyCommand
 from frapy.http import Request
 from frapy.shell import Shell
 from frapy.utils.spider import DefaultSpider, spidercls_for_request
 from frapy.utils.url import guess_scheme
 
 
-class Command(ScrapyCommand):
+class Command(FrapyCommand):
     requires_project = False
     default_settings = {
         "KEEP_ALIVE": True,
@@ -33,7 +33,7 @@ class Command(ScrapyCommand):
         )
 
     def add_options(self, parser):
-        ScrapyCommand.add_options(self, parser)
+        FrapyCommand.add_options(self, parser)
         parser.add_argument(
             "-c",
             dest="code",
@@ -49,7 +49,7 @@ class Command(ScrapyCommand):
         )
 
     def update_vars(self, vars):
-        """You can use this function to update the Scrapy objects that will be
+        """You can use this function to update the Frapy objects that will be
         available in the shell
         """
         pass

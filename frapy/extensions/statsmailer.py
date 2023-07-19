@@ -31,4 +31,4 @@ class StatsMailer:
         body += "\n".join(f"{k:<50} : {v}" for k, v in self.stats.get_stats().items())
         body += f"\n\n{spider.name} stats\n\n"
         body += "\n".join(f"{k:<50} : {v}" for k, v in spider_stats.items())
-        return self.mail.send(self.recipients, f"Scrapy stats for: {spider.name}", body)
+        return self.mail.send(self.recipients, f"Frapy stats for: {spider.name}", body)

@@ -23,7 +23,7 @@ from twisted.python.versions import Version
 from twisted.trial import unittest
 
 import frapy
-from frapy.commands import ScrapyCommand, ScrapyHelpFormatter, view
+from frapy.commands import FrapyCommand, FrapyHelpFormatter, view
 from frapy.commands.startproject import IGNORE
 from frapy.settings import Settings
 from frapy.utils.python import to_unicode
@@ -33,10 +33,10 @@ from tests.test_crawler import ExceptionSpider, NoRequestsSpider
 
 class CommandSettings(unittest.TestCase):
     def setUp(self):
-        self.command = ScrapyCommand()
+        self.command = FrapyCommand()
         self.command.settings = Settings()
         self.parser = argparse.ArgumentParser(
-            formatter_class=ScrapyHelpFormatter, conflict_handler="resolve"
+            formatter_class=FrapyHelpFormatter, conflict_handler="resolve"
         )
         self.command.add_options(self.parser)
 
@@ -52,7 +52,7 @@ class CommandSettings(unittest.TestCase):
         self.assertEqual(dict(self.command.settings["FEEDS"]), json.loads(feeds_json))
 
     def test_help_formatter(self):
-        formatter = ScrapyHelpFormatter(prog="frapy")
+        formatter = FrapyHelpFormatter(prog="frapy")
         part_strings = [
             "usage: frapy genspider [options] <name> <domain>\n\n",
             "\n",
@@ -238,7 +238,7 @@ class StartprojectTemplatesTest(ProjectTest):
         args = ["--set", f"TEMPLATES_DIR={self.tmpl}"]
         p, out, err = self.proc("startproject", self.project_name, *args)
         self.assertIn(
-            f"New Scrapy project '{self.project_name}', " "using template directory",
+            f"New Frapy project '{self.project_name}', " "using template directory",
             out,
         )
         self.assertIn(self.tmpl_proj, out)
@@ -441,7 +441,7 @@ class CommandTest(ProjectTest):
         super().setUp()
         self.call("startproject", self.project_name)
         self.cwd = Path(self.temp_path, self.project_name)
-        self.env["SCRAPY_SETTINGS_MODULE"] = f"{self.project_name}.settings"
+        self.env["FRAPY_SETTINGS_MODULE"] = f"{self.project_name}.settings"
 
 
 class GenspiderCommandTest(CommandTest):
@@ -976,13 +976,13 @@ class ViewCommandTest(CommandTest):
         parser = argparse.ArgumentParser(
             prog="frapy",
             prefix_chars="-",
-            formatter_class=ScrapyHelpFormatter,
+            formatter_class=FrapyHelpFormatter,
             conflict_handler="resolve",
         )
         command.add_options(parser)
-        self.assertEqual(command.short_desc(), "Open URL in browser, as seen by Scrapy")
+        self.assertEqual(command.short_desc(), "Open URL in browser, as seen by Frapy")
         self.assertIn(
-            "URL using the Scrapy downloader and show its", command.long_desc()
+            "URL using the Frapy downloader and show its", command.long_desc()
         )
 
 

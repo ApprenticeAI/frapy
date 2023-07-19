@@ -81,7 +81,7 @@ class MemoryUsage:
             self.crawler.stats.set_value("memusage/limit_reached", 1)
             mem = self.limit / 1024 / 1024
             logger.error(
-                "Memory usage exceeded %(memusage)dMiB. Shutting down Scrapy...",
+                "Memory usage exceeded %(memusage)dMiB. Shutting down Frapy...",
                 {"memusage": mem},
                 extra={"crawler": self.crawler},
             )

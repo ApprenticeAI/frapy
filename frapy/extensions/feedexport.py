@@ -19,7 +19,7 @@ from w3lib.url import file_uri_to_path
 from zope.interface import Interface, implementer
 
 from frapy import Spider, signals
-from frapy.exceptions import NotConfigured, ScrapyDeprecationWarning
+from frapy.exceptions import NotConfigured, FrapyDeprecationWarning
 from frapy.extensions.postprocessing import PostProcessingManager
 from frapy.utils.boto import is_botocore_available
 from frapy.utils.conf import feed_complete_default_values_from_settings
@@ -40,8 +40,8 @@ def build_storage(builder, uri, *args, feed_options=None, preargs=(), **kwargs):
             f"{builder.__qualname__} does not support the 'feed_options' keyword argument. Add a "
             "'feed_options' parameter to its signature to remove this "
             "warning. This parameter will become mandatory in a future "
-            "version of Scrapy.",
-            category=ScrapyDeprecationWarning,
+            "version of Frapy.",
+            category=FrapyDeprecationWarning,
         )
     return builder(*preargs, uri, *args, **kwargs)
 
@@ -73,7 +73,7 @@ class ItemFilter:
         Return ``True`` if `item` should be exported or ``False`` otherwise.
 
         :param item: scraped item which user wants to check if is acceptable
-        :type item: :ref:`Scrapy items <topics-items>`
+        :type item: :ref:`Frapy items <topics-items>`
         :return: `True` if accepted, `False` otherwise
         :rtype: bool
         """
@@ -333,7 +333,7 @@ class FeedExporter:
             warnings.warn(
                 "The `FEED_URI` and `FEED_FORMAT` settings have been deprecated in favor of "
                 "the `FEEDS` setting. Please see the `FEEDS` setting docs for more details",
-                category=ScrapyDeprecationWarning,
+                category=FrapyDeprecationWarning,
                 stacklevel=2,
             )
             uri = str(self.settings["FEED_URI"])  # handle pathlib.Path objects
@@ -594,7 +594,7 @@ class FeedExporter:
                 "the FEED_URI_PARAMS setting or in the uri_params key of the FEEDS "
                 "setting is deprecated. The function must return a new dictionary "
                 "instead.",
-                category=ScrapyDeprecationWarning,
+                category=FrapyDeprecationWarning,
             )
         return new_params if new_params is not None else params
 

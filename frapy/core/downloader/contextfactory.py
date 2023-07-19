@@ -15,14 +15,14 @@ from zope.interface.verify import verifyObject
 
 from frapy.core.downloader.tls import (
     DEFAULT_CIPHERS,
-    ScrapyClientTLSOptions,
+    FrapyClientTLSOptions,
     openssl_methods,
 )
 from frapy.utils.misc import create_instance, load_object
 
 
 @implementer(IPolicyForHTTPS)
-class ScrapyClientContextFactory(BrowserLikePolicyForHTTPS):
+class FrapyClientContextFactory(BrowserLikePolicyForHTTPS):
     """
     Non-peer-certificate verifying HTTPS context factory
 
@@ -68,7 +68,7 @@ class ScrapyClientContextFactory(BrowserLikePolicyForHTTPS):
         # backward-compatible SSL/TLS method:
         #
         # * this will respect `method` attribute in often recommended
-        #   `ScrapyClientContextFactory` subclass
+        #   `FrapyClientContextFactory` subclass
         #   (https://github.com/frapy/frapy/issues/1429#issuecomment-131782133)
         #
         # * getattr() for `_ssl_method` attribute for context factories
@@ -88,7 +88,7 @@ class ScrapyClientContextFactory(BrowserLikePolicyForHTTPS):
         return ctx
 
     def creatorForNetloc(self, hostname, port):
-        return ScrapyClientTLSOptions(
+        return FrapyClientTLSOptions(
             hostname.decode("ascii"),
             self.getContext(),
             verbose_logging=self.tls_verbose_logging,
@@ -96,7 +96,7 @@ class ScrapyClientContextFactory(BrowserLikePolicyForHTTPS):
 
 
 @implementer(IPolicyForHTTPS)
-class BrowserLikeContextFactory(ScrapyClientContextFactory):
+class BrowserLikeContextFactory(FrapyClientContextFactory):
     """
     Twisted-recommended context factory for web clients.
 

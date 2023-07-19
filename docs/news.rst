@@ -5,7 +5,7 @@ Release notes
 
 .. _release-2.8.0:
 
-Scrapy 2.8.0 (2023-02-02)
+Frapy 2.8.0 (2023-02-02)
 -------------------------
 
 This is a maintenance release, with minor features, bug fixes, and cleanups.
@@ -13,41 +13,41 @@ This is a maintenance release, with minor features, bug fixes, and cleanups.
 Deprecation removals
 ~~~~~~~~~~~~~~~~~~~~
 
--   The ``frapy.utils.gz.read1`` function, deprecated in Scrapy 2.0, has now
+-   The ``frapy.utils.gz.read1`` function, deprecated in Frapy 2.0, has now
     been removed. Use the :meth:`~io.BufferedIOBase.read1` method of
     :class:`~gzip.GzipFile` instead.
     (:issue:`5719`)
 
--   The ``frapy.utils.python.to_native_str`` function, deprecated in Scrapy
+-   The ``frapy.utils.python.to_native_str`` function, deprecated in Frapy
     2.0, has now been removed. Use :func:`frapy.utils.python.to_unicode`
     instead.
     (:issue:`5719`)
 
--   The ``frapy.utils.python.MutableChain.next`` method, deprecated in Scrapy
+-   The ``frapy.utils.python.MutableChain.next`` method, deprecated in Frapy
     2.0, has now been removed. Use
     :meth:`~frapy.utils.python.MutableChain.__next__` instead.
     (:issue:`5719`)
 
 -   The ``frapy.linkextractors.FilteringLinkExtractor`` class, deprecated
-    in Scrapy 2.0, has now been removed. Use
+    in Frapy 2.0, has now been removed. Use
     :class:`LinkExtractor <frapy.linkextractors.lxmlhtml.LxmlLinkExtractor>`
     instead.
     (:issue:`5720`)
 
--   Support for using environment variables prefixed with ``SCRAPY_`` to
-    override settings, deprecated in Scrapy 2.0, has now been removed.
+-   Support for using environment variables prefixed with ``FRAPY_`` to
+    override settings, deprecated in Frapy 2.0, has now been removed.
     (:issue:`5724`)
 
 -   Support for the ``noconnect`` query string argument in proxy URLs,
-    deprecated in Scrapy 2.0, has now been removed. We expect proxies that used
+    deprecated in Frapy 2.0, has now been removed. We expect proxies that used
     to need it to work fine without it.
     (:issue:`5731`)
 
--   The ``frapy.utils.python.retry_on_eintr`` function, deprecated in Scrapy
+-   The ``frapy.utils.python.retry_on_eintr`` function, deprecated in Frapy
     2.3, has now been removed.
     (:issue:`5719`)
 
--   The ``frapy.utils.python.WeakKeyCache`` class, deprecated in Scrapy 2.4,
+-   The ``frapy.utils.python.WeakKeyCache`` class, deprecated in Frapy 2.4,
     has now been removed.
     (:issue:`5719`)
 
@@ -142,7 +142,7 @@ Bug fixes
     ``file://``).
     (:issue:`5807`)
 
--   Silenced the ``filelock`` debug log messages introduced in Scrapy 2.6.
+-   Silenced the ``filelock`` debug log messages introduced in Frapy 2.6.
     (:issue:`5753`, :issue:`5754`)
 
 -   Fixed the output of ``frapy -h`` showing an unintended ``**commands**``
@@ -211,7 +211,7 @@ Quality assurance
 
 .. _release-2.7.1:
 
-Scrapy 2.7.1 (2022-11-02)
+Frapy 2.7.1 (2022-11-02)
 -------------------------
 
 New features
@@ -234,7 +234,7 @@ Bug fixes
     event loop with code that explicitly requests a loop from the event loop
     policy (:issue:`5685`, :issue:`5689`).
 
--   Fixed uses of deprecated Scrapy APIs in Scrapy itself (:issue:`5588`,
+-   Fixed uses of deprecated Frapy APIs in Frapy itself (:issue:`5588`,
     :issue:`5589`).
 
 -   Fixed uses of a deprecated Pillow API (:issue:`5684`, :issue:`5692`).
@@ -263,7 +263,7 @@ Quality assurance
 
 .. _release-2.7.0:
 
-Scrapy 2.7.0 (2022-10-17)
+Frapy 2.7.0 (2022-10-17)
 -----------------------------
 
 Highlights:
@@ -332,7 +332,7 @@ New features
 
 -   You can now customize :ref:`request fingerprinting <request-fingerprints>`
     through the new :setting:`REQUEST_FINGERPRINTER_CLASS` setting, instead of
-    having to change it on every Scrapy component that relies on request
+    having to change it on every Frapy component that relies on request
     fingerprinting (:issue:`900`, :issue:`3420`, :issue:`4113`, :issue:`4762`,
     :issue:`4524`).
 
@@ -413,7 +413,7 @@ Documentation
     .. _Google cache: http://www.googleguide.com/cached_pages.html
 
 -   The new :ref:`topics-components` topic covers enforcing requirements on
-    Scrapy components, like :ref:`downloader middlewares
+    Frapy components, like :ref:`downloader middlewares
     <topics-downloader-middleware>`, :ref:`extensions <topics-extensions>`,
     :ref:`item pipelines <topics-item-pipeline>`, :ref:`spider middlewares
     <topics-spider-middleware>`, and more; :ref:`enforce-asyncio-requirement`
@@ -452,7 +452,7 @@ Quality assurance
 
 .. _release-2.6.3:
 
-Scrapy 2.6.3 (2022-09-27)
+Frapy 2.6.3 (2022-09-27)
 -------------------------
 
 -   Added support for pyOpenSSL_ 22.1.0, removing support for SSLv3
@@ -478,7 +478,7 @@ Scrapy 2.6.3 (2022-09-27)
 
 .. _release-2.6.2:
 
-Scrapy 2.6.2 (2022-07-25)
+Frapy 2.6.2 (2022-07-25)
 -------------------------
 
 **Security bug fix:**
@@ -533,9 +533,9 @@ Also fixes the following regressions introduced in 2.6.0:
 -   :class:`~frapy.crawler.CrawlerProcess` supports again crawling multiple
     spiders (:issue:`5435`, :issue:`5436`)
 
--   Installing a Twisted reactor before Scrapy does (e.g. importing
+-   Installing a Twisted reactor before Frapy does (e.g. importing
     :mod:`twisted.internet.reactor` somewhere at the module level) no longer
-    prevents Scrapy from starting, as long as a different reactor is not
+    prevents Frapy from starting, as long as a different reactor is not
     specified in :setting:`TWISTED_REACTOR` (:issue:`5525`, :issue:`5528`)
 
 -   Fixed an exception that was being logged after the spider finished under
@@ -550,7 +550,7 @@ Also fixes the following regressions introduced in 2.6.0:
 
 .. _release-2.6.1:
 
-Scrapy 2.6.1 (2022-03-01)
+Frapy 2.6.1 (2022-03-01)
 -------------------------
 
 Fixes a regression introduced in 2.6.0 that would unset the request method when
@@ -559,7 +559,7 @@ following redirects.
 
 .. _release-2.6.0:
 
-Scrapy 2.6.0 (2022-03-01)
+Frapy 2.6.0 (2022-03-01)
 -------------------------
 
 Highlights:
@@ -665,16 +665,16 @@ Backward-incompatible changes
 Deprecation removals
 ~~~~~~~~~~~~~~~~~~~~
 
--   ``frapy.http.TextResponse.body_as_unicode``, deprecated in Scrapy 2.2, has
+-   ``frapy.http.TextResponse.body_as_unicode``, deprecated in Frapy 2.2, has
     now been removed. (:issue:`5393`)
 
--   ``frapy.item.BaseItem``, deprecated in Scrapy 2.2, has now been removed.
+-   ``frapy.item.BaseItem``, deprecated in Frapy 2.2, has now been removed.
     (:issue:`5398`)
 
--   ``frapy.item.DictItem``, deprecated in Scrapy 1.8, has now been removed.
+-   ``frapy.item.DictItem``, deprecated in Frapy 1.8, has now been removed.
     (:issue:`5398`)
 
--   ``frapy.Spider.make_requests_from_url``, deprecated in Scrapy 1.4, has now
+-   ``frapy.Spider.make_requests_from_url``, deprecated in Frapy 1.4, has now
     been removed. (:issue:`4178`, :issue:`4356`)
 
 
@@ -747,7 +747,7 @@ New features
 
 -   Enabling :ref:`asyncio <using-asyncio>` while using Windows and Python 3.8
     or later will automatically switch the asyncio event loop to one that
-    allows Scrapy to work. See :ref:`asyncio-windows`. (:issue:`4976`,
+    allows Frapy to work. See :ref:`asyncio-windows`. (:issue:`4976`,
     :issue:`5315`)
 
 -   The :command:`genspider` command now supports a start URL instead of a
@@ -916,7 +916,7 @@ Documentation
 -   The pronunciation of the project name is now :ref:`officially
     <intro-overview>` /ˈskreɪpaɪ/. (:issue:`5280`, :issue:`5281`)
 
--   Added the Scrapy logo to the README. (:issue:`5255`, :issue:`5258`)
+-   Added the Frapy logo to the README. (:issue:`5255`, :issue:`5258`)
 
 -   Fixed issues and implemented minor improvements. (:issue:`3155`,
     :issue:`4335`, :issue:`5074`, :issue:`5098`, :issue:`5134`, :issue:`5180`,
@@ -959,7 +959,7 @@ Quality Assurance
 
 .. _release-2.5.1:
 
-Scrapy 2.5.1 (2021-10-05)
+Frapy 2.5.1 (2021-10-05)
 -------------------------
 
 *   **Security bug fix:**
@@ -988,7 +988,7 @@ Scrapy 2.5.1 (2021-10-05)
     to ``None``.
 
     Finally, if you are a user of `frapy-splash`_, know that this version of
-    Scrapy breaks compatibility with frapy-splash 0.7.2 and earlier. You will
+    Frapy breaks compatibility with frapy-splash 0.7.2 and earlier. You will
     need to upgrade frapy-splash to a greater version for it to continue to
     work.
 
@@ -997,7 +997,7 @@ Scrapy 2.5.1 (2021-10-05)
 
 .. _release-2.5.0:
 
-Scrapy 2.5.0 (2021-04-06)
+Frapy 2.5.0 (2021-04-06)
 -------------------------
 
 Highlights:
@@ -1021,7 +1021,7 @@ Deprecation removals
     had not :ref:`already been removed in 2.4.0 <2.4-deprecation-removals>`.
     (:issue:`4901`)
 
--   Removed support for the ``SCRAPY_PICKLED_SETTINGS_TO_OVERRIDE`` environment
+-   Removed support for the ``FRAPY_PICKLED_SETTINGS_TO_OVERRIDE`` environment
     variable, :ref:`deprecated in 1.8.0 <1.8-deprecations>`. (:issue:`4912`)
 
 
@@ -1093,7 +1093,7 @@ Bug fixes
 ~~~~~~~~~
 
 -   Fixed installation on PyPy installing PyDispatcher in addition to
-    PyPyDispatcher, which could prevent Scrapy from working depending on which
+    PyPyDispatcher, which could prevent Frapy from working depending on which
     package got imported. (:issue:`4710`, :issue:`4814`)
 
 -   When inspecting a callback to check if it is a generator that also returns
@@ -1115,7 +1115,7 @@ Bug fixes
 Documentation
 ~~~~~~~~~~~~~
 
--   Added instructions to :ref:`install Scrapy in Windows using pip
+-   Added instructions to :ref:`install Frapy in Windows using pip
     <intro-install-windows>`.
     (:issue:`4715`, :issue:`4736`)
 
@@ -1181,7 +1181,7 @@ Quality Assurance
 
 .. _release-2.4.1:
 
-Scrapy 2.4.1 (2020-11-17)
+Frapy 2.4.1 (2020-11-17)
 -------------------------
 
 -   Fixed :ref:`feed exports <topics-feed-exports>` overwrite support (:issue:`4845`, :issue:`4857`, :issue:`4859`)
@@ -1204,7 +1204,7 @@ Scrapy 2.4.1 (2020-11-17)
 
 .. _release-2.4.0:
 
-Scrapy 2.4.0 (2020-10-11)
+Frapy 2.4.0 (2020-10-11)
 -------------------------
 
 Highlights:
@@ -1261,13 +1261,13 @@ Backward-incompatible changes
     discards cookies defined in :attr:`Request.headers
     <frapy.http.Request.headers>`.
 
-    We decided to revert this bug fix, introduced in Scrapy 2.2.0, because it
+    We decided to revert this bug fix, introduced in Frapy 2.2.0, because it
     was reported that the current implementation could break existing code.
 
     If you need to set cookies for a request, use the :class:`Request.cookies
     <frapy.http.Request>` parameter.
 
-    A future version of Scrapy will include a new, better implementation of the
+    A future version of Frapy will include a new, better implementation of the
     reverted bug fix.
 
     (:issue:`4717`, :issue:`4823`)
@@ -1479,7 +1479,7 @@ Documentation
 
 *   Our :ref:`documentation policies <documentation-policies>` now cover usage
     of Sphinx’s :rst:dir:`versionadded` and :rst:dir:`versionchanged`
-    directives, and we have removed usages referencing Scrapy 1.4.0 and earlier
+    directives, and we have removed usages referencing Frapy 1.4.0 and earlier
     versions (:issue:`3971`, :issue:`4310`)
 
 *   Other documentation cleanups (:issue:`4090`, :issue:`4782`, :issue:`4800`,
@@ -1510,7 +1510,7 @@ Quality assurance
 
 .. _release-2.3.0:
 
-Scrapy 2.3.0 (2020-08-04)
+Frapy 2.3.0 (2020-08-04)
 -------------------------
 
 Highlights:
@@ -1522,14 +1522,14 @@ Highlights:
     output items in batches of up to the specified number of items.
 
     It also serves as a workaround for :ref:`delayed file delivery
-    <delayed-file-delivery>`, which causes Scrapy to only start item delivery
+    <delayed-file-delivery>`, which causes Frapy to only start item delivery
     after the crawl has finished when using certain storage backends
     (:ref:`S3 <topics-feed-storage-s3>`, :ref:`FTP <topics-feed-storage-ftp>`,
     and now :ref:`GCS <topics-feed-storage-gcs>`).
 
 *   The base implementation of :ref:`item loaders <topics-loaders>` has been
     moved into a separate library, :doc:`itemloaders <itemloaders:index>`,
-    allowing usage from outside Scrapy and a separate release schedule
+    allowing usage from outside Frapy and a separate release schedule
 
 Deprecation removals
 ~~~~~~~~~~~~~~~~~~~~
@@ -1633,7 +1633,7 @@ Quality assurance
 
 .. _release-2.2.1:
 
-Scrapy 2.2.1 (2020-07-17)
+Frapy 2.2.1 (2020-07-17)
 -------------------------
 
 *   The :command:`startproject` command no longer makes unintended changes to
@@ -1643,7 +1643,7 @@ Scrapy 2.2.1 (2020-07-17)
 
 .. _release-2.2.0:
 
-Scrapy 2.2.0 (2020-06-24)
+Frapy 2.2.0 (2020-06-24)
 -------------------------
 
 Highlights:
@@ -1659,7 +1659,7 @@ Highlights:
 Backward-incompatible changes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*   Support for Python 3.5.0 and 3.5.1 has been dropped; Scrapy now refuses to
+*   Support for Python 3.5.0 and 3.5.1 has been dropped; Frapy now refuses to
     run with a Python version lower than 3.5.2, which introduced
     :class:`typing.Type` (:issue:`4615`)
 
@@ -1712,7 +1712,7 @@ New features
     :attr:`Request.meta <frapy.http.Request.meta>` when :ref:`persisting
     scheduled requests <topics-jobs>` (:issue:`4554`)
 
-*   Upgraded the :ref:`pickle protocol <pickle-protocols>` that Scrapy uses
+*   Upgraded the :ref:`pickle protocol <pickle-protocols>` that Frapy uses
     from protocol 2 to protocol 4, improving serialization capabilities and
     performance (:issue:`4135`, :issue:`4541`)
 
@@ -1736,7 +1736,7 @@ Bug fixes
     (:issue:`2400`, :issue:`3575`)
 
 *   When :setting:`FEEDS` defines multiple URIs, :setting:`FEED_STORE_EMPTY` is
-    ``False`` and the crawl yields no items, Scrapy no longer stops feed
+    ``False`` and the crawl yields no items, Frapy no longer stops feed
     exports after the first URI (:issue:`4621`, :issue:`4626`)
 
 *   :class:`~frapy.spiders.Spider` callbacks defined using :doc:`coroutine
@@ -1838,7 +1838,7 @@ Quality assurance
 
 .. _release-2.1.0:
 
-Scrapy 2.1.0 (2020-04-24)
+Frapy 2.1.0 (2020-04-24)
 -------------------------
 
 Highlights:
@@ -1851,10 +1851,10 @@ Backward-incompatible changes
 
 *   :exc:`AssertionError` exceptions triggered by :ref:`assert <assert>`
     statements have been replaced by new exception types, to support running
-    Python in optimized mode (see :option:`-O`) without changing Scrapy’s
+    Python in optimized mode (see :option:`-O`) without changing Frapy’s
     behavior in any unexpected ways.
 
-    If you catch an :exc:`AssertionError` exception from Scrapy, update your
+    If you catch an :exc:`AssertionError` exception from Frapy, update your
     code to catch the corresponding new exception.
 
     (:issue:`4440`)
@@ -1932,7 +1932,7 @@ Bug fixes
 *   zope.interface 5.0.0 and later versions are now supported
     (:issue:`4447`, :issue:`4448`)
 
-*   ``Spider.make_requests_from_url``, deprecated in Scrapy 1.4.0, now issues a
+*   ``Spider.make_requests_from_url``, deprecated in Frapy 1.4.0, now issues a
     warning when used (:issue:`4412`)
 
 
@@ -1984,7 +1984,7 @@ Quality assurance
 
 .. _release-2.0.1:
 
-Scrapy 2.0.1 (2020-03-18)
+Frapy 2.0.1 (2020-03-18)
 -------------------------
 
 *   :meth:`Response.follow_all <frapy.http.Response.follow_all>` now supports
@@ -2000,7 +2000,7 @@ Scrapy 2.0.1 (2020-03-18)
 
 .. _release-2.0.0:
 
-Scrapy 2.0.0 (2020-03-03)
+Frapy 2.0.0 (2020-03-03)
 -------------------------
 
 Highlights:
@@ -2067,7 +2067,7 @@ Backward-incompatible changes
 Deprecation removals
 ~~~~~~~~~~~~~~~~~~~~
 
-*   The :ref:`Scrapy shell <topics-shell>` no longer provides a `sel` proxy
+*   The :ref:`Frapy shell <topics-shell>` no longer provides a `sel` proxy
     object, use :meth:`response.selector <frapy.http.Response.selector>`
     instead (:issue:`4347`)
 
@@ -2081,7 +2081,7 @@ Deprecation removals
 Deprecations
 ~~~~~~~~~~~~
 
-*   Using environment variables prefixed with ``SCRAPY_`` to override settings
+*   Using environment variables prefixed with ``FRAPY_`` to override settings
     is deprecated (:issue:`4300`, :issue:`4374`, :issue:`4375`)
 
 *   :class:`frapy.linkextractors.FilteringLinkExtractor` is deprecated, use
@@ -2128,7 +2128,7 @@ New features
     response data being processed is too high (:issue:`1410`, :issue:`3551`)
 
 *   A new :setting:`TWISTED_REACTOR` setting allows customizing the
-    :mod:`~twisted.internet.reactor` that Scrapy uses, allowing to
+    :mod:`~twisted.internet.reactor` that Frapy uses, allowing to
     :doc:`enable asyncio support <topics/asyncio>` or deal with a
     :ref:`common macOS issue <faq-specific-reactor>` (:issue:`2905`,
     :issue:`4294`)
@@ -2174,7 +2174,7 @@ New features
 *   A new :signal:`request_left_downloader` signal is sent when a request
     leaves the downloader (:issue:`4303`)
 
-*   Scrapy logs a warning when it detects a request callback or errback that
+*   Frapy logs a warning when it detects a request callback or errback that
     uses ``yield`` but also returns a value, since the returned value would be
     lost (:issue:`3484`, :issue:`3869`)
 
@@ -2196,7 +2196,7 @@ New features
     (:issue:`4104`)
 
 *   Download handlers (see :setting:`DOWNLOAD_HANDLERS`) may now use the
-    ``from_settings`` and ``from_crawler`` class methods that other Scrapy
+    ``from_settings`` and ``from_crawler`` class methods that other Frapy
     components already supported (:issue:`4126`)
 
 *   :class:`frapy.utils.python.MutableChain.__iter__` now returns ``self``,
@@ -2278,7 +2278,7 @@ Documentation
 *   Fixed the signatures of the ``file_path`` method in :ref:`media pipeline
     <topics-media-pipeline>` examples (:issue:`4290`)
 
-*   Covered a backward-incompatible change in Scrapy 1.7.0 affecting custom
+*   Covered a backward-incompatible change in Frapy 1.7.0 affecting custom
     :class:`frapy.core.scheduler.Scheduler` subclasses (:issue:`4274`)
 
 *   Improved the ``README.rst`` and ``CODE_OF_CONDUCT.md`` files
@@ -2349,8 +2349,8 @@ The following changes may impact any custom queue classes of all types:
 *   The ``push`` method no longer receives a second positional parameter
     containing ``request.priority * -1``. If you need that value, get it
     from the first positional parameter, ``request``, instead, or use
-    the new :meth:`~frapy.core.scheduler.ScrapyPriorityQueue.priority`
-    method in :class:`frapy.core.scheduler.ScrapyPriorityQueue`
+    the new :meth:`~frapy.core.scheduler.FrapyPriorityQueue.priority`
+    method in :class:`frapy.core.scheduler.FrapyPriorityQueue`
     subclasses.
 
 The following changes may impact custom priority queue classes:
@@ -2383,7 +2383,7 @@ The following changes may impact custom disk and memory queue classes:
     ``__init__(self, crawler, key)``.
 
 The following changes affect specifically the
-:class:`~frapy.core.scheduler.ScrapyPriorityQueue` and
+:class:`~frapy.core.scheduler.FrapyPriorityQueue` and
 :class:`~frapy.core.scheduler.DownloaderAwarePriorityQueue` classes from
 :mod:`frapy.core.scheduler` and may affect subclasses:
 
@@ -2399,7 +2399,7 @@ The following changes affect specifically the
 
         Instances of ``downstream_queue_cls`` should be created using
         the new
-        :meth:`ScrapyPriorityQueue.qfactory <frapy.core.scheduler.ScrapyPriorityQueue.qfactory>`
+        :meth:`FrapyPriorityQueue.qfactory <frapy.core.scheduler.FrapyPriorityQueue.qfactory>`
         or
         :meth:`DownloaderAwarePriorityQueue.pqfactory <frapy.core.scheduler.DownloaderAwarePriorityQueue.pqfactory>`
         methods.
@@ -2409,28 +2409,28 @@ The following changes affect specifically the
 
 *   The following class attributes have been added:
 
-    *   :attr:`~frapy.core.scheduler.ScrapyPriorityQueue.crawler`
+    *   :attr:`~frapy.core.scheduler.FrapyPriorityQueue.crawler`
 
-    *   :attr:`~frapy.core.scheduler.ScrapyPriorityQueue.downstream_queue_cls`
+    *   :attr:`~frapy.core.scheduler.FrapyPriorityQueue.downstream_queue_cls`
         (details above)
 
-    *   :attr:`~frapy.core.scheduler.ScrapyPriorityQueue.key` (details above)
+    *   :attr:`~frapy.core.scheduler.FrapyPriorityQueue.key` (details above)
 
 *   The ``serialize`` attribute has been removed (details above)
 
 The following changes affect specifically the
-:class:`~frapy.core.scheduler.ScrapyPriorityQueue` class and may affect
+:class:`~frapy.core.scheduler.FrapyPriorityQueue` class and may affect
 subclasses:
 
-*   A new :meth:`~frapy.core.scheduler.ScrapyPriorityQueue.priority`
+*   A new :meth:`~frapy.core.scheduler.FrapyPriorityQueue.priority`
     method has been added which, given a request, returns
     ``request.priority * -1``.
 
-    It is used in :meth:`~frapy.core.scheduler.ScrapyPriorityQueue.push`
+    It is used in :meth:`~frapy.core.scheduler.FrapyPriorityQueue.push`
     to make up for the removal of its ``priority`` parameter.
 
 *   The ``spider`` attribute has been removed. Use
-    :attr:`crawler.spider <frapy.core.scheduler.ScrapyPriorityQueue.crawler>`
+    :attr:`crawler.spider <frapy.core.scheduler.FrapyPriorityQueue.crawler>`
     instead.
 
 The following changes affect specifically the
@@ -2447,7 +2447,7 @@ affect subclasses:
 
 .. _release-1.8.3:
 
-Scrapy 1.8.3 (2022-07-25)
+Frapy 1.8.3 (2022-07-25)
 -------------------------
 
 **Security bug fix:**
@@ -2500,7 +2500,7 @@ Scrapy 1.8.3 (2022-07-25)
 
 .. _release-1.8.2:
 
-Scrapy 1.8.2 (2022-03-01)
+Frapy 1.8.2 (2022-03-01)
 -------------------------
 
 **Security bug fixes:**
@@ -2544,7 +2544,7 @@ Scrapy 1.8.2 (2022-03-01)
 
 .. _release-1.8.1:
 
-Scrapy 1.8.1 (2021-10-05)
+Frapy 1.8.1 (2021-10-05)
 -------------------------
 
 *   **Security bug fix:**
@@ -2573,7 +2573,7 @@ Scrapy 1.8.1 (2021-10-05)
     to ``None``.
 
     Finally, if you are a user of `frapy-splash`_, know that this version of
-    Scrapy breaks compatibility with frapy-splash 0.7.2 and earlier. You will
+    Frapy breaks compatibility with frapy-splash 0.7.2 and earlier. You will
     need to upgrade frapy-splash to a greater version for it to continue to
     work.
 
@@ -2582,7 +2582,7 @@ Scrapy 1.8.1 (2021-10-05)
 
 .. _release-1.8.0:
 
-Scrapy 1.8.0 (2019-10-28)
+Frapy 1.8.0 (2019-10-28)
 -------------------------
 
 Highlights:
@@ -2598,7 +2598,7 @@ Backward-incompatible changes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 *   Python 3.4 is no longer supported, and some of the minimum requirements of
-    Scrapy have also changed:
+    Frapy have also changed:
 
     *   :doc:`cssselect <cssselect:index>` 0.9.1
     *   cryptography_ 2.0
@@ -2757,7 +2757,7 @@ Deprecations
     :class:`~frapy.downloadermiddlewares.httpcache.HttpCacheMiddleware` is
     deprecated (:issue:`4085`, :issue:`4092`)
 
-*   Use of the undocumented ``SCRAPY_PICKLED_SETTINGS_TO_OVERRIDE`` environment
+*   Use of the undocumented ``FRAPY_PICKLED_SETTINGS_TO_OVERRIDE`` environment
     variable is deprecated (:issue:`3910`)
 
 *   ``frapy.item.DictItem`` is deprecated, use :class:`~frapy.item.Item`
@@ -2767,7 +2767,7 @@ Deprecations
 Other changes
 ~~~~~~~~~~~~~
 
-*   Minimum versions of optional Scrapy requirements that are covered by
+*   Minimum versions of optional Frapy requirements that are covered by
     continuous integration tests have been updated:
 
     *   botocore_ 1.3.23
@@ -2787,7 +2787,7 @@ Other changes
 
 .. _release-1.7.4:
 
-Scrapy 1.7.4 (2019-10-21)
+Frapy 1.7.4 (2019-10-21)
 -------------------------
 
 Revert the fix for :issue:`3804` (:issue:`3819`), which has a few undesired
@@ -2802,7 +2802,7 @@ makes later calls to :meth:`ItemLoader.get_output_value()
 
 .. _release-1.7.3:
 
-Scrapy 1.7.3 (2019-08-01)
+Frapy 1.7.3 (2019-08-01)
 -------------------------
 
 Enforce lxml 4.3.5 or lower for Python 3.4 (:issue:`3912`, :issue:`3918`).
@@ -2810,7 +2810,7 @@ Enforce lxml 4.3.5 or lower for Python 3.4 (:issue:`3912`, :issue:`3918`).
 
 .. _release-1.7.2:
 
-Scrapy 1.7.2 (2019-07-23)
+Frapy 1.7.2 (2019-07-23)
 -------------------------
 
 Fix Python 2 support (:issue:`3889`, :issue:`3893`, :issue:`3896`).
@@ -2818,18 +2818,18 @@ Fix Python 2 support (:issue:`3889`, :issue:`3893`, :issue:`3896`).
 
 .. _release-1.7.1:
 
-Scrapy 1.7.1 (2019-07-18)
+Frapy 1.7.1 (2019-07-18)
 -------------------------
 
-Re-packaging of Scrapy 1.7.0, which was missing some changes in PyPI.
+Re-packaging of Frapy 1.7.0, which was missing some changes in PyPI.
 
 
 .. _release-1.7.0:
 
-Scrapy 1.7.0 (2019-07-18)
+Frapy 1.7.0 (2019-07-18)
 -------------------------
 
-.. note:: Make sure you install Scrapy 1.7.1. The Scrapy 1.7.0 package in PyPI
+.. note:: Make sure you install Frapy 1.7.1. The Frapy 1.7.0 package in PyPI
           is the result of an erroneous commit tagging and does not include all
           the changes described below.
 
@@ -2915,7 +2915,7 @@ New features
     (status code, meta refresh) behind every followed redirect (:issue:`3581`,
     :issue:`3687`)
 
-*   The ``SCRAPY_CHECK`` variable is now set to the ``true`` string during runs
+*   The ``FRAPY_CHECK`` variable is now set to the ``true`` string during runs
     of the :command:`check` command, which allows :ref:`detecting contract
     check runs from code <detecting-contract-check-runs>` (:issue:`3704`,
     :issue:`3739`)
@@ -3056,11 +3056,11 @@ The following deprecated APIs have been removed (:issue:`3578`):
 
 *   From ``frapy.selector.csstranslator``:
 
-    *   ``ScrapyGenericTranslator`` (use parsel.csstranslator.GenericTranslator_)
+    *   ``FrapyGenericTranslator`` (use parsel.csstranslator.GenericTranslator_)
 
-    *   ``ScrapyHTMLTranslator`` (use parsel.csstranslator.HTMLTranslator_)
+    *   ``FrapyHTMLTranslator`` (use parsel.csstranslator.HTMLTranslator_)
 
-    *   ``ScrapyXPathExpr`` (use parsel.csstranslator.XPathExpr_)
+    *   ``FrapyXPathExpr`` (use parsel.csstranslator.XPathExpr_)
 
 *   From :class:`~frapy.selector.Selector`:
 
@@ -3112,7 +3112,7 @@ Deprecations
 
 *   The ``queuelib.PriorityQueue`` value for the
     :setting:`SCHEDULER_PRIORITY_QUEUE` setting is deprecated. Use
-    ``frapy.pqueues.ScrapyPriorityQueue`` instead.
+    ``frapy.pqueues.FrapyPriorityQueue`` instead.
 
 *   ``process_request`` callbacks passed to :class:`~frapy.spiders.Rule` that
     do not accept two arguments are deprecated.
@@ -3156,7 +3156,7 @@ Other changes
 
 .. _release-1.6.0:
 
-Scrapy 1.6.0 (2019-01-30)
+Frapy 1.6.0 (2019-01-30)
 -------------------------
 
 Highlights:
@@ -3180,10 +3180,10 @@ Highlights:
 Selector API changes
 ~~~~~~~~~~~~~~~~~~~~
 
-While these are not changes in Scrapy itself, but rather in the parsel_
-library which Scrapy uses for xpath/css selectors, these changes are
-worth mentioning here. Scrapy now depends on parsel >= 1.5, and
-Scrapy documentation is updated to follow recent ``parsel`` API conventions.
+While these are not changes in Frapy itself, but rather in the parsel_
+library which Frapy uses for xpath/css selectors, these changes are
+worth mentioning here. Frapy now depends on parsel >= 1.5, and
+Frapy documentation is updated to follow recent ``parsel`` API conventions.
 
 Most visible change is that ``.get()`` and ``.getall()`` selector
 methods are now preferred over ``.extract_first()`` and ``.extract()``.
@@ -3200,7 +3200,7 @@ attributes of HTML elements. See :ref:`selecting-attributes`.
 
 CSS selectors are cached in parsel >= 1.5, which makes them faster
 when the same CSS path is used many times. This is very common in
-case of Scrapy spiders: callbacks are usually called several times,
+case of Frapy spiders: callbacks are usually called several times,
 on different pages.
 
 If you're using custom ``Selector`` or ``SelectorList`` subclasses,
@@ -3213,7 +3213,7 @@ full list of improvements.
 Telnet console
 ~~~~~~~~~~~~~~
 
-**Backward incompatible**: Scrapy's telnet console now requires username
+**Backward incompatible**: Frapy's telnet console now requires username
 and password. See :ref:`topics-telnetconsole` for more details. This change
 fixes a **security issue**; see :ref:`release-1.5.2` release notes for details.
 
@@ -3221,7 +3221,7 @@ New extensibility features
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * ``from_crawler`` support is added to feed exporters and feed storages. This,
-  among other things, allows to access Scrapy settings from custom feed
+  among other things, allows to access Frapy settings from custom feed
   storages and exporters (:issue:`1605`, :issue:`3348`).
 * ``from_crawler`` support is added to dupefilters (:issue:`2956`); this allows
   to access e.g. settings or a spider from a dupefilter.
@@ -3264,7 +3264,7 @@ Usability improvements
 * INFO log level is used to show telnet host/port (:issue:`3115`)
 * a message is added to IgnoreRequest in RobotsTxtMiddleware (:issue:`3113`)
 * better validation of ``url`` argument in ``Response.follow`` (:issue:`3131`)
-* non-zero exit code is returned from Scrapy commands when error happens
+* non-zero exit code is returned from Frapy commands when error happens
   on spider initialization (:issue:`3226`)
 * Link extraction improvements: "ftp" is added to scheme list (:issue:`3152`);
   "flv" is added to common video extensions (:issue:`3165`)
@@ -3295,7 +3295,7 @@ Documentation improvements
   (:issue:`3390`).
 * :ref:`topics-developer-tools` is a new tutorial which replaces
   old Firefox and Firebug tutorials (:issue:`3400`).
-* SCRAPY_PROJECT environment variable is documented (:issue:`3518`);
+* FRAPY_PROJECT environment variable is documented (:issue:`3518`);
 * troubleshooting section is added to install instructions (:issue:`3517`);
 * improved links to beginner resources in the tutorial
   (:issue:`3367`, :issue:`3468`);
@@ -3307,7 +3307,7 @@ Documentation improvements
 Deprecation removals
 ~~~~~~~~~~~~~~~~~~~~
 
-Compatibility shims for pre-1.0 Scrapy module names are removed
+Compatibility shims for pre-1.0 Frapy module names are removed
 (:issue:`3318`):
 
 * ``frapy.command``
@@ -3324,7 +3324,7 @@ Compatibility shims for pre-1.0 Scrapy module names are removed
 * ``frapy.utils.decorator``
 
 See :ref:`module-relocations` for more information, or use suggestions
-from Scrapy 1.5.x deprecation warnings to update your code.
+from Frapy 1.5.x deprecation warnings to update your code.
 
 Other deprecation removals:
 
@@ -3337,7 +3337,7 @@ Other deprecation removals:
 Other improvements, cleanups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* All Scrapy tests now pass on Windows; Scrapy testing suite is executed
+* All Frapy tests now pass on Windows; Frapy testing suite is executed
   in a Windows environment on CI (:issue:`3315`).
 * Python 3.7 support (:issue:`3326`, :issue:`3150`, :issue:`3547`).
 * Testing and CI fixes (:issue:`3526`, :issue:`3538`, :issue:`3308`,
@@ -3352,12 +3352,12 @@ Other improvements, cleanups
 
 .. _release-1.5.2:
 
-Scrapy 1.5.2 (2019-01-22)
+Frapy 1.5.2 (2019-01-22)
 -------------------------
 
 * *Security bugfix*: Telnet console extension can be easily exploited by rogue
   websites POSTing content to http://localhost:6023, we haven't found a way to
-  exploit it from Scrapy, but it is very easy to trick a browser to do so and
+  exploit it from Frapy, but it is very easy to trick a browser to do so and
   elevates the risk for local development environment.
 
   *The fix is backward incompatible*, it enables telnet user-password
@@ -3371,7 +3371,7 @@ Scrapy 1.5.2 (2019-01-22)
 
 .. _release-1.5.1:
 
-Scrapy 1.5.1 (2018-07-12)
+Frapy 1.5.1 (2018-07-12)
 -------------------------
 
 This is a maintenance release with important bug fixes, but no new features:
@@ -3389,7 +3389,7 @@ This is a maintenance release with important bug fixes, but no new features:
 
 .. _release-1.5.0:
 
-Scrapy 1.5.0 (2017-12-29)
+Frapy 1.5.0 (2017-12-29)
 -------------------------
 
 This release brings small new features and improvements across the codebase.
@@ -3410,14 +3410,14 @@ Some highlights:
 Backward Incompatible Changes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Scrapy 1.5 drops support for Python 3.3.
-* Default Scrapy User-Agent now uses https link to frapy.org (:issue:`2983`).
+* Frapy 1.5 drops support for Python 3.3.
+* Default Frapy User-Agent now uses https link to frapy.org (:issue:`2983`).
   **This is technically backward-incompatible**; override
   :setting:`USER_AGENT` if you relied on old value.
 * Logging of settings overridden by ``custom_settings`` is fixed;
   **this is technically backward-incompatible** because the logger
   changes from ``[frapy.utils.log]`` to ``[frapy.crawler]``. If you're
-  parsing Scrapy logs, please update your log parsers (:issue:`1343`).
+  parsing Frapy logs, please update your log parsers (:issue:`1343`).
 * LinkExtractor now ignores ``m4v`` extension by default, this is change
   in behavior.
 * 522 and 524 status codes are added to ``RETRY_HTTP_CODES`` (:issue:`2851`)
@@ -3455,7 +3455,7 @@ Bug fixes
   **this is technically backward-incompatible** because the logger
   changes from ``[frapy.utils.log]`` to ``[frapy.crawler]``, so please
   update your log parsers if needed (:issue:`1343`)
-- Default Scrapy User-Agent now uses https link to frapy.org (:issue:`2983`).
+- Default Frapy User-Agent now uses https link to frapy.org (:issue:`2983`).
   **This is technically backward-incompatible**; override
   :setting:`USER_AGENT` if you relied on old value.
 - Fix PyPy and PyPy3 test failures, support them officially
@@ -3477,7 +3477,7 @@ Docs
   setting. (:issue:`2756`)
 - Update Contributing docs, document new support channels
   (:issue:`2762`, issue:`3038`)
-- Include references to Scrapy subreddit in the docs
+- Include references to Frapy subreddit in the docs
 - Fix broken links; use https:// for external links
   (:issue:`2978`, :issue:`2982`, :issue:`2958`)
 - Document CloseSpider extension better (:issue:`2759`)
@@ -3502,20 +3502,20 @@ Docs
 
 .. _release-1.4.0:
 
-Scrapy 1.4.0 (2017-05-18)
+Frapy 1.4.0 (2017-05-18)
 -------------------------
 
-Scrapy 1.4 does not bring that many breathtaking new features
+Frapy 1.4 does not bring that many breathtaking new features
 but quite a few handy improvements nonetheless.
 
-Scrapy now supports anonymous FTP sessions with customizable user and
+Frapy now supports anonymous FTP sessions with customizable user and
 password via the new :setting:`FTP_USER` and :setting:`FTP_PASSWORD` settings.
 And if you're using Twisted version 17.1.0 or above, FTP is now available
 with Python 3.
 
 There's a new :meth:`response.follow <frapy.http.TextResponse.follow>` method
 for creating requests; **it is now a recommended way to create Requests
-in Scrapy spiders**. This method makes it easier to write correct
+in Frapy spiders**. This method makes it easier to write correct
 spiders; ``response.follow`` has several advantages over creating
 ``frapy.Request`` objects directly:
 
@@ -3546,21 +3546,21 @@ anymore.** This was puzzling users every now and then, and it's not what
 browsers do in fact, so we removed that extra transformation on extracted
 links.
 
-For those of you wanting more control on the ``Referer:`` header that Scrapy
+For those of you wanting more control on the ``Referer:`` header that Frapy
 sends when following links, you can set your own ``Referrer Policy``.
-Prior to Scrapy 1.4, the default ``RefererMiddleware`` would simply and
+Prior to Frapy 1.4, the default ``RefererMiddleware`` would simply and
 blindly set it to the URL of the response that generated the HTTP request
 (which could leak information on your URL seeds).
-By default, Scrapy now behaves much like your regular browser does.
+By default, Frapy now behaves much like your regular browser does.
 And this policy is fully customizable with W3C standard values
 (or with something really custom of your own if you wish).
 See :setting:`REFERRER_POLICY` for details.
 
-To make Scrapy spiders easier to debug, Scrapy logs more stats by default
+To make Frapy spiders easier to debug, Frapy logs more stats by default
 in 1.4: memory usage stats, detailed retry stats, detailed HTTP error code
 stats. A similar change is that HTTP cache path is also visible in logs now.
 
-Last but not least, Scrapy now has the option to make JSON and XML items
+Last but not least, Frapy now has the option to make JSON and XML items
 more human-readable, with newlines between items and even custom indenting
 offset, using the new :setting:`FEED_EXPORT_INDENT` setting.
 
@@ -3578,7 +3578,7 @@ Deprecations and Backward Incompatible Changes
   **this is technically backward-incompatible** so please check if you have
   any non-default ``MEMUSAGE_***`` options set.
 - ``EDITOR`` environment variable now takes precedence over ``EDITOR``
-  option defined in settings.py (:issue:`1829`); Scrapy default settings
+  option defined in settings.py (:issue:`1829`); Frapy default settings
   no longer depend on environment variables. **This is technically a backward
   incompatible change**.
 - ``Spider.make_requests_from_url`` is deprecated
@@ -3681,7 +3681,7 @@ Documentation
 - Use single quotes uniformly in templates (:issue:`2596`)
 - Document :reqmeta:`ftp_user` and :reqmeta:`ftp_password` meta keys (:issue:`2587`)
 - Removed section on deprecated ``contrib/`` (:issue:`2636`)
-- Recommend Anaconda when installing Scrapy on Windows
+- Recommend Anaconda when installing Frapy on Windows
   (:issue:`2477`, fixes :issue:`2475`)
 - FAQ: rewrite note on Python 3 support on Windows (:issue:`2690`)
 - Rearrange selector sections (:issue:`2705`)
@@ -3696,7 +3696,7 @@ Documentation
 
 .. _release-1.3.3:
 
-Scrapy 1.3.3 (2017-03-10)
+Frapy 1.3.3 (2017-03-10)
 -------------------------
 
 Bug fixes
@@ -3710,7 +3710,7 @@ Bug fixes
 
 .. _release-1.3.2:
 
-Scrapy 1.3.2 (2017-02-13)
+Frapy 1.3.2 (2017-02-13)
 -------------------------
 
 Bug fixes
@@ -3722,7 +3722,7 @@ Bug fixes
 
 .. _release-1.3.1:
 
-Scrapy 1.3.1 (2017-02-08)
+Frapy 1.3.1 (2017-02-08)
 -------------------------
 
 New features
@@ -3772,14 +3772,14 @@ Cleanups
 
 .. _release-1.3.0:
 
-Scrapy 1.3.0 (2016-12-21)
+Frapy 1.3.0 (2016-12-21)
 -------------------------
 
 This release comes rather soon after 1.2.2 for one main reason:
 it was found out that releases since 0.18 up to 1.2.2 (included) use
 some backported code from Twisted (``frapy.xlib.tx.*``),
 even if newer Twisted modules are available.
-Scrapy now uses ``twisted.web.client`` and ``twisted.internet.endpoints`` directly.
+Frapy now uses ``twisted.web.client`` and ``twisted.internet.endpoints`` directly.
 (See also cleanups below.)
 
 As it is a major change, we wanted to get the bug fix out quickly
@@ -3791,7 +3791,7 @@ New Features
 - ``MailSender`` now accepts single strings as values for ``to`` and ``cc``
   arguments (:issue:`2272`)
 - ``frapy fetch url``, ``frapy shell url`` and ``fetch(url)`` inside
-  Scrapy shell now follow HTTP redirections by default (:issue:`2290`);
+  Frapy shell now follow HTTP redirections by default (:issue:`2290`);
   See :command:`fetch` and :command:`shell` for details.
 - ``HttpErrorMiddleware`` now logs errors with ``INFO`` level instead of ``DEBUG``;
   this is technically **backward incompatible** so please check your log parsers.
@@ -3804,7 +3804,7 @@ New Features
 Dependencies & Cleanups
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-- Scrapy now requires Twisted >= 13.1 which is the case for many Linux
+- Frapy now requires Twisted >= 13.1 which is the case for many Linux
   distributions already.
 - As a consequence, we got rid of ``frapy.xlib.tx.*`` modules, which
   copied some of Twisted code for users stuck with an "old" Twisted version
@@ -3813,7 +3813,7 @@ Dependencies & Cleanups
 
 .. _release-1.2.3:
 
-Scrapy 1.2.3 (2017-03-03)
+Frapy 1.2.3 (2017-03-03)
 -------------------------
 
 - Packaging fix: disallow unsupported Twisted versions in setup.py
@@ -3821,7 +3821,7 @@ Scrapy 1.2.3 (2017-03-03)
 
 .. _release-1.2.2:
 
-Scrapy 1.2.2 (2016-12-06)
+Frapy 1.2.2 (2016-12-06)
 -------------------------
 
 Bug fixes
@@ -3846,7 +3846,7 @@ Documentation
 Other changes
 ~~~~~~~~~~~~~
 
-- Advertize `conda-forge`_ as Scrapy's official conda channel (:issue:`2387`)
+- Advertize `conda-forge`_ as Frapy's official conda channel (:issue:`2387`)
 - More helpful error messages when trying to use ``.css()`` or ``.xpath()``
   on non-Text Responses (:issue:`2264`)
 - ``startproject`` command now generates a sample ``middlewares.py`` file (:issue:`2335`)
@@ -3858,7 +3858,7 @@ Other changes
 
 .. _release-1.2.1:
 
-Scrapy 1.2.1 (2016-10-21)
+Frapy 1.2.1 (2016-10-21)
 -------------------------
 
 Bug fixes
@@ -3884,7 +3884,7 @@ Other changes
 
 .. _release-1.2.0:
 
-Scrapy 1.2.0 (2016-10-03)
+Frapy 1.2.0 (2016-10-03)
 -------------------------
 
 New Features
@@ -3932,13 +3932,13 @@ Refactoring
 Tests & Requirements
 ~~~~~~~~~~~~~~~~~~~~
 
-Scrapy's new requirements baseline is Debian 8 "Jessie". It was previously
+Frapy's new requirements baseline is Debian 8 "Jessie". It was previously
 Ubuntu 12.04 Precise.
 What this means in practice is that we run continuous integration tests
 with these (main) packages versions at a minimum:
 Twisted 14.0, pyOpenSSL 0.14, lxml 3.4.
 
-Scrapy may very well work with older versions of these packages
+Frapy may very well work with older versions of these packages
 (the code base still has switches for older Twisted versions for example)
 but it is not guaranteed (because it's not tested anymore).
 
@@ -3947,21 +3947,21 @@ Documentation
 
 - Grammar fixes: :issue:`2128`, :issue:`1566`.
 - Download stats badge removed from README (:issue:`2160`).
-- New Scrapy :ref:`architecture diagram <topics-architecture>` (:issue:`2165`).
+- New Frapy :ref:`architecture diagram <topics-architecture>` (:issue:`2165`).
 - Updated ``Response`` parameters documentation (:issue:`2197`).
 - Reworded misleading :setting:`RANDOMIZE_DOWNLOAD_DELAY` description (:issue:`2190`).
 - Add StackOverflow as a support channel (:issue:`2257`).
 
 .. _release-1.1.4:
 
-Scrapy 1.1.4 (2017-03-03)
+Frapy 1.1.4 (2017-03-03)
 -------------------------
 
 - Packaging fix: disallow unsupported Twisted versions in setup.py
 
 .. _release-1.1.3:
 
-Scrapy 1.1.3 (2016-09-22)
+Frapy 1.1.3 (2016-09-22)
 -------------------------
 
 Bug fixes
@@ -3979,7 +3979,7 @@ Documentation
 
 .. _release-1.1.2:
 
-Scrapy 1.1.2 (2016-08-18)
+Frapy 1.1.2 (2016-08-18)
 -------------------------
 
 Bug fixes
@@ -3988,13 +3988,13 @@ Bug fixes
 - Introduce a missing :setting:`IMAGES_STORE_S3_ACL` setting to override
   the default ACL policy in ``ImagesPipeline`` when uploading images to S3
   (note that default ACL policy is "private" -- instead of "public-read" --
-  since Scrapy 1.1.0)
+  since Frapy 1.1.0)
 - :setting:`IMAGES_EXPIRES` default value set back to 90
   (the regression was introduced in 1.1.1)
 
 .. _release-1.1.1:
 
-Scrapy 1.1.1 (2016-07-13)
+Frapy 1.1.1 (2016-07-13)
 -------------------------
 
 Bug fixes
@@ -4037,7 +4037,7 @@ Documentation
 - Use "url" variable in downloader middleware example (:issue:`2015`)
 - Grammar fixes (:issue:`2054`, :issue:`2120`)
 - New FAQ entry on using BeautifulSoup in spider callbacks (:issue:`2048`)
-- Add notes about Scrapy not working on Windows with Python 3 (:issue:`2060`)
+- Add notes about Frapy not working on Windows with Python 3 (:issue:`2060`)
 - Encourage complete titles in pull requests (:issue:`2026`)
 
 Tests
@@ -4047,12 +4047,12 @@ Tests
 
 .. _release-1.1.0:
 
-Scrapy 1.1.0 (2016-05-11)
+Frapy 1.1.0 (2016-05-11)
 -------------------------
 
 This 1.1 release brings a lot of interesting features and bug fixes:
 
-- Scrapy 1.1 has beta Python 3 support (requires Twisted >= 15.5). See
+- Frapy 1.1 has beta Python 3 support (requires Twisted >= 15.5). See
   :ref:`news_betapy3` for more details and some limitations.
 - Hot new features:
 
@@ -4068,8 +4068,8 @@ This 1.1 release brings a lot of interesting features and bug fixes:
     :setting:`HTTPCACHE_ALWAYS_STORE` and
     :setting:`HTTPCACHE_IGNORE_RESPONSE_CACHE_CONTROLS` (:issue:`1151`).
   - Selectors were extracted to the parsel_ library (:issue:`1409`). This means
-    you can use Scrapy Selectors without Scrapy and also upgrade the
-    selectors engine without needing to upgrade Scrapy.
+    you can use Frapy Selectors without Frapy and also upgrade the
+    selectors engine without needing to upgrade Frapy.
   - HTTPS downloader now does TLS protocol negotiation by default,
     instead of forcing TLS 1.0. You can also set the SSL/TLS method
     using the new :setting:`DOWNLOADER_CLIENT_TLS_METHOD`.
@@ -4082,7 +4082,7 @@ This 1.1 release brings a lot of interesting features and bug fixes:
     If you try ``frapy shell index.html`` it will try to load the URL http://index.html,
     use ``frapy shell ./index.html`` to load a local file.
   - Robots.txt compliance is now enabled by default for newly-created projects
-    (:issue:`1724`). Scrapy will also wait for robots.txt to be downloaded
+    (:issue:`1724`). Frapy will also wait for robots.txt to be downloaded
     before proceeding with the crawl (:issue:`1735`). If you want to disable
     this behavior, update :setting:`ROBOTSTXT_OBEY` in ``settings.py`` file
     after creating a new project.
@@ -4096,7 +4096,7 @@ This 1.1 release brings a lot of interesting features and bug fixes:
     You can use :setting:`FILES_STORE_S3_ACL` to change it.
   - We've reimplemented ``canonicalize_url()`` for more correct output,
     especially for URLs with non-ASCII characters (:issue:`1947`).
-    This could change link extractors output compared to previous Scrapy versions.
+    This could change link extractors output compared to previous Frapy versions.
     This may also invalidate some cache entries you could still have from pre-1.1 runs.
     **Warning: backward incompatible!**.
 
@@ -4107,7 +4107,7 @@ Keep reading for more details on other improvements and bug fixes.
 Beta Python 3 Support
 ~~~~~~~~~~~~~~~~~~~~~
 
-We have been `hard at work to make Scrapy run on Python 3
+We have been `hard at work to make Frapy run on Python 3
 <https://github.com/frapy/frapy/wiki/Python-3-Porting>`_. As a result, now
 you can run spiders on Python 3.3, 3.4 and 3.5 (Twisted >= 15.5 required). Some
 features are still missing (and some may never be ported).
@@ -4116,7 +4116,7 @@ features are still missing (and some may never be ported).
 Almost all builtin extensions/middlewares are expected to work.
 However, we are aware of some limitations in Python 3:
 
-- Scrapy does not work on Windows with Python 3
+- Frapy does not work on Windows with Python 3
 - Sending emails is not supported
 - FTP download handler is not supported
 - Telnet console is not supported
@@ -4124,12 +4124,12 @@ However, we are aware of some limitations in Python 3:
 Additional New Features and Enhancements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Scrapy now has a `Code of Conduct`_ (:issue:`1681`).
+- Frapy now has a `Code of Conduct`_ (:issue:`1681`).
 - Command line tool now has completion for zsh (:issue:`934`).
 - Improvements to ``frapy shell``:
 
   - Support for bpython and configure preferred Python shell via
-    ``SCRAPY_PYTHON_SHELL`` (:issue:`1100`, :issue:`1444`).
+    ``FRAPY_PYTHON_SHELL`` (:issue:`1100`, :issue:`1444`).
   - Support URLs without scheme (:issue:`1498`)
     **Warning: backward incompatible!**
   - Bring back support for relative file path (:issue:`1710`, :issue:`1550`).
@@ -4213,7 +4213,7 @@ Relocations
 Bugfixes
 ~~~~~~~~
 
-- Scrapy does not retry requests that got a ``HTTP 400 Bad Request``
+- Frapy does not retry requests that got a ``HTTP 400 Bad Request``
   response anymore (:issue:`1289`). **Warning: backward incompatible!**
 - Support empty password for http_proxy config (:issue:`1274`).
 - Interpret ``application/x-json`` as ``TextResponse`` (:issue:`1333`).
@@ -4237,14 +4237,14 @@ Bugfixes
 
 .. _release-1.0.7:
 
-Scrapy 1.0.7 (2017-03-03)
+Frapy 1.0.7 (2017-03-03)
 -------------------------
 
 - Packaging fix: disallow unsupported Twisted versions in setup.py
 
 .. _release-1.0.6:
 
-Scrapy 1.0.6 (2016-05-04)
+Frapy 1.0.6 (2016-05-04)
 -------------------------
 
 - FIX: RetryMiddleware is now robust to non-standard HTTP status codes (:issue:`1857`)
@@ -4254,7 +4254,7 @@ Scrapy 1.0.6 (2016-05-04)
 
 .. _release-1.0.5:
 
-Scrapy 1.0.5 (2016-02-04)
+Frapy 1.0.5 (2016-02-04)
 -------------------------
 
 - FIX: [Backport] Ignore bogus links in LinkExtractors (fixes :issue:`907`, :commit:`108195e`)
@@ -4264,7 +4264,7 @@ Scrapy 1.0.5 (2016-02-04)
 
 .. _release-1.0.4:
 
-Scrapy 1.0.4 (2015-12-30)
+Frapy 1.0.4 (2015-12-30)
 -------------------------
 
 - Ignoring xlib/tx folder, depending on Twisted version. (:commit:`7dfa979`)
@@ -4309,7 +4309,7 @@ Scrapy 1.0.4 (2015-12-30)
 - Merge pull request #1513 from mgedmin/patch-2 (:commit:`5d4daf8`)
 - Typo (:commit:`f8d0682`)
 - Fix list formatting (:commit:`5f83a93`)
-- fix Scrapy squeue tests after recent changes to queuelib (:commit:`3365c01`)
+- fix Frapy squeue tests after recent changes to queuelib (:commit:`3365c01`)
 - Merge pull request #1475 from rweindl/patch-1 (:commit:`2d688cd`)
 - Update tutorial.rst (:commit:`fbc1f25`)
 - Merge pull request #1449 from rhoekman/patch-1 (:commit:`7d6538c`)
@@ -4318,15 +4318,15 @@ Scrapy 1.0.4 (2015-12-30)
 
 .. _release-1.0.3:
 
-Scrapy 1.0.3 (2015-08-11)
+Frapy 1.0.3 (2015-08-11)
 -------------------------
 
-- add service_identity to Scrapy install_requires (:commit:`cbc2501`)
+- add service_identity to Frapy install_requires (:commit:`cbc2501`)
 - Workaround for travis#296 (:commit:`66af9cd`)
 
 .. _release-1.0.2:
 
-Scrapy 1.0.2 (2015-08-06)
+Frapy 1.0.2 (2015-08-06)
 -------------------------
 
 - Twisted 15.3.0 does not raises PicklingError serializing lambda functions (:commit:`b04dd7d`)
@@ -4338,7 +4338,7 @@ Scrapy 1.0.2 (2015-08-06)
 
 .. _release-1.0.1:
 
-Scrapy 1.0.1 (2015-07-01)
+Frapy 1.0.1 (2015-07-01)
 -------------------------
 
 - Unquote request path before passing to FTPClient, it already escape paths (:commit:`cc00ad2`)
@@ -4350,7 +4350,7 @@ Scrapy 1.0.1 (2015-07-01)
 
 .. _release-1.0.0:
 
-Scrapy 1.0.0 (2015-06-19)
+Frapy 1.0.0 (2015-06-19)
 -------------------------
 
 You will find a lot of new features and bugfixes in this major release.  Make
@@ -4360,7 +4360,7 @@ some of the changes, along with our brushed :ref:`tutorial <intro-tutorial>`.
 Support for returning dictionaries in spiders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Declaring and returning Scrapy Items is no longer necessary to collect the
+Declaring and returning Frapy Items is no longer necessary to collect the
 scraped data from your spider, you can now return explicit dictionaries
 instead.
 
@@ -4406,7 +4406,7 @@ Read more about settings population: :ref:`topics-settings`
 Python Logging
 ~~~~~~~~~~~~~~
 
-Scrapy 1.0 has moved away from Twisted logging to support Python built in’s
+Frapy 1.0 has moved away from Twisted logging to support Python built in’s
 as default logging system. We’re maintaining backward compatibility for most
 of the old custom interface to call logging functions, but you’ll get
 warnings to switch to the Python logging API entirely.
@@ -4445,7 +4445,7 @@ Another milestone for last Google Summer of Code was a refactoring of the
 internal API, seeking a simpler and easier usage. Check new core interface
 in: :ref:`topics-api`
 
-A common situation where you will face these changes is while running Scrapy
+A common situation where you will face these changes is while running Frapy
 from scripts. Here’s a quick example of how to run a Spider manually with the
 new API:
 
@@ -4462,7 +4462,7 @@ new API:
 Bear in mind this feature is still under development and its API may change
 until it reaches a stable status.
 
-See more examples for scripts running Scrapy: :ref:`topics-practices`
+See more examples for scripts running Frapy: :ref:`topics-practices`
 
 .. _module-relocations:
 
@@ -4470,7 +4470,7 @@ Module Relocations
 ~~~~~~~~~~~~~~~~~~
 
 There’s been a large rearrangement of modules trying to improve the general
-structure of Scrapy. Main changes were separating various subpackages into
+structure of Frapy. Main changes were separating various subpackages into
 new projects and dissolving both ``frapy.contrib`` and ``frapy.contrib_exp``
 into top level packages. Backward compatibility was kept among internal
 relocations, while importing deprecated modules expect warnings indicating
@@ -4640,7 +4640,7 @@ Documentation
 - CrawlerProcess documentation (:issue:`1190`)
 - Favoring web scraping over screen scraping in the descriptions
   (:issue:`1188`)
-- Some improvements for Scrapy tutorial (:issue:`1180`)
+- Some improvements for Frapy tutorial (:issue:`1180`)
 - Documenting Files Pipeline together with Images Pipeline (:issue:`1150`)
 - deployment docs tweaks (:issue:`1164`)
 - Added deployment section covering frapyd-deploy and shub (:issue:`1124`)
@@ -4718,7 +4718,7 @@ Code refactoring
   (:issue:`805`)
 - rename "sflo" local variables to less cryptic "log_observer" (:issue:`775`)
 
-Scrapy 0.24.6 (2015-04-20)
+Frapy 0.24.6 (2015-04-20)
 --------------------------
 
 - encode invalid xpath with unicode_escape under PY2 (:commit:`07cb3e5`)
@@ -4728,7 +4728,7 @@ Scrapy 0.24.6 (2015-04-20)
 - Converted sel.xpath() calls to response.xpath() in Extracting the data (:commit:`c2c6d15`)
 
 
-Scrapy 0.24.5 (2015-02-25)
+Frapy 0.24.5 (2015-02-25)
 --------------------------
 
 - Support new _getEndpoint Agent signatures on Twisted 15.0.0 (:commit:`540b9bc`)
@@ -4754,18 +4754,18 @@ Scrapy 0.24.5 (2015-02-25)
 - Update request-response.rst (:commit:`3f3263d`)
 - SgmlLinkExtractor - fix for parsing <area> tag with Unicode present (:commit:`49b40f0`)
 
-Scrapy 0.24.4 (2014-08-09)
+Frapy 0.24.4 (2014-08-09)
 --------------------------
 
 - pem file is used by mockserver and required by frapy bench (:commit:`5eddc68`)
 - frapy bench needs frapy.tests* (:commit:`d6cb999`)
 
-Scrapy 0.24.3 (2014-08-09)
+Frapy 0.24.3 (2014-08-09)
 --------------------------
 
 - no need to waste travis-ci time on py3 for 0.24 (:commit:`8e080c1`)
 - Update installation docs (:commit:`1d0c096`)
-- There is a trove classifier for Scrapy framework! (:commit:`4c701d7`)
+- There is a trove classifier for Frapy framework! (:commit:`4c701d7`)
 - update other places where w3lib version is mentioned (:commit:`d109c13`)
 - Update w3lib requirement to 1.8.0 (:commit:`39d2ce5`)
 - Use w3lib.html.replace_entities() (remove_entities() is deprecated) (:commit:`180d3ad`)
@@ -4793,7 +4793,7 @@ Scrapy 0.24.3 (2014-08-09)
 - better testcase for settings.overrides.setdefault (:commit:`e22daaf`)
 - Using CRLF as line marker according to http 1.1 definition (:commit:`5ec430b`)
 
-Scrapy 0.24.2 (2014-07-08)
+Frapy 0.24.2 (2014-07-08)
 --------------------------
 
 - Use a mutable mapping to proxy deprecated settings.overrides and settings.defaults attribute (:commit:`e5e8133`)
@@ -4801,20 +4801,20 @@ Scrapy 0.24.2 (2014-07-08)
 - Update python compatible version set to Debian packages (:commit:`fa5d76b`)
 - DOC fix formatting in release notes (:commit:`c6a9e20`)
 
-Scrapy 0.24.1 (2014-06-27)
+Frapy 0.24.1 (2014-06-27)
 --------------------------
 
 - Fix deprecated CrawlerSettings and increase backward compatibility with
   .defaults attribute (:commit:`8e3f20a`)
 
 
-Scrapy 0.24.0 (2014-06-26)
+Frapy 0.24.0 (2014-06-26)
 --------------------------
 
 Enhancements
 ~~~~~~~~~~~~
 
-- Improve Scrapy top-level namespace (:issue:`494`, :issue:`684`)
+- Improve Frapy top-level namespace (:issue:`494`, :issue:`684`)
 - Add selector shortcuts to responses (:issue:`554`, :issue:`690`)
 - Add new lxml based LinkExtractor to replace unmaintained SgmlLinkExtractor
   (:issue:`559`, :issue:`761`, :issue:`763`)
@@ -4825,7 +4825,7 @@ Enhancements
 - Disable smart strings in lxml XPath evaluations (:issue:`535`)
 - Restore filesystem based cache as default for http
   cache middleware (:issue:`541`, :issue:`500`, :issue:`571`)
-- Expose current crawler in Scrapy shell (:issue:`557`)
+- Expose current crawler in Frapy shell (:issue:`557`)
 - Improve testsuite comparing CSV and XML exporters (:issue:`570`)
 - New ``offsite/filtered`` and ``offsite/domains`` stats (:issue:`566`)
 - Support process_links as generator in CrawlSpider (:issue:`555`)
@@ -4888,14 +4888,14 @@ Bugfixes
 - Testsuite doesn't require PIL anymore (:issue:`585`)
 
 
-Scrapy 0.22.2 (released 2014-02-14)
+Frapy 0.22.2 (released 2014-02-14)
 -----------------------------------
 
 - fix a reference to unexistent engine.slots. closes #593 (:commit:`13c099a`)
 - downloaderMW doc typo (spiderMW doc copy remnant) (:commit:`8ae11bf`)
 - Correct typos (:commit:`1346037`)
 
-Scrapy 0.22.1 (released 2014-02-08)
+Frapy 0.22.1 (released 2014-02-08)
 -----------------------------------
 
 - localhost666 can resolve under certain circumstances (:commit:`2ec2279`)
@@ -4913,18 +4913,18 @@ Scrapy 0.22.1 (released 2014-02-08)
 - Updated the tutorial crawl output with latest output. (:commit:`8da65de`)
 - Updated shell docs with the crawler reference and fixed the actual shell output. (:commit:`875b9ab`)
 - PEP8 minor edits. (:commit:`f89efaf`)
-- Expose current crawler in the Scrapy shell. (:commit:`5349cec`)
+- Expose current crawler in the Frapy shell. (:commit:`5349cec`)
 - Unused re import and PEP8 minor edits. (:commit:`387f414`)
 - Ignore None's values when using the ItemLoader. (:commit:`0632546`)
 - DOC Fixed HTTPCACHE_STORAGE typo in the default value which is now Filesystem instead Dbm. (:commit:`cde9a8c`)
 - show Ubuntu setup instructions as literal code (:commit:`fb5c9c5`)
 - Update Ubuntu installation instructions (:commit:`70fb105`)
 - Merge pull request #550 from stray-leone/patch-1 (:commit:`6f70b6a`)
-- modify the version of Scrapy Ubuntu package (:commit:`725900d`)
+- modify the version of Frapy Ubuntu package (:commit:`725900d`)
 - fix 0.22.0 release date (:commit:`af0219a`)
 - fix typos in news.rst and remove (not released yet) header (:commit:`b7f58f4`)
 
-Scrapy 0.22.0 (released 2014-01-17)
+Frapy 0.22.0 (released 2014-01-17)
 -----------------------------------
 
 Enhancements
@@ -4968,19 +4968,19 @@ Fixes
 - Fix tests runner under pip 1.5 (:issue:`513`)
 - Fix logging error when spider name is unicode (:issue:`479`)
 
-Scrapy 0.20.2 (released 2013-12-09)
+Frapy 0.20.2 (released 2013-12-09)
 -----------------------------------
 
 - Update CrawlSpider Template with Selector changes (:commit:`6d1457d`)
 - fix method name in tutorial. closes GH-480 (:commit:`b4fc359`
 
-Scrapy 0.20.1 (released 2013-11-28)
+Frapy 0.20.1 (released 2013-11-28)
 -----------------------------------
 
 - include_package_data is required to build wheels from published sources (:commit:`5ba1ad5`)
 - process_parallel was leaking the failures on its internal deferreds.  closes #458 (:commit:`419a780`)
 
-Scrapy 0.20.0 (released 2013-11-08)
+Frapy 0.20.0 (released 2013-11-08)
 -----------------------------------
 
 Enhancements
@@ -5002,7 +5002,7 @@ Enhancements
 - Mock server (used for tests) can listen for HTTPS requests (:issue:`410`)
 - Remove multi spider support from multiple core components
   (:issue:`422`, :issue:`421`, :issue:`420`, :issue:`419`, :issue:`423`, :issue:`418`)
-- Travis-CI now tests Scrapy changes against development versions of ``w3lib`` and ``queuelib`` python packages.
+- Travis-CI now tests Frapy changes against development versions of ``w3lib`` and ``queuelib`` python packages.
 - Add pypy 2.1 to continuous integration tests (:commit:`ecfa7431`)
 - Pylinted, pep8 and removed old-style exceptions from source (:issue:`430`, :issue:`432`)
 - Use importlib for parametric imports (:issue:`445`)
@@ -5017,7 +5017,7 @@ Bugfixes
 - Fix tests under Django 1.6 (:commit:`b6bed44c`)
 - Lot of bugfixes to retry middleware under disconnections using HTTP 1.1 download handler
 - Fix inconsistencies among Twisted releases (:issue:`406`)
-- Fix Scrapy shell bugs (:issue:`418`, :issue:`407`)
+- Fix Frapy shell bugs (:issue:`418`, :issue:`407`)
 - Fix invalid variable name in setup.py (:issue:`429`)
 - Fix tutorial references (:issue:`387`)
 - Improve request-response docs (:issue:`391`)
@@ -5068,14 +5068,14 @@ List of contributors sorted by number of commits::
       1 cacovsky <amarquesferraz@...>
       1 Berend Iwema <berend@...>
 
-Scrapy 0.18.4 (released 2013-10-10)
+Frapy 0.18.4 (released 2013-10-10)
 -----------------------------------
 
 - IPython refuses to update the namespace. fix #396 (:commit:`3d32c4f`)
 - Fix AlreadyCalledError replacing a request in shell command. closes #407 (:commit:`b1d8919`)
 - Fix start_requests laziness and early hangs (:commit:`89faf52`)
 
-Scrapy 0.18.3 (released 2013-10-03)
+Frapy 0.18.3 (released 2013-10-03)
 -----------------------------------
 
 - fix regression on lazy evaluation of start requests (:commit:`12693a5`)
@@ -5084,13 +5084,13 @@ Scrapy 0.18.3 (released 2013-10-03)
 - backport master fixes to json exporter (:commit:`cfc2d46`)
 - Fix permission and set umask before generating sdist tarball (:commit:`06149e0`)
 
-Scrapy 0.18.2 (released 2013-09-03)
+Frapy 0.18.2 (released 2013-09-03)
 -----------------------------------
 
 - Backport ``frapy check`` command fixes and backward compatible multi
   crawler process(:issue:`339`)
 
-Scrapy 0.18.1 (released 2013-08-27)
+Frapy 0.18.1 (released 2013-08-27)
 -----------------------------------
 
 - remove extra import added by cherry picked changes (:commit:`d20304e`)
@@ -5109,7 +5109,7 @@ Scrapy 0.18.1 (released 2013-08-27)
 - minor updates to 0.18 release notes (:commit:`c45e5f1`)
 - fix contributors list format (:commit:`0b60031`)
 
-Scrapy 0.18.0 (released 2013-08-09)
+Frapy 0.18.0 (released 2013-08-09)
 -----------------------------------
 
 - Lot of improvements to testsuite run using Tox, including a way to test on pypi
@@ -5134,7 +5134,7 @@ Scrapy 0.18.0 (released 2013-08-09)
 - Add RFC2616 cache policy to ``HttpCacheMiddleware`` (:issue:`212`)
 - Allow customization of messages logged by engine (:issue:`214`)
 - Multiples improvements to ``DjangoItem`` (:issue:`217`, :issue:`218`, :issue:`221`)
-- Extend Scrapy commands using setuptools entry points (:issue:`260`)
+- Extend Frapy commands using setuptools entry points (:issue:`260`)
 - Allow spider ``allowed_domains`` value to be set/tuple (:issue:`261`)
 - Support ``settings.getdict`` (:issue:`269`)
 - Simplify internal ``frapy.core.scraper`` slot handling (:issue:`271`)
@@ -5142,8 +5142,8 @@ Scrapy 0.18.0 (released 2013-08-09)
 - Collect idle downloader slots (:issue:`297`)
 - Add ``ftp://`` scheme downloader handler (:issue:`329`)
 - Added downloader benchmark webserver and spider tools :ref:`benchmarking`
-- Moved persistent (on disk) queues to a separate project (queuelib_) which Scrapy now depends on
-- Add Scrapy commands using external libraries (:issue:`260`)
+- Moved persistent (on disk) queues to a separate project (queuelib_) which Frapy now depends on
+- Add Frapy commands using external libraries (:issue:`260`)
 - Added ``--pdb`` option to ``frapy`` command line tool
 - Added :meth:`XPathSelector.remove_namespaces <frapy.selector.Selector.remove_namespaces>` which allows to remove all namespaces from XML documents for convenience (to work with namespace-less XPaths). Documented in :ref:`topics-selectors`.
 - Several improvements to spider contracts
@@ -5155,7 +5155,7 @@ Scrapy 0.18.0 (released 2013-08-09)
 - several more cleanups to singletons and multi-spider support (thanks Nicolas Ramirez)
 - support custom download slots
 - added --spider option to "shell" command.
-- log overridden settings when Scrapy starts
+- log overridden settings when Frapy starts
 
 Thanks to everyone who contribute to this release. Here is a list of
 contributors sorted by number of commits::
@@ -5201,16 +5201,16 @@ contributors sorted by number of commits::
       1 Berend Iwema <berend@...>
 
 
-Scrapy 0.16.5 (released 2013-05-30)
+Frapy 0.16.5 (released 2013-05-30)
 -----------------------------------
 
-- obey request method when Scrapy deploy is redirected to a new endpoint (:commit:`8c4fcee`)
+- obey request method when Frapy deploy is redirected to a new endpoint (:commit:`8c4fcee`)
 - fix inaccurate downloader middleware documentation. refs #280 (:commit:`40667cb`)
 - doc: remove links to diveintopython.org, which is no longer available. closes #246 (:commit:`bd58bfa`)
 - Find form nodes in invalid html5 documents (:commit:`e3d6945`)
 - Fix typo labeling attrs type bool instead of list (:commit:`a274276`)
 
-Scrapy 0.16.4 (released 2013-01-23)
+Frapy 0.16.4 (released 2013-01-23)
 -----------------------------------
 
 - fixes spelling errors in documentation (:commit:`6d2b3aa`)
@@ -5219,10 +5219,10 @@ Scrapy 0.16.4 (released 2013-01-23)
 - lint and improve images pipeline error logging (:commit:`56b45fc`)
 - fixed doc typos (:commit:`243be84`)
 - add documentation topics: Broad Crawls & Common Practices (:commit:`1fbb715`)
-- fix bug in Scrapy parse command when spider is not specified explicitly. closes #209 (:commit:`c72e682`)
+- fix bug in Frapy parse command when spider is not specified explicitly. closes #209 (:commit:`c72e682`)
 - Update docs/topics/commands.rst (:commit:`28eac7a`)
 
-Scrapy 0.16.3 (released 2012-12-07)
+Frapy 0.16.3 (released 2012-12-07)
 -----------------------------------
 
 - Remove concurrency limitation when using download delays and still ensure inter-request delays are enforced (:commit:`487b9b5`)
@@ -5235,32 +5235,32 @@ Scrapy 0.16.3 (released 2012-12-07)
 - Fixed docs typo in SpiderOpenCloseLogging example (:commit:`7184094`)
 
 
-Scrapy 0.16.2 (released 2012-11-09)
+Frapy 0.16.2 (released 2012-11-09)
 -----------------------------------
 
-- Scrapy contracts: python2.6 compat (:commit:`a4a9199`)
-- Scrapy contracts verbose option (:commit:`ec41673`)
-- proper unittest-like output for Scrapy contracts (:commit:`86635e4`)
+- Frapy contracts: python2.6 compat (:commit:`a4a9199`)
+- Frapy contracts verbose option (:commit:`ec41673`)
+- proper unittest-like output for Frapy contracts (:commit:`86635e4`)
 - added open_in_browser to debugging doc (:commit:`c9b690d`)
-- removed reference to global Scrapy stats from settings doc (:commit:`dd55067`)
+- removed reference to global Frapy stats from settings doc (:commit:`dd55067`)
 - Fix SpiderState bug in Windows platforms (:commit:`58998f4`)
 
 
-Scrapy 0.16.1 (released 2012-10-26)
+Frapy 0.16.1 (released 2012-10-26)
 -----------------------------------
 
 - fixed LogStats extension, which got broken after a wrong merge before the 0.16 release (:commit:`8c780fd`)
 - better backward compatibility for frapy.conf.settings (:commit:`3403089`)
 - extended documentation on how to access crawler stats from extensions (:commit:`c4da0b5`)
-- removed .hgtags (no longer needed now that Scrapy uses git) (:commit:`d52c188`)
+- removed .hgtags (no longer needed now that Frapy uses git) (:commit:`d52c188`)
 - fix dashes under rst headers (:commit:`fa4f7f9`)
 - set release date for 0.16.0 in news (:commit:`e292246`)
 
 
-Scrapy 0.16.0 (released 2012-10-18)
+Frapy 0.16.0 (released 2012-10-18)
 -----------------------------------
 
-Scrapy changes:
+Frapy changes:
 
 - added :ref:`topics-contracts`, a mechanism for testing spiders in a formal/reproducible way
 - added options ``-o`` and ``-t`` to the :command:`runspider` command
@@ -5277,11 +5277,11 @@ Scrapy changes:
 - StackTraceDump extension: also dump trackref live references (:commit:`fe2ce93`)
 - nested items now fully supported in JSON and JSONLines exporters
 - added :reqmeta:`cookiejar` Request meta key to support multiple cookie sessions per spider
-- decoupled encoding detection code to `w3lib.encoding`_, and ported Scrapy code to use that module
+- decoupled encoding detection code to `w3lib.encoding`_, and ported Frapy code to use that module
 - dropped support for Python 2.5. See https://blog.scrapinghub.com/2012/02/27/frapy-0-15-dropping-support-for-python-2-5/
 - dropped support for Twisted 2.5
 - added :setting:`REFERER_ENABLED` setting, to control referer middleware
-- changed default user agent to: ``Scrapy/VERSION (+http://frapy.org)``
+- changed default user agent to: ``Frapy/VERSION (+http://frapy.org)``
 - removed (undocumented) ``HTMLImageLinkExtractor`` class from ``frapy.contrib.linkextractors.image``
 - removed per-spider settings (to be replaced by instantiating multiple crawler objects)
 - ``USER_AGENT`` spider attribute will no longer work, use ``user_agent`` attribute instead
@@ -5294,11 +5294,11 @@ Scrapy changes:
 - removed signal: ``frapy.mail.mail_sent``
 - removed ``TRACK_REFS`` setting, now :ref:`trackrefs <topics-leaks-trackrefs>` is always enabled
 - DBM is now the default storage backend for HTTP cache middleware
-- number of log messages (per level) are now tracked through Scrapy stats (stat name: ``log_count/LEVEL``)
-- number received responses are now tracked through Scrapy stats (stat name: ``response_received_count``)
+- number of log messages (per level) are now tracked through Frapy stats (stat name: ``log_count/LEVEL``)
+- number received responses are now tracked through Frapy stats (stat name: ``response_received_count``)
 - removed ``frapy.log.started`` attribute
 
-Scrapy 0.14.4
+Frapy 0.14.4
 -------------
 
 - added precise to supported Ubuntu distros (:commit:`b7e46df`)
@@ -5307,7 +5307,7 @@ Scrapy 0.14.4
 - replace "import Image" by more standard "from PIL import Image". closes #88 (:commit:`4d17048`)
 - return trial status as bin/runtests.sh exit value. #118 (:commit:`b7b2e7f`)
 
-Scrapy 0.14.3
+Frapy 0.14.3
 -------------
 
 - forgot to include pydispatch license. #118 (:commit:`fd85f9c`)
@@ -5318,9 +5318,9 @@ Scrapy 0.14.3
 - do not fail handling unicode xpaths in libxml2 backed selectors (:commit:`b830e95`)
 - fixed minor mistake in Request objects documentation (:commit:`bf3c9ee`)
 - fixed minor defect in link extractors documentation (:commit:`ba14f38`)
-- removed some obsolete remaining code related to sqlite support in Scrapy (:commit:`0665175`)
+- removed some obsolete remaining code related to sqlite support in Frapy (:commit:`0665175`)
 
-Scrapy 0.14.2
+Frapy 0.14.2
 -------------
 
 - move buffer pointing to start of file before computing checksum. refs #92 (:commit:`6a5bef2`)
@@ -5335,7 +5335,7 @@ Scrapy 0.14.2
 - frapyd: fixed documentation link (:commit:`2b4e4c3`)
 - extras/makedeb.py: no longer obtaining version from git (:commit:`caffe0e`)
 
-Scrapy 0.14.1
+Frapy 0.14.1
 -------------
 
 - extras/makedeb.py: no longer obtaining version from git (:commit:`caffe0e`)
@@ -5350,7 +5350,7 @@ Scrapy 0.14.1
 - Avoid _disconnectedDeferred AttributeError exception in Twisted>=11.1.0 (:commit:`98f3f87`)
 - allow spider to set autothrottle max concurrency (:commit:`175a4b5`)
 
-Scrapy 0.14
+Frapy 0.14
 -----------
 
 New features and settings
@@ -5359,7 +5359,7 @@ New features and settings
 - Support for `AJAX crawlable urls`_
 - New persistent scheduler that stores requests on disk, allowing to suspend and resume crawls (:rev:`2737`)
 - added ``-o`` option to ``frapy crawl``, a shortcut for dumping scraped items into a file (or standard output using ``-``)
-- Added support for passing custom settings to Scrapyd ``schedule.json`` api (:rev:`2779`, :rev:`2783`)
+- Added support for passing custom settings to Frapyd ``schedule.json`` api (:rev:`2779`, :rev:`2783`)
 - New ``ChunkedTransferMiddleware`` (enabled by default) to support `chunked transfer encoding`_ (:rev:`2769`)
 - Add boto 2.0 support for S3 downloader handler (:rev:`2763`)
 - Added `marshal`_ to formats supported by feed exports (:rev:`2744`)
@@ -5380,20 +5380,20 @@ New features and settings
 - Refactored close spider behavior to wait for all downloads to finish and be processed by spiders, before closing the spider (:rev:`2688`)
 - Added ``SitemapSpider`` (see documentation in Spiders page) (:rev:`2658`)
 - Added ``LogStats`` extension for periodically logging basic stats (like crawled pages and scraped items) (:rev:`2657`)
-- Make handling of gzipped responses more robust (#319, :rev:`2643`). Now Scrapy will try and decompress as much as possible from a gzipped response, instead of failing with an ``IOError``.
+- Make handling of gzipped responses more robust (#319, :rev:`2643`). Now Frapy will try and decompress as much as possible from a gzipped response, instead of failing with an ``IOError``.
 - Simplified !MemoryDebugger extension to use stats for dumping memory debugging info (:rev:`2639`)
 - Added new command to edit spiders: ``frapy edit`` (:rev:`2636`) and ``-e`` flag to ``genspider`` command that uses it (:rev:`2653`)
 - Changed default representation of items to pretty-printed dicts. (:rev:`2631`). This improves default logging by making log more readable in the default case, for both Scraped and Dropped lines.
 - Added :signal:`spider_error` signal (:rev:`2628`)
 - Added :setting:`COOKIES_ENABLED` setting (:rev:`2625`)
-- Stats are now dumped to Scrapy log (default value of :setting:`STATS_DUMP` setting has been changed to ``True``). This is to make Scrapy users more aware of Scrapy stats and the data that is collected there.
+- Stats are now dumped to Frapy log (default value of :setting:`STATS_DUMP` setting has been changed to ``True``). This is to make Frapy users more aware of Frapy stats and the data that is collected there.
 - Added support for dynamically adjusting download delay and maximum concurrent requests (:rev:`2599`)
 - Added new DBM HTTP cache storage backend (:rev:`2576`)
-- Added ``listjobs.json`` API to Scrapyd (:rev:`2571`)
+- Added ``listjobs.json`` API to Frapyd (:rev:`2571`)
 - ``CsvItemExporter``: added ``join_multivalued`` parameter (:rev:`2578`)
 - Added namespace support to ``xmliter_lxml`` (:rev:`2552`)
 - Improved cookies middleware by making ``COOKIES_DEBUG`` nicer and documenting it (:rev:`2579`)
-- Several improvements to Scrapyd and Link extractors
+- Several improvements to Frapyd and Link extractors
 
 Code rearranged and removed
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -5403,12 +5403,12 @@ Code rearranged and removed
    - original item_passed signal was renamed to item_scraped
    - old log lines ``Scraped Item...`` were removed
    - old log lines ``Passed Item...`` were renamed to ``Scraped Item...`` lines and downgraded to ``DEBUG`` level
-- Reduced Scrapy codebase by striping part of Scrapy code into two new libraries:
+- Reduced Frapy codebase by striping part of Frapy code into two new libraries:
    - `w3lib`_ (several functions from ``frapy.utils.{http,markup,multipart,response,url}``, done in :rev:`2584`)
    - `scrapely`_ (was ``frapy.contrib.ibl``, done in :rev:`2586`)
 - Removed unused function: ``frapy.utils.request.request_info()`` (:rev:`2577`)
 - Removed googledir project from ``examples/googledir``. There's now a new example project called ``dirbot`` available on GitHub: https://github.com/frapy/dirbot
-- Removed support for default field values in Scrapy items (:rev:`2616`)
+- Removed support for default field values in Frapy items (:rev:`2616`)
 - Removed experimental crawlspider v2 (:rev:`2632`)
 - Removed scheduler middleware to simplify architecture. Duplicates filter is now done in the scheduler itself, using the same dupe filtering class as before (``DUPEFILTER_CLASS`` setting) (:rev:`2640`)
 - Removed support for passing urls to ``frapy crawl`` command (use ``frapy parse`` instead) (:rev:`2704`)
@@ -5418,7 +5418,7 @@ Code rearranged and removed
 - Renamed attributes of core components: downloader.sites -> downloader.slots, scraper.sites -> scraper.slots (:rev:`2717`, :rev:`2718`)
 - Renamed setting ``CLOSESPIDER_ITEMPASSED`` to :setting:`CLOSESPIDER_ITEMCOUNT` (:rev:`2655`). Backward compatibility kept.
 
-Scrapy 0.12
+Frapy 0.12
 -----------
 
 The numbers like #NNN reference tickets in the old issue tracker (Trac) which is no longer available.
@@ -5431,23 +5431,23 @@ New features and improvements
 - Added verbose option to ``frapy version`` command, useful for bug reports (#298)
 - HTTP cache now stored by default in the project data dir (#279)
 - Added project data storage directory (#276, #277)
-- Documented file structure of Scrapy projects (see command-line tool doc)
+- Documented file structure of Frapy projects (see command-line tool doc)
 - New lxml backend for XPath selectors (#147)
 - Per-spider settings (#245)
-- Support exit codes to signal errors in Scrapy commands (#248)
+- Support exit codes to signal errors in Frapy commands (#248)
 - Added ``-c`` argument to ``frapy shell`` command
 - Made ``libxml2`` optional (#260)
 - New ``deploy`` command (#261)
 - Added :setting:`CLOSESPIDER_PAGECOUNT` setting (#253)
 - Added :setting:`CLOSESPIDER_ERRORCOUNT` setting (#254)
 
-Scrapyd changes
+Frapyd changes
 ~~~~~~~~~~~~~~~
 
-- Scrapyd now uses one process per spider
+- Frapyd now uses one process per spider
 - It stores one log file per spider run, and rotate them keeping the latest 5 logs per spider (by default)
 - A minimal web ui was added, available at http://localhost:6800 by default
-- There is now a ``frapy server`` command to start a Scrapyd server of the current project
+- There is now a ``frapy server`` command to start a Frapyd server of the current project
 
 Changes to settings
 ~~~~~~~~~~~~~~~~~~~
@@ -5458,11 +5458,11 @@ Changes to settings
 Deprecated/obsoleted functionality
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Deprecated ``runserver`` command in favor of ``server`` command which starts a Scrapyd server. See also: Scrapyd changes
-- Deprecated ``queue`` command in favor of using Scrapyd ``schedule.json`` API. See also: Scrapyd changes
+- Deprecated ``runserver`` command in favor of ``server`` command which starts a Frapyd server. See also: Frapyd changes
+- Deprecated ``queue`` command in favor of using Frapyd ``schedule.json`` API. See also: Frapyd changes
 - Removed the !LxmlItemLoader (experimental contrib which never graduated to main contrib)
 
-Scrapy 0.10
+Frapy 0.10
 -----------
 
 The numbers like #NNN reference tickets in the old issue tracker (Trac) which is no longer available.
@@ -5470,19 +5470,19 @@ The numbers like #NNN reference tickets in the old issue tracker (Trac) which is
 New features and improvements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- New Scrapy service called ``frapyd`` for deploying Scrapy crawlers in production (#218) (documentation available)
+- New Frapy service called ``frapyd`` for deploying Frapy crawlers in production (#218) (documentation available)
 - Simplified Images pipeline usage which doesn't require subclassing your own images pipeline now (#217)
-- Scrapy shell now shows the Scrapy log by default (#206)
+- Frapy shell now shows the Frapy log by default (#206)
 - Refactored execution queue in a common base code and pluggable backends called "spider queues" (#220)
-- New persistent spider queue (based on SQLite) (#198), available by default, which allows to start Scrapy in server mode and then schedule spiders to run.
-- Added documentation for Scrapy command-line tool and all its available sub-commands. (documentation available)
+- New persistent spider queue (based on SQLite) (#198), available by default, which allows to start Frapy in server mode and then schedule spiders to run.
+- Added documentation for Frapy command-line tool and all its available sub-commands. (documentation available)
 - Feed exporters with pluggable backends (#197) (documentation available)
 - Deferred signals (#193)
 - Added two new methods to item pipeline open_spider(), close_spider() with deferred support (#195)
 - Support for overriding default request headers per spider (#181)
 - Replaced default Spider Manager with one with similar functionality but not depending on Twisted Plugins (#186)
 - Split Debian package into two packages - the library and the service (#187)
-- Scrapy log refactoring (#188)
+- Frapy log refactoring (#188)
 - New extension for keeping persistent spider contexts among different runs (#203)
 - Added ``dont_redirect`` request.meta key for avoiding redirects (#233)
 - Added ``dont_retry`` request.meta key for avoiding retries (#234)
@@ -5504,8 +5504,8 @@ API changes
 - Removed ``UrlFilterMiddleware`` from ``frapy.contrib`` (already disabled by default)
 - Offsite middleware doesn't filter out any request coming from a spider that doesn't have a allowed_domains attribute (#225)
 - Removed Spider Manager ``load()`` method. Now spiders are loaded in the ``__init__`` method itself.
-- Changes to Scrapy Manager (now called "Crawler"):
-   - ``frapy.core.manager.ScrapyManager`` class renamed to ``frapy.crawler.Crawler``
+- Changes to Frapy Manager (now called "Crawler"):
+   - ``frapy.core.manager.FrapyManager`` class renamed to ``frapy.crawler.Crawler``
    - ``frapy.core.manager.frapymanager`` singleton moved to ``frapy.project.crawler``
 - Moved module: ``frapy.contrib.spidermanager`` to ``frapy.spidermanager``
 - Spider Manager singleton moved from ``frapy.spider.spiders`` to the ``spiders` attribute of ``frapy.project.crawler`` singleton.
@@ -5535,7 +5535,7 @@ Changes to settings
 - Removed ``COMMANDS_SETTINGS_MODULE`` setting (#201)
 - Renamed ``REQUEST_HANDLERS`` to ``DOWNLOAD_HANDLERS`` and make download handlers classes (instead of functions)
 
-Scrapy 0.9
+Frapy 0.9
 ----------
 
 The numbers like #NNN reference tickets in the old issue tracker (Trac) which is no longer available.
@@ -5545,9 +5545,9 @@ New features and improvements
 
 - Added SMTP-AUTH support to frapy.mail
 - New settings added: ``MAIL_USER``, ``MAIL_PASS`` (:rev:`2065` | #149)
-- Added new frapy-ctl view command - To view URL in the browser, as seen by Scrapy (:rev:`2039`)
-- Added web service for controlling Scrapy process (this also deprecates the web console. (:rev:`2053` | #167)
-- Support for running Scrapy as a service, for production systems (:rev:`1988`, :rev:`2054`, :rev:`2055`, :rev:`2056`, :rev:`2057` | #168)
+- Added new frapy-ctl view command - To view URL in the browser, as seen by Frapy (:rev:`2039`)
+- Added web service for controlling Frapy process (this also deprecates the web console. (:rev:`2053` | #167)
+- Support for running Frapy as a service, for production systems (:rev:`1988`, :rev:`2054`, :rev:`2055`, :rev:`2056`, :rev:`2057` | #168)
 - Added wrapper induction library (documentation only available in source code for now). (:rev:`2011`)
 - Simplified and improved response encoding support (:rev:`1961`, :rev:`1969`)
 - Added ``LOG_ENCODING`` setting (:rev:`1956`, documentation available)
@@ -5575,7 +5575,7 @@ Changes to default settings
 
 - Changed default ``SCHEDULER_ORDER`` to ``DFO`` (:rev:`1939`)
 
-Scrapy 0.8
+Frapy 0.8
 ----------
 
 The numbers like #NNN reference tickets in the old issue tracker (Trac) which is no longer available.
@@ -5601,18 +5601,18 @@ Backward-incompatible changes
 - Changed core signals ``domain_opened``, ``domain_closed``, ``domain_idle``
 - Changed Item pipeline to use spiders instead of domains
    -  The ``domain`` argument of  ``process_item()`` item pipeline method was changed to  ``spider``, the new signature is: ``process_item(spider, item)`` (:rev:`1827` | #105)
-   - To quickly port your code (to work with Scrapy 0.8) just use ``spider.domain_name`` where you previously used ``domain``.
+   - To quickly port your code (to work with Frapy 0.8) just use ``spider.domain_name`` where you previously used ``domain``.
 - Changed Stats API to use spiders instead of domains (:rev:`1849` | #113)
    - ``StatsCollector`` was changed to receive spider references (instead of domains) in its methods (``set_value``, ``inc_value``, etc).
    - added ``StatsCollector.iter_spider_stats()`` method
    - removed ``StatsCollector.list_domains()`` method
    - Also, Stats signals were renamed and now pass around spider references (instead of domains). Here's a summary of the changes:
-   - To quickly port your code (to work with Scrapy 0.8) just use ``spider.domain_name`` where you previously used ``domain``. ``spider_stats`` contains exactly the same data as ``domain_stats``.
+   - To quickly port your code (to work with Frapy 0.8) just use ``spider.domain_name`` where you previously used ``domain``. ``spider_stats`` contains exactly the same data as ``domain_stats``.
 - ``CloseDomain`` extension moved to ``frapy.contrib.closespider.CloseSpider`` (:rev:`1833`)
    - Its settings were also renamed:
       - ``CLOSEDOMAIN_TIMEOUT`` to ``CLOSESPIDER_TIMEOUT``
       - ``CLOSEDOMAIN_ITEMCOUNT`` to ``CLOSESPIDER_ITEMCOUNT``
-- Removed deprecated ``SCRAPYSETTINGS_MODULE`` environment variable - use ``SCRAPY_SETTINGS_MODULE`` instead (:rev:`1840`)
+- Removed deprecated ``FRAPYSETTINGS_MODULE`` environment variable - use ``FRAPY_SETTINGS_MODULE`` instead (:rev:`1840`)
 - Renamed setting: ``REQUESTS_PER_DOMAIN`` to ``CONCURRENT_REQUESTS_PER_SPIDER`` (:rev:`1830`, :rev:`1844`)
 - Renamed setting: ``CONCURRENT_DOMAINS`` to ``CONCURRENT_SPIDERS`` (:rev:`1830`)
 - Refactored HTTP Cache middleware
@@ -5621,10 +5621,10 @@ Backward-incompatible changes
 - Renamed extension: ``DelayedCloseDomain`` to ``SpiderCloseDelay`` (:rev:`1861` | #121)
 - Removed obsolete ``frapy.utils.markup.remove_escape_chars`` function - use ``frapy.utils.markup.replace_escape_chars`` instead (:rev:`1865`)
 
-Scrapy 0.7
+Frapy 0.7
 ----------
 
-First release of Scrapy.
+First release of Frapy.
 
 
 .. _AJAX crawlable urls: https://developers.google.com/search/docs/ajax-crawling/docs/getting-started?csw=1

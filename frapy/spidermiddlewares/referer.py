@@ -30,7 +30,7 @@ POLICY_STRICT_ORIGIN = "strict-origin"
 POLICY_ORIGIN_WHEN_CROSS_ORIGIN = "origin-when-cross-origin"
 POLICY_STRICT_ORIGIN_WHEN_CROSS_ORIGIN = "strict-origin-when-cross-origin"
 POLICY_UNSAFE_URL = "unsafe-url"
-POLICY_SCRAPY_DEFAULT = "frapy-default"
+POLICY_FRAPY_DEFAULT = "frapy-default"
 
 
 class ReferrerPolicy:
@@ -264,7 +264,7 @@ class DefaultReferrerPolicy(NoReferrerWhenDowngradePolicy):
     """
 
     NOREFERRER_SCHEMES: Tuple[str, ...] = LOCAL_SCHEMES + ("file", "s3")
-    name: str = POLICY_SCRAPY_DEFAULT
+    name: str = POLICY_FRAPY_DEFAULT
 
 
 _policy_classes = {

@@ -76,7 +76,7 @@ Tags reference
 ==============
 
 Note that tags can also be extended by users, meaning that you can have your
-own custom contract tags in your Scrapy project.
+own custom contract tags in your Frapy project.
 
 ==================== ==========================================================
 ``@url``             url of a sample page parsed by the callback

@@ -7,7 +7,7 @@ Requests and Responses
 .. module:: frapy.http
    :synopsis: Request and Response classes
 
-Scrapy uses :class:`Request` and :class:`Response` objects for crawling web
+Frapy uses :class:`Request` and :class:`Response` objects for crawling web
 sites.
 
 Typically, :class:`Request` objects are generated in the spiders and pass
@@ -206,12 +206,12 @@ Request objects
     .. attribute:: Request.meta
 
         A dict that contains arbitrary metadata for this request. This dict is
-        empty for new Requests, and is usually  populated by different Scrapy
+        empty for new Requests, and is usually  populated by different Frapy
         components (extensions, middlewares, etc). So the data contained in this
         dict depends on the extensions you have enabled.
 
         See :ref:`topics-request-meta` for a list of special meta keys
-        recognized by Scrapy.
+        recognized by Frapy.
 
         This dict is :doc:`shallow copied <library/copy>` when the request is
         cloned using the ``copy()`` or ``replace()`` methods, and can also be
@@ -469,21 +469,21 @@ Possible values are:
 -   ``'2.6'`` (default)
 
     This implementation uses the same request fingerprinting algorithm as
-    Scrapy 2.6 and earlier versions.
+    Frapy 2.6 and earlier versions.
 
     Even though this is the default value for backward compatibility reasons,
     it is a deprecated value.
 
 -   ``'2.7'``
 
-    This implementation was introduced in Scrapy 2.7 to fix an issue of the
+    This implementation was introduced in Frapy 2.7 to fix an issue of the
     previous implementation.
 
     New projects should use this value. The :command:`startproject` command
     sets this value in the generated ``settings.py`` file.
 
 If you are using the default value (``'2.6'``) for this setting, and you are
-using Scrapy components where changing the request fingerprinting algorithm
+using Frapy components where changing the request fingerprinting algorithm
 would cause undesired results, you need to carefully decide when to change the
 value of this setting, or switch the :setting:`REQUEST_FINGERPRINTER_CLASS`
 setting to a custom request fingerprinter class that implements the 2.6 request
@@ -500,7 +500,7 @@ cache, requiring you to redownload all requests again.
 Otherwise, set :setting:`REQUEST_FINGERPRINTER_IMPLEMENTATION` to ``'2.7'`` in
 your settings to switch already to the request fingerprinting implementation
 that will be the only request fingerprinting implementation available in a
-future version of Scrapy, and remove the deprecation warning triggered by using
+future version of Frapy, and remove the deprecation warning triggered by using
 the default value (``'2.6'``).
 
 
@@ -532,9 +532,9 @@ Additionally, it may also implement the following methods:
    instance from a :class:`~frapy.crawler.Crawler` object. It must return a
    new instance of the request fingerprinter.
 
-   *crawler* provides access to all Scrapy core components like settings and
+   *crawler* provides access to all Frapy core components like settings and
    signals; it is a way for the request fingerprinter to access them and hook
-   its functionality into Scrapy.
+   its functionality into Frapy.
 
    :param crawler: crawler that uses this request fingerprinter
    :type crawler: :class:`~frapy.crawler.Crawler` object
@@ -578,7 +578,7 @@ However, if you do not use :func:`frapy.utils.request.fingerprint`, make sure
 you use :class:`~weakref.WeakKeyDictionary` to cache request fingerprints:
 
 -   Caching saves CPU by ensuring that fingerprints are calculated only once
-    per request, and not once per Scrapy component that needs the fingerprint
+    per request, and not once per Frapy component that needs the fingerprint
     of a request.
 
 -   Using :class:`~weakref.WeakKeyDictionary` saves memory by ensuring that
@@ -623,7 +623,7 @@ when available, and then falls back to
                 return request.meta["fingerprint"]
             return fingerprint(request)
 
-If you need to reproduce the same fingerprinting algorithm as Scrapy 2.6
+If you need to reproduce the same fingerprinting algorithm as Frapy 2.6
 without using the deprecated ``'2.6'`` value of the
 :setting:`REQUEST_FINGERPRINTER_IMPLEMENTATION` setting, use the following
 request fingerprinter:
@@ -655,11 +655,11 @@ request fingerprinter:
 Request fingerprint restrictions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Scrapy components that use request fingerprints may impose additional
+Frapy components that use request fingerprints may impose additional
 restrictions on the format of the fingerprints that your :ref:`request
 fingerprinter <custom-request-fingerprinter>` generates.
 
-The following built-in Scrapy components have such restrictions:
+The following built-in Frapy components have such restrictions:
 
 -   :class:`frapy.extensions.httpcache.FilesystemCacheStorage` (default
     value of :setting:`HTTPCACHE_STORAGE`)
@@ -699,7 +699,7 @@ Request.meta special keys
 =========================
 
 The :attr:`Request.meta` attribute can contain any arbitrary data, but there
-are some special keys recognized by Scrapy and its built-in extensions.
+are some special keys recognized by Frapy and its built-in extensions.
 
 Those are:
 
@@ -747,7 +747,7 @@ download_latency
 The amount of time spent to fetch the response, since the request has been
 started, i.e. HTTP message sent over the network. This meta key only becomes
 available when the response has been downloaded. While most other meta keys are
-used to control Scrapy behavior, this one is supposed to be read-only.
+used to control Frapy behavior, this one is supposed to be read-only.
 
 .. reqmeta:: download_fail_on_dataloss
 
@@ -1099,7 +1099,7 @@ Response objects
     .. attribute:: Response.request
 
         The :class:`Request` object that generated this response. This attribute is
-        assigned in the Scrapy engine, after the response and the request have passed
+        assigned in the Frapy engine, after the response and the request have passed
         through all :ref:`Downloader Middlewares <topics-downloader-middleware>`.
         In particular, this means that:
 

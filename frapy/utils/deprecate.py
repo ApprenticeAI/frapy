@@ -4,15 +4,15 @@ import inspect
 import warnings
 from typing import List, Tuple
 
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 
 
 def attribute(obj, oldattr, newattr, version="0.12"):
     cname = obj.__class__.__name__
     warnings.warn(
         f"{cname}.{oldattr} attribute is deprecated and will be no longer supported "
-        f"in Scrapy {version}, use {cname}.{newattr} attribute instead",
-        ScrapyDeprecationWarning,
+        f"in Frapy {version}, use {cname}.{newattr} attribute instead",
+        FrapyDeprecationWarning,
         stacklevel=3,
     )
 
@@ -21,7 +21,7 @@ def create_deprecated_class(
     name,
     new_class,
     clsdict=None,
-    warn_category=ScrapyDeprecationWarning,
+    warn_category=FrapyDeprecationWarning,
     warn_once=True,
     old_class_path=None,
     new_class_path=None,
@@ -141,7 +141,7 @@ def update_classpath(path):
             new_path = path.replace(prefix, replacement, 1)
             warnings.warn(
                 f"`{path}` class is deprecated, use `{new_path}` instead",
-                ScrapyDeprecationWarning,
+                FrapyDeprecationWarning,
             )
             return new_path
     return path

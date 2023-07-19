@@ -10,15 +10,15 @@ Status   Archived
 SEP-004: Library API
 ====================
 .. note:: the library API has been implemented, but slightly different from
-          proposed in this SEP. You can run a Scrapy crawler inside a Twisted
+          proposed in this SEP. You can run a Frapy crawler inside a Twisted
           reactor, but not outside it. 
 
 Introduction
 ============
 
-It would be desirable for Scrapy to provide a quick, "light-weight" mechanism
+It would be desirable for Frapy to provide a quick, "light-weight" mechanism
 for implementing crawlers by just using callback functions. That way you could
-use Scrapy as any standard library (like you would use os.walk) in a script
+use Frapy as any standard library (like you would use os.walk) in a script
 without the overhead of having to create an entire project from scratch.
 
 Proposed API
@@ -55,14 +55,14 @@ Here's a simple proof-of-concept code of such script:
    print("%d items scraped" % len(scraped_items))
    # ... do something more interesting with scraped_items ...
 
-The behaviour of the Scrapy crawler would be controller by the Scrapy settings,
-naturally, just like any typical Scrapy project. But the default settings
+The behaviour of the Frapy crawler would be controller by the Frapy settings,
+naturally, just like any typical Frapy project. But the default settings
 should be sufficient so as to not require adding any specific setting. But, at
 the same time, you could do it if you need to, say, for specifying a custom
 middleware.
 
 It shouldn't be hard to implement this API as all this functionality is a
-(small) subset of the current Scrapy functionality. At the same time, it would
+(small) subset of the current Frapy functionality. At the same time, it would
 provide an additional incentive for newcomers.
 
 Crawler class

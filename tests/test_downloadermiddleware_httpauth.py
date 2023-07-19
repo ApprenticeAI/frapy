@@ -4,7 +4,7 @@ import pytest
 from w3lib.http import basic_auth_header
 
 from frapy.downloadermiddlewares.httpauth import HttpAuthMiddleware
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 from frapy.http import Request
 from frapy.spiders import Spider
 
@@ -32,7 +32,7 @@ class HttpAuthMiddlewareLegacyTest(unittest.TestCase):
 
     def test_auth(self):
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="Using HttpAuthMiddleware without http_auth_domain is deprecated",
         ):
             mw = HttpAuthMiddleware()
@@ -55,7 +55,7 @@ class HttpAuthMiddlewareLegacyTest(unittest.TestCase):
 
     def test_auth_already_set(self):
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="Using HttpAuthMiddleware without http_auth_domain is deprecated",
         ):
             mw = HttpAuthMiddleware()

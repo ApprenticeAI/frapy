@@ -1,10 +1,10 @@
 .. _topics-shell:
 
 ============
-Scrapy shell
+Frapy shell
 ============
 
-The Scrapy shell is an interactive shell where you can try and debug your
+The Frapy shell is an interactive shell where you can try and debug your
 scraping code very quickly, without having to run the spider. It's meant to be
 used for testing data extraction code, but you can actually use it for testing
 any kind of code as it is also a regular Python shell.
@@ -14,13 +14,13 @@ and what data they extract from the web pages you're trying to scrape. It
 allows you to interactively test your expressions while you're writing your
 spider, without having to run the spider to test every change.
 
-Once you get familiarized with the Scrapy shell, you'll see that it's an
+Once you get familiarized with the Frapy shell, you'll see that it's an
 invaluable tool for developing and debugging your spiders.
 
 Configuring the shell
 =====================
 
-If you have `IPython`_ installed, the Scrapy shell will use it (instead of the
+If you have `IPython`_ installed, the Frapy shell will use it (instead of the
 standard Python console). The `IPython`_ console is much more powerful and
 provides smart auto-completion and colorized output, among other things.
 
@@ -28,12 +28,12 @@ We highly recommend you install `IPython`_, specially if you're working on
 Unix systems (where `IPython`_ excels). See the `IPython installation guide`_
 for more info.
 
-Scrapy also has support for `bpython`_, and will try to use it where `IPython`_
+Frapy also has support for `bpython`_, and will try to use it where `IPython`_
 is unavailable.
 
-Through Scrapy's settings you can configure it to use any one of
+Through Frapy's settings you can configure it to use any one of
 ``ipython``, ``bpython`` or the standard ``python`` shell, regardless of which
-are installed. This is done by setting the ``SCRAPY_PYTHON_SHELL`` environment
+are installed. This is done by setting the ``FRAPY_PYTHON_SHELL`` environment
 variable; or by defining it in your :ref:`frapy.cfg <topics-config-settings>`::
 
     [settings]
@@ -46,7 +46,7 @@ variable; or by defining it in your :ref:`frapy.cfg <topics-config-settings>`::
 Launch the shell
 ================
 
-To launch the Scrapy shell you can use the :command:`shell` command like
+To launch the Frapy shell you can use the :command:`shell` command like
 this::
 
     frapy shell <url>
@@ -88,7 +88,7 @@ the following syntaxes for local files::
 Using the shell
 ===============
 
-The Scrapy shell is just a regular Python console (or `IPython`_ console if you
+The Frapy shell is just a regular Python console (or `IPython`_ console if you
 have it available) which provides some additional shortcut functions for
 convenience.
 
@@ -113,10 +113,10 @@ Available Shortcuts
 
 .. _<base> tag: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
 
-Available Scrapy objects
+Available Frapy objects
 ------------------------
 
-The Scrapy shell automatically creates some convenient objects from the
+The Frapy shell automatically creates some convenient objects from the
 downloaded page, like the :class:`~frapy.http.Response` object and the
 :class:`~frapy.Selector` objects (for both HTML and XML
 content).
@@ -137,7 +137,7 @@ Those objects are:
 -   ``response`` - a :class:`~frapy.http.Response` object containing the last
     fetched page
 
--   ``settings`` - the current :ref:`Scrapy settings <topics-settings>`
+-   ``settings`` - the current :ref:`Frapy settings <topics-settings>`
 
 Example of shell session
 ========================
@@ -150,7 +150,7 @@ Ctrl-Z in Windows.
 
 Keep in mind that the data extracted here may not be the same when you try it,
 as those pages are not static and could have changed by the time you test this.
-The only purpose of this example is to get you familiarized with how the Scrapy
+The only purpose of this example is to get you familiarized with how the Frapy
 shell works.
 
 First, we launch the shell::
@@ -159,7 +159,7 @@ First, we launch the shell::
 
 .. note::
 
-   Remember to always enclose URLs in quotes when running the Scrapy shell from
+   Remember to always enclose URLs in quotes when running the Frapy shell from
    the command line, otherwise URLs containing arguments (i.e. the ``&`` character)
    will not work.
 
@@ -168,11 +168,11 @@ First, we launch the shell::
        frapy shell "https://frapy.org" --nolog
 
 
-Then, the shell fetches the URL (using the Scrapy downloader) and prints the
+Then, the shell fetches the URL (using the Frapy downloader) and prints the
 list of available objects and useful shortcuts (you'll notice that these lines
 all start with the ``[s]`` prefix)::
 
-    [s] Available Scrapy objects:
+    [s] Available Frapy objects:
     [s]   frapy     frapy module (contains frapy.Request, frapy.Selector, etc)
     [s]   crawler    <frapy.crawler.Crawler object at 0x7f07395dd690>
     [s]   item       {}
@@ -194,7 +194,7 @@ After that, we can start playing with the objects:
 .. code-block:: pycon
 
     >>> response.xpath("//title/text()").get()
-    'Scrapy | A Fast and Powerful Scraping and Web Crawling Framework'
+    'Frapy | A Fast and Powerful Scraping and Web Crawling Framework'
 
     >>> fetch("https://old.reddit.com/")
 
@@ -272,7 +272,7 @@ When you run the spider, you will get something similar to this::
 
     2014-01-23 17:48:31-0400 [frapy.core.engine] DEBUG: Crawled (200) <GET http://example.com> (referer: None)
     2014-01-23 17:48:31-0400 [frapy.core.engine] DEBUG: Crawled (200) <GET http://example.org> (referer: None)
-    [s] Available Scrapy objects:
+    [s] Available Frapy objects:
     [s]   crawler    <frapy.crawler.Crawler object at 0x1e16b50>
     ...
 
@@ -301,6 +301,6 @@ crawling::
     2014-01-23 17:50:03-0400 [frapy.core.engine] DEBUG: Crawled (200) <GET http://example.net> (referer: None)
     ...
 
-Note that you can't use the ``fetch`` shortcut here since the Scrapy engine is
+Note that you can't use the ``fetch`` shortcut here since the Frapy engine is
 blocked by the shell. However, after you leave the shell, the spider will
 continue crawling where it stopped, as shown above.

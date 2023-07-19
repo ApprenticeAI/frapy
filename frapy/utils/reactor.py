@@ -5,7 +5,7 @@ from warnings import catch_warnings, filterwarnings, warn
 
 from twisted.internet import asyncioreactor, error
 
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 from frapy.utils.misc import load_object
 
 
@@ -73,7 +73,7 @@ def get_asyncio_event_loop_policy():
         " to unexpected behaviour.\n"
         "This function is replaced by set_asyncio_event_loop_policy and"
         " is meant to be used only when the reactor is being installed.",
-        category=ScrapyDeprecationWarning,
+        category=FrapyDeprecationWarning,
         stacklevel=2,
     )
     return _get_asyncio_event_loop_policy()
@@ -172,7 +172,7 @@ def verify_installed_asyncio_event_loop(loop_path):
     )
     specified = f"{loop_class.__module__}.{loop_class.__qualname__}"
     raise Exception(
-        "Scrapy found an asyncio Twisted reactor already "
+        "Frapy found an asyncio Twisted reactor already "
         f"installed, and its event loop class ({installed}) does "
         "not match the one specified in the ASYNCIO_EVENT_LOOP "
         f"setting ({specified})"

@@ -39,7 +39,7 @@ def _parse(url):
     return _parsed_url_args(parsed)
 
 
-class ScrapyHTTPPageGetter(HTTPClient):
+class FrapyHTTPPageGetter(HTTPClient):
     delimiter = b"\n"
 
     def connectionMade(self):
@@ -101,8 +101,8 @@ class ScrapyHTTPPageGetter(HTTPClient):
 # twisted.web.client.HTTPClientFactory. When that class was deprecated in
 # Twisted (https://github.com/twisted/twisted/pull/643), we merged its
 # non-overridden code into this class.
-class ScrapyHTTPClientFactory(ClientFactory):
-    protocol = ScrapyHTTPPageGetter
+class FrapyHTTPClientFactory(ClientFactory):
+    protocol = FrapyHTTPPageGetter
 
     waiting = 1
     noisy = False
@@ -146,7 +146,7 @@ class ScrapyHTTPClientFactory(ClientFactory):
 
         # Fixes Twisted 11.1.0+ support as HTTPClientFactory is expected
         # to have _disconnectedDeferred. See Twisted r32329.
-        # As Scrapy implements it's own logic to handle redirects is not
+        # As Frapy implements it's own logic to handle redirects is not
         # needed to add the callback _waitForDisconnect.
         # Specifically this avoids the AttributeError exception when
         # clientConnectionFailed method is called.

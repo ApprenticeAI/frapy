@@ -3,7 +3,7 @@ from itertools import product
 from unittest import TestCase
 
 from frapy.downloadermiddlewares.stats import DownloaderStats
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 from frapy.http import Request, Response
 from frapy.spiders import Spider
 from frapy.utils.response import response_httprepr
@@ -55,7 +55,7 @@ class TestDownloaderStats(TestCase):
             self.crawler.stats.set_value("downloader/response_bytes", 0)
             self.mw.process_response(self.req, test_response, self.spider)
             with warnings.catch_warnings():
-                warnings.simplefilter("ignore", ScrapyDeprecationWarning)
+                warnings.simplefilter("ignore", FrapyDeprecationWarning)
                 resp_size = len(response_httprepr(test_response))
             self.assertStatsEqual("downloader/response_bytes", resp_size)
 

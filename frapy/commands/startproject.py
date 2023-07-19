@@ -7,7 +7,7 @@ from shutil import copy2, copystat, ignore_patterns, move
 from stat import S_IWUSR as OWNER_WRITE_PERMISSION
 
 import frapy
-from frapy.commands import ScrapyCommand
+from frapy.commands import FrapyCommand
 from frapy.exceptions import UsageError
 from frapy.utils.template import render_templatefile, string_camelcase
 
@@ -27,7 +27,7 @@ def _make_writable(path):
     os.chmod(path, current_permissions | OWNER_WRITE_PERMISSION)
 
 
-class Command(ScrapyCommand):
+class Command(FrapyCommand):
     requires_project = False
     default_settings = {"LOG_ENABLED": False, "SPIDER_LOADER_WARN_ONLY": True}
 
@@ -120,7 +120,7 @@ class Command(ScrapyCommand):
                 ProjectName=string_camelcase(project_name),
             )
         print(
-            f"New Scrapy project '{project_name}', using template directory "
+            f"New Frapy project '{project_name}', using template directory "
             f"'{self.templates_dir}', created in:"
         )
         print(f"    {project_dir.resolve()}\n")

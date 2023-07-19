@@ -1,4 +1,4 @@
-"""Scrapy Shell
+"""Frapy Shell
 
 See documentation in docs/topics/shell.rst
 
@@ -62,7 +62,7 @@ class Shell:
             """
             cfg = get_config()
             section, option = "settings", "shell"
-            env = os.environ.get("SCRAPY_PYTHON_SHELL")
+            env = os.environ.get("FRAPY_PYTHON_SHELL")
             shells = []
             if env:
                 shells += env.strip().lower().split(",")
@@ -145,7 +145,7 @@ class Shell:
 
     def get_help(self):
         b = []
-        b.append("Available Scrapy objects:")
+        b.append("Available Frapy objects:")
         b.append(
             "  frapy     frapy module (contains frapy.Request, frapy.Selector, etc)"
         )

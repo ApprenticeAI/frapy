@@ -1,5 +1,5 @@
 """
-Base class for Scrapy spiders
+Base class for Frapy spiders
 
 See documentation in docs/topics/spiders.rst
 """

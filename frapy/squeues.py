@@ -56,7 +56,7 @@ def _serializable_queue(queue_class, serialize, deserialize):
 
 
 def _frapy_serialization_queue(queue_class):
-    class ScrapyRequestQueue(queue_class):
+    class FrapyRequestQueue(queue_class):
         def __init__(self, crawler, key):
             self.spider = crawler.spider
             super().__init__(key)
@@ -87,11 +87,11 @@ def _frapy_serialization_queue(queue_class):
                 return None
             return request_from_dict(request, spider=self.spider)
 
-    return ScrapyRequestQueue
+    return FrapyRequestQueue
 
 
 def _frapy_non_serialization_queue(queue_class):
-    class ScrapyRequestQueue(queue_class):
+    class FrapyRequestQueue(queue_class):
         @classmethod
         def from_crawler(cls, crawler, *args, **kwargs):
             return cls()
@@ -111,7 +111,7 @@ def _frapy_non_serialization_queue(queue_class):
                 ) from ex
             return s
 
-    return ScrapyRequestQueue
+    return FrapyRequestQueue
 
 
 def _pickle_serialize(obj):

@@ -32,7 +32,7 @@ from zope.interface import implementer
 from zope.interface.verify import verifyObject
 
 import frapy
-from frapy.exceptions import NotConfigured, ScrapyDeprecationWarning
+from frapy.exceptions import NotConfigured, FrapyDeprecationWarning
 from frapy.exporters import CsvItemExporter, JsonItemExporter
 from frapy.extensions.feedexport import (
     BlockingFeedStorage,
@@ -1075,7 +1075,7 @@ class FeedExportTest(FeedExportTestBase):
             {"hello": "world4", "egg": "spam4"},
         ]
 
-        # by default, Scrapy uses fields of the first Item for CSV and
+        # by default, Frapy uses fields of the first Item for CSV and
         # all fields for JSON Lines
         header = self.MyItem.fields.keys()
         rows_csv = [
@@ -2640,7 +2640,7 @@ class StdoutFeedStoragePreFeedOptionsTest(unittest.TestCase):
             "FEED_STORAGES": {"file": StdoutFeedStorageWithoutFeedOptions},
         }
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="The `FEED_URI` and `FEED_FORMAT` settings have been deprecated",
         ):
             crawler = get_crawler(settings_dict=settings_dict)
@@ -2648,7 +2648,7 @@ class StdoutFeedStoragePreFeedOptionsTest(unittest.TestCase):
 
         spider = frapy.Spider("default")
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="StdoutFeedStorageWithoutFeedOptions does not support "
             "the 'feed_options' keyword argument.",
         ):
@@ -2674,7 +2674,7 @@ class FileFeedStoragePreFeedOptionsTest(unittest.TestCase):
                 "FEED_STORAGES": {"file": FileFeedStorageWithoutFeedOptions},
             }
             with pytest.warns(
-                ScrapyDeprecationWarning,
+                FrapyDeprecationWarning,
                 match="The `FEED_URI` and `FEED_FORMAT` settings have been deprecated",
             ):
                 crawler = get_crawler(settings_dict=settings_dict)
@@ -2682,7 +2682,7 @@ class FileFeedStoragePreFeedOptionsTest(unittest.TestCase):
         spider = frapy.Spider("default")
 
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="FileFeedStorageWithoutFeedOptions does not support "
             "the 'feed_options' keyword argument.",
         ):
@@ -2713,7 +2713,7 @@ class S3FeedStoragePreFeedOptionsTest(unittest.TestCase):
             "FEED_STORAGES": {"file": S3FeedStorageWithoutFeedOptions},
         }
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="The `FEED_URI` and `FEED_FORMAT` settings have been deprecated",
         ):
             crawler = get_crawler(settings_dict=settings_dict)
@@ -2723,7 +2723,7 @@ class S3FeedStoragePreFeedOptionsTest(unittest.TestCase):
         spider.crawler = crawler
 
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="S3FeedStorageWithoutFeedOptions does not support "
             "the 'feed_options' keyword argument.",
         ):
@@ -2735,7 +2735,7 @@ class S3FeedStoragePreFeedOptionsTest(unittest.TestCase):
             "FEED_STORAGES": {"file": S3FeedStorageWithoutFeedOptionsWithFromCrawler},
         }
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="The `FEED_URI` and `FEED_FORMAT` settings have been deprecated",
         ):
             crawler = get_crawler(settings_dict=settings_dict)
@@ -2745,7 +2745,7 @@ class S3FeedStoragePreFeedOptionsTest(unittest.TestCase):
         spider.crawler = crawler
 
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="S3FeedStorageWithoutFeedOptionsWithFromCrawler.from_crawler does not support "
             "the 'feed_options' keyword argument.",
         ):
@@ -2776,7 +2776,7 @@ class FTPFeedStoragePreFeedOptionsTest(unittest.TestCase):
             "FEED_STORAGES": {"file": FTPFeedStorageWithoutFeedOptions},
         }
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="The `FEED_URI` and `FEED_FORMAT` settings have been deprecated",
         ):
             crawler = get_crawler(settings_dict=settings_dict)
@@ -2786,7 +2786,7 @@ class FTPFeedStoragePreFeedOptionsTest(unittest.TestCase):
         spider.crawler = crawler
 
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="FTPFeedStorageWithoutFeedOptions does not support "
             "the 'feed_options' keyword argument.",
         ):
@@ -2798,7 +2798,7 @@ class FTPFeedStoragePreFeedOptionsTest(unittest.TestCase):
             "FEED_STORAGES": {"file": FTPFeedStorageWithoutFeedOptionsWithFromCrawler},
         }
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="The `FEED_URI` and `FEED_FORMAT` settings have been deprecated",
         ):
             crawler = get_crawler(settings_dict=settings_dict)
@@ -2808,7 +2808,7 @@ class FTPFeedStoragePreFeedOptionsTest(unittest.TestCase):
         spider.crawler = crawler
 
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="FTPFeedStorageWithoutFeedOptionsWithFromCrawler.from_crawler does not support "
             "the 'feed_options' keyword argument.",
         ):
@@ -2825,7 +2825,7 @@ class URIParamsTest:
     def _crawler_feed_exporter(self, settings):
         if self.deprecated_options:
             with pytest.warns(
-                ScrapyDeprecationWarning,
+                FrapyDeprecationWarning,
                 match="The `FEED_URI` and `FEED_FORMAT` settings have been deprecated",
             ):
                 crawler = get_crawler(settings_dict=settings)
@@ -2844,7 +2844,7 @@ class URIParamsTest:
         spider.crawler = crawler
 
         with warnings.catch_warnings():
-            warnings.simplefilter("error", ScrapyDeprecationWarning)
+            warnings.simplefilter("error", FrapyDeprecationWarning)
             feed_exporter.open_spider(spider)
 
         self.assertEqual(feed_exporter.slots[0].uri, f"file:///tmp/{self.spider_name}")
@@ -2862,7 +2862,7 @@ class URIParamsTest:
         spider.crawler = crawler
 
         with pytest.warns(
-            ScrapyDeprecationWarning, match="Modifying the params dictionary in-place"
+            FrapyDeprecationWarning, match="Modifying the params dictionary in-place"
         ):
             feed_exporter.open_spider(spider)
 
@@ -2881,7 +2881,7 @@ class URIParamsTest:
         spider.crawler = crawler
 
         with warnings.catch_warnings():
-            warnings.simplefilter("error", ScrapyDeprecationWarning)
+            warnings.simplefilter("error", FrapyDeprecationWarning)
             with self.assertRaises(KeyError):
                 feed_exporter.open_spider(spider)
 
@@ -2897,7 +2897,7 @@ class URIParamsTest:
         spider = frapy.Spider(self.spider_name)
         spider.crawler = crawler
         with warnings.catch_warnings():
-            warnings.simplefilter("error", ScrapyDeprecationWarning)
+            warnings.simplefilter("error", FrapyDeprecationWarning)
             feed_exporter.open_spider(spider)
 
         self.assertEqual(feed_exporter.slots[0].uri, f"file:///tmp/{self.spider_name}")
@@ -2914,7 +2914,7 @@ class URIParamsTest:
         spider = frapy.Spider(self.spider_name)
         spider.crawler = crawler
         with warnings.catch_warnings():
-            warnings.simplefilter("error", ScrapyDeprecationWarning)
+            warnings.simplefilter("error", FrapyDeprecationWarning)
             feed_exporter.open_spider(spider)
 
         self.assertEqual(feed_exporter.slots[0].uri, f"file:///tmp/{self.spider_name}")

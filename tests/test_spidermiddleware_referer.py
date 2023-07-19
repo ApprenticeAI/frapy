@@ -11,7 +11,7 @@ from frapy.spidermiddlewares.referer import (
     POLICY_ORIGIN,
     POLICY_ORIGIN_WHEN_CROSS_ORIGIN,
     POLICY_SAME_ORIGIN,
-    POLICY_SCRAPY_DEFAULT,
+    POLICY_FRAPY_DEFAULT,
     POLICY_STRICT_ORIGIN,
     POLICY_STRICT_ORIGIN_WHEN_CROSS_ORIGIN,
     POLICY_UNSAFE_URL,
@@ -707,7 +707,7 @@ class TestSettingsCustomPolicy(TestRefererMiddleware):
 
 # --- Tests using Request meta dict to set policy
 class TestRequestMetaDefault(MixinDefault, TestRefererMiddleware):
-    req_meta = {"referrer_policy": POLICY_SCRAPY_DEFAULT}
+    req_meta = {"referrer_policy": POLICY_FRAPY_DEFAULT}
 
 
 class TestRequestMetaNoReferrer(MixinNoReferrer, TestRefererMiddleware):
@@ -848,7 +848,7 @@ class TestRequestMetaSettingFallback(TestCase):
 class TestSettingsPolicyByName(TestCase):
     def test_valid_name(self):
         for s, p in [
-            (POLICY_SCRAPY_DEFAULT, DefaultReferrerPolicy),
+            (POLICY_FRAPY_DEFAULT, DefaultReferrerPolicy),
             (POLICY_NO_REFERRER, NoReferrerPolicy),
             (POLICY_NO_REFERRER_WHEN_DOWNGRADE, NoReferrerWhenDowngradePolicy),
             (POLICY_SAME_ORIGIN, SameOriginPolicy),
@@ -864,7 +864,7 @@ class TestSettingsPolicyByName(TestCase):
 
     def test_valid_name_casevariants(self):
         for s, p in [
-            (POLICY_SCRAPY_DEFAULT, DefaultReferrerPolicy),
+            (POLICY_FRAPY_DEFAULT, DefaultReferrerPolicy),
             (POLICY_NO_REFERRER, NoReferrerPolicy),
             (POLICY_NO_REFERRER_WHEN_DOWNGRADE, NoReferrerWhenDowngradePolicy),
             (POLICY_SAME_ORIGIN, SameOriginPolicy),

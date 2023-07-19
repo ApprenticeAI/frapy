@@ -24,7 +24,7 @@ def _path_safe(text):
     return "-".join([pathable_slot, unique_slot])
 
 
-class ScrapyPriorityQueue:
+class FrapyPriorityQueue:
     """A priority queue implemented using multiple internal queues (typically,
     FIFO queues). It uses one internal queue for each priority value. The internal
     queue must implement the following methods:
@@ -37,7 +37,7 @@ class ScrapyPriorityQueue:
     Optionally, the queue could provide a ``peek`` method, that should return the
     next object to be returned by ``pop``, but without removing it from the queue.
 
-    ``__init__`` method of ScrapyPriorityQueue receives a downstream_queue_cls
+    ``__init__`` method of FrapyPriorityQueue receives a downstream_queue_cls
     argument, which is a class used to instantiate a new (internal) queue when
     a new priority is allocated.
 
@@ -180,7 +180,7 @@ class DownloaderAwarePriorityQueue:
             self.pqueues[slot] = self.pqfactory(slot, startprios)
 
     def pqfactory(self, slot, startprios=()):
-        return ScrapyPriorityQueue(
+        return FrapyPriorityQueue(
             self.crawler,
             self.downstream_queue_cls,
             self.key + "/" + _path_safe(slot),

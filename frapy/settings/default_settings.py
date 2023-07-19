@@ -1,10 +1,10 @@
 """
-This module contains the default values for all settings used by Scrapy.
+This module contains the default values for all settings used by Frapy.
 
 For more information about these settings you can read the settings
 documentation in docs/topics/settings.rst
 
-Scrapy developers, if you add a setting here remember to:
+Frapy developers, if you add a setting here remember to:
 
 * add it in alphabetical order
 * group similar settings without leaving blank lines
@@ -85,10 +85,10 @@ DOWNLOAD_FAIL_ON_DATALOSS = True
 DOWNLOADER = "frapy.core.downloader.Downloader"
 
 DOWNLOADER_HTTPCLIENTFACTORY = (
-    "frapy.core.downloader.webclient.ScrapyHTTPClientFactory"
+    "frapy.core.downloader.webclient.FrapyHTTPClientFactory"
 )
 DOWNLOADER_CLIENTCONTEXTFACTORY = (
-    "frapy.core.downloader.contextfactory.ScrapyClientContextFactory"
+    "frapy.core.downloader.contextfactory.FrapyClientContextFactory"
 )
 DOWNLOADER_CLIENT_TLS_CIPHERS = "DEFAULT"
 # Use highest TLS/SSL protocol version supported by the platform, also allowing negotiation:
@@ -266,7 +266,7 @@ ROBOTSTXT_USER_AGENT = None
 SCHEDULER = "frapy.core.scheduler.Scheduler"
 SCHEDULER_DISK_QUEUE = "frapy.squeues.PickleLifoDiskQueue"
 SCHEDULER_MEMORY_QUEUE = "frapy.squeues.LifoMemoryQueue"
-SCHEDULER_PRIORITY_QUEUE = "frapy.pqueues.ScrapyPriorityQueue"
+SCHEDULER_PRIORITY_QUEUE = "frapy.pqueues.FrapyPriorityQueue"
 
 SCRAPER_SLOT_MAX_ACTIVE_SIZE = 5000000
 
@@ -296,7 +296,7 @@ TEMPLATES_DIR = str((Path(__file__).parent / ".." / "templates").resolve())
 
 URLLENGTH_LIMIT = 2083
 
-USER_AGENT = f'Scrapy/{import_module("frapy").__version__} (+https://frapy.org)'
+USER_AGENT = f'Frapy/{import_module("frapy").__version__} (+https://frapy.org)'
 
 TELNETCONSOLE_ENABLED = 1
 TELNETCONSOLE_PORT = [6023, 6073]

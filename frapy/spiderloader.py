@@ -13,7 +13,7 @@ from frapy.utils.spider import iter_spider_classes
 class SpiderLoader:
     """
     SpiderLoader is a class which locates and loads spiders
-    in a Scrapy project.
+    in a Frapy project.
     """
 
     def __init__(self, settings):

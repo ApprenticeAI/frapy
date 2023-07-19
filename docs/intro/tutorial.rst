@@ -1,10 +1,10 @@
 .. _intro-tutorial:
 
 ===============
-Scrapy Tutorial
+Frapy Tutorial
 ===============
 
-In this tutorial, we'll assume that Scrapy is already installed on your system.
+In this tutorial, we'll assume that Frapy is already installed on your system.
 If that's not the case, see :ref:`intro-install`.
 
 We are going to scrape `quotes.toscrape.com <https://quotes.toscrape.com/>`_, a website
@@ -12,15 +12,15 @@ that lists quotes from famous authors.
 
 This tutorial will walk you through these tasks:
 
-1. Creating a new Scrapy project
+1. Creating a new Frapy project
 2. Writing a :ref:`spider <topics-spiders>` to crawl a site and extract data
 3. Exporting the scraped data using the command line
 4. Changing spider to recursively follow links
 5. Using spider arguments
 
-Scrapy is written in Python_. If you're new to the language you might want to
+Frapy is written in Python_. If you're new to the language you might want to
 start by getting an idea of what the language is like, to get the most out of
-Scrapy.
+Frapy.
 
 If you're already familiar with other languages, and want to learn Python quickly, the `Python Tutorial`_ is a good resource.
 
@@ -48,7 +48,7 @@ as well as the `suggested resources in the learnpython-subreddit`_.
 Creating a project
 ==================
 
-Before you start scraping, you will have to set up a new Scrapy project. Enter a
+Before you start scraping, you will have to set up a new Frapy project. Enter a
 directory where you'd like to store your code and run::
 
     frapy startproject tutorial
@@ -76,7 +76,7 @@ This will create a ``tutorial`` directory with the following contents::
 Our first Spider
 ================
 
-Spiders are classes that you define and that Scrapy uses to scrape information
+Spiders are classes that you define and that Frapy uses to scrape information
 from a website (or a group of websites). They must subclass
 :class:`~frapy.Spider` and define the initial requests to make,
 optionally how to follow links in the pages, and how to parse the downloaded
@@ -165,7 +165,7 @@ for the respective URLs, as our ``parse`` method instructs.
 What just happened under the hood?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Scrapy schedules the :class:`frapy.Request <frapy.Request>` objects
+Frapy schedules the :class:`frapy.Request <frapy.Request>` objects
 returned by the ``start_requests`` method of the Spider. Upon receiving a
 response for each one, it instantiates :class:`~frapy.http.Response` objects
 and calls the callback method associated with the request (in this case, the
@@ -201,8 +201,8 @@ for your spider.
             Path(filename).write_bytes(response.body)
 
 The :meth:`~frapy.Spider.parse` method will be called to handle each
-of the requests for those URLs, even though we haven't explicitly told Scrapy
-to do so. This happens because :meth:`~frapy.Spider.parse` is Scrapy's
+of the requests for those URLs, even though we haven't explicitly told Frapy
+to do so. This happens because :meth:`~frapy.Spider.parse` is Frapy's
 default callback method, which is called for requests without an explicitly
 assigned callback.
 
@@ -210,14 +210,14 @@ assigned callback.
 Extracting data
 ---------------
 
-The best way to learn how to extract data with Scrapy is trying selectors
-using the :ref:`Scrapy shell <topics-shell>`. Run::
+The best way to learn how to extract data with Frapy is trying selectors
+using the :ref:`Frapy shell <topics-shell>`. Run::
 
     frapy shell 'https://quotes.toscrape.com/page/1/'
 
 .. note::
 
-   Remember to always enclose urls in quotes when running Scrapy shell from
+   Remember to always enclose urls in quotes when running Frapy shell from
    command-line, otherwise urls containing arguments (i.e. ``&`` character)
    will not work.
 
@@ -227,9 +227,9 @@ using the :ref:`Scrapy shell <topics-shell>`. Run::
 
 You will see something like::
 
-    [ ... Scrapy log here ... ]
+    [ ... Frapy log here ... ]
     2016-09-19 12:09:27 [frapy.core.engine] DEBUG: Crawled (200) <GET https://quotes.toscrape.com/page/1/> (referer: None)
-    [s] Available Scrapy objects:
+    [s] Available Frapy objects:
     [s]   frapy     frapy module (contains frapy.Request, frapy.Selector, etc)
     [s]   crawler    <frapy.crawler.Crawler object at 0x7fa91d888c90>
     [s]   item       {}
@@ -343,7 +343,7 @@ visually selected elements, which works in many browsers.
 XPath: a brief intro
 ^^^^^^^^^^^^^^^^^^^^
 
-Besides `CSS`_, Scrapy selectors also support using `XPath`_ expressions:
+Besides `CSS`_, Frapy selectors also support using `XPath`_ expressions:
 
 .. code-block:: pycon
 
@@ -352,7 +352,7 @@ Besides `CSS`_, Scrapy selectors also support using `XPath`_ expressions:
     >>> response.xpath("//title/text()").get()
     'Quotes to Scrape'
 
-XPath expressions are very powerful, and are the foundation of Scrapy
+XPath expressions are very powerful, and are the foundation of Frapy
 Selectors. In fact, CSS selectors are converted to XPath under-the-hood. You
 can see that if you read closely the text representation of the selector
 objects in the shell.
@@ -365,7 +365,7 @@ of scraping, and we encourage you to learn XPath even if you already know how to
 construct CSS selectors, it will make scraping much easier.
 
 We won't cover much of XPath here, but you can read more about :ref:`using XPath
-with Scrapy Selectors here <topics-selectors>`. To learn more about XPath, we
+with Frapy Selectors here <topics-selectors>`. To learn more about XPath, we
 recommend `this tutorial to learn XPath through examples
 <http://zvon.org/comp/r/tut-XPath_1.html>`_, and `this tutorial to learn "how
 to think in XPath" <http://plasmasturm.org/log/xpath101/>`_.
@@ -469,7 +469,7 @@ Let's get back to our spider. Until now, it doesn't extract any data in
 particular, just saves the whole HTML page to a local file. Let's integrate the
 extraction logic above into our spider.
 
-A Scrapy spider typically generates many dictionaries containing the data
+A Frapy spider typically generates many dictionaries containing the data
 extracted from the page. To do that, we use the ``yield`` Python keyword
 in the callback, as you can see below:
 
@@ -565,7 +565,7 @@ We can try extracting it in the shell:
 '<a href="/page/2/">Next <span aria-hidden="true">→</span></a>'
 
 This gets the anchor element, but we want the attribute ``href``. For that,
-Scrapy supports a CSS extension that lets you select the attribute contents,
+Frapy supports a CSS extension that lets you select the attribute contents,
 like this:
 
 .. code-block:: pycon
@@ -616,8 +616,8 @@ relative) and yields a new request to the next page, registering itself as
 callback to handle the data extraction for the next page and to keep the
 crawling going through all the pages.
 
-What you see here is Scrapy's mechanism of following links: when you yield
-a Request in a callback method, Scrapy will schedule that request to be sent
+What you see here is Frapy's mechanism of following links: when you yield
+a Request in a callback method, Frapy will schedule that request to be sent
 and register a callback method to be executed when that request finishes.
 
 Using this, you can build complex crawlers that follow links according to rules
@@ -746,13 +746,13 @@ data from a CSS query and yields the Python dict with the author data.
 
 Another interesting thing this spider demonstrates is that, even if there are
 many quotes from the same author, we don't need to worry about visiting the
-same author page multiple times. By default, Scrapy filters out duplicated
+same author page multiple times. By default, Frapy filters out duplicated
 requests to URLs already visited, avoiding the problem of hitting servers too
 much because of a programming mistake. This can be configured by the setting
 :setting:`DUPEFILTER_CLASS`.
 
 Hopefully by now you have a good understanding of how to use the mechanism
-of following links and callbacks with Scrapy.
+of following links and callbacks with Frapy.
 
 As yet another example spider that leverages the mechanism of following links,
 check out the :class:`~frapy.spiders.CrawlSpider` class for a generic
@@ -815,7 +815,7 @@ You can :ref:`learn more about handling spider arguments here <spiderargs>`.
 Next steps
 ==========
 
-This tutorial covered only the basics of Scrapy, but there's a lot of other
+This tutorial covered only the basics of Frapy, but there's a lot of other
 features not mentioned here. Check the :ref:`topics-whatelse` section in
 :ref:`intro-overview` chapter for a quick overview of the most important ones.
 

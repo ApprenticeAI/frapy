@@ -4,9 +4,9 @@
 Downloader Middleware
 =====================
 
-The downloader middleware is a framework of hooks into Scrapy's
+The downloader middleware is a framework of hooks into Frapy's
 request/response processing.  It's a light, low-level system for globally
-altering Scrapy's requests and responses.
+altering Frapy's requests and responses.
 
 .. _topics-downloader-middleware-setting:
 
@@ -26,7 +26,7 @@ Here's an example:
     }
 
 The :setting:`DOWNLOADER_MIDDLEWARES` setting is merged with the
-:setting:`DOWNLOADER_MIDDLEWARES_BASE` setting defined in Scrapy (and not meant
+:setting:`DOWNLOADER_MIDDLEWARES_BASE` setting defined in Frapy (and not meant
 to be overridden) and then sorted by order to get the final sorted list of
 enabled middlewares: the first middleware is the one closer to the engine and
 the last is the one closer to the downloader. In other words,
@@ -83,16 +83,16 @@ object gives you access, for example, to the :ref:`settings <topics-settings>`.
       :class:`~frapy.Response` object, return a :class:`~frapy.http.Request`
       object, or raise :exc:`~frapy.exceptions.IgnoreRequest`.
 
-      If it returns ``None``, Scrapy will continue processing this request, executing all
+      If it returns ``None``, Frapy will continue processing this request, executing all
       other middlewares until, finally, the appropriate downloader handler is called
       the request performed (and its response downloaded).
 
-      If it returns a :class:`~frapy.http.Response` object, Scrapy won't bother
+      If it returns a :class:`~frapy.http.Response` object, Frapy won't bother
       calling *any* other :meth:`process_request` or :meth:`process_exception` methods,
       or the appropriate download function; it'll return that response. The :meth:`process_response`
       methods of installed middleware is always called on every response.
 
-      If it returns a :class:`~frapy.Request` object, Scrapy will stop calling
+      If it returns a :class:`~frapy.Request` object, Frapy will stop calling
       :meth:`process_request` methods and reschedule the returned request. Once the newly returned
       request is performed, the appropriate middleware chain will be called on
       the downloaded response.
@@ -138,19 +138,19 @@ object gives you access, for example, to the :ref:`settings <topics-settings>`.
 
    .. method:: process_exception(request, exception, spider)
 
-      Scrapy calls :meth:`process_exception` when a download handler
+      Frapy calls :meth:`process_exception` when a download handler
       or a :meth:`process_request` (from a downloader middleware) raises an
       exception (including an :exc:`~frapy.exceptions.IgnoreRequest` exception)
 
       :meth:`process_exception` should return: either ``None``,
       a :class:`~frapy.http.Response` object, or a :class:`~frapy.Request` object.
 
-      If it returns ``None``, Scrapy will continue processing this exception,
+      If it returns ``None``, Frapy will continue processing this exception,
       executing any other :meth:`process_exception` methods of installed middleware,
       until no middleware is left and the default exception handling kicks in.
 
       If it returns a :class:`~frapy.http.Response` object, the :meth:`process_response`
-      method chain of installed middleware is started, and Scrapy won't bother calling
+      method chain of installed middleware is started, and Frapy won't bother calling
       any other :meth:`process_exception` methods of middleware.
 
       If it returns a :class:`~frapy.Request` object, the returned request is
@@ -171,9 +171,9 @@ object gives you access, for example, to the :ref:`settings <topics-settings>`.
 
       If present, this classmethod is called to create a middleware instance
       from a :class:`~frapy.crawler.Crawler`. It must return a new instance
-      of the middleware. Crawler object provides access to all Scrapy core
+      of the middleware. Crawler object provides access to all Frapy core
       components like settings and signals; it is a way for middleware to
-      access them and hook its functionality into Scrapy.
+      access them and hook its functionality into Frapy.
 
       :param crawler: crawler that uses this middleware
       :type crawler: :class:`~frapy.crawler.Crawler` object
@@ -184,7 +184,7 @@ Built-in downloader middleware reference
 ========================================
 
 This page describes all downloader middleware components that come with
-Scrapy. For information on how to use them and how to write your own downloader
+Frapy. For information on how to use them and how to write your own downloader
 middleware, see the :ref:`downloader middleware usage guide
 <topics-downloader-middleware>`.
 
@@ -277,7 +277,7 @@ COOKIES_DEBUG
 
 Default: ``False``
 
-If enabled, Scrapy will log all cookies sent in requests (i.e. ``Cookie``
+If enabled, Frapy will log all cookies sent in requests (i.e. ``Cookie``
 header) and all cookies received in responses (i.e. ``Set-Cookie`` header).
 
 Here's an example of a log with :setting:`COOKIES_DEBUG` enabled::
@@ -342,7 +342,7 @@ HttpAuthMiddleware
     credentials to unrelated domains.
 
     .. warning::
-        In previous Scrapy versions HttpAuthMiddleware sent the authentication
+        In previous Frapy versions HttpAuthMiddleware sent the authentication
         data with all requests, which is a security problem if the spider
         makes requests to several different domains. Currently if the
         ``http_auth_domain`` attribute is not set, the middleware will use the
@@ -378,7 +378,7 @@ HttpCacheMiddleware
     This middleware provides low-level cache to all HTTP requests and responses.
     It has to be combined with a cache storage backend as well as a cache policy.
 
-    Scrapy ships with the following HTTP cache storage backends:
+    Frapy ships with the following HTTP cache storage backends:
 
         * :ref:`httpcache-storage-fs`
         * :ref:`httpcache-storage-dbm`
@@ -386,7 +386,7 @@ HttpCacheMiddleware
     You can change the HTTP cache storage backend with the :setting:`HTTPCACHE_STORAGE`
     setting. Or you can also :ref:`implement your own storage backend. <httpcache-storage-custom>`
 
-    Scrapy ships with two HTTP cache policies:
+    Frapy ships with two HTTP cache policies:
 
         * :ref:`httpcache-policy-rfc2616`
         * :ref:`httpcache-policy-dummy`
@@ -992,7 +992,7 @@ RobotsTxtMiddleware
     This middleware filters out requests forbidden by the robots.txt exclusion
     standard.
 
-    To make sure Scrapy respects robots.txt make sure the middleware is enabled
+    To make sure Frapy respects robots.txt make sure the middleware is enabled
     and the :setting:`ROBOTSTXT_OBEY` setting is enabled.
 
     The :setting:`ROBOTSTXT_USER_AGENT` setting can be used to specify the
@@ -1003,7 +1003,7 @@ RobotsTxtMiddleware
 
     This middleware has to be combined with a robots.txt_ parser.
 
-    Scrapy ships with support for the following robots.txt_ parsers:
+    Frapy ships with support for the following robots.txt_ parsers:
 
     * :ref:`Protego <protego-parser>` (default)
     * :ref:`RobotFileParser <python-robotfileparser>`
@@ -1052,7 +1052,7 @@ Based on `Protego <https://github.com/frapy/protego>`_:
 
 * uses the length based rule
 
-Scrapy uses this parser by default.
+Frapy uses this parser by default.
 
 .. _python-robotfileparser:
 
@@ -1070,7 +1070,7 @@ Based on :class:`~urllib.robotparser.RobotFileParser`:
 
 * doesn't use the length based rule
 
-It is faster than Protego and backward-compatible with versions of Scrapy before 1.8.0.
+It is faster than Protego and backward-compatible with versions of Frapy before 1.8.0.
 
 In order to use this parser, set:
 
@@ -1190,7 +1190,7 @@ AjaxCrawlMiddleware
 
    .. note::
 
-       Scrapy finds 'AJAX crawlable' pages for URLs like
+       Frapy finds 'AJAX crawlable' pages for URLs like
        ``'http://example.com/!#foo=bar'`` even without this middleware.
        AjaxCrawlMiddleware is necessary when URL doesn't contain ``'!#'``.
        This is often a case for 'index' or 'main' website pages.

@@ -4,13 +4,13 @@
 Architecture overview
 =====================
 
-This document describes the architecture of Scrapy and how its components
+This document describes the architecture of Frapy and how its components
 interact.
 
 Overview
 ========
 
-The following diagram shows an overview of the Scrapy architecture with its
+The following diagram shows an overview of the Frapy architecture with its
 components and an outline of the data flow that takes place inside the system
 (shown by the red arrows). A brief description of the components is included
 below with links for more detailed information about them. The data flow is
@@ -24,9 +24,9 @@ Data flow
 .. image:: _images/frapy_architecture_02.png
    :width: 700
    :height: 470
-   :alt: Scrapy architecture
+   :alt: Frapy architecture
 
-The data flow in Scrapy is controlled by the execution engine, and goes like
+The data flow in Frapy is controlled by the execution engine, and goes like
 this:
 
 1. The :ref:`Engine <component-engine>` gets the initial Requests to crawl from the
@@ -75,7 +75,7 @@ Components
 
 .. _component-engine:
 
-Scrapy Engine
+Frapy Engine
 -------------
 
 The engine is responsible for controlling the data flow between all components
@@ -104,7 +104,7 @@ engine which, in turn, feeds them to the spiders.
 Spiders
 -------
 
-Spiders are custom classes written by Scrapy users to parse responses and
+Spiders are custom classes written by Frapy users to parse responses and
 extract :ref:`items <topics-items>` from them or additional requests to
 follow. For more information see :ref:`topics-spiders`.
 
@@ -130,7 +130,7 @@ Downloader, and responses that pass from Downloader to the Engine.
 Use a Downloader middleware if you need to do one of the following:
 
 * process a request just before it is sent to the Downloader
-  (i.e. right before Scrapy sends the request to the website);
+  (i.e. right before Frapy sends the request to the website);
 * change received response before passing it to a spider;
 * send a new Request instead of passing received response to a spider;
 * pass response to a spider without fetching a web page;
@@ -160,7 +160,7 @@ For more information see :ref:`topics-spider-middleware`.
 Event-driven networking
 =======================
 
-Scrapy is written with `Twisted`_, a popular event-driven networking framework
+Frapy is written with `Twisted`_, a popular event-driven networking framework
 for Python. Thus, it's implemented using a non-blocking (aka asynchronous) code
 for concurrency.
 

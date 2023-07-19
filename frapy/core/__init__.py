@@ -1,3 +1,3 @@
 """
-Scrapy core library classes and functions.
+Frapy core library classes and functions.
 """

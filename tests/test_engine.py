@@ -1,8 +1,8 @@
 """
-Scrapy engine tests
+Frapy engine tests
 
 This starts a testing web server (using twisted.server.Site) and then crawls it
-with the Scrapy crawler.
+with the Frapy crawler.
 
 To view the testing web server in a browser you can start it by running this
 module with the ``runserver`` argument::
@@ -29,7 +29,7 @@ from twisted.web import server, static, util
 
 from frapy import signals
 from frapy.core.engine import ExecutionEngine
-from frapy.exceptions import CloseSpider, ScrapyDeprecationWarning
+from frapy.exceptions import CloseSpider, FrapyDeprecationWarning
 from frapy.http import Request
 from frapy.item import Field, Item
 from frapy.linkextractors import LinkExtractor
@@ -439,7 +439,7 @@ class EngineTest(unittest.TestCase):
     @defer.inlineCallbacks
     def test_close_spiders_downloader(self):
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="ExecutionEngine.open_spiders is deprecated, "
             "please use ExecutionEngine.spider instead",
         ):
@@ -452,7 +452,7 @@ class EngineTest(unittest.TestCase):
     @defer.inlineCallbacks
     def test_close_engine_spiders_downloader(self):
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="ExecutionEngine.open_spiders is deprecated, "
             "please use ExecutionEngine.spider instead",
         ):
@@ -467,7 +467,7 @@ class EngineTest(unittest.TestCase):
     @defer.inlineCallbacks
     def test_crawl_deprecated_spider_arg(self):
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="Passing a 'spider' argument to "
             "ExecutionEngine.crawl is deprecated",
         ):
@@ -481,7 +481,7 @@ class EngineTest(unittest.TestCase):
     @defer.inlineCallbacks
     def test_download_deprecated_spider_arg(self):
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="Passing a 'spider' argument to "
             "ExecutionEngine.download is deprecated",
         ):
@@ -495,7 +495,7 @@ class EngineTest(unittest.TestCase):
     @defer.inlineCallbacks
     def test_deprecated_schedule(self):
         with pytest.warns(
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             match="ExecutionEngine.schedule is deprecated, please use "
             "ExecutionEngine.crawl or ExecutionEngine.download instead",
         ):
@@ -509,7 +509,7 @@ class EngineTest(unittest.TestCase):
     @defer.inlineCallbacks
     def test_deprecated_has_capacity(self):
         with pytest.warns(
-            ScrapyDeprecationWarning, match="ExecutionEngine.has_capacity is deprecated"
+            FrapyDeprecationWarning, match="ExecutionEngine.has_capacity is deprecated"
         ):
             e = ExecutionEngine(get_crawler(TestSpider), lambda _: None)
             self.assertTrue(e.has_capacity())

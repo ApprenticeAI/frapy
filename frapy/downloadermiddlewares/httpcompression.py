@@ -5,7 +5,7 @@ import zlib
 from frapy.exceptions import NotConfigured
 from frapy.http import Response, TextResponse
 from frapy.responsetypes import responsetypes
-from frapy.utils.deprecate import ScrapyDeprecationWarning
+from frapy.utils.deprecate import FrapyDeprecationWarning
 from frapy.utils.gz import gunzip
 
 ACCEPTED_ENCODINGS = [b"gzip", b"deflate"]
@@ -43,7 +43,7 @@ class HttpCompressionMiddleware:
                 "HttpCompressionMiddleware subclasses must either modify "
                 "their '__init__' method to support a 'stats' parameter or "
                 "reimplement the 'from_crawler' method.",
-                ScrapyDeprecationWarning,
+                FrapyDeprecationWarning,
             )
             result = cls()
             result.stats = crawler.stats

@@ -5,7 +5,7 @@ Debugging Spiders
 =================
 
 This document explains the most common techniques for debugging spiders.
-Consider the following Scrapy spider below:
+Consider the following Frapy spider below:
 
 .. skip: next
 .. code-block:: python
@@ -98,7 +98,7 @@ using::
 .. skip: end
 
 
-Scrapy Shell
+Frapy Shell
 ============
 
 While the :command:`parse` command is very useful for checking behaviour of a
@@ -141,7 +141,7 @@ you would use it:
         if "item name" not in response.body:
             open_in_browser(response)
 
-``open_in_browser`` will open a browser with the response received by Scrapy at
+``open_in_browser`` will open a browser with the response received by Frapy at
 that point, adjusting the `base tag`_ so that images and styles are displayed
 properly.
 
@@ -178,7 +178,7 @@ To debug spiders with Visual Studio Code you can use the following ``launch.json
         "version": "0.1.0",
         "configurations": [
             {
-                "name": "Python: Launch Scrapy Spider",
+                "name": "Python: Launch Frapy Spider",
                 "type": "python",
                 "request": "launch",
                 "module": "frapy",
@@ -193,4 +193,4 @@ To debug spiders with Visual Studio Code you can use the following ``launch.json
 
 
 Also, make sure you enable "User Uncaught Exceptions", to catch exceptions in
-your Scrapy spider.
+your Frapy spider.

@@ -56,7 +56,7 @@ class GetProjectSettingsTestCase(unittest.TestCase):
     def test_valid_envvar(self):
         value = "tests.test_cmdline.settings"
         envvars = {
-            "SCRAPY_SETTINGS_MODULE": value,
+            "FRAPY_SETTINGS_MODULE": value,
         }
         with warnings.catch_warnings():
             warnings.simplefilter("error")
@@ -67,20 +67,20 @@ class GetProjectSettingsTestCase(unittest.TestCase):
 
     def test_invalid_envvar(self):
         envvars = {
-            "SCRAPY_FOO": "bar",
+            "FRAPY_FOO": "bar",
         }
         with set_env(**envvars):
             settings = get_project_settings()
 
-        assert settings.get("SCRAPY_FOO") is None
+        assert settings.get("FRAPY_FOO") is None
 
     def test_valid_and_invalid_envvars(self):
         value = "tests.test_cmdline.settings"
         envvars = {
-            "SCRAPY_FOO": "bar",
-            "SCRAPY_SETTINGS_MODULE": value,
+            "FRAPY_FOO": "bar",
+            "FRAPY_SETTINGS_MODULE": value,
         }
         with set_env(**envvars):
             settings = get_project_settings()
         assert settings.get("SETTINGS_MODULE") == value
-        assert settings.get("SCRAPY_FOO") is None
+        assert settings.get("FRAPY_FOO") is None

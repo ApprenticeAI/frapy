@@ -6,11 +6,11 @@
 Command line tool
 =================
 
-Scrapy is controlled through the ``frapy`` command-line tool, to be referred
-here as the "Scrapy tool" to differentiate it from the sub-commands, which we
-just call "commands" or "Scrapy commands".
+Frapy is controlled through the ``frapy`` command-line tool, to be referred
+here as the "Frapy tool" to differentiate it from the sub-commands, which we
+just call "commands" or "Frapy commands".
 
-The Scrapy tool provides several commands, for multiple purposes, and each one
+The Frapy tool provides several commands, for multiple purposes, and each one
 accepts a different set of arguments and options.
 
 (The ``frapy deploy`` command has been removed in 1.0 in favor of the
@@ -21,34 +21,34 @@ standalone ``frapyd-deploy``. See `Deploying your project`_.)
 Configuration settings
 ======================
 
-Scrapy will look for configuration parameters in ini-style ``frapy.cfg`` files
+Frapy will look for configuration parameters in ini-style ``frapy.cfg`` files
 in standard locations:
 
 1. ``/etc/frapy.cfg`` or ``c:\frapy\frapy.cfg`` (system-wide),
 2. ``~/.config/frapy.cfg`` (``$XDG_CONFIG_HOME``) and ``~/.frapy.cfg`` (``$HOME``)
    for global (user-wide) settings, and
-3. ``frapy.cfg`` inside a Scrapy project's root (see next section).
+3. ``frapy.cfg`` inside a Frapy project's root (see next section).
 
 Settings from these files are merged in the listed order of preference:
 user-defined values have higher priority than system-wide defaults
 and project-wide settings will override all others, when defined.
 
-Scrapy also understands, and can be configured through, a number of environment
+Frapy also understands, and can be configured through, a number of environment
 variables. Currently these are:
 
-* ``SCRAPY_SETTINGS_MODULE`` (see :ref:`topics-settings-module-envvar`)
-* ``SCRAPY_PROJECT`` (see :ref:`topics-project-envvar`)
-* ``SCRAPY_PYTHON_SHELL`` (see :ref:`topics-shell`)
+* ``FRAPY_SETTINGS_MODULE`` (see :ref:`topics-settings-module-envvar`)
+* ``FRAPY_PROJECT`` (see :ref:`topics-project-envvar`)
+* ``FRAPY_PYTHON_SHELL`` (see :ref:`topics-shell`)
 
 .. _topics-project-structure:
 
-Default structure of Scrapy projects
+Default structure of Frapy projects
 ====================================
 
 Before delving into the command-line tool and its sub-commands, let's first
-understand the directory structure of a Scrapy project.
+understand the directory structure of a Frapy project.
 
-Though it can be modified, all Scrapy projects have the same file
+Though it can be modified, all Frapy projects have the same file
 structure by default, similar to this::
 
    frapy.cfg
@@ -79,7 +79,7 @@ Sharing the root directory between projects
 ===========================================
 
 A project root directory, the one that contains the ``frapy.cfg``, may be
-shared by multiple Scrapy projects, each with its own settings module.
+shared by multiple Frapy projects, each with its own settings module.
 
 In that case, you must define one or more aliases for those settings modules
 under ``[settings]`` in your ``frapy.cfg`` file:
@@ -92,12 +92,12 @@ under ``[settings]`` in your ``frapy.cfg`` file:
     project2 = myproject2.settings
 
 By default, the ``frapy`` command-line tool will use the ``default`` settings.
-Use the ``SCRAPY_PROJECT`` environment variable to specify a different project
+Use the ``FRAPY_PROJECT`` environment variable to specify a different project
 for ``frapy`` to use::
 
     $ frapy settings --get BOT_NAME
     Project 1 Bot
-    $ export SCRAPY_PROJECT=project2
+    $ export FRAPY_PROJECT=project2
     $ frapy settings --get BOT_NAME
     Project 2 Bot
 
@@ -105,24 +105,24 @@ for ``frapy`` to use::
 Using the ``frapy`` tool
 =========================
 
-You can start by running the Scrapy tool with no arguments and it will print
+You can start by running the Frapy tool with no arguments and it will print
 some usage help and the available commands::
 
-    Scrapy X.Y - no active project
+    Frapy X.Y - no active project
 
     Usage:
       frapy <command> [options] [args]
 
     Available commands:
       crawl         Run a spider
-      fetch         Fetch a URL using the Scrapy downloader
+      fetch         Fetch a URL using the Frapy downloader
     [...]
 
 The first line will print the currently active project if you're inside a
-Scrapy project. In this example it was run from outside a project. If run from inside
+Frapy project. In this example it was run from outside a project. If run from inside
 a project it would have printed something like this::
 
-    Scrapy X.Y - project: myproject
+    Frapy X.Y - project: myproject
 
     Usage:
       frapy <command> [options] [args]
@@ -132,12 +132,12 @@ a project it would have printed something like this::
 Creating projects
 -----------------
 
-The first thing you typically do with the ``frapy`` tool is create your Scrapy
+The first thing you typically do with the ``frapy`` tool is create your Frapy
 project::
 
     frapy startproject myproject [project_dir]
 
-That will create a Scrapy project under the ``project_dir`` directory.
+That will create a Frapy project under the ``project_dir`` directory.
 If ``project_dir`` wasn't specified, ``project_dir`` will be the same as ``myproject``.
 
 Next, you go inside the new project directory::
@@ -157,7 +157,7 @@ For example, to create a new spider::
 
     frapy genspider mydomain mydomain.com
 
-Some Scrapy commands (like :command:`crawl`) must be run from inside a Scrapy
+Some Frapy commands (like :command:`crawl`) must be run from inside a Frapy
 project. See the :ref:`commands reference <topics-commands-ref>` below for more
 information on which commands must be run from inside projects, and which not.
 
@@ -183,9 +183,9 @@ And you can see all available commands with::
 
     frapy -h
 
-There are two kinds of commands, those that only work from inside a Scrapy
+There are two kinds of commands, those that only work from inside a Frapy
 project (Project-specific commands) and those that also work without an active
-Scrapy project (Global commands), though they may behave slightly different
+Frapy project (Global commands), though they may behave slightly different
 when running from inside a project (as they would use the project overridden
 settings).
 
@@ -217,7 +217,7 @@ startproject
 * Syntax: ``frapy startproject <project_name> [project_dir]``
 * Requires project: *no*
 
-Creates a new Scrapy project named ``project_name``, under the ``project_dir``
+Creates a new Frapy project named ``project_name``, under the ``project_dir``
 directory.
 If ``project_dir`` wasn't specified, ``project_dir`` will be the same as ``project_name``.
 
@@ -369,7 +369,7 @@ fetch
 * Syntax: ``frapy fetch <url>``
 * Requires project: *no*
 
-Downloads the given URL using the Scrapy downloader and writes the contents to
+Downloads the given URL using the Frapy downloader and writes the contents to
 standard output.
 
 The interesting thing about this command is that it fetches the page how the
@@ -379,7 +379,7 @@ attribute which overrides the User Agent, it will use that one.
 So this command can be used to "see" how your spider would fetch a certain page.
 
 If used outside a project, no particular per-spider behaviour would be applied
-and it will just use the default Scrapy downloader settings.
+and it will just use the default Frapy downloader settings.
 
 Supported options:
 
@@ -413,7 +413,7 @@ view
 * Syntax: ``frapy view <url>``
 * Requires project: *no*
 
-Opens the given URL in a browser, as your Scrapy spider would "see" it.
+Opens the given URL in a browser, as your Frapy spider would "see" it.
 Sometimes spiders see pages differently from regular users, so this can be used
 to check what the spider "sees" and confirm it's what you expect.
 
@@ -436,7 +436,7 @@ shell
 * Syntax: ``frapy shell [url]``
 * Requires project: *no*
 
-Starts the Scrapy shell for the given URL (if given) or empty if no URL is
+Starts the Frapy shell for the given URL (if given) or empty if no URL is
 given. Also supports UNIX-style local file paths, either relative with
 ``./`` or ``../`` prefixes or absolute file paths.
 See :ref:`topics-shell` for more info.
@@ -543,10 +543,10 @@ settings
 * Syntax: ``frapy settings [options]``
 * Requires project: *no*
 
-Get the value of a Scrapy setting.
+Get the value of a Frapy setting.
 
 If used inside a project it'll show the project setting value, otherwise it'll
-show the default Scrapy value for that setting.
+show the default Frapy value for that setting.
 
 Example usage::
 
@@ -579,7 +579,7 @@ version
 * Syntax: ``frapy version [-v]``
 * Requires project: *no*
 
-Prints the Scrapy version. If used with ``-v`` it also prints Python, Twisted
+Prints the Frapy version. If used with ``-v`` it also prints Python, Twisted
 and Platform info, which is useful for bug reports.
 
 .. command:: bench
@@ -596,7 +596,7 @@ Custom project commands
 =======================
 
 You can also add your custom project commands by using the
-:setting:`COMMANDS_MODULE` setting. See the Scrapy commands in
+:setting:`COMMANDS_MODULE` setting. See the Frapy commands in
 `frapy/commands`_ for examples on how to implement your commands.
 
 .. _frapy/commands: https://github.com/frapy/frapy/tree/master/frapy/commands
@@ -607,8 +607,8 @@ COMMANDS_MODULE
 
 Default: ``''`` (empty string)
 
-A module to use for looking up custom Scrapy commands. This is used to add custom
-commands for your Scrapy project.
+A module to use for looking up custom Frapy commands. This is used to add custom
+commands for your Frapy project.
 
 Example:
 
@@ -621,7 +621,7 @@ Example:
 Register commands via setup.py entry points
 -------------------------------------------
 
-You can also add Scrapy commands from an external library by adding a
+You can also add Frapy commands from an external library by adding a
 ``frapy.commands`` section in the entry points of the library ``setup.py``
 file.
 

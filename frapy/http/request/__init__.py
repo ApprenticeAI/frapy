@@ -1,6 +1,6 @@
 """
 This module implements the Request class which is used to represent HTTP
-requests in Scrapy.
+requests in Frapy.
 
 See documentation in docs/topics/request-response.rst
 """
@@ -200,7 +200,7 @@ class Request(object_ref):
                      :class:`~frapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware`,
                      may modify the :class:`~frapy.http.Request` object.
 
-        To translate a cURL command into a Scrapy request,
+        To translate a cURL command into a Frapy request,
         you may use `curl2frapy <https://michael-shub.github.io/curl2frapy/>`_.
         """
         request_kwargs = curl_to_request_kwargs(curl_command, ignore_unknown_options)

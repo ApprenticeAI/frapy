@@ -4,9 +4,9 @@
 Benchmarking
 ============
 
-Scrapy comes with a simple benchmarking suite that spawns a local HTTP server
+Frapy comes with a simple benchmarking suite that spawns a local HTTP server
 and crawls it at the maximum possible speed. The goal of this benchmarking is
-to get an idea of how Scrapy performs in your hardware, in order to have a
+to get an idea of how Frapy performs in your hardware, in order to have a
 common baseline for comparisons. It uses a simple spider that does nothing and
 just follows links.
 
@@ -16,7 +16,7 @@ To run it use::
 
 You should see an output like this::
 
-    2016-12-16 21:18:48 [frapy.utils.log] INFO: Scrapy 1.2.2 started (bot: quotesbot)
+    2016-12-16 21:18:48 [frapy.utils.log] INFO: Frapy 1.2.2 started (bot: quotesbot)
     2016-12-16 21:18:48 [frapy.utils.log] INFO: Overridden settings: {'CLOSESPIDER_TIMEOUT': 10, 'ROBOTSTXT_OBEY': True, 'SPIDER_MODULES': ['quotesbot.spiders'], 'LOGSTATS_INTERVAL': 1, 'BOT_NAME': 'quotesbot', 'LOG_LEVEL': 'INFO', 'NEWSPIDER_MODULE': 'quotesbot.spiders'}
     2016-12-16 21:18:49 [frapy.middleware] INFO: Enabled extensions:
     ['frapy.extensions.closespider.CloseSpider',
@@ -56,7 +56,7 @@ You should see an output like this::
     2016-12-16 21:18:58 [frapy.extensions.logstats] INFO: Crawled 470 pages (at 1920 pages/min), scraped 0 items (at 0 items/min)
     2016-12-16 21:18:59 [frapy.core.engine] INFO: Closing spider (closespider_timeout)
     2016-12-16 21:18:59 [frapy.extensions.logstats] INFO: Crawled 518 pages (at 2880 pages/min), scraped 0 items (at 0 items/min)
-    2016-12-16 21:19:00 [frapy.statscollectors] INFO: Dumping Scrapy stats:
+    2016-12-16 21:19:00 [frapy.statscollectors] INFO: Dumping Frapy stats:
     {'downloader/request_bytes': 229995,
      'downloader/request_count': 534,
      'downloader/request_method_count/GET': 534,
@@ -75,7 +75,7 @@ You should see an output like this::
      'start_time': datetime.datetime(2016, 12, 16, 16, 18, 49, 799869)}
     2016-12-16 21:19:00 [frapy.core.engine] INFO: Spider closed (closespider_timeout)
 
-That tells you that Scrapy is able to crawl about 3000 pages per minute in the
+That tells you that Frapy is able to crawl about 3000 pages per minute in the
 hardware where you run it. Note that this is a very simple spider intended to
 follow links, any custom spider you write will probably do more stuff which
 results in slower crawl rates. How slower depends on how much your spider does

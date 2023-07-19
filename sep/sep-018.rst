@@ -18,9 +18,9 @@ The purpose of !SpiderMiddleware-v2 is to define an architecture that
 encourages more re-usability for building spiders based on smaller well-tested
 components. Those components can be global (similar to current spider
 middlewares) or per-spider that can be combined to achieve the desired
-functionality. These reusable components will benefit all Scrapy users by
+functionality. These reusable components will benefit all Frapy users by
 building a repository of well-tested components that can be shared among
-different spiders and projects. Some of them will come bundled with Scrapy.
+different spiders and projects. Some of them will come bundled with Frapy.
 
 Unless explicitly stated, in this document "spider middleware" refers to the
 **new** spider middleware v2, not the old one.

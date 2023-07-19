@@ -178,11 +178,11 @@ class BaseSchedulerOnDiskTester(SchedulerHandler):
 
 
 class TestSchedulerInMemory(BaseSchedulerInMemoryTester, unittest.TestCase):
-    priority_queue_cls = "frapy.pqueues.ScrapyPriorityQueue"
+    priority_queue_cls = "frapy.pqueues.FrapyPriorityQueue"
 
 
 class TestSchedulerOnDisk(BaseSchedulerOnDiskTester, unittest.TestCase):
-    priority_queue_cls = "frapy.pqueues.ScrapyPriorityQueue"
+    priority_queue_cls = "frapy.pqueues.FrapyPriorityQueue"
 
 
 _URLS_WITH_SLOTS = [
@@ -204,7 +204,7 @@ class TestMigration(unittest.TestCase):
 
     def _migration(self, tmp_dir):
         prev_scheduler_handler = SchedulerHandler()
-        prev_scheduler_handler.priority_queue_cls = "frapy.pqueues.ScrapyPriorityQueue"
+        prev_scheduler_handler.priority_queue_cls = "frapy.pqueues.FrapyPriorityQueue"
         prev_scheduler_handler.jobdir = tmp_dir
 
         prev_scheduler_handler.create_scheduler()

@@ -21,7 +21,7 @@ from twisted.internet.defer import inlineCallbacks
 from twisted.protocols.policies import WrappingFactory
 
 from frapy.core.downloader import webclient as client
-from frapy.core.downloader.contextfactory import ScrapyClientContextFactory
+from frapy.core.downloader.contextfactory import FrapyClientContextFactory
 from frapy.http import Headers, Request
 from frapy.settings import Settings
 from frapy.utils.misc import create_instance
@@ -43,7 +43,7 @@ def getPage(url, contextFactory=None, response_transform=None, *args, **kwargs):
     def _clientfactory(url, *args, **kwargs):
         url = to_unicode(url)
         timeout = kwargs.pop("timeout", 0)
-        f = client.ScrapyHTTPClientFactory(
+        f = client.FrapyHTTPClientFactory(
             Request(url, *args, **kwargs), timeout=timeout
         )
         f.deferred.addCallback(response_transform or (lambda r: r.body))
@@ -64,7 +64,7 @@ class ParseUrlTestCase(unittest.TestCase):
     """Test URL parsing facility and defaults values."""
 
     def _parse(self, url):
-        f = client.ScrapyHTTPClientFactory(Request(url))
+        f = client.FrapyHTTPClientFactory(Request(url))
         return (f.scheme, f.netloc, f.host, f.port, f.path)
 
     def testParse(self):
@@ -126,10 +126,10 @@ class ParseUrlTestCase(unittest.TestCase):
             self.assertEqual(client._parse(url), test, url)
 
 
-class ScrapyHTTPPageGetterTests(unittest.TestCase):
+class FrapyHTTPPageGetterTests(unittest.TestCase):
     def test_earlyHeaders(self):
         # basic test stolen from twisted HTTPageGetter
-        factory = client.ScrapyHTTPClientFactory(
+        factory = client.FrapyHTTPClientFactory(
             Request(
                 url="http://foo/bar",
                 body="some data",
@@ -157,11 +157,11 @@ class ScrapyHTTPPageGetterTests(unittest.TestCase):
         )
 
         # test minimal sent headers
-        factory = client.ScrapyHTTPClientFactory(Request("http://foo/bar"))
+        factory = client.FrapyHTTPClientFactory(Request("http://foo/bar"))
         self._test(factory, b"GET /bar HTTP/1.0\r\n" b"Host: foo\r\n" b"\r\n")
 
         # test a simple POST with body and content-type
-        factory = client.ScrapyHTTPClientFactory(
+        factory = client.FrapyHTTPClientFactory(
             Request(
                 method="POST",
                 url="http://foo/bar",
@@ -182,7 +182,7 @@ class ScrapyHTTPPageGetterTests(unittest.TestCase):
         )
 
         # test a POST method with no body provided
-        factory = client.ScrapyHTTPClientFactory(
+        factory = client.FrapyHTTPClientFactory(
             Request(method="POST", url="http://foo/bar")
         )
 
@@ -192,7 +192,7 @@ class ScrapyHTTPPageGetterTests(unittest.TestCase):
         )
 
         # test with single and multivalued headers
-        factory = client.ScrapyHTTPClientFactory(
+        factory = client.FrapyHTTPClientFactory(
             Request(
                 url="http://foo/bar",
                 headers={
@@ -213,7 +213,7 @@ class ScrapyHTTPPageGetterTests(unittest.TestCase):
         )
 
         # same test with single and multivalued headers but using Headers class
-        factory = client.ScrapyHTTPClientFactory(
+        factory = client.FrapyHTTPClientFactory(
             Request(
                 url="http://foo/bar",
                 headers=Headers(
@@ -237,7 +237,7 @@ class ScrapyHTTPPageGetterTests(unittest.TestCase):
 
     def _test(self, factory, testvalue):
         transport = StringTransport()
-        protocol = client.ScrapyHTTPPageGetter()
+        protocol = client.FrapyHTTPPageGetter()
         protocol.factory = factory
         protocol.makeConnection(transport)
         self.assertEqual(
@@ -247,8 +247,8 @@ class ScrapyHTTPPageGetterTests(unittest.TestCase):
 
     def test_non_standard_line_endings(self):
         # regression test for: http://dev.frapy.org/ticket/258
-        factory = client.ScrapyHTTPClientFactory(Request(url="http://foo/bar"))
-        protocol = client.ScrapyHTTPPageGetter()
+        factory = client.FrapyHTTPClientFactory(Request(url="http://foo/bar"))
+        protocol = client.FrapyHTTPPageGetter()
         protocol.factory = factory
         protocol.headers = Headers()
         protocol.dataReceived(b"HTTP/1.0 200 OK\n")
@@ -387,7 +387,7 @@ class WebClientTestCase(unittest.TestCase):
     def testFactoryInfo(self):
         url = self.getURL("file")
         _, _, host, port, _ = client._parse(url)
-        factory = client.ScrapyHTTPClientFactory(Request(url))
+        factory = client.FrapyHTTPClientFactory(Request(url))
         reactor.connectTCP(to_unicode(host), port, factory)
         return factory.deferred.addCallback(self._cbFactoryInfo, factory)
 
@@ -471,7 +471,7 @@ class WebClientCustomCiphersSSLTestCase(WebClientSSLTestCase):
         s = "0123456789" * 10
         settings = Settings({"DOWNLOADER_CLIENT_TLS_CIPHERS": self.custom_ciphers})
         client_context_factory = create_instance(
-            ScrapyClientContextFactory, settings=settings, crawler=None
+            FrapyClientContextFactory, settings=settings, crawler=None
         )
         return getPage(
             self.getURL("payload"), body=s, contextFactory=client_context_factory
@@ -483,7 +483,7 @@ class WebClientCustomCiphersSSLTestCase(WebClientSSLTestCase):
             {"DOWNLOADER_CLIENT_TLS_CIPHERS": "ECDHE-RSA-AES256-GCM-SHA384"}
         )
         client_context_factory = create_instance(
-            ScrapyClientContextFactory, settings=settings, crawler=None
+            FrapyClientContextFactory, settings=settings, crawler=None
         )
         d = getPage(
             self.getURL("payload"), body=s, contextFactory=client_context_factory

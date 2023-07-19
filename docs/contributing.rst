@@ -1,7 +1,7 @@
 .. _topics-contributing:
 
 ======================
-Contributing to Scrapy
+Contributing to Frapy
 ======================
 
 .. important::
@@ -9,10 +9,10 @@ Contributing to Scrapy
     Double check that you are reading the most recent version of this document at
     https://docs.frapy.org/en/master/contributing.html
 
-There are many ways to contribute to Scrapy. Here are some of them:
+There are many ways to contribute to Frapy. Here are some of them:
 
-* Blog about Scrapy. Tell the world how you're using Scrapy. This will help
-  newcomers with more examples and will help the Scrapy project to increase its
+* Blog about Frapy. Tell the world how you're using Frapy. This will help
+  newcomers with more examples and will help the Frapy project to increase its
   visibility.
 
 * Report bugs and request features in the `issue tracker`_, trying to follow
@@ -22,10 +22,10 @@ There are many ways to contribute to Scrapy. Here are some of them:
   :ref:`writing-patches` and `Submitting patches`_ below for details on how to
   write and submit a patch.
 
-* Join the `Scrapy subreddit`_ and share your ideas on how to
-  improve Scrapy. We're always open to suggestions.
+* Join the `Frapy subreddit`_ and share your ideas on how to
+  improve Frapy. We're always open to suggestions.
 
-* Answer Scrapy questions at
+* Answer Frapy questions at
   `Stack Overflow <https://stackoverflow.com/questions/tagged/frapy>`__.
 
 
@@ -36,7 +36,7 @@ Reporting bugs
 
     Please report security issues **only** to
     frapy-security@googlegroups.com. This is a private list only open to
-    trusted Scrapy developers, and its archives are not public.
+    trusted Frapy developers, and its archives are not public.
 
 Well-written bug reports are very helpful, so keep in mind the following
 guidelines when you're going to report a new bug.
@@ -44,7 +44,7 @@ guidelines when you're going to report a new bug.
 * check the :ref:`FAQ <faq>` first to see if your issue is addressed in a
   well-known question
 
-* if you have a general question about Scrapy usage, please ask it at
+* if you have a general question about Frapy usage, please ask it at
   `Stack Overflow <https://stackoverflow.com/questions/tagged/frapy>`__
   (use "frapy" tag).
 
@@ -53,7 +53,7 @@ guidelines when you're going to report a new bug.
   you have additional useful information, please leave a comment, or consider
   :ref:`sending a pull request <writing-patches>` with a fix.
 
-* search the `frapy-users`_ list and `Scrapy subreddit`_ to see if it has
+* search the `frapy-users`_ list and `Frapy subreddit`_ to see if it has
   been discussed there, or if you're not sure if what you're seeing is a bug.
   You can also ask in the ``#frapy`` IRC channel.
 
@@ -65,7 +65,7 @@ guidelines when you're going to report a new bug.
 
 * the most awesome way to provide a complete reproducible example is to
   send a pull request which adds a failing test case to the
-  Scrapy testing suite (see :ref:`submitting-patches`).
+  Frapy testing suite (see :ref:`submitting-patches`).
   This is helpful even if you don't have an intention to
   fix the issue yourselves.
 
@@ -131,11 +131,11 @@ and show that you have put some additional thought into the subject. A good
 starting point is to send a pull request on GitHub. It can be simple enough to
 illustrate your idea, and leave documentation/tests for later, after the idea
 has been validated and proven useful. Alternatively, you can start a
-conversation in the `Scrapy subreddit`_ to discuss your idea first.
+conversation in the `Frapy subreddit`_ to discuss your idea first.
 
 Sometimes there is an existing pull request for the problem you'd like to
 solve, which is stalled for some reason. Often the pull request is in a
-right direction, but changes are requested by Scrapy maintainers, and the
+right direction, but changes are requested by Frapy maintainers, and the
 original pull request author hasn't had time to address them.
 In this case consider picking up this pull request: open
 a new pull request with all commits from the original pull request, as well as
@@ -151,7 +151,7 @@ with a name of the branch you want to create locally).
 See also: https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/checking-out-pull-requests-locally#modifying-an-inactive-pull-request-locally.
 
 When writing GitHub pull requests, try to keep titles short but descriptive.
-E.g. For bug #411: "Scrapy hangs if an exception raises in start_requests"
+E.g. For bug #411: "Frapy hangs if an exception raises in start_requests"
 prefer "Fix hanging when exception occurs in start_requests (#411)"
 instead of "Fix for #411". Complete titles make it easy to skim through
 the issue tracker.
@@ -167,7 +167,7 @@ Coding style
 ============
 
 Please follow these coding conventions when writing code for inclusion in
-Scrapy:
+Frapy:
 
 * We use `black <https://black.readthedocs.io/en/stable/>`_ for code formatting.
   There is a hook in the pre-commit config
@@ -189,11 +189,11 @@ commit.
 
 .. _pre-commit: https://pre-commit.com/
 
-After your create a local clone of your fork of the Scrapy repository:
+After your create a local clone of your fork of the Frapy repository:
 
 #.  `Install pre-commit <https://pre-commit.com/#installation>`_.
 
-#.  On the root of your local clone of the Scrapy repository, run the following
+#.  On the root of your local clone of the Frapy repository, run the following
     command:
 
     .. code-block:: bash
@@ -230,7 +230,7 @@ Documentation updates that cover new or modified features must use Sphinx’s
 :rst:dir:`versionadded` and :rst:dir:`versionchanged` directives. Use
 ``VERSION`` as version, we will replace it with the actual version right before
 the corresponding release. When we release a new major or minor version of
-Scrapy, we remove these directives if they are older than 3 years.
+Frapy, we remove these directives if they are older than 3 years.
 
 Documentation about deprecated features must be removed as those features are
 deprecated, so that new readers do not run into it. New deprecations and
@@ -295,7 +295,7 @@ All functionality (including new features and bug fixes) must include a test
 case to check that it works as expected, so please include tests for your
 patches if you want them to get accepted sooner.
 
-Scrapy uses unit-tests, which are located in the `tests/`_ directory.
+Frapy uses unit-tests, which are located in the `tests/`_ directory.
 Their module name typically resembles the full path of the module they're
 testing. For example, the item loaders code is in::
 
@@ -307,7 +307,7 @@ And their unit-tests are in::
 
 .. _issue tracker: https://github.com/frapy/frapy/issues
 .. _frapy-users: https://groups.google.com/forum/#!forum/frapy-users
-.. _Scrapy subreddit: https://reddit.com/r/frapy
+.. _Frapy subreddit: https://reddit.com/r/frapy
 .. _AUTHORS: https://github.com/frapy/frapy/blob/master/AUTHORS
 .. _tests/: https://github.com/frapy/frapy/tree/master/tests
 .. _open issues: https://github.com/frapy/frapy/issues

@@ -27,7 +27,7 @@ For spiders, the scraping cycle goes through something like this:
    :ref:`item objects <topics-items>`,
    :class:`~frapy.Request` objects, or an iterable of these objects.
    Those Requests will also contain a callback (maybe
-   the same) and will then be downloaded by Scrapy and then their
+   the same) and will then be downloaded by Frapy and then their
    response handled by the specified callback.
 
 3. In callback functions, you parse the page contents, typically using
@@ -39,7 +39,7 @@ For spiders, the scraping cycle goes through something like this:
    a file using :ref:`topics-feed-exports`.
 
 Even though this cycle applies (more or less) to any kind of spider, there are
-different kinds of default spiders bundled into Scrapy for different purposes.
+different kinds of default spiders bundled into Frapy for different purposes.
 We will talk about those types here.
 
 .. _topics-spiders-ref:
@@ -51,7 +51,7 @@ frapy.Spider
 .. class:: frapy.Spider()
 
    This is the simplest spider, and the one from which every other spider
-   must inherit (including spiders that come bundled with Scrapy, as well as spiders
+   must inherit (including spiders that come bundled with Frapy, as well as spiders
    that you write yourself). It doesn't provide any special functionality. It just
    provides a default :meth:`start_requests` implementation which sends requests from
    the :attr:`start_urls` spider attribute and calls the spider's method ``parse``
@@ -60,7 +60,7 @@ frapy.Spider
    .. attribute:: name
 
        A string which defines the name for this spider. The spider name is how
-       the spider is located (and instantiated) by Scrapy, so it must be
+       the spider is located (and instantiated) by Frapy, so it must be
        unique. However, nothing prevents you from instantiating more than one
        instance of the same spider. This is the most important spider attribute
        and it's required.
@@ -126,7 +126,7 @@ frapy.Spider
 
    .. method:: from_crawler(crawler, *args, **kwargs)
 
-       This is the class method used by Scrapy to create your spiders.
+       This is the class method used by Frapy to create your spiders.
 
        You probably won't need to override this directly because the default
        implementation acts as a proxy to the :meth:`__init__` method, calling
@@ -148,8 +148,8 @@ frapy.Spider
    .. method:: start_requests()
 
        This method must return an iterable with the first Requests to crawl for
-       this spider. It is called by Scrapy when the spider is opened for
-       scraping. Scrapy calls it only once, so it is safe to implement
+       this spider. It is called by Frapy when the spider is opened for
+       scraping. Frapy calls it only once, so it is safe to implement
        :meth:`start_requests` as a generator.
 
        The default implementation generates ``Request(url, dont_filter=True)``
@@ -183,7 +183,7 @@ frapy.Spider
 
    .. method:: parse(response)
 
-       This is the default callback used by Scrapy to process downloaded
+       This is the default callback used by Frapy to process downloaded
        responses, when their requests don't specify a callback.
 
        The ``parse`` method is in charge of processing the response and returning
@@ -322,7 +322,7 @@ The above example can also be written as follows:
         def start_requests(self):
             yield frapy.Request(f"http://www.example.com/categories/{self.category}")
 
-If you are :ref:`running Scrapy from a script <run-from-script>`, you can 
+If you are :ref:`running Frapy from a script <run-from-script>`, you can 
 specify spider arguments when calling 
 :class:`CrawlerProcess.crawl <frapy.crawler.CrawlerProcess.crawl>` or
 :class:`CrawlerRunner.crawl <frapy.crawler.CrawlerRunner.crawl>`:
@@ -350,15 +350,15 @@ used by :class:`~frapy.downloadermiddlewares.useragent.UserAgentMiddleware`::
 
     frapy crawl myspider -a http_user=myuser -a http_pass=mypassword -a user_agent=mybot
 
-Spider arguments can also be passed through the Scrapyd ``schedule.json`` API.
-See `Scrapyd documentation`_.
+Spider arguments can also be passed through the Frapyd ``schedule.json`` API.
+See `Frapyd documentation`_.
 
 .. _builtin-spiders:
 
 Generic Spiders
 ===============
 
-Scrapy comes with some useful generic spiders that you can use to subclass
+Frapy comes with some useful generic spiders that you can use to subclass
 your spiders from. Their aim is to provide convenient functionality for a few
 common scraping cases, like following all links on a site based on certain
 rules, crawling from `Sitemaps`_, or parsing an XML/CSV feed.
@@ -898,4 +898,4 @@ Combine SitemapSpider with other sources of urls:
 .. _Sitemap index files: https://www.sitemaps.org/protocol.html#index
 .. _robots.txt: https://www.robotstxt.org/
 .. _TLD: https://en.wikipedia.org/wiki/Top-level_domain
-.. _Scrapyd documentation: https://frapyd.readthedocs.io/en/latest/
+.. _Frapyd documentation: https://frapyd.readthedocs.io/en/latest/

@@ -10,7 +10,7 @@ Status   Document in progress (being written)
 SEP-013 - Middlewares refactoring
 =================================
 
-This SEP proposes a refactoring of Scrapy middlewares to remove some
+This SEP proposes a refactoring of Frapy middlewares to remove some
 inconsistencies and limitations.
 
 Current flaws and inconsistencies
@@ -18,7 +18,7 @@ Current flaws and inconsistencies
 
 Even though the core works pretty well, it has some subtle inconsistencies that
 don't manifest in the common uses, but arise (and are quite annoying) when you
-try to fully exploit all Scrapy features. The currently identified flaws and
+try to fully exploit all Frapy features. The currently identified flaws and
 inconsistencies are:
 
 1. Request errback may not get called in all cases (more details needed on when

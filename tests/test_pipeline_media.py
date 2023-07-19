@@ -15,7 +15,7 @@ from frapy.pipelines.images import ImagesPipeline
 from frapy.pipelines.media import MediaPipeline
 from frapy.settings import Settings
 from frapy.spiders import Spider
-from frapy.utils.deprecate import ScrapyDeprecationWarning
+from frapy.utils.deprecate import FrapyDeprecationWarning
 from frapy.utils.log import failure_to_exc_info
 from frapy.utils.signal import disconnect_all
 from frapy.utils.test import get_crawler
@@ -447,7 +447,7 @@ class MediaPipelineDeprecatedMethodsTestCase(unittest.TestCase):
         for warning in warnings:
             if (
                 warning["message"] == message
-                and warning["category"] == ScrapyDeprecationWarning
+                and warning["category"] == FrapyDeprecationWarning
             ):
                 warningShown = True
         self.assertTrue(warningShown)

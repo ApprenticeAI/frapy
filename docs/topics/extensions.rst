@@ -5,15 +5,15 @@ Extensions
 ==========
 
 The extensions framework provides a mechanism for inserting your own
-custom functionality into Scrapy.
+custom functionality into Frapy.
 
 Extensions are just regular classes.
 
 Extension settings
 ==================
 
-Extensions use the :ref:`Scrapy settings <topics-settings>` to manage their
-settings, just like any other Scrapy code.
+Extensions use the :ref:`Frapy settings <topics-settings>` to manage their
+settings, just like any other Frapy code.
 
 It is customary for extensions to prefix their settings with their own name, to
 avoid collision with existing (and future) extensions. For example, a
@@ -30,7 +30,7 @@ instance of the extension class per spider being run. All the extension
 initialization code must be performed in the class ``__init__`` method.
 
 To make an extension available, add it to the :setting:`EXTENSIONS` setting in
-your Scrapy settings. In :setting:`EXTENSIONS`, each extension is represented
+your Frapy settings. In :setting:`EXTENSIONS`, each extension is represented
 by a string: the full Python path to the extension's class name. For example:
 
 .. code-block:: python
@@ -44,7 +44,7 @@ by a string: the full Python path to the extension's class name. For example:
 As you can see, the :setting:`EXTENSIONS` setting is a dict where the keys are
 the extension paths, and their values are the orders, which define the
 extension *loading* order. The :setting:`EXTENSIONS` setting is merged with the
-:setting:`EXTENSIONS_BASE` setting defined in Scrapy (and not meant to be
+:setting:`EXTENSIONS_BASE` setting defined in Frapy (and not meant to be
 overridden) and then sorted by order to get the final sorted list of enabled
 extensions.
 
@@ -77,7 +77,7 @@ included in the :setting:`EXTENSIONS_BASE` setting) you must set its order to
 Writing your own extension
 ==========================
 
-Each extension is a Python class. The main entry point for a Scrapy extension
+Each extension is a Python class. The main entry point for a Frapy extension
 (this also includes middlewares and pipelines) is the ``from_crawler``
 class method which receives a ``Crawler`` instance. Through the Crawler object
 you can access settings, signals, stats, and also control the crawling behaviour.
@@ -191,7 +191,7 @@ Telnet console extension
 .. class:: TelnetConsole
 
 Provides a telnet console for getting into a Python interpreter inside the
-currently running Scrapy process, which can be very useful for debugging.
+currently running Frapy process, which can be very useful for debugging.
 
 The telnet console must be enabled by the :setting:`TELNETCONSOLE_ENABLED`
 setting, and the server will listen in the port specified in
@@ -209,7 +209,7 @@ Memory usage extension
 
 .. note:: This extension does not work in Windows.
 
-Monitors the memory used by the Scrapy process that runs the spider and:
+Monitors the memory used by the Frapy process that runs the spider and:
 
 1. sends a notification e-mail when it exceeds a certain value
 2. closes the spider when it exceeds a certain value
@@ -217,7 +217,7 @@ Monitors the memory used by the Scrapy process that runs the spider and:
 The notification e-mails can be triggered when a certain warning value is
 reached (:setting:`MEMUSAGE_WARNING_MB`) and when the maximum value is reached
 (:setting:`MEMUSAGE_LIMIT_MB`) which will also cause the spider to be closed
-and the Scrapy process to be terminated.
+and the Frapy process to be terminated.
 
 This extension is enabled by the :setting:`MEMUSAGE_ENABLED` setting and
 can be configured with the following settings:
@@ -325,7 +325,7 @@ StatsMailer extension
 .. class:: StatsMailer
 
 This simple extension can be used to send a notification e-mail every time a
-domain has finished scraping, including the Scrapy stats collected. The email
+domain has finished scraping, including the Frapy stats collected. The email
 will be sent to all recipients specified in the :setting:`STATSMAILER_RCPTS`
 setting.
 
@@ -335,7 +335,7 @@ full list of parameters, including examples on how to instantiate
 :ref:`topics-email`.
 
 .. module:: frapy.extensions.debug
-   :synopsis: Extensions for debugging Scrapy
+   :synopsis: Extensions for debugging Frapy
 
 Debugging extensions
 --------------------
@@ -352,16 +352,16 @@ signal is received. The information dumped is the following:
 2. live references (see :ref:`topics-leaks-trackrefs`)
 3. stack trace of all threads
 
-After the stack trace and engine status is dumped, the Scrapy process continues
+After the stack trace and engine status is dumped, the Frapy process continues
 running normally.
 
 This extension only works on POSIX-compliant platforms (i.e. not Windows),
 because the `SIGQUIT`_ and `SIGUSR2`_ signals are not available on Windows.
 
-There are at least two ways to send Scrapy the `SIGQUIT`_ signal:
+There are at least two ways to send Frapy the `SIGQUIT`_ signal:
 
-1. By pressing Ctrl-\ while a Scrapy process is running (Linux only?)
-2. By running this command (assuming ``<pid>`` is the process id of the Scrapy
+1. By pressing Ctrl-\ while a Frapy process is running (Linux only?)
+2. By running this command (assuming ``<pid>`` is the process id of the Frapy
    process)::
 
     kill -QUIT <pid>
@@ -374,8 +374,8 @@ Debugger extension
 
 .. class:: Debugger
 
-Invokes a :doc:`Python debugger <library/pdb>` inside a running Scrapy process when a `SIGUSR2`_
-signal is received. After the debugger is exited, the Scrapy process continues
+Invokes a :doc:`Python debugger <library/pdb>` inside a running Frapy process when a `SIGUSR2`_
+signal is received. After the debugger is exited, the Frapy process continues
 running normally.
 
 For more info see `Debugging in Python`_.

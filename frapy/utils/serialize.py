@@ -8,7 +8,7 @@ from twisted.internet import defer
 from frapy.http import Request, Response
 
 
-class ScrapyJSONEncoder(json.JSONEncoder):
+class FrapyJSONEncoder(json.JSONEncoder):
     DATE_FORMAT = "%Y-%m-%d"
     TIME_FORMAT = "%H:%M:%S"
 
@@ -34,5 +34,5 @@ class ScrapyJSONEncoder(json.JSONEncoder):
         return super().default(o)
 
 
-class ScrapyJSONDecoder(json.JSONDecoder):
+class FrapyJSONDecoder(json.JSONDecoder):
     pass

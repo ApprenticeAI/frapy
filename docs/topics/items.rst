@@ -11,7 +11,7 @@ The main goal in scraping is to extract structured data from unstructured
 sources, typically, web pages. :ref:`Spiders <topics-spiders>` may return the
 extracted data as `items`, Python objects that define key-value pairs.
 
-Scrapy supports :ref:`multiple types of items <item-types>`. When you create an
+Frapy supports :ref:`multiple types of items <item-types>`. When you create an
 item, you may use whichever type of item you want. When you write code that
 receives an item, your code should :ref:`work for any item type
 <supporting-item-types>`.
@@ -21,7 +21,7 @@ receives an item, your code should :ref:`work for any item type
 Item Types
 ==========
 
-Scrapy supports the following types of items, via the `itemadapter`_ library:
+Frapy supports the following types of items, via the `itemadapter`_ library:
 :ref:`dictionaries <dict-items>`, :ref:`Item objects <item-objects>`,
 :ref:`dataclass objects <dataclass-items>`, and :ref:`attrs objects <attrs-items>`.
 
@@ -175,8 +175,8 @@ Item subclasses are declared using a simple class definition syntax and
         tags = frapy.Field()
         last_updated = frapy.Field(serializer=str)
 
-.. note:: Those familiar with `Django`_ will notice that Scrapy Items are
-   declared similar to `Django Models`_, except that Scrapy Items are much
+.. note:: Those familiar with `Django`_ will notice that Frapy Items are
+   declared similar to `Django Models`_, except that Frapy Items are much
    simpler as there is no concept of different field types.
 
 .. _Django: https://www.djangoproject.com/

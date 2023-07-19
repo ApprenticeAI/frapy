@@ -1,5 +1,5 @@
 """
-Scrapy extension for collecting scraping stats
+Frapy extension for collecting scraping stats
 """
 import logging
 import pprint
@@ -43,7 +43,7 @@ class StatsCollector:
     def close_spider(self, spider, reason):
         if self._dump:
             logger.info(
-                "Dumping Scrapy stats:\n" + pprint.pformat(self._stats),
+                "Dumping Frapy stats:\n" + pprint.pformat(self._stats),
                 extra={"spider": spider},
             )
         self._persist_stats(self._stats, spider)

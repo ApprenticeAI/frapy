@@ -1,7 +1,7 @@
 import unittest
 import warnings
 
-from frapy.exceptions import ScrapyDeprecationWarning, UsageError
+from frapy.exceptions import FrapyDeprecationWarning, UsageError
 from frapy.settings import BaseSettings, Settings
 from frapy.utils.conf import (
     arglist_to_dict,
@@ -139,7 +139,7 @@ class FeedExportConfigTestCase(unittest.TestCase):
                 {"items.dat": {"format": "csv"}},
                 feed_process_params_from_cli(settings, ["items.dat"], "csv"),
             )
-            self.assertEqual(cw[0].category, ScrapyDeprecationWarning)
+            self.assertEqual(cw[0].category, FrapyDeprecationWarning)
 
     def test_feed_export_config_explicit_formats(self):
         settings = Settings()

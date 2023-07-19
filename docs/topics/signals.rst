@@ -4,9 +4,9 @@
 Signals
 =======
 
-Scrapy uses signals extensively to notify when certain events occur. You can
-catch some of those signals in your Scrapy project (using an :ref:`extension
-<topics-extensions>`, for example) to perform additional tasks or extend Scrapy
+Frapy uses signals extensively to notify when certain events occur. You can
+catch some of those signals in your Frapy project (using an :ref:`extension
+<topics-extensions>`, for example) to perform additional tasks or extend Frapy
 to add functionality not provided out of the box.
 
 Even though signals provide several arguments, the handlers that catch them
@@ -51,8 +51,8 @@ Deferred signal handlers
 
 Some signals support returning :class:`~twisted.internet.defer.Deferred`
 or :term:`awaitable objects <awaitable>` from their handlers, allowing
-you to run asynchronous code that does not block Scrapy. If a signal
-handler returns one of these objects, Scrapy waits for that asynchronous
+you to run asynchronous code that does not block Frapy. If a signal
+handler returns one of these objects, Frapy waits for that asynchronous
 operation to finish.
 
 Let's take an example using :ref:`coroutines <topics-coroutines>`:
@@ -101,7 +101,7 @@ Built-in signals reference
 .. module:: frapy.signals
    :synopsis: Signals definitions
 
-Here's the list of Scrapy built-in signals and their meaning.
+Here's the list of Frapy built-in signals and their meaning.
 
 Engine signals
 --------------
@@ -112,7 +112,7 @@ engine_started
 .. signal:: engine_started
 .. function:: engine_started()
 
-    Sent when the Scrapy engine has started crawling.
+    Sent when the Frapy engine has started crawling.
 
     This signal supports returning deferreds from its handlers.
 
@@ -126,7 +126,7 @@ engine_stopped
 .. signal:: engine_stopped
 .. function:: engine_stopped()
 
-    Sent when the Scrapy engine is stopped (for example, when a crawling
+    Sent when the Frapy engine is stopped (for example, when a crawling
     process has finished).
 
     This signal supports returning deferreds from its handlers.

@@ -7,7 +7,7 @@ from typing import Optional, cast
 from urllib.parse import urlparse
 
 import frapy
-from frapy.commands import ScrapyCommand
+from frapy.commands import FrapyCommand
 from frapy.exceptions import UsageError
 from frapy.utils.template import render_templatefile, string_camelcase
 
@@ -39,7 +39,7 @@ def verify_url_scheme(url):
     return parsed.geturl()
 
 
-class Command(ScrapyCommand):
+class Command(FrapyCommand):
     requires_project = False
     default_settings = {"LOG_ENABLED": False}
 
@@ -50,7 +50,7 @@ class Command(ScrapyCommand):
         return "Generate new spider using pre-defined templates"
 
     def add_options(self, parser):
-        ScrapyCommand.add_options(self, parser)
+        FrapyCommand.add_options(self, parser)
         parser.add_argument(
             "-l",
             "--list",

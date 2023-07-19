@@ -14,7 +14,7 @@ from w3lib.http import basic_auth_header
 from w3lib.url import canonicalize_url
 
 from frapy import Request, Spider
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 from frapy.utils.httpobj import urlparse_cached
 from frapy.utils.misc import load_object
 from frapy.utils.python import to_bytes, to_unicode
@@ -71,12 +71,12 @@ def request_fingerprint(
             "Call to deprecated function "
             "frapy.utils.request.request_fingerprint().\n"
             "\n"
-            "If you are using this function in a Scrapy component because you "
+            "If you are using this function in a Frapy component because you "
             "need a non-default fingerprinting algorithm, and you are OK "
             "with that non-default fingerprinting algorithm being used by "
-            "all Scrapy components and not just the one calling this "
+            "all Frapy components and not just the one calling this "
             "function, use crawler.request_fingerprinter.fingerprint() "
-            "instead in your Scrapy component (you can get the crawler "
+            "instead in your Frapy component (you can get the crawler "
             "object from the 'from_crawler' class method), and use the "
             "'REQUEST_FINGERPRINTER_CLASS' setting to configure your "
             "non-default fingerprinting algorithm.\n"
@@ -99,11 +99,11 @@ def request_fingerprint(
             "Call to deprecated function "
             "frapy.utils.request.request_fingerprint().\n"
             "\n"
-            "If you are using this function in a Scrapy component, and you "
+            "If you are using this function in a Frapy component, and you "
             "are OK with users of your component changing the fingerprinting "
             "algorithm through settings, use "
             "crawler.request_fingerprinter.fingerprint() instead in your "
-            "Scrapy component (you can get the crawler object from the "
+            "Frapy component (you can get the crawler object from the "
             "'from_crawler' class method).\n"
             "\n"
             "Otherwise, consider using the "
@@ -117,7 +117,7 @@ def request_fingerprint(
             "implementing your own function which returns the same "
             "fingerprints as the deprecated 'request_fingerprint()' function."
         )
-    warnings.warn(message, category=ScrapyDeprecationWarning, stacklevel=2)
+    warnings.warn(message, category=FrapyDeprecationWarning, stacklevel=2)
     processed_include_headers: Optional[Tuple[bytes, ...]] = None
     if include_headers:
         processed_include_headers = tuple(
@@ -247,13 +247,13 @@ class RequestFingerprinter:
                 "to get this warning if you have not defined a value for the "
                 "'REQUEST_FINGERPRINTER_IMPLEMENTATION' setting. This is so "
                 "for backward compatibility reasons, but it will change in a "
-                "future version of Scrapy.\n"
+                "future version of Frapy.\n"
                 "\n"
                 "See the documentation of the "
                 "'REQUEST_FINGERPRINTER_IMPLEMENTATION' setting for "
                 "information on how to handle this deprecation."
             )
-            warnings.warn(message, category=ScrapyDeprecationWarning, stacklevel=2)
+            warnings.warn(message, category=FrapyDeprecationWarning, stacklevel=2)
             self._fingerprint = _request_fingerprint_as_bytes
         elif implementation == "2.7":
             self._fingerprint = fingerprint

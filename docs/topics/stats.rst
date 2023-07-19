@@ -4,7 +4,7 @@
 Stats Collection
 ================
 
-Scrapy provides a convenient facility for collecting stats in the form of
+Frapy provides a convenient facility for collecting stats in the form of
 key/values, where values are often counters. The facility is called the Stats
 Collector, and can be accessed through the :attr:`~frapy.crawler.Crawler.stats`
 attribute of the :ref:`topics-api-crawler`, as illustrated by the examples in
@@ -15,7 +15,7 @@ in your module and use its API (to increment or set new stat keys), regardless
 of whether the stats collection is enabled or not. If it's disabled, the API
 will still work but it won't collect anything. This is aimed at simplifying the
 stats collector usage: you should spend no more than one line of code for
-collecting stats in your spider, Scrapy extension, or whatever code you're
+collecting stats in your spider, Frapy extension, or whatever code you're
 using the Stats Collector from.
 
 Another feature of the Stats Collector is that it's very efficient (when
@@ -84,7 +84,7 @@ Available Stats Collectors
 ==========================
 
 Besides the basic :class:`StatsCollector` there are other Stats Collectors
-available in Scrapy which extend the basic Stats Collector. You can select
+available in Frapy which extend the basic Stats Collector. You can select
 which Stats Collector to use through the :setting:`STATS_CLASS` setting. The
 default Stats Collector used is the :class:`MemoryStatsCollector`. 
 
@@ -100,7 +100,7 @@ MemoryStatsCollector
     through the :attr:`spider_stats` attribute, which is a dict keyed by spider
     domain name.
 
-    This is the default Stats Collector used in Scrapy.
+    This is the default Stats Collector used in Frapy.
 
     .. attribute:: spider_stats
 
@@ -116,5 +116,5 @@ DummyStatsCollector
     nothing). This stats collector can be set via the :setting:`STATS_CLASS`
     setting, to disable stats collect in order to improve performance. However,
     the performance penalty of stats collection is usually marginal compared to
-    other Scrapy workload like parsing pages.
+    other Frapy workload like parsing pages.
 

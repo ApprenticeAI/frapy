@@ -5,7 +5,7 @@ Selecting dynamically-loaded content
 ====================================
 
 Some webpages show the desired data when you load them in a web browser.
-However, when you download them using Scrapy, you cannot reach the desired data
+However, when you download them using Frapy, you cannot reach the desired data
 using :ref:`selectors <topics-selectors>`.
 
 When this happens, the recommended approach is to
@@ -49,19 +49,19 @@ Inspecting the source code of a webpage
 Sometimes you need to inspect the source code of a webpage (not the
 :ref:`DOM <topics-livedom>`) to determine where some desired data is located.
 
-Use Scrapy’s :command:`fetch` command to download the webpage contents as seen
-by Scrapy::
+Use Frapy’s :command:`fetch` command to download the webpage contents as seen
+by Frapy::
 
     frapy fetch --nolog https://example.com > response.html
 
 If the desired data is in embedded JavaScript code within a ``<script/>``
 element, see :ref:`topics-parsing-javascript`.
 
-If you cannot find the desired data, first make sure it’s not just Scrapy:
+If you cannot find the desired data, first make sure it’s not just Frapy:
 download the webpage with an HTTP client like curl_ or wget_ and see if the
 information can be found in the response they get.
 
-If they get a response with the desired data, modify your Scrapy
+If they get a response with the desired data, modify your Frapy
 :class:`~frapy.Request` to match that of the other HTTP client. For
 example, try using the same user-agent string (:setting:`USER_AGENT`) or the
 same :attr:`~frapy.Request.headers`.
@@ -79,14 +79,14 @@ Sometimes we need to reproduce a request the way our web browser performs it.
 
 Use the :ref:`network tool <topics-network-tool>` of your web browser to see
 how your web browser performs the desired request, and try to reproduce that
-request with Scrapy.
+request with Frapy.
 
 It might be enough to yield a :class:`~frapy.Request` with the same HTTP
 method and URL. However, you may also need to reproduce the body, headers and
 form parameters (see :class:`~frapy.FormRequest`) of that request.
 
 As all major browsers allow to export the requests in `cURL
-<https://curl.haxx.se/>`_ format, Scrapy incorporates the method
+<https://curl.haxx.se/>`_ format, Frapy incorporates the method
 :meth:`~frapy.Request.from_curl()` to generate an equivalent
 :class:`~frapy.Request` from a cURL command. To get more information
 visit :ref:`request from curl <requests-from-curl>` inside the network
@@ -95,7 +95,7 @@ tool section.
 Once you get the expected response, you can :ref:`extract the desired data from
 it <topics-handling-response-formats>`.
 
-You can reproduce any request with Scrapy. However, some times reproducing all
+You can reproduce any request with Frapy. However, some times reproducing all
 necessary requests may not seem efficient in developer time. If that is your
 case, and crawling speed is not a major concern for you, you can alternatively
 consider :ref:`JavaScript pre-rendering <topics-javascript-rendering>`.
@@ -104,7 +104,7 @@ If you get the expected response `sometimes`, but not always, the issue is
 probably not your request, but the target server. The target server might be
 buggy, overloaded, or :ref:`banning <bans>` some of your requests.
 
-Note that to translate a cURL command into a Scrapy request,
+Note that to translate a cURL command into a Frapy request,
 you may use `curl2frapy <https://michael-shub.github.io/curl2frapy/>`_.
 
 .. _topics-handling-response-formats:
@@ -260,7 +260,7 @@ automation. By installing the :ref:`asyncio reactor <install-asyncio>`,
 it is possible to integrate ``asyncio``-based libraries which handle headless browsers.
 
 One such library is `playwright-python`_ (an official Python port of `playwright`_).
-The following is a simple snippet to illustrate its usage within a Scrapy spider:
+The following is a simple snippet to illustrate its usage within a Frapy spider:
 
 .. code-block:: python
 
@@ -270,7 +270,7 @@ The following is a simple snippet to illustrate its usage within a Scrapy spider
 
     class PlaywrightSpider(frapy.Spider):
         name = "playwright"
-        start_urls = ["data:,"]  # avoid using the default Scrapy downloader
+        start_urls = ["data:,"]  # avoid using the default Frapy downloader
 
         async def parse(self, response):
             async with async_playwright() as pw:
@@ -282,7 +282,7 @@ The following is a simple snippet to illustrate its usage within a Scrapy spider
 
 
 However, using `playwright-python`_ directly as in the above example
-circumvents most of the Scrapy components (middlewares, dupefilter, etc).
+circumvents most of the Frapy components (middlewares, dupefilter, etc).
 We recommend using `frapy-playwright`_ for a better integration.
 
 .. _AJAX: https://en.wikipedia.org/wiki/Ajax_%28programming%29

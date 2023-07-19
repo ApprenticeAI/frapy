@@ -28,7 +28,7 @@ openssl_methods = {
 }
 
 
-class ScrapyClientTLSOptions(ClientTLSOptions):
+class FrapyClientTLSOptions(ClientTLSOptions):
     """
     SSL Client connection creator ignoring certificate verification errors
     (for genuinely invalid certificates or bugs in verification code).

@@ -7,7 +7,7 @@ Versioning and API stability
 Versioning
 ==========
 
-There are 3 numbers in a Scrapy version: *A.B.C*
+There are 3 numbers in a Frapy version: *A.B.C*
 
 * *A* is the major version. This will rarely change and will signify very
   large changes.
@@ -23,10 +23,10 @@ Development releases do not follow 3-numbers version and are generally
 released as ``dev`` suffixed versions, e.g. ``1.3dev``.
 
 .. note::
-    With Scrapy 0.* series, Scrapy used `odd-numbered versions for development releases`_.
-    This is not the case anymore from Scrapy 1.0 onwards.
+    With Frapy 0.* series, Frapy used `odd-numbered versions for development releases`_.
+    This is not the case anymore from Frapy 1.0 onwards.
 
-    Starting with Scrapy 1.0, all releases should be considered production-ready.
+    Starting with Frapy 1.0, all releases should be considered production-ready.
 
 For example:
 
@@ -52,16 +52,16 @@ same way.
 Deprecation policy
 ==================
 
-We aim to maintain support for deprecated Scrapy features for at least 1 year.
+We aim to maintain support for deprecated Frapy features for at least 1 year.
 
-For example, if a feature is deprecated in a Scrapy version released on
+For example, if a feature is deprecated in a Frapy version released on
 June 15th 2020, that feature should continue to work in versions released on
 June 14th 2021 or before that.
 
-Any new Scrapy release after a year *may* remove support for that deprecated
+Any new Frapy release after a year *may* remove support for that deprecated
 feature.
 
-All deprecated features removed in a Scrapy release are explicitly mentioned in
+All deprecated features removed in a Frapy release are explicitly mentioned in
 the :ref:`release notes <news>`.
 
 

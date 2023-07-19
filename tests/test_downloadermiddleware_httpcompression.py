@@ -10,7 +10,7 @@ from frapy.downloadermiddlewares.httpcompression import (
     ACCEPTED_ENCODINGS,
     HttpCompressionMiddleware,
 )
-from frapy.exceptions import NotConfigured, ScrapyDeprecationWarning
+from frapy.exceptions import NotConfigured, FrapyDeprecationWarning
 from frapy.http import HtmlResponse, Request, Response
 from frapy.responsetypes import responsetypes
 from frapy.spiders import Spider
@@ -386,7 +386,7 @@ class HttpCompressionSubclassTest(TestCase):
         messages = tuple(
             str(warning.message)
             for warning in caught_warnings
-            if warning.category is ScrapyDeprecationWarning
+            if warning.category is FrapyDeprecationWarning
         )
         self.assertEqual(
             messages,

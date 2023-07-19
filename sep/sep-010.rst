@@ -10,7 +10,7 @@ Status   Obsolete (JSON-RPC API implemented instead)
 SEP-010: REST API
 =================
 
-This SEP proposes a JSON REST API for controlling Scrapy in server-mode, which
+This SEP proposes a JSON REST API for controlling Frapy in server-mode, which
 is launched with: ``frapy-ctl.py start``
 
 Operations

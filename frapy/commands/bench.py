@@ -4,11 +4,11 @@ import time
 from urllib.parse import urlencode
 
 import frapy
-from frapy.commands import ScrapyCommand
+from frapy.commands import FrapyCommand
 from frapy.linkextractors import LinkExtractor
 
 
-class Command(ScrapyCommand):
+class Command(FrapyCommand):
     default_settings = {
         "LOG_LEVEL": "INFO",
         "LOGSTATS_INTERVAL": 1,

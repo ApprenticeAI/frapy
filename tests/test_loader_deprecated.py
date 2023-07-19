@@ -19,7 +19,7 @@ from itemloaders.processors import (
 from frapy.item import Field, Item
 from frapy.loader import ItemLoader
 from frapy.loader.common import wrap_loader_context
-from frapy.utils.deprecate import ScrapyDeprecationWarning
+from frapy.utils.deprecate import FrapyDeprecationWarning
 from frapy.utils.misc import extract_regex
 
 
@@ -207,7 +207,7 @@ class BasicItemLoaderTest(unittest.TestCase):
         proc = MapCompose(filter_world, str.upper)
         self.assertEqual(
             proc(["hello", "world", "this", "is", "frapy"]),
-            ["HELLO", "THIS", "IS", "SCRAPY"],
+            ["HELLO", "THIS", "IS", "FRAPY"],
         )
 
     def test_map_compose_filter_multil(self):
@@ -249,7 +249,7 @@ class BasicItemLoaderTest(unittest.TestCase):
 
         il = ChildChildItemLoader()
         il.add_value("url", "http://frapy.org")
-        self.assertEqual(il.get_output_value("url"), ["HTTP://SCRAPY.ORG"])
+        self.assertEqual(il.get_output_value("url"), ["HTTP://FRAPY.ORG"])
         il.add_value("name", "marta")
         self.assertEqual(il.get_output_value("name"), ["Marta"])
 
@@ -657,7 +657,7 @@ class ProcessorsTest(unittest.TestCase):
         proc = MapCompose(filter_world, str.upper)
         self.assertEqual(
             proc(["hello", "world", "this", "is", "frapy"]),
-            ["HELLO", "THIS", "IS", "SCRAPY"],
+            ["HELLO", "THIS", "IS", "FRAPY"],
         )
         proc = MapCompose(filter_world, str.upper)
         self.assertEqual(proc(None), [])
@@ -731,14 +731,14 @@ class DeprecatedUtilityFunctionsTestCase(unittest.TestCase):
             wrap_loader_context(function, context={})
 
             assert len(w) == 1
-            assert issubclass(w[0].category, ScrapyDeprecationWarning)
+            assert issubclass(w[0].category, FrapyDeprecationWarning)
 
     def test_deprecated_extract_regex(self):
         with warnings.catch_warnings(record=True) as w:
             extract_regex(r"\w+", "this is a test")
 
             assert len(w) == 1
-            assert issubclass(w[0].category, ScrapyDeprecationWarning)
+            assert issubclass(w[0].category, FrapyDeprecationWarning)
 
 
 if __name__ == "__main__":

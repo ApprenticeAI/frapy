@@ -17,7 +17,7 @@ achieve this, such as:
     API based on :mod:`~xml.etree.ElementTree`. (lxml is not part of the Python
     standard library.)
 
-Scrapy comes with its own mechanism for extracting data. They're called
+Frapy comes with its own mechanism for extracting data. They're called
 selectors because they "select" certain parts of the HTML document specified
 either by `XPath`_ or `CSS`_ expressions.
 
@@ -26,12 +26,12 @@ used with HTML. `CSS`_ is a language for applying styles to HTML documents. It
 defines selectors to associate those styles with specific HTML elements.
 
 .. note::
-    Scrapy Selectors is a thin wrapper around `parsel`_ library; the purpose of
-    this wrapper is to provide better integration with Scrapy Response objects.
+    Frapy Selectors is a thin wrapper around `parsel`_ library; the purpose of
+    this wrapper is to provide better integration with Frapy Response objects.
 
     `parsel`_ is a stand-alone web scraping library which can be used without
-    Scrapy. It uses `lxml`_ library under the hood, and implements an
-    easy API on top of lxml API. It means Scrapy selectors are very similar
+    Frapy. It uses `lxml`_ library under the hood, and implements an
+    easy API on top of lxml API. It means Frapy selectors are very similar
     in speed and parsing accuracy to lxml.
 
 .. _BeautifulSoup: https://www.crummy.com/software/BeautifulSoup/
@@ -66,11 +66,11 @@ more shortcuts: ``response.xpath()`` and ``response.css()``:
     >>> response.css("span::text").get()
     'good'
 
-Scrapy selectors are instances of :class:`~frapy.Selector` class
+Frapy selectors are instances of :class:`~frapy.Selector` class
 constructed by passing either :class:`~frapy.http.TextResponse` object or
 markup as a string (in ``text`` argument).
 
-Usually there is no need to construct Scrapy selectors manually:
+Usually there is no need to construct Frapy selectors manually:
 ``response`` object is available in Spider callbacks, so in most cases
 it is more convenient to use ``response.css()`` and ``response.xpath()``
 shortcuts. By using ``response.selector`` or one of these shortcuts
@@ -103,8 +103,8 @@ Constructing from response - :class:`~frapy.http.HtmlResponse` is one of
 Using selectors
 ---------------
 
-To explain how to use the selectors we'll use the ``Scrapy shell`` (which
-provides interactive testing) and an example page located in the Scrapy
+To explain how to use the selectors we'll use the ``Frapy shell`` (which
+provides interactive testing) and an example page located in the Frapy
 documentation server:
 
     https://docs.frapy.org/en/latest/_static/selectors-sample1.html
@@ -174,7 +174,7 @@ selectors. This API can be used for quickly selecting nested data:
 
 If you want to extract only the first matched element, you can call the
 selector ``.get()`` (or its alias ``.extract_first()`` commonly used in
-previous Scrapy versions):
+previous Frapy versions):
 
 .. code-block:: pycon
 
@@ -273,14 +273,14 @@ Extensions to CSS Selectors
 Per W3C standards, `CSS selectors`_ do not support selecting text nodes
 or attribute values.
 But selecting these is so essential in a web scraping context
-that Scrapy (parsel) implements a couple of **non-standard pseudo-elements**:
+that Frapy (parsel) implements a couple of **non-standard pseudo-elements**:
 
 * to select text nodes, use ``::text``
 * to select attribute values, use ``::attr(name)`` where *name* is the
   name of the attribute that you want the value of
 
 .. warning::
-    These pseudo-elements are Scrapy-/Parsel-specific.
+    These pseudo-elements are Frapy-/Parsel-specific.
     They will most probably not work with other libraries like
     `lxml`_ or `PyQuery`_.
 
@@ -397,7 +397,7 @@ XPath syntax has a few advantages: it is a standard XPath feature, and
 ``@attributes`` can be used in other parts of an XPath expression - e.g.
 it is possible to filter by attribute value.
 
-Scrapy also provides an extension to CSS selectors (``::attr(...)``)
+Frapy also provides an extension to CSS selectors (``::attr(...)``)
 which allows to get attribute values:
 
 .. code-block:: pycon
@@ -467,12 +467,12 @@ Use it to extract just the first matching string:
 extract() and extract_first()
 -----------------------------
 
-If you're a long-time Scrapy user, you're probably familiar
+If you're a long-time Frapy user, you're probably familiar
 with ``.extract()`` and ``.extract_first()`` selector methods. Many blog posts
 and tutorials are using them as well. These methods are still supported
-by Scrapy, there are **no plans** to deprecate them.
+by Frapy, there are **no plans** to deprecate them.
 
-However, Scrapy usage docs are now written using ``.get()`` and
+However, Frapy usage docs are now written using ``.get()`` and
 ``.getall()`` methods. We feel that these new methods result in a more concise
 and readable code.
 
@@ -524,7 +524,7 @@ result either ``.extract()`` or ``.extract_first()`` should be called.
 Working with XPaths
 ===================
 
-Here are some tips which may help you to use XPath with Scrapy selectors
+Here are some tips which may help you to use XPath with Frapy selectors
 effectively. If you are not much familiar with XPath yet,
 you may want to take a look first at this `XPath tutorial`_.
 
@@ -595,7 +595,7 @@ other classes, and if you just use ``contains(@class, 'someclass')`` to make up
 for that you may end up with more elements that you want, if they have a different
 class name that shares the string ``someclass``.
 
-As it turns out, Scrapy selectors allow you to chain selectors, so most of the time
+As it turns out, Frapy selectors allow you to chain selectors, so most of the time
 you can just select by class using CSS and then switch to XPath when needed:
 
 .. code-block:: pycon
@@ -750,7 +750,7 @@ All variable references must have a binding value when calling ``.xpath()``
 (otherwise you'll get a ``ValueError: XPath error:`` exception).
 This is done by passing as many named arguments as necessary.
 
-`parsel`_, the library powering Scrapy selectors, has more details and examples
+`parsel`_, the library powering Frapy selectors, has more details and examples
 on `XPath variables`_.
 
 .. _XPath variables: https://parsel.readthedocs.io/en/latest/usage.html#variables-in-xpath-expressions
@@ -818,7 +818,7 @@ of relevance, are:
 
 1. Removing namespaces requires to iterate and modify all nodes in the
    document, which is a reasonably expensive operation to perform by default
-   for all documents crawled by Scrapy
+   for all documents crawled by Frapy
 
 2. There could be some cases where using namespaces is actually required, in
    case some element names clash between namespaces. These cases are very rare
@@ -828,7 +828,7 @@ of relevance, are:
 Using EXSLT extensions
 ----------------------
 
-Being built atop `lxml`_, Scrapy selectors support some `EXSLT`_ extensions
+Being built atop `lxml`_, Frapy selectors support some `EXSLT`_ extensions
 and come with these pre-registered namespaces to use in XPath expressions:
 
 
@@ -973,7 +973,7 @@ inside another ``itemscope``.
 Other XPath extensions
 ----------------------
 
-Scrapy selectors also provide a sorely missed XPath extension function
+Frapy selectors also provide a sorely missed XPath extension function
 ``has-class`` that returns ``True`` for nodes that have all of the specified
 HTML classes.
 

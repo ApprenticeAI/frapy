@@ -16,7 +16,7 @@ their ``x`` method.
 Motivation
 ==========
 
-When you use Selectors in Scrapy, your final goal is to "extract" the data that
+When you use Selectors in Frapy, your final goal is to "extract" the data that
 you've selected, as the [https://docs.frapy.org/en/latest/topics/selectors.html
 XPath Selectors documentation] says (bolding by me):
 
@@ -25,7 +25,7 @@ XPath Selectors documentation] says (bolding by me):
 
 ..
 
-   Scrapy comes with its own mechanism for **extracting** data. They’re called
+   Frapy comes with its own mechanism for **extracting** data. They’re called
    ``XPath`` selectors (or just “selectors”, for short) because they “select”
    certain parts of the HTML document specified by ``XPath`` expressions.
 
@@ -47,9 +47,9 @@ XPath Selectors documentation] says (bolding by me):
 Rationale
 =========
 
-As and there is no ``Extractor`` object in Scrapy and what you want to finally
+As and there is no ``Extractor`` object in Frapy and what you want to finally
 perform with ``Selectors`` is extracting data, we propose the renaming of
-``Selectors`` to ``Extractors``. (In Scrapy for extracting you use selectors is
+``Selectors`` to ``Extractors``. (In Frapy for extracting you use selectors is
 really weird :) )
 
 Additional changes

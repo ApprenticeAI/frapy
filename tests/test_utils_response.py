@@ -3,7 +3,7 @@ import warnings
 from pathlib import Path
 from urllib.parse import urlparse
 
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 from frapy.http import HtmlResponse, Response, TextResponse
 from frapy.utils.python import to_bytes
 from frapy.utils.response import (
@@ -22,7 +22,7 @@ class ResponseUtilsTest(unittest.TestCase):
 
     def test_response_httprepr(self):
         with warnings.catch_warnings():
-            warnings.simplefilter("ignore", ScrapyDeprecationWarning)
+            warnings.simplefilter("ignore", FrapyDeprecationWarning)
 
             r1 = Response("http://www.example.com")
             self.assertEqual(response_httprepr(r1), b"HTTP/1.1 200 OK\r\n\r\n")

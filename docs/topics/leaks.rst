@@ -4,18 +4,18 @@
 Debugging memory leaks
 ======================
 
-In Scrapy, objects such as requests, responses and items have a finite
+In Frapy, objects such as requests, responses and items have a finite
 lifetime: they are created, used for a while, and finally destroyed.
 
 From all those objects, the Request is probably the one with the longest
 lifetime, as it stays waiting in the Scheduler queue until it's time to process
 it. For more info see :ref:`topics-architecture`.
 
-As these Scrapy objects have a (rather long) lifetime, there is always the risk
+As these Frapy objects have a (rather long) lifetime, there is always the risk
 of accumulating them in memory without releasing them properly and thus causing
 what is known as a "memory leak".
 
-To help debugging memory leaks, Scrapy provides a built-in mechanism for
+To help debugging memory leaks, Frapy provides a built-in mechanism for
 tracking objects references called :ref:`trackref <topics-leaks-trackrefs>`,
 and you can also use a third-party library called :ref:`muppy
 <topics-leaks-muppy>` for more advanced memory debugging (see below for more
@@ -26,11 +26,11 @@ Common causes of memory leaks
 =============================
 
 It happens quite often (sometimes by accident, sometimes on purpose) that the
-Scrapy developer passes objects referenced in Requests (for example, using the
+Frapy developer passes objects referenced in Requests (for example, using the
 :attr:`~frapy.Request.cb_kwargs` or :attr:`~frapy.Request.meta`
 attributes or the request callback function) and that effectively bounds the
 lifetime of those referenced objects to the lifetime of the Request. This is,
-by far, the most common cause of memory leaks in Scrapy projects, and a quite
+by far, the most common cause of memory leaks in Frapy projects, and a quite
 difficult one to debug for newcomers.
 
 In big projects, the spiders are typically written by different people and some
@@ -47,7 +47,7 @@ you're running :ref:`multiple spiders per process <run-multiple-spiders>`.
 Too Many Requests?
 ------------------
 
-By default Scrapy keeps the request queue in memory; it includes
+By default Frapy keeps the request queue in memory; it includes
 :class:`~frapy.Request` objects and all objects
 referenced in Request attributes (e.g. in :attr:`~frapy.Request.cb_kwargs`
 and :attr:`~frapy.Request.meta`).
@@ -60,7 +60,7 @@ in control.
 Debugging memory leaks with ``trackref``
 ========================================
 
-:mod:`trackref` is a module provided by Scrapy to debug the most common cases of
+:mod:`trackref` is a module provided by Frapy to debug the most common cases of
 memory leaks. It basically tracks the references to all live Request,
 Response, Item, Spider and Selector objects.
 
@@ -262,9 +262,9 @@ For more info about muppy, refer to the `muppy documentation`_.
 Leaks without leaks
 ===================
 
-Sometimes, you may notice that the memory usage of your Scrapy process will
+Sometimes, you may notice that the memory usage of your Frapy process will
 only increase, but never decrease. Unfortunately, this could happen even
-though neither Scrapy nor your project are leaking memory. This is due to a
+though neither Frapy nor your project are leaking memory. This is due to a
 (not so well) known problem of Python, which may not return released memory to
 the operating system in some cases. For more information on this issue see:
 

@@ -1,5 +1,5 @@
 #
-# Makefile for Scrapy documentation [based on Python documentation Makefile]
+# Makefile for Frapy documentation [based on Python documentation Makefile]
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 

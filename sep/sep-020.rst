@@ -160,7 +160,7 @@ Log Output
 
 ::
 
-    2012-11-19 14:21:22-0600 [frapy] INFO: Scrapy 0.17.0 started (bot: frapy-loader)
+    2012-11-19 14:21:22-0600 [frapy] INFO: Frapy 0.17.0 started (bot: frapy-loader)
     2012-11-19 14:21:22-0600 [frapy] DEBUG: Enabled extensions: LogStats, TelnetConsole, CloseSpider, WebService, CoreStats, SpiderState
     2012-11-19 14:21:22-0600 [frapy] DEBUG: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, RedirectMiddleware, CookiesMiddleware, HttpCompressionMiddleware, ChunkedTransferMiddleware, DownloaderStats, HttpCacheMiddleware
     2012-11-19 14:21:22-0600 [frapy] DEBUG: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware

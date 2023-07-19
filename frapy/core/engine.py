@@ -1,5 +1,5 @@
 """
-This is the Scrapy engine which controls the Scheduler, Downloader and Spider.
+This is the Frapy engine which controls the Scheduler, Downloader and Spider.
 
 For more information see docs/topics/architecture.rst
 
@@ -26,7 +26,7 @@ from twisted.python.failure import Failure
 from frapy import signals
 from frapy.core.downloader import Downloader
 from frapy.core.scraper import Scraper
-from frapy.exceptions import CloseSpider, DontCloseSpider, ScrapyDeprecationWarning
+from frapy.exceptions import CloseSpider, DontCloseSpider, FrapyDeprecationWarning
 from frapy.http import Request, Response
 from frapy.settings import BaseSettings
 from frapy.spiders import Spider
@@ -257,7 +257,7 @@ class ExecutionEngine:
         if spider is not None:
             warnings.warn(
                 "Passing a 'spider' argument to ExecutionEngine.spider_is_idle is deprecated",
-                category=ScrapyDeprecationWarning,
+                category=FrapyDeprecationWarning,
                 stacklevel=2,
             )
         if self.slot is None:
@@ -277,7 +277,7 @@ class ExecutionEngine:
         if spider is not None:
             warnings.warn(
                 "Passing a 'spider' argument to ExecutionEngine.crawl is deprecated",
-                category=ScrapyDeprecationWarning,
+                category=FrapyDeprecationWarning,
                 stacklevel=2,
             )
             if spider is not self.spider:
@@ -303,7 +303,7 @@ class ExecutionEngine:
         if spider is not None:
             warnings.warn(
                 "Passing a 'spider' argument to ExecutionEngine.download is deprecated",
-                category=ScrapyDeprecationWarning,
+                category=FrapyDeprecationWarning,
                 stacklevel=2,
             )
             if spider is not self.spider:
@@ -474,7 +474,7 @@ class ExecutionEngine:
     def open_spiders(self) -> list:
         warnings.warn(
             "ExecutionEngine.open_spiders is deprecated, please use ExecutionEngine.spider instead",
-            category=ScrapyDeprecationWarning,
+            category=FrapyDeprecationWarning,
             stacklevel=2,
         )
         return [self.spider] if self.spider is not None else []
@@ -482,7 +482,7 @@ class ExecutionEngine:
     def has_capacity(self) -> bool:
         warnings.warn(
             "ExecutionEngine.has_capacity is deprecated",
-            ScrapyDeprecationWarning,
+            FrapyDeprecationWarning,
             stacklevel=2,
         )
         return not bool(self.slot)
@@ -491,7 +491,7 @@ class ExecutionEngine:
         warnings.warn(
             "ExecutionEngine.schedule is deprecated, please use "
             "ExecutionEngine.crawl or ExecutionEngine.download instead",
-            category=ScrapyDeprecationWarning,
+            category=FrapyDeprecationWarning,
             stacklevel=2,
         )
         if self.slot is None:

@@ -153,9 +153,9 @@ class Https2TestCase(Https11TestCase):
 class Https2WrongHostnameTestCase(Https2TestCase):
     tls_log_message = (
         'SSL connection certificate: issuer "/C=XW/ST=XW/L=The '
-        'Internet/O=Scrapy/CN=www.example.com/emailAddress=test@example.com", '
+        'Internet/O=Frapy/CN=www.example.com/emailAddress=test@example.com", '
         'subject "/C=XW/ST=XW/L=The '
-        'Internet/O=Scrapy/CN=www.example.com/emailAddress=test@example.com"'
+        'Internet/O=Frapy/CN=www.example.com/emailAddress=test@example.com"'
     )
 
     # above tests use a server certificate for "localhost",
@@ -187,8 +187,8 @@ class Https2InvalidDNSPattern(Https2TestCase):
         except ImportError:
             raise unittest.SkipTest("cryptography lib is too old")
         self.tls_log_message = (
-            'SSL connection certificate: issuer "/C=IE/O=Scrapy/CN=127.0.0.1", '
-            'subject "/C=IE/O=Scrapy/CN=127.0.0.1"'
+            'SSL connection certificate: issuer "/C=IE/O=Frapy/CN=127.0.0.1", '
+            'subject "/C=IE/O=Frapy/CN=127.0.0.1"'
         )
         super().setUp()
 

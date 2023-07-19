@@ -74,7 +74,7 @@ def mustbe_deferred(f: Callable, *args, **kw) -> Deferred:
         result = f(*args, **kw)
     # FIXME: Hack to avoid introspecting tracebacks. This to speed up
     # processing of IgnoreRequest errors which are, by far, the most common
-    # exception in Scrapy - see #125
+    # exception in Frapy - see #125
     except IgnoreRequest as e:
         return defer_fail(failure.Failure(e))
     except Exception:
@@ -332,7 +332,7 @@ def deferred_to_future(d: Deferred) -> Future:
     Return an :class:`asyncio.Future` object that wraps *d*.
 
     When :ref:`using the asyncio reactor <install-asyncio>`, you cannot await
-    on :class:`~twisted.internet.defer.Deferred` objects from :ref:`Scrapy
+    on :class:`~twisted.internet.defer.Deferred` objects from :ref:`Frapy
     callables defined as coroutines <coroutine-support>`, you can only await on
     ``Future`` objects. Wrapping ``Deferred`` objects into ``Future`` objects
     allows you to wait on them::
@@ -350,10 +350,10 @@ def maybe_deferred_to_future(d: Deferred) -> Union[Deferred, Future]:
     """
     .. versionadded:: 2.6.0
 
-    Return *d* as an object that can be awaited from a :ref:`Scrapy callable
+    Return *d* as an object that can be awaited from a :ref:`Frapy callable
     defined as a coroutine <coroutine-support>`.
 
-    What you can await in Scrapy callables defined as coroutines depends on the
+    What you can await in Frapy callables defined as coroutines depends on the
     value of :setting:`TWISTED_REACTOR`:
 
     -   When not using the asyncio reactor, you can only await on

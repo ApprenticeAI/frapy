@@ -8,7 +8,7 @@ from twisted import version as twisted_version
 from twisted.trial import unittest
 
 
-class ScrapyUtilsTest(unittest.TestCase):
+class FrapyUtilsTest(unittest.TestCase):
     def test_required_openssl_version(self):
         try:
             module = import_module("OpenSSL")
@@ -26,7 +26,7 @@ class ScrapyUtilsTest(unittest.TestCase):
 
         See https://github.com/frapy/frapy/pull/4814#issuecomment-706230011
         """
-        if not os.environ.get("_SCRAPY_PINNED", None):
+        if not os.environ.get("_FRAPY_PINNED", None):
             self.skipTest("Not in a pinned environment")
 
         tox_config_file_path = Path(__file__).parent / ".." / "tox.ini"

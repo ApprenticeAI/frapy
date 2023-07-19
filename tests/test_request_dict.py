@@ -4,7 +4,7 @@ import warnings
 from contextlib import suppress
 
 from frapy import Request, Spider
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 from frapy.http import FormRequest, JsonRequest
 from frapy.utils.request import request_from_dict
 
@@ -178,7 +178,7 @@ class DeprecatedMethodsRequestSerializationTest(RequestSerializationTest):
             self._assert_same_request(request, request_copy)
 
             self.assertEqual(len(caught), 1)
-            self.assertTrue(issubclass(caught[0].category, ScrapyDeprecationWarning))
+            self.assertTrue(issubclass(caught[0].category, FrapyDeprecationWarning))
             self.assertEqual(
                 "Module frapy.utils.reqser is deprecated, please use request.to_dict method"
                 " and/or frapy.utils.request.request_from_dict instead",

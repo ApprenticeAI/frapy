@@ -581,8 +581,8 @@ class Https11TestCase(Http11TestCase):
     scheme = "https"
 
     tls_log_message = (
-        'SSL connection certificate: issuer "/C=IE/O=Scrapy/CN=localhost", '
-        'subject "/C=IE/O=Scrapy/CN=localhost"'
+        'SSL connection certificate: issuer "/C=IE/O=Frapy/CN=localhost", '
+        'subject "/C=IE/O=Frapy/CN=localhost"'
     )
 
     @defer.inlineCallbacks
@@ -637,8 +637,8 @@ class Https11InvalidDNSPattern(Https11TestCase):
         except ImportError:
             raise unittest.SkipTest("cryptography lib is too old")
         self.tls_log_message = (
-            'SSL connection certificate: issuer "/C=IE/O=Scrapy/CN=127.0.0.1", '
-            'subject "/C=IE/O=Scrapy/CN=127.0.0.1"'
+            'SSL connection certificate: issuer "/C=IE/O=Frapy/CN=127.0.0.1", '
+            'subject "/C=IE/O=Frapy/CN=127.0.0.1"'
         )
         super().setUp()
 

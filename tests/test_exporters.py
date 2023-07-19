@@ -12,7 +12,7 @@ from warnings import catch_warnings, filterwarnings
 import lxml.etree
 from itemadapter import ItemAdapter
 
-from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exceptions import FrapyDeprecationWarning
 from frapy.exporters import (
     BaseItemExporter,
     CsvItemExporter,
@@ -196,7 +196,7 @@ class PythonItemExporterTest(BaseItemExporterTest):
 
     def test_export_binary(self):
         with catch_warnings():
-            filterwarnings("ignore", category=ScrapyDeprecationWarning)
+            filterwarnings("ignore", category=FrapyDeprecationWarning)
             exporter = PythonItemExporter(binary=True)
             value = self.item_class(name="John\xa3", age="22")
             expected = {b"name": b"John\xc2\xa3", b"age": b"22"}

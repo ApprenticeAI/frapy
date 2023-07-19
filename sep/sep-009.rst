@@ -10,14 +10,14 @@ Status   Document in progress (being written)
 SEP-009 - Singletons removal
 ============================
 
-This SEP proposes a refactoring of the Scrapy to get ri of singletons, which
+This SEP proposes a refactoring of the Frapy to get ri of singletons, which
 will result in a cleaner API and will allow us to implement the library API
 proposed in :doc:`sep-004`.
 
 Current singletons
 ==================
 
-Scrapy 0.7 has the following singletons:
+Frapy 0.7 has the following singletons:
 
 - Execution engine (``frapy.core.engine.frapyengine``)
 - Execution manager (``frapy.core.manager.frapymanager``)
@@ -108,15 +108,15 @@ When running from **command line** (the only mechanism supported so far) the
 ``frapy.command.cmdline`` module will:
 
 1. instantiate a ``Settings`` object and populate it with the values in
-   SCRAPY_SETTINGS_MODULE, and per-command overrides
+   FRAPY_SETTINGS_MODULE, and per-command overrides
 2. instantiate a ``Crawler`` object with the ``Settings`` object (the
    ``Crawler`` instantiates all its components based on the given settings)
 3. run ``Crawler.crawl()`` with the URLs or domains passed in the command line
 
-Using Scrapy as a library
+Using Frapy as a library
 =========================
 
-When using Scrapy with the **library API**, the programmer will:
+When using Frapy with the **library API**, the programmer will:
 
 1. instantiate a ``Settings`` object (which only has the defaults settings, by
    default) and override the desired settings
@@ -125,7 +125,7 @@ When using Scrapy with the **library API**, the programmer will:
 Open issues to resolve
 ======================
 
-- Should we pass ``Settings`` object to ``ScrapyCommand.add_options()``?
+- Should we pass ``Settings`` object to ``FrapyCommand.add_options()``?
 - How should spiders access settings?
    - Option 1. Pass ``Crawler`` object to spider ``__init__`` methods too
       - pro: one way to access all components (settings and signals being the

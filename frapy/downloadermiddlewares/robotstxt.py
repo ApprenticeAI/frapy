@@ -24,7 +24,7 @@ class RobotsTxtMiddleware:
     def __init__(self, crawler):
         if not crawler.settings.getbool("ROBOTSTXT_OBEY"):
             raise NotConfigured
-        self._default_useragent = crawler.settings.get("USER_AGENT", "Scrapy")
+        self._default_useragent = crawler.settings.get("USER_AGENT", "Frapy")
         self._robotstxt_useragent = crawler.settings.get("ROBOTSTXT_USER_AGENT", None)
         self.crawler = crawler
         self._parsers = {}

@@ -87,7 +87,7 @@ It is supposed to be write-only, but many previously loaded settings are
 needed to be accessed before freezing them. For example, the
 ``COMMANDS_MODULE`` setting allows loading more command default settings.
 Another example is that we need to read ``LOG_*`` settings early because we
-must be able to log errors on the load settings process. ``ScrapyCommands``
+must be able to log errors on the load settings process. ``FrapyCommands``
 may be configured based upon current settings, as users can plug custom
 commands. These are some of the reasons that suggest that we need a read-write
 access for this class.
@@ -108,7 +108,7 @@ SettingsReader
 
 It's intended to be the one used by core, extensions, and all components that
 use settings without modifying them. Because there are logical objects that
-change settings, such as ``ScrapyCommands``, use cases of each settings class
+change settings, such as ``FrapyCommands``, use cases of each settings class
 need to be comprehensively explained.
 
 New crawlers will be created with an instance of this class (The one returned
@@ -133,7 +133,7 @@ There will be 5 setting priorities used by default:
 
 There are a couple of issues here:
 
-- ``SCRAPY_PICKLED_SETTINGS_TO_OVERRIDE`` and ``SCRAPY_{settings}`` need-to-be
+- ``FRAPY_PICKLED_SETTINGS_TO_OVERRIDE`` and ``FRAPY_{settings}`` need-to-be
   deprecated environment variables: Can be kept, with a new or existing
   priority.
 
@@ -219,10 +219,10 @@ core components themselves. This should be the new way to create a spider from
 now on (instead of normally instantiate it as is currently).
 
 
-Scrapy commands
+Frapy commands
 ===============
 
-As already stated, ``ScrapyCommands`` modify the settings, so they need a
+As already stated, ``FrapyCommands`` modify the settings, so they need a
 ``SettingsLoader`` instance reference in order to do that.
 
 Present ``process_option`` implementations on Base and other commands read and
@@ -236,7 +236,7 @@ refactored API (Particularly ``crawl`` command).
 CrawlerProcess
 ==============
 
-``CrawlerProcess`` should be remove because Scrapy crawl command no longer
+``CrawlerProcess`` should be remove because Frapy crawl command no longer
 supports running multiple spiders. The preferred way for doing this is using
 the API manually, instantiating a separate Crawler for each spider, so
 ``CrawlerProcess`` has loosen its utility.
@@ -265,7 +265,7 @@ Startup process
 ===============
 
 This summarizes the current and new proposed mechanisms for starting up a
-Scrapy crawler. Imports and non representative functions are omitted for
+Frapy crawler. Imports and non representative functions are omitted for
 brevity.
 
 

@@ -19,9 +19,9 @@ Rationale
 The purpose of Leg Spiders is to define an architecture for building spiders
 based on smaller well-tested components (aka. Legs) that can be combined to
 achieve the desired functionality. These reusable components will benefit all
-Scrapy users by building a repository of well-tested components (legs) that can
+Frapy users by building a repository of well-tested components (legs) that can
 be shared among different spiders and projects. Some of them will come bundled
-with Scrapy.
+with Frapy.
 
 The Legs themselves can be also combined with sub-legs, in a hierarchical
 fashion. Legs are also spiders themselves, hence the name "Leg Spider".

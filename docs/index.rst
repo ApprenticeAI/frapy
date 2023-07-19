@@ -1,10 +1,10 @@
 .. _topics-index:
 
 ==============================
-Scrapy |version| documentation
+Frapy |version| documentation
 ==============================
 
-Scrapy is a fast high-level `web crawling`_ and `web scraping`_ framework, used
+Frapy is a fast high-level `web crawling`_ and `web scraping`_ framework, used
 to crawl websites and extract structured data from their pages. It can be used
 for a wide range of purposes, from data mining to monitoring and automated
 testing.
@@ -22,18 +22,18 @@ Having trouble? We'd like to help!
 * Try the :doc:`FAQ <faq>` -- it's got answers to some common questions.
 * Looking for specific information? Try the :ref:`genindex` or :ref:`modindex`.
 * Ask or search questions in `StackOverflow using the frapy tag`_.
-* Ask or search questions in the `Scrapy subreddit`_.
+* Ask or search questions in the `Frapy subreddit`_.
 * Search for questions on the archives of the `frapy-users mailing list`_.
 * Ask a question in the `#frapy IRC channel`_,
-* Report bugs with Scrapy in our `issue tracker`_.
-* Join the Discord community `Scrapy Discord`_.
+* Report bugs with Frapy in our `issue tracker`_.
+* Join the Discord community `Frapy Discord`_.
 
 .. _frapy-users mailing list: https://groups.google.com/forum/#!forum/frapy-users
-.. _Scrapy subreddit: https://www.reddit.com/r/frapy/
+.. _Frapy subreddit: https://www.reddit.com/r/frapy/
 .. _StackOverflow using the frapy tag: https://stackoverflow.com/tags/frapy
 .. _#frapy IRC channel: irc://irc.freenode.net/frapy
 .. _issue tracker: https://github.com/frapy/frapy/issues
-.. _Scrapy Discord: https://discord.gg/mv3yErfpvq
+.. _Frapy Discord: https://discord.gg/mv3yErfpvq
 
 
 First steps
@@ -49,16 +49,16 @@ First steps
    intro/examples
 
 :doc:`intro/overview`
-    Understand what Scrapy is and how it can help you.
+    Understand what Frapy is and how it can help you.
 
 :doc:`intro/install`
-    Get Scrapy installed on your computer.
+    Get Frapy installed on your computer.
 
 :doc:`intro/tutorial`
-    Write your first Scrapy project.
+    Write your first Frapy project.
 
 :doc:`intro/examples`
-    Learn more by playing with a pre-made Scrapy project.
+    Learn more by playing with a pre-made Frapy project.
 
 .. _section-basics:
 
@@ -83,7 +83,7 @@ Basic concepts
    topics/exceptions
 
 :doc:`topics/commands`
-    Learn about the command-line tool used to manage your Scrapy project.
+    Learn about the command-line tool used to manage your Frapy project.
 
 :doc:`topics/spiders`
     Write the rules to crawl your websites.
@@ -113,7 +113,7 @@ Basic concepts
     Convenient classes to extract links to follow from pages.
 
 :doc:`topics/settings`
-    Learn how to configure Scrapy and see all :ref:`available settings <topics-settings-ref>`.
+    Learn how to configure Frapy and see all :ref:`available settings <topics-settings-ref>`.
 
 :doc:`topics/exceptions`
     See all available exceptions and their meaning.
@@ -132,7 +132,7 @@ Built-in services
    topics/telnetconsole
 
 :doc:`topics/logging`
-    Learn how to use Python's builtin logging on Scrapy.
+    Learn how to use Python's builtin logging on Frapy.
 
 :doc:`topics/stats`
     Collect statistics about your scraping crawler.
@@ -171,16 +171,16 @@ Solving specific problems
     Get answers to most frequently asked questions.
 
 :doc:`topics/debug`
-    Learn how to debug common problems of your Scrapy spider.
+    Learn how to debug common problems of your Frapy spider.
 
 :doc:`topics/contracts`
     Learn how to use contracts for testing your spiders.
 
 :doc:`topics/practices`
-    Get familiar with some Scrapy common practices.
+    Get familiar with some Frapy common practices.
 
 :doc:`topics/broad-crawls`
-    Tune Scrapy for crawling a lot domains in parallel.
+    Tune Frapy for crawling a lot domains in parallel.
 
 :doc:`topics/developer-tools`
     Learn how to scrape with your browser's developer tools.
@@ -195,13 +195,13 @@ Solving specific problems
     Download files and/or images associated with your scraped items.
 
 :doc:`topics/deploy`
-    Deploying your Scrapy spiders and run them in a remote server.
+    Deploying your Frapy spiders and run them in a remote server.
 
 :doc:`topics/autothrottle`
     Adjust crawl rate dynamically based on load.
 
 :doc:`topics/benchmarking`
-    Check how Scrapy performs on your hardware.
+    Check how Frapy performs on your hardware.
 
 :doc:`topics/jobs`
     Learn how to pause and resume crawls for large spiders.
@@ -214,11 +214,11 @@ Solving specific problems
 
 .. _extending-frapy:
 
-Extending Scrapy
+Extending Frapy
 ================
 
 .. toctree::
-   :caption: Extending Scrapy
+   :caption: Extending Frapy
    :hidden:
 
    topics/architecture
@@ -233,7 +233,7 @@ Extending Scrapy
 
 
 :doc:`topics/architecture`
-    Understand the Scrapy architecture.
+    Understand the Frapy architecture.
 
 :doc:`topics/downloader-middleware`
     Customize how pages get requested and downloaded.
@@ -242,7 +242,7 @@ Extending Scrapy
     Customize the input and output of your spiders.
 
 :doc:`topics/extensions`
-    Extend Scrapy with your custom functionality
+    Extend Frapy with your custom functionality
 
 :doc:`topics/signals`
     See all available signals and how to work with them.
@@ -254,11 +254,11 @@ Extending Scrapy
     Quickly export your scraped items to a file (XML, CSV, etc).
 
 :doc:`topics/components`
-    Learn the common API and some good practices when building custom Scrapy
+    Learn the common API and some good practices when building custom Frapy
     components.
 
 :doc:`topics/api`
-    Use it on extensions and middlewares to extend Scrapy functionality.
+    Use it on extensions and middlewares to extend Frapy functionality.
 
 
 All the rest
@@ -273,10 +273,10 @@ All the rest
    versioning
 
 :doc:`news`
-    See what has changed in recent Scrapy versions.
+    See what has changed in recent Frapy versions.
 
 :doc:`contributing`
-    Learn how to contribute to the Scrapy project.
+    Learn how to contribute to the Frapy project.
 
 :doc:`versioning`
-    Understand Scrapy versioning and API stability.
+    Understand Frapy versioning and API stability.

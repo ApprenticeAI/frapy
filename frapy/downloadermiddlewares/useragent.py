@@ -6,7 +6,7 @@ from frapy import signals
 class UserAgentMiddleware:
     """This middleware allows spiders to override the user_agent"""
 
-    def __init__(self, user_agent="Scrapy"):
+    def __init__(self, user_agent="Frapy"):
         self.user_agent = user_agent
 
     @classmethod

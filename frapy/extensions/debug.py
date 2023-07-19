@@ -1,5 +1,5 @@
 """
-Extensions for debugging Scrapy
+Extensions for debugging Frapy
 
 See documentation in docs/topics/extensions.rst
 """

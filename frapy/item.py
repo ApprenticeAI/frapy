@@ -1,5 +1,5 @@
 """
-Scrapy Item
+Frapy Item
 
 See documentation in docs/topics/item.rst
 """
@@ -48,12 +48,12 @@ class Item(MutableMapping, object_ref, metaclass=ItemMeta):
     """
     Base class for scraped items.
 
-    In Scrapy, an object is considered an ``item`` if it is an instance of either
+    In Frapy, an object is considered an ``item`` if it is an instance of either
     :class:`Item` or :class:`dict`, or any subclass. For example, when the output of a
     spider callback is evaluated, only instances of :class:`Item` or
     :class:`dict` are passed to :ref:`item pipelines <topics-item-pipeline>`.
 
-    If you need instances of a custom class to be considered items by Scrapy,
+    If you need instances of a custom class to be considered items by Frapy,
     you must inherit from either :class:`Item` or :class:`dict`.
 
     Items must declare :class:`Field` attributes, which are processed and stored

@@ -1,4 +1,4 @@
-# Scrapy documentation build configuration file, created by
+# Frapy documentation build configuration file, created by
 # sphinx-quickstart on Mon Nov 24 12:02:52 2008.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -47,8 +47,8 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = "Scrapy"
-copyright = f"2008–{datetime.now().year}, Scrapy developers"
+project = "Frapy"
+copyright = f"2008–{datetime.now().year}, Frapy developers"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -181,7 +181,7 @@ html_copy_source = True
 # html_file_suffix = ''
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "Scrapydoc"
+htmlhelp_basename = "Frapydoc"
 
 html_css_files = [
     "custom.css",
@@ -200,7 +200,7 @@ html_css_files = [
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, document class [howto/manual]).
 latex_documents = [
-    ("index", "Scrapy.tex", "Scrapy Documentation", "Scrapy developers", "manual"),
+    ("index", "Frapy.tex", "Frapy Documentation", "Frapy developers", "manual"),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -248,7 +248,7 @@ coverage_ignore_pyobjects = [
     # should be irrelevant to developers using those contracts.
     r"\w+Contract\.(adjust_request_args|(pre|post)_process)$",
     # Methods of downloader middlewares are not documented, only the classes
-    # themselves, since downloader middlewares are controlled through Scrapy
+    # themselves, since downloader middlewares are controlled through Frapy
     # settings.
     r"^frapy\.downloadermiddlewares\.\w*?\.(\w*?Middleware|DownloaderStats)\.",
     # Base classes of downloader middlewares are implementation details that

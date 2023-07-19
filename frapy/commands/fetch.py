@@ -2,30 +2,30 @@ import sys
 
 from w3lib.url import is_url
 
-from frapy.commands import ScrapyCommand
+from frapy.commands import FrapyCommand
 from frapy.exceptions import UsageError
 from frapy.http import Request
 from frapy.utils.datatypes import SequenceExclude
 from frapy.utils.spider import DefaultSpider, spidercls_for_request
 
 
-class Command(ScrapyCommand):
+class Command(FrapyCommand):
     requires_project = False
 
     def syntax(self):
         return "[options] <url>"
 
     def short_desc(self):
-        return "Fetch a URL using the Scrapy downloader"
+        return "Fetch a URL using the Frapy downloader"
 
     def long_desc(self):
         return (
-            "Fetch a URL using the Scrapy downloader and print its content"
+            "Fetch a URL using the Frapy downloader and print its content"
             " to stdout. You may want to use --nolog to disable logging"
         )
 
     def add_options(self, parser):
-        ScrapyCommand.add_options(self, parser)
+        FrapyCommand.add_options(self, parser)
         parser.add_argument("--spider", dest="spider", help="use this spider")
         parser.add_argument(
             "--headers",

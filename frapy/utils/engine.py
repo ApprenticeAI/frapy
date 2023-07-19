@@ -1,4 +1,4 @@
-"""Some debugging functions for working with the Scrapy engine"""
+"""Some debugging functions for working with the Frapy engine"""
 
 # used in global tests code
 from time import time  # noqa: F401

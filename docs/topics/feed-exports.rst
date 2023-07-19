@@ -9,7 +9,7 @@ being able to store the scraped data properly and, quite often, that means
 generating an "export file" with the scraped data (commonly called "export
 feed") to be consumed by other systems.
 
-Scrapy provides this functionality out of the box with the Feed Exports, which
+Frapy provides this functionality out of the box with the Feed Exports, which
 allows you to generate feeds with the scraped items, using multiple
 serialization formats and storage backends.
 
@@ -171,7 +171,7 @@ The feeds are stored in a FTP server.
 -   Required external libraries: none
 
 FTP supports two different connection modes: `active or passive
-<https://stackoverflow.com/a/1699163>`_. Scrapy uses the passive connection
+<https://stackoverflow.com/a/1699163>`_. Frapy uses the passive connection
 mode by default. To use the active connection mode instead, set the
 :setting:`FEED_STORAGE_FTP_ACTIVE` setting to ``True``.
 
@@ -246,7 +246,7 @@ This storage backend uses :ref:`delayed file delivery <delayed-file-delivery>`.
 Standard output
 ---------------
 
-The feeds are written to the standard output of the Scrapy process.
+The feeds are written to the standard output of the Frapy process.
 
 -   URI scheme: ``stdout``
 -   Example URI: ``stdout:``
@@ -262,7 +262,7 @@ As indicated above, some of the described storage backends use delayed file
 delivery.
 
 These storage backends do not upload items to the feed URI as those items are
-scraped. Instead, Scrapy writes items into a temporary local file, and only
+scraped. Instead, Frapy writes items into a temporary local file, and only
 once all the file contents have been written (i.e. at the end of the crawl) is
 that file uploaded to the feed URI.
 
@@ -321,7 +321,7 @@ Post-Processing
 
 .. versionadded:: 2.6.0
 
-Scrapy provides an option to activate plugins to post-process feeds before they are exported
+Frapy provides an option to activate plugins to post-process feeds before they are exported
 to feed storages. In addition to using :ref:`builtin plugins <builtin-plugins>`, you
 can create your own :ref:`plugins <custom-plugins>`.
 
@@ -607,7 +607,7 @@ Default:
         "ftp": "frapy.extensions.feedexport.FTPFeedStorage",
     }
 
-A dict containing the built-in feed storage backends supported by Scrapy. You
+A dict containing the built-in feed storage backends supported by Frapy. You
 can disable any of these backends by assigning ``None`` to their URI scheme in
 :setting:`FEED_STORAGES`. E.g., to disable the built-in FTP storage backend
 (without replacement), place this in your ``settings.py``:
@@ -648,7 +648,7 @@ Default:
         "pickle": "frapy.exporters.PickleItemExporter",
     }
 
-A dict containing the built-in feed exporters supported by Scrapy. You can
+A dict containing the built-in feed exporters supported by Frapy. You can
 disable any of these exporters by assigning ``None`` to their serialization
 format in :setting:`FEED_EXPORTERS`. E.g., to disable the built-in CSV exporter
 (without replacement), place this in your ``settings.py``:
@@ -669,7 +669,7 @@ FEED_EXPORT_BATCH_ITEM_COUNT
 
 Default: ``0``
 
-If assigned an integer number higher than ``0``, Scrapy generates multiple output files
+If assigned an integer number higher than ``0``, Frapy generates multiple output files
 storing up to the specified number of items in each output file.
 
 When generating multiple output files, you must use at least one of the following

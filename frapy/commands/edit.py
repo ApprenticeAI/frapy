@@ -1,11 +1,11 @@
 import os
 import sys
 
-from frapy.commands import ScrapyCommand
+from frapy.commands import FrapyCommand
 from frapy.exceptions import UsageError
 
 
-class Command(ScrapyCommand):
+class Command(FrapyCommand):
     requires_project = True
     default_settings = {"LOG_ENABLED": False}
 

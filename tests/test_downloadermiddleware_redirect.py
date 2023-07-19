@@ -369,7 +369,7 @@ class MetaRefreshMiddlewareTest(unittest.TestCase):
         self.assertEqual(req2.url, "http://example.org/newpage")
 
     def test_ignore_tags_1_x_list(self):
-        """Test that Scrapy 1.x behavior remains possible"""
+        """Test that Frapy 1.x behavior remains possible"""
         settings = {"METAREFRESH_IGNORE_TAGS": ["script", "noscript"]}
         crawler = get_crawler(Spider, settings)
         mw = MetaRefreshMiddleware.from_crawler(crawler)

@@ -343,7 +343,7 @@ with multiples lines
         """
         Test whether errors happening anywhere in Crawler.crawl() are properly
         reported (and not somehow swallowed) after a graceful engine shutdown.
-        The errors should not come from within Scrapy's core but from within
+        The errors should not come from within Frapy's core but from within
         spiders/middlewares/etc., e.g. raised in Spider.start_requests(),
         SpiderMiddleware.process_start_requests(), etc.
         """

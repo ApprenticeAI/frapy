@@ -4,7 +4,7 @@
 Spider Middleware
 =================
 
-The spider middleware is a framework of hooks into Scrapy's spider processing
+The spider middleware is a framework of hooks into Frapy's spider processing
 mechanism where you can plug custom functionality to process the responses that
 are sent to :ref:`topics-spiders` for processing and to process the requests
 and items that are generated from spiders.
@@ -27,7 +27,7 @@ Here's an example:
     }
 
 The :setting:`SPIDER_MIDDLEWARES` setting is merged with the
-:setting:`SPIDER_MIDDLEWARES_BASE` setting defined in Scrapy (and not meant to
+:setting:`SPIDER_MIDDLEWARES_BASE` setting defined in Frapy (and not meant to
 be overridden) and then sorted by order to get the final sorted list of enabled
 middlewares: the first middleware is the one closer to the engine and the last
 is the one closer to the spider. In other words,
@@ -82,11 +82,11 @@ object gives you access, for example, to the :ref:`settings <topics-settings>`.
         :meth:`process_spider_input` should return ``None`` or raise an
         exception.
 
-        If it returns ``None``, Scrapy will continue processing this response,
+        If it returns ``None``, Frapy will continue processing this response,
         executing all other middlewares until, finally, the response is handed
         to the spider for processing.
 
-        If it raises an exception, Scrapy won't bother calling any other spider
+        If it raises an exception, Frapy won't bother calling any other spider
         middleware :meth:`process_spider_input` and will call the request
         errback if there is one, otherwise it will start the :meth:`process_spider_exception`
         chain. The output of the errback is chained back in the other
@@ -114,12 +114,12 @@ object gives you access, for example, to the :ref:`settings <topics-settings>`.
            which case ``result`` is an :term:`asynchronous iterable`.
 
         Consider defining this method as an :term:`asynchronous generator`,
-        which will be a requirement in a future version of Scrapy. However, if
+        which will be a requirement in a future version of Frapy. However, if
         you plan on sharing your spider middleware with other people, consider
-        either :ref:`enforcing Scrapy 2.7 <enforce-component-requirements>`
+        either :ref:`enforcing Frapy 2.7 <enforce-component-requirements>`
         as a minimum requirement of your spider middleware, or :ref:`making
         your spider middleware universal <universal-spider-middleware>` so that
-        it works with Scrapy versions earlier than Scrapy 2.7.
+        it works with Frapy versions earlier than Frapy 2.7.
 
         :param response: the response which generated this output from the
           spider
@@ -149,7 +149,7 @@ object gives you access, for example, to the :ref:`settings <topics-settings>`.
         iterable of :class:`~frapy.Request` or :ref:`item <topics-items>`
         objects.
 
-        If it returns ``None``, Scrapy will continue processing this exception,
+        If it returns ``None``, Frapy will continue processing this exception,
         executing any other :meth:`process_spider_exception` in the following
         middleware components, until no middleware components are left and the
         exception reaches the engine (where it's logged and discarded).
@@ -181,7 +181,7 @@ object gives you access, for example, to the :ref:`settings <topics-settings>`.
         .. note:: When implementing this method in your spider middleware, you
            should always return an iterable (that follows the input one) and
            not consume all ``start_requests`` iterator because it can be very
-           large (or even unbounded) and cause a memory overflow. The Scrapy
+           large (or even unbounded) and cause a memory overflow. The Frapy
            engine is designed to pull start requests while it has capacity to
            process them, so the start requests iterator can be effectively
            endless where there is some other condition for stopping the spider
@@ -197,9 +197,9 @@ object gives you access, for example, to the :ref:`settings <topics-settings>`.
 
        If present, this classmethod is called to create a middleware instance
        from a :class:`~frapy.crawler.Crawler`. It must return a new instance
-       of the middleware. Crawler object provides access to all Scrapy core
+       of the middleware. Crawler object provides access to all Frapy core
        components like settings and signals; it is a way for middleware to
-       access them and hook its functionality into Scrapy.
+       access them and hook its functionality into Frapy.
 
        :param crawler: crawler that uses this middleware
        :type crawler: :class:`~frapy.crawler.Crawler` object
@@ -209,7 +209,7 @@ object gives you access, for example, to the :ref:`settings <topics-settings>`.
 Built-in spider middleware reference
 ====================================
 
-This page describes all spider middleware components that come with Scrapy. For
+This page describes all spider middleware components that come with Frapy. For
 information on how to use them and how to write your own spider middleware, see
 the :ref:`spider middleware usage guide <topics-spider-middleware>`.
 
@@ -413,7 +413,7 @@ String value                             Class name (as a string)
 
 .. autoclass:: DefaultReferrerPolicy
 .. warning::
-    Scrapy's default referrer policy — just like `"no-referrer-when-downgrade"`_,
+    Frapy's default referrer policy — just like `"no-referrer-when-downgrade"`_,
     the W3C-recommended value for browsers — will send a non-empty
     "Referer" header from any ``http(s)://`` to any ``https://`` URL,
     even if the domain is different.
@@ -428,7 +428,7 @@ String value                             Class name (as a string)
     "no-referrer-when-downgrade" policy is the W3C-recommended default,
     and is used by major web browsers.
 
-    However, it is NOT Scrapy's default referrer policy (see :class:`DefaultReferrerPolicy`).
+    However, it is NOT Frapy's default referrer policy (see :class:`DefaultReferrerPolicy`).
 
 .. autoclass:: SameOriginPolicy
 

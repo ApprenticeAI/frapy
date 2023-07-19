@@ -1,14 +1,14 @@
 .. _intro-overview:
 
 ==================
-Scrapy at a glance
+Frapy at a glance
 ==================
 
-Scrapy (/ˈskreɪpaɪ/) is an application framework for crawling web sites and extracting
+Frapy (/ˈskreɪpaɪ/) is an application framework for crawling web sites and extracting
 structured data which can be used for a wide range of useful applications, like
 data mining, information processing or historical archival.
 
-Even though Scrapy was originally designed for `web scraping`_, it can also be
+Even though Frapy was originally designed for `web scraping`_, it can also be
 used to extract data using APIs (such as `Amazon Associates Web Services`_) or
 as a general purpose web crawler.
 
@@ -16,8 +16,8 @@ as a general purpose web crawler.
 Walk-through of an example spider
 =================================
 
-In order to show you what Scrapy brings to the table, we'll walk you through an
-example of a Scrapy Spider using the simplest way to run a spider.
+In order to show you what Frapy brings to the table, we'll walk you through an
+example of a Frapy Spider using the simplest way to run a spider.
 
 Here's the code for a spider that scrapes famous quotes from website
 https://quotes.toscrape.com, following the pagination:
@@ -61,7 +61,7 @@ quotes in JSON Lines format, containing text and author, looking like this::
 What just happened?
 -------------------
 
-When you ran the command ``frapy runspider quotes_spider.py``, Scrapy looked for a
+When you ran the command ``frapy runspider quotes_spider.py``, Frapy looked for a
 Spider definition inside it and ran it through its crawler engine.
 
 The crawl started by making requests to the URLs defined in the ``start_urls``
@@ -72,15 +72,15 @@ using a CSS Selector, yield a Python dict with the extracted quote text and auth
 look for a link to the next page and schedule another request using the same
 ``parse`` method as callback.
 
-Here you notice one of the main advantages about Scrapy: requests are
+Here you notice one of the main advantages about Frapy: requests are
 :ref:`scheduled and processed asynchronously <topics-architecture>`.  This
-means that Scrapy doesn't need to wait for a request to be finished and
+means that Frapy doesn't need to wait for a request to be finished and
 processed, it can send another request or do other things in the meantime. This
 also means that other requests can keep going even if some request fails or an
 error happens while handling it.
 
 While this enables you to do very fast crawls (sending multiple concurrent
-requests at the same time, in a fault-tolerant way) Scrapy also gives you
+requests at the same time, in a fault-tolerant way) Frapy also gives you
 control over the politeness of the crawl through :ref:`a few settings
 <topics-settings-ref>`. You can do things like setting a download delay between
 each request, limiting amount of concurrent requests per domain or per IP, and
@@ -100,8 +100,8 @@ to figure out these automatically.
 What else?
 ==========
 
-You've seen how to extract and store items from a website using Scrapy, but
-this is just the surface. Scrapy provides a lot of powerful features for making
+You've seen how to extract and store items from a website using Frapy, but
+this is just the surface. Frapy provides a lot of powerful features for making
 scraping easy and efficient, such as:
 
 * Built-in support for :ref:`selecting and extracting <topics-selectors>` data
@@ -134,7 +134,7 @@ scraping easy and efficient, such as:
   - and more
 
 * A :ref:`Telnet console <topics-telnetconsole>` for hooking into a Python
-  console running inside your Scrapy process, to introspect and debug your
+  console running inside your Frapy process, to introspect and debug your
   crawler
 
 * Plus other goodies like reusable spiders to crawl sites from `Sitemaps`_ and
@@ -145,9 +145,9 @@ scraping easy and efficient, such as:
 What's next?
 ============
 
-The next steps for you are to :ref:`install Scrapy <intro-install>`,
+The next steps for you are to :ref:`install Frapy <intro-install>`,
 :ref:`follow through the tutorial <intro-tutorial>` to learn how to create
-a full-blown Scrapy project and `join the community`_. Thanks for your
+a full-blown Frapy project and `join the community`_. Thanks for your
 interest!
 
 .. _join the community: https://frapy.org/community/

@@ -3,10 +3,10 @@
 .. _topics-frapyd:
 
 =======
-Scrapyd
+Frapyd
 =======
 
-Scrapyd has been moved into a separate project.
+Frapyd has been moved into a separate project.
 
 Its documentation is now hosted at:
 

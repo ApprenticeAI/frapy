@@ -1,10 +1,10 @@
 import json
 
-from frapy.commands import ScrapyCommand
+from frapy.commands import FrapyCommand
 from frapy.settings import BaseSettings
 
 
-class Command(ScrapyCommand):
+class Command(FrapyCommand):
     requires_project = False
     default_settings = {"LOG_ENABLED": False, "SPIDER_LOADER_WARN_ONLY": True}
 
@@ -15,7 +15,7 @@ class Command(ScrapyCommand):
         return "Get settings values"
 
     def add_options(self, parser):
-        ScrapyCommand.add_options(self, parser)
+        FrapyCommand.add_options(self, parser)
         parser.add_argument(
             "--get", dest="get", metavar="SETTING", help="print raw setting value"
         )

@@ -21,7 +21,7 @@ for extending and overriding different field parsing rules, either by spider,
 or by source format (HTML, XML, etc) without becoming a nightmare to maintain.
 
 .. note:: Item Loaders are an extension of the itemloaders_ library that make it
-    easier to work with Scrapy by adding support for
+    easier to work with Frapy by adding support for
     :ref:`responses <topics-request-response>`.
 
 Using Item Loaders to populate items
@@ -437,7 +437,7 @@ rule (as input processors do). See also:
 
 There are many other possible ways to extend, inherit and override your Item
 Loaders, and different Item Loaders hierarchies may fit better for different
-projects. Scrapy only provides the mechanism; it doesn't impose any specific
+projects. Frapy only provides the mechanism; it doesn't impose any specific
 organization of your Loaders collection - that's up to you and your project's
 needs.
 

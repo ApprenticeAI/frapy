@@ -1,6 +1,6 @@
 """
 This module implements the Response class which is used to represent HTTP
-responses in Scrapy.
+responses in Frapy.
 
 See documentation in docs/topics/request-response.rst
 """

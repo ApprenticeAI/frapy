@@ -15,7 +15,7 @@ from w3lib.html import replace_entities
 
 from frapy.item import Item
 from frapy.utils.datatypes import LocalWeakReferencedCache
-from frapy.utils.deprecate import ScrapyDeprecationWarning
+from frapy.utils.deprecate import FrapyDeprecationWarning
 from frapy.utils.python import flatten, to_unicode
 
 _ITERABLE_SINGLE_VALUES = dict, Item, str, bytes
@@ -98,7 +98,7 @@ def extract_regex(regex, text, encoding="utf-8"):
     """
     warnings.warn(
         "frapy.utils.misc.extract_regex has moved to parsel.utils.extract_regex.",
-        ScrapyDeprecationWarning,
+        FrapyDeprecationWarning,
         stacklevel=2,
     )
 
@@ -268,9 +268,9 @@ def warn_on_generator_with_return_value(spider, callable):
         callable_name = spider.__class__.__name__ + "." + callable.__name__
         warnings.warn(
             f'Unable to determine whether or not "{callable_name}" is a generator with a return value. '
-            "This will not prevent your code from working, but it prevents Scrapy from detecting "
+            "This will not prevent your code from working, but it prevents Frapy from detecting "
             f'potential issues in your implementation of "{callable_name}". Please, report this in the '
-            "Scrapy issue tracker (https://github.com/frapy/frapy/issues), "
+            "Frapy issue tracker (https://github.com/frapy/frapy/issues), "
             f'including the code of "{callable_name}"',
             stacklevel=2,
         )
