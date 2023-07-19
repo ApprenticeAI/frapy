@@ -3,10 +3,10 @@ import warnings
 from pathlib import Path
 from urllib.parse import urlparse
 
-from scrapy.exceptions import ScrapyDeprecationWarning
-from scrapy.http import HtmlResponse, Response, TextResponse
-from scrapy.utils.python import to_bytes
-from scrapy.utils.response import (
+from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.http import HtmlResponse, Response, TextResponse
+from frapy.utils.python import to_bytes
+from frapy.utils.response import (
     get_base_url,
     get_meta_refresh,
     open_in_browser,
@@ -14,7 +14,7 @@ from scrapy.utils.response import (
     response_status_message,
 )
 
-__doctests__ = ["scrapy.utils.response"]
+__doctests__ = ["frapy.utils.response"]
 
 
 class ResponseUtilsTest(unittest.TestCase):

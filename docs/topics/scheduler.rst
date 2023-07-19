@@ -4,7 +4,7 @@
 Scheduler
 =========
 
-.. module:: scrapy.core.scheduler
+.. module:: frapy.core.scheduler
 
 The scheduler component receives requests from the :ref:`engine <component-engine>`
 and stores them into persistent and/or non-persistent data structures.

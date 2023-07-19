@@ -1,13 +1,13 @@
 import unittest
 
-from scrapy.downloadermiddlewares.redirect import (
+from frapy.downloadermiddlewares.redirect import (
     MetaRefreshMiddleware,
     RedirectMiddleware,
 )
-from scrapy.exceptions import IgnoreRequest
-from scrapy.http import HtmlResponse, Request, Response
-from scrapy.spiders import Spider
-from scrapy.utils.test import get_crawler
+from frapy.exceptions import IgnoreRequest
+from frapy.http import HtmlResponse, Request, Response
+from frapy.spiders import Spider
+from frapy.utils.test import get_crawler
 
 
 class RedirectMiddlewareTest(unittest.TestCase):
@@ -130,9 +130,9 @@ class RedirectMiddlewareTest(unittest.TestCase):
 
     def test_max_redirect_times(self):
         self.mw.max_redirect_times = 1
-        req = Request("http://scrapytest.org/302")
+        req = Request("http://frapytest.org/302")
         rsp = Response(
-            "http://scrapytest.org/302", headers={"Location": "/redirected"}, status=302
+            "http://frapytest.org/302", headers={"Location": "/redirected"}, status=302
         )
 
         req = self.mw.process_response(req, rsp, self.spider)
@@ -145,9 +145,9 @@ class RedirectMiddlewareTest(unittest.TestCase):
 
     def test_ttl(self):
         self.mw.max_redirect_times = 100
-        req = Request("http://scrapytest.org/302", meta={"redirect_ttl": 1})
+        req = Request("http://frapytest.org/302", meta={"redirect_ttl": 1})
         rsp = Response(
-            "http://www.scrapytest.org/302",
+            "http://www.frapytest.org/302",
             headers={"Location": "/redirected"},
             status=302,
         )
@@ -159,38 +159,38 @@ class RedirectMiddlewareTest(unittest.TestCase):
         )
 
     def test_redirect_urls(self):
-        req1 = Request("http://scrapytest.org/first")
+        req1 = Request("http://frapytest.org/first")
         rsp1 = Response(
-            "http://scrapytest.org/first",
+            "http://frapytest.org/first",
             headers={"Location": "/redirected"},
             status=302,
         )
         req2 = self.mw.process_response(req1, rsp1, self.spider)
         rsp2 = Response(
-            "http://scrapytest.org/redirected",
+            "http://frapytest.org/redirected",
             headers={"Location": "/redirected2"},
             status=302,
         )
         req3 = self.mw.process_response(req2, rsp2, self.spider)
 
-        self.assertEqual(req2.url, "http://scrapytest.org/redirected")
-        self.assertEqual(req2.meta["redirect_urls"], ["http://scrapytest.org/first"])
-        self.assertEqual(req3.url, "http://scrapytest.org/redirected2")
+        self.assertEqual(req2.url, "http://frapytest.org/redirected")
+        self.assertEqual(req2.meta["redirect_urls"], ["http://frapytest.org/first"])
+        self.assertEqual(req3.url, "http://frapytest.org/redirected2")
         self.assertEqual(
             req3.meta["redirect_urls"],
-            ["http://scrapytest.org/first", "http://scrapytest.org/redirected"],
+            ["http://frapytest.org/first", "http://frapytest.org/redirected"],
         )
 
     def test_redirect_reasons(self):
-        req1 = Request("http://scrapytest.org/first")
+        req1 = Request("http://frapytest.org/first")
         rsp1 = Response(
-            "http://scrapytest.org/first",
+            "http://frapytest.org/first",
             headers={"Location": "/redirected1"},
             status=301,
         )
         req2 = self.mw.process_response(req1, rsp1, self.spider)
         rsp2 = Response(
-            "http://scrapytest.org/redirected1",
+            "http://frapytest.org/redirected1",
             headers={"Location": "/redirected2"},
             status=301,
         )
@@ -224,27 +224,27 @@ class RedirectMiddlewareTest(unittest.TestCase):
         _test_passthrough(Request(url, meta={"handle_httpstatus_all": True}))
 
     def test_latin1_location(self):
-        req = Request("http://scrapytest.org/first")
+        req = Request("http://frapytest.org/first")
         latin1_location = "/ação".encode("latin1")  # HTTP historically supports latin1
         resp = Response(
-            "http://scrapytest.org/first",
+            "http://frapytest.org/first",
             headers={"Location": latin1_location},
             status=302,
         )
         req_result = self.mw.process_response(req, resp, self.spider)
-        perc_encoded_utf8_url = "http://scrapytest.org/a%E7%E3o"
+        perc_encoded_utf8_url = "http://frapytest.org/a%E7%E3o"
         self.assertEqual(perc_encoded_utf8_url, req_result.url)
 
     def test_utf8_location(self):
-        req = Request("http://scrapytest.org/first")
+        req = Request("http://frapytest.org/first")
         utf8_location = "/ação".encode("utf-8")  # header using UTF-8 encoding
         resp = Response(
-            "http://scrapytest.org/first",
+            "http://frapytest.org/first",
             headers={"Location": utf8_location},
             status=302,
         )
         req_result = self.mw.process_response(req, resp, self.spider)
-        perc_encoded_utf8_url = "http://scrapytest.org/a%C3%A7%C3%A3o"
+        perc_encoded_utf8_url = "http://frapytest.org/a%C3%A7%C3%A3o"
         self.assertEqual(perc_encoded_utf8_url, req_result.url)
 
 
@@ -303,7 +303,7 @@ class MetaRefreshMiddlewareTest(unittest.TestCase):
 
     def test_max_redirect_times(self):
         self.mw.max_redirect_times = 1
-        req = Request("http://scrapytest.org/max")
+        req = Request("http://frapytest.org/max")
         rsp = HtmlResponse(req.url, body=self._body())
 
         req = self.mw.process_response(req, rsp, self.spider)
@@ -316,7 +316,7 @@ class MetaRefreshMiddlewareTest(unittest.TestCase):
 
     def test_ttl(self):
         self.mw.max_redirect_times = 100
-        req = Request("http://scrapytest.org/302", meta={"redirect_ttl": 1})
+        req = Request("http://frapytest.org/302", meta={"redirect_ttl": 1})
         rsp = HtmlResponse(req.url, body=self._body())
 
         req = self.mw.process_response(req, rsp, self.spider)
@@ -326,29 +326,29 @@ class MetaRefreshMiddlewareTest(unittest.TestCase):
         )
 
     def test_redirect_urls(self):
-        req1 = Request("http://scrapytest.org/first")
+        req1 = Request("http://frapytest.org/first")
         rsp1 = HtmlResponse(req1.url, body=self._body(url="/redirected"))
         req2 = self.mw.process_response(req1, rsp1, self.spider)
         assert isinstance(req2, Request), req2
         rsp2 = HtmlResponse(req2.url, body=self._body(url="/redirected2"))
         req3 = self.mw.process_response(req2, rsp2, self.spider)
         assert isinstance(req3, Request), req3
-        self.assertEqual(req2.url, "http://scrapytest.org/redirected")
-        self.assertEqual(req2.meta["redirect_urls"], ["http://scrapytest.org/first"])
-        self.assertEqual(req3.url, "http://scrapytest.org/redirected2")
+        self.assertEqual(req2.url, "http://frapytest.org/redirected")
+        self.assertEqual(req2.meta["redirect_urls"], ["http://frapytest.org/first"])
+        self.assertEqual(req3.url, "http://frapytest.org/redirected2")
         self.assertEqual(
             req3.meta["redirect_urls"],
-            ["http://scrapytest.org/first", "http://scrapytest.org/redirected"],
+            ["http://frapytest.org/first", "http://frapytest.org/redirected"],
         )
 
     def test_redirect_reasons(self):
-        req1 = Request("http://scrapytest.org/first")
+        req1 = Request("http://frapytest.org/first")
         rsp1 = HtmlResponse(
-            "http://scrapytest.org/first", body=self._body(url="/redirected")
+            "http://frapytest.org/first", body=self._body(url="/redirected")
         )
         req2 = self.mw.process_response(req1, rsp1, self.spider)
         rsp2 = HtmlResponse(
-            "http://scrapytest.org/redirected", body=self._body(url="/redirected1")
+            "http://frapytest.org/redirected", body=self._body(url="/redirected1")
         )
         req3 = self.mw.process_response(req2, rsp2, self.spider)
 

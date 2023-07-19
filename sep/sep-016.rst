@@ -246,10 +246,10 @@ Here's a proof-of-concept implementation of ``LegSpider``:
 .. code-block:: python
 
    #!python
-   from scrapy.http import Request
-   from scrapy.item import BaseItem
-   from scrapy.spider import BaseSpider
-   from scrapy.utils.spider import iterate_spider_output
+   from frapy.http import Request
+   from frapy.item import BaseItem
+   from frapy.spider import BaseSpider
+   from frapy.utils.spider import iterate_spider_output
 
 
    class LegSpider(BaseSpider):

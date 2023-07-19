@@ -8,11 +8,11 @@ from testfixtures import LogCapture
 from twisted.trial import unittest
 from w3lib.url import safe_url_string
 
-from scrapy import signals
-from scrapy.http import HtmlResponse, Request, Response, TextResponse, XmlResponse
-from scrapy.linkextractors import LinkExtractor
-from scrapy.settings import Settings
-from scrapy.spiders import (
+from frapy import signals
+from frapy.http import HtmlResponse, Request, Response, TextResponse, XmlResponse
+from frapy.linkextractors import LinkExtractor
+from frapy.settings import Settings
+from frapy.spiders import (
     CrawlSpider,
     CSVFeedSpider,
     Rule,
@@ -20,8 +20,8 @@ from scrapy.spiders import (
     Spider,
     XMLFeedSpider,
 )
-from scrapy.spiders.init import InitSpider
-from scrapy.utils.test import get_crawler
+from frapy.spiders.init import InitSpider
+from frapy.utils.test import get_crawler
 from tests import get_testdata
 
 
@@ -108,7 +108,7 @@ class SpiderTest(unittest.TestCase):
 
     def test_log(self):
         spider = self.spider_class("example.com")
-        with mock.patch("scrapy.spiders.Spider.logger") as mock_logger:
+        with mock.patch("frapy.spiders.Spider.logger") as mock_logger:
             spider.log("test log msg", "INFO")
         mock_logger.log.assert_called_once_with("INFO", "test log msg")
 

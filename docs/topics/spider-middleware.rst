@@ -31,10 +31,10 @@ The :setting:`SPIDER_MIDDLEWARES` setting is merged with the
 be overridden) and then sorted by order to get the final sorted list of enabled
 middlewares: the first middleware is the one closer to the engine and the last
 is the one closer to the spider. In other words,
-the :meth:`~scrapy.spidermiddlewares.SpiderMiddleware.process_spider_input`
+the :meth:`~frapy.spidermiddlewares.SpiderMiddleware.process_spider_input`
 method of each middleware will be invoked in increasing
 middleware order (100, 200, 300, ...), and the
-:meth:`~scrapy.spidermiddlewares.SpiderMiddleware.process_spider_output` method
+:meth:`~frapy.spidermiddlewares.SpiderMiddleware.process_spider_output` method
 of each middleware will be invoked in decreasing order.
 
 To decide which order to assign to your middleware see the
@@ -52,7 +52,7 @@ value.  For example, if you want to disable the off-site middleware:
 
     SPIDER_MIDDLEWARES = {
         "myproject.middlewares.CustomSpiderMiddleware": 543,
-        "scrapy.spidermiddlewares.offsite.OffsiteMiddleware": None,
+        "frapy.spidermiddlewares.offsite.OffsiteMiddleware": None,
     }
 
 Finally, keep in mind that some middlewares may need to be enabled through a
@@ -67,10 +67,10 @@ Each spider middleware is a Python class that defines one or more of the
 methods defined below.
 
 The main entry point is the ``from_crawler`` class method, which receives a
-:class:`~scrapy.crawler.Crawler` instance. The :class:`~scrapy.crawler.Crawler`
+:class:`~frapy.crawler.Crawler` instance. The :class:`~frapy.crawler.Crawler`
 object gives you access, for example, to the :ref:`settings <topics-settings>`.
 
-.. module:: scrapy.spidermiddlewares
+.. module:: frapy.spidermiddlewares
 
 .. class:: SpiderMiddleware
 
@@ -94,10 +94,10 @@ object gives you access, for example, to the :ref:`settings <topics-settings>`.
         :meth:`process_spider_exception` if it raised an exception.
 
         :param response: the response being processed
-        :type response: :class:`~scrapy.http.Response` object
+        :type response: :class:`~frapy.http.Response` object
 
         :param spider: the spider for which this response is intended
-        :type spider: :class:`~scrapy.Spider` object
+        :type spider: :class:`~frapy.Spider` object
 
 
     .. method:: process_spider_output(response, result, spider)
@@ -106,7 +106,7 @@ object gives you access, for example, to the :ref:`settings <topics-settings>`.
         it has processed the response.
 
         :meth:`process_spider_output` must return an iterable of
-        :class:`~scrapy.Request` objects and :ref:`item objects
+        :class:`~frapy.Request` objects and :ref:`item objects
         <topics-items>`.
 
         .. versionchanged:: 2.7
@@ -123,14 +123,14 @@ object gives you access, for example, to the :ref:`settings <topics-settings>`.
 
         :param response: the response which generated this output from the
           spider
-        :type response: :class:`~scrapy.http.Response` object
+        :type response: :class:`~frapy.http.Response` object
 
         :param result: the result returned by the spider
-        :type result: an iterable of :class:`~scrapy.Request` objects and
+        :type result: an iterable of :class:`~frapy.Request` objects and
           :ref:`item objects <topics-items>`
 
         :param spider: the spider whose result is being processed
-        :type spider: :class:`~scrapy.Spider` object
+        :type spider: :class:`~frapy.Spider` object
 
     .. method:: process_spider_output_async(response, result, spider)
 
@@ -146,7 +146,7 @@ object gives you access, for example, to the :ref:`settings <topics-settings>`.
         method (from a previous spider middleware) raises an exception.
 
         :meth:`process_spider_exception` should return either ``None`` or an
-        iterable of :class:`~scrapy.Request` or :ref:`item <topics-items>`
+        iterable of :class:`~frapy.Request` or :ref:`item <topics-items>`
         objects.
 
         If it returns ``None``, Scrapy will continue processing this exception,
@@ -160,13 +160,13 @@ object gives you access, for example, to the :ref:`settings <topics-settings>`.
 
         :param response: the response being processed when the exception was
           raised
-        :type response: :class:`~scrapy.http.Response` object
+        :type response: :class:`~frapy.http.Response` object
 
         :param exception: the exception raised
         :type exception: :exc:`Exception` object
 
         :param spider: the spider which raised the exception
-        :type spider: :class:`~scrapy.Spider` object
+        :type spider: :class:`~frapy.Spider` object
 
     .. method:: process_start_requests(start_requests, spider)
 
@@ -176,7 +176,7 @@ object gives you access, for example, to the :ref:`settings <topics-settings>`.
         items).
 
         It receives an iterable (in the ``start_requests`` parameter) and must
-        return another iterable of :class:`~scrapy.Request` objects.
+        return another iterable of :class:`~frapy.Request` objects.
 
         .. note:: When implementing this method in your spider middleware, you
            should always return an iterable (that follows the input one) and
@@ -188,21 +188,21 @@ object gives you access, for example, to the :ref:`settings <topics-settings>`.
            (like a time limit or item/page count).
 
         :param start_requests: the start requests
-        :type start_requests: an iterable of :class:`~scrapy.Request`
+        :type start_requests: an iterable of :class:`~frapy.Request`
 
         :param spider: the spider to whom the start requests belong
-        :type spider: :class:`~scrapy.Spider` object
+        :type spider: :class:`~frapy.Spider` object
 
     .. method:: from_crawler(cls, crawler)
 
        If present, this classmethod is called to create a middleware instance
-       from a :class:`~scrapy.crawler.Crawler`. It must return a new instance
+       from a :class:`~frapy.crawler.Crawler`. It must return a new instance
        of the middleware. Crawler object provides access to all Scrapy core
        components like settings and signals; it is a way for middleware to
        access them and hook its functionality into Scrapy.
 
        :param crawler: crawler that uses this middleware
-       :type crawler: :class:`~scrapy.crawler.Crawler` object
+       :type crawler: :class:`~frapy.crawler.Crawler` object
 
 .. _topics-spider-middleware-ref:
 
@@ -219,7 +219,7 @@ For a list of the components enabled by default (and their orders) see the
 DepthMiddleware
 ---------------
 
-.. module:: scrapy.spidermiddlewares.depth
+.. module:: frapy.spidermiddlewares.depth
    :synopsis: Depth Spider Middleware
 
 .. class:: DepthMiddleware
@@ -245,7 +245,7 @@ DepthMiddleware
 HttpErrorMiddleware
 -------------------
 
-.. module:: scrapy.spidermiddlewares.httperror
+.. module:: frapy.spidermiddlewares.httperror
    :synopsis: HTTP Error Spider Middleware
 
 .. class:: HttpErrorMiddleware
@@ -269,7 +269,7 @@ this:
 
 .. code-block:: python
 
-    from scrapy.spiders import CrawlSpider
+    from frapy.spiders import CrawlSpider
 
 
     class MySpider(CrawlSpider):
@@ -280,7 +280,7 @@ this:
 .. reqmeta:: handle_httpstatus_all
 
 The ``handle_httpstatus_list`` key of :attr:`Request.meta
-<scrapy.Request.meta>` can also be used to specify which response codes to
+<frapy.Request.meta>` can also be used to specify which response codes to
 allow on a per-request basis. You can also set the meta key ``handle_httpstatus_all``
 to ``True`` if you want to allow any response code for a request, and ``False`` to
 disable the effects of the ``handle_httpstatus_all`` key.
@@ -316,7 +316,7 @@ Pass all responses, regardless of its status code.
 OffsiteMiddleware
 -----------------
 
-.. module:: scrapy.spidermiddlewares.offsite
+.. module:: frapy.spidermiddlewares.offsite
    :synopsis: Offsite Spider Middleware
 
 .. class:: OffsiteMiddleware
@@ -324,7 +324,7 @@ OffsiteMiddleware
    Filters out Requests for URLs outside the domains covered by the spider.
 
    This middleware filters out every request whose host names aren't in the
-   spider's :attr:`~scrapy.Spider.allowed_domains` attribute.
+   spider's :attr:`~frapy.Spider.allowed_domains` attribute.
    All subdomains of any domain in the list are also allowed.
    E.g. the rule ``www.example.org`` will also allow ``bob.www.example.org``
    but not ``www2.example.com`` nor ``example.com``.
@@ -342,10 +342,10 @@ OffsiteMiddleware
    will be printed (but only for the first request filtered).
 
    If the spider doesn't define an
-   :attr:`~scrapy.Spider.allowed_domains` attribute, or the
+   :attr:`~frapy.Spider.allowed_domains` attribute, or the
    attribute is empty, the offsite middleware will allow all requests.
 
-   If the request has the :attr:`~scrapy.Request.dont_filter` attribute
+   If the request has the :attr:`~frapy.Request.dont_filter` attribute
    set, the offsite middleware will allow the request even if its domain is not
    listed in allowed domains.
 
@@ -353,7 +353,7 @@ OffsiteMiddleware
 RefererMiddleware
 -----------------
 
-.. module:: scrapy.spidermiddlewares.referer
+.. module:: frapy.spidermiddlewares.referer
    :synopsis: Referer Spider Middleware
 
 .. class:: RefererMiddleware
@@ -378,7 +378,7 @@ Whether to enable referer middleware.
 REFERRER_POLICY
 ^^^^^^^^^^^^^^^
 
-Default: ``'scrapy.spidermiddlewares.referer.DefaultReferrerPolicy'``
+Default: ``'frapy.spidermiddlewares.referer.DefaultReferrerPolicy'``
 
 .. reqmeta:: referrer_policy
 
@@ -392,23 +392,23 @@ Default: ``'scrapy.spidermiddlewares.referer.DefaultReferrerPolicy'``
 Acceptable values for REFERRER_POLICY
 *************************************
 
-- either a path to a ``scrapy.spidermiddlewares.referer.ReferrerPolicy``
+- either a path to a ``frapy.spidermiddlewares.referer.ReferrerPolicy``
   subclass — a custom policy or one of the built-in ones (see classes below),
 - or one of the standard W3C-defined string values,
-- or the special ``"scrapy-default"``.
+- or the special ``"frapy-default"``.
 
 =======================================  ========================================================================
 String value                             Class name (as a string)
 =======================================  ========================================================================
-``"scrapy-default"`` (default)           :class:`scrapy.spidermiddlewares.referer.DefaultReferrerPolicy`
-`"no-referrer"`_                         :class:`scrapy.spidermiddlewares.referer.NoReferrerPolicy`
-`"no-referrer-when-downgrade"`_          :class:`scrapy.spidermiddlewares.referer.NoReferrerWhenDowngradePolicy`
-`"same-origin"`_                         :class:`scrapy.spidermiddlewares.referer.SameOriginPolicy`
-`"origin"`_                              :class:`scrapy.spidermiddlewares.referer.OriginPolicy`
-`"strict-origin"`_                       :class:`scrapy.spidermiddlewares.referer.StrictOriginPolicy`
-`"origin-when-cross-origin"`_            :class:`scrapy.spidermiddlewares.referer.OriginWhenCrossOriginPolicy`
-`"strict-origin-when-cross-origin"`_     :class:`scrapy.spidermiddlewares.referer.StrictOriginWhenCrossOriginPolicy`
-`"unsafe-url"`_                          :class:`scrapy.spidermiddlewares.referer.UnsafeUrlPolicy`
+``"frapy-default"`` (default)           :class:`frapy.spidermiddlewares.referer.DefaultReferrerPolicy`
+`"no-referrer"`_                         :class:`frapy.spidermiddlewares.referer.NoReferrerPolicy`
+`"no-referrer-when-downgrade"`_          :class:`frapy.spidermiddlewares.referer.NoReferrerWhenDowngradePolicy`
+`"same-origin"`_                         :class:`frapy.spidermiddlewares.referer.SameOriginPolicy`
+`"origin"`_                              :class:`frapy.spidermiddlewares.referer.OriginPolicy`
+`"strict-origin"`_                       :class:`frapy.spidermiddlewares.referer.StrictOriginPolicy`
+`"origin-when-cross-origin"`_            :class:`frapy.spidermiddlewares.referer.OriginWhenCrossOriginPolicy`
+`"strict-origin-when-cross-origin"`_     :class:`frapy.spidermiddlewares.referer.StrictOriginWhenCrossOriginPolicy`
+`"unsafe-url"`_                          :class:`frapy.spidermiddlewares.referer.UnsafeUrlPolicy`
 =======================================  ========================================================================
 
 .. autoclass:: DefaultReferrerPolicy
@@ -458,7 +458,7 @@ String value                             Class name (as a string)
 UrlLengthMiddleware
 -------------------
 
-.. module:: scrapy.spidermiddlewares.urllength
+.. module:: frapy.spidermiddlewares.urllength
    :synopsis: URL Length Spider Middleware
 
 .. class:: UrlLengthMiddleware

@@ -7,7 +7,7 @@ Contributing to Scrapy
 .. important::
 
     Double check that you are reading the most recent version of this document at
-    https://docs.scrapy.org/en/master/contributing.html
+    https://docs.frapy.org/en/master/contributing.html
 
 There are many ways to contribute to Scrapy. Here are some of them:
 
@@ -26,7 +26,7 @@ There are many ways to contribute to Scrapy. Here are some of them:
   improve Scrapy. We're always open to suggestions.
 
 * Answer Scrapy questions at
-  `Stack Overflow <https://stackoverflow.com/questions/tagged/scrapy>`__.
+  `Stack Overflow <https://stackoverflow.com/questions/tagged/frapy>`__.
 
 
 Reporting bugs
@@ -35,7 +35,7 @@ Reporting bugs
 .. note::
 
     Please report security issues **only** to
-    scrapy-security@googlegroups.com. This is a private list only open to
+    frapy-security@googlegroups.com. This is a private list only open to
     trusted Scrapy developers, and its archives are not public.
 
 Well-written bug reports are very helpful, so keep in mind the following
@@ -45,17 +45,17 @@ guidelines when you're going to report a new bug.
   well-known question
 
 * if you have a general question about Scrapy usage, please ask it at
-  `Stack Overflow <https://stackoverflow.com/questions/tagged/scrapy>`__
-  (use "scrapy" tag).
+  `Stack Overflow <https://stackoverflow.com/questions/tagged/frapy>`__
+  (use "frapy" tag).
 
 * check the `open issues`_ to see if the issue has already been reported. If it
   has, don't dismiss the report, but check the ticket history and comments. If
   you have additional useful information, please leave a comment, or consider
   :ref:`sending a pull request <writing-patches>` with a fix.
 
-* search the `scrapy-users`_ list and `Scrapy subreddit`_ to see if it has
+* search the `frapy-users`_ list and `Scrapy subreddit`_ to see if it has
   been discussed there, or if you're not sure if what you're seeing is a bug.
-  You can also ask in the ``#scrapy`` IRC channel.
+  You can also ask in the ``#frapy`` IRC channel.
 
 * write **complete, reproducible, specific bug reports**. The smaller the test
   case, the better. Remember that other developers won't have your project to
@@ -69,7 +69,7 @@ guidelines when you're going to report a new bug.
   This is helpful even if you don't have an intention to
   fix the issue yourselves.
 
-* include the output of ``scrapy version -v`` so developers working on your bug
+* include the output of ``frapy version -v`` so developers working on your bug
   know exactly which version and platform it occurred on, which is often very
   helpful for reproducing it, or knowing if it was already fixed.
 
@@ -145,7 +145,7 @@ his/her commits.
 
 You can pull an existing pull request to a local branch
 by running ``git fetch upstream pull/$PR_NUMBER/head:$BRANCH_NAME_TO_CREATE``
-(replace 'upstream' with a remote name for scrapy repository,
+(replace 'upstream' with a remote name for frapy repository,
 ``$PR_NUMBER`` with an ID of the pull request, and ``$BRANCH_NAME_TO_CREATE``
 with a name of the branch you want to create locally).
 See also: https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/checking-out-pull-requests-locally#modifying-an-inactive-pull-request-locally.
@@ -179,7 +179,7 @@ Scrapy:
   See https://help.github.com/en/github/using-git/setting-your-username-in-git for
   setup instructions.
 
-.. _scrapy-pre-commit:
+.. _frapy-pre-commit:
 
 Pre-commit
 ==========
@@ -272,14 +272,14 @@ parallel::
 To pass command-line options to :doc:`pytest <pytest:index>`, add them after
 ``--`` in your call to :doc:`tox <tox:index>`. Using ``--`` overrides the
 default positional arguments defined in ``tox.ini``, so you must include those
-default positional arguments (``scrapy tests``) after ``--`` as well::
+default positional arguments (``frapy tests``) after ``--`` as well::
 
-    tox -- scrapy tests -x  # stop after first failure
+    tox -- frapy tests -x  # stop after first failure
 
 You can also use the `pytest-xdist`_ plugin. For example, to run all tests on
 the Python 3.7 :doc:`tox <tox:index>` environment using all your CPU cores::
 
-    tox -e py37 -- scrapy tests -n auto
+    tox -e py37 -- frapy tests -n auto
 
 To see coverage report install :doc:`coverage <coverage:index>`
 (``pip install coverage``) and run:
@@ -299,18 +299,18 @@ Scrapy uses unit-tests, which are located in the `tests/`_ directory.
 Their module name typically resembles the full path of the module they're
 testing. For example, the item loaders code is in::
 
-    scrapy.loader
+    frapy.loader
 
 And their unit-tests are in::
 
     tests/test_loader.py
 
-.. _issue tracker: https://github.com/scrapy/scrapy/issues
-.. _scrapy-users: https://groups.google.com/forum/#!forum/scrapy-users
-.. _Scrapy subreddit: https://reddit.com/r/scrapy
-.. _AUTHORS: https://github.com/scrapy/scrapy/blob/master/AUTHORS
-.. _tests/: https://github.com/scrapy/scrapy/tree/master/tests
-.. _open issues: https://github.com/scrapy/scrapy/issues
+.. _issue tracker: https://github.com/frapy/frapy/issues
+.. _frapy-users: https://groups.google.com/forum/#!forum/frapy-users
+.. _Scrapy subreddit: https://reddit.com/r/frapy
+.. _AUTHORS: https://github.com/frapy/frapy/blob/master/AUTHORS
+.. _tests/: https://github.com/frapy/frapy/tree/master/tests
+.. _open issues: https://github.com/frapy/frapy/issues
 .. _PEP 257: https://www.python.org/dev/peps/pep-0257/
 .. _pull request: https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request
 .. _pytest-xdist: https://github.com/pytest-dev/pytest-xdist

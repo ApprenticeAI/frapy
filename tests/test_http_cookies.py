@@ -1,8 +1,8 @@
 from unittest import TestCase
 from urllib.parse import urlparse
 
-from scrapy.http import Request, Response
-from scrapy.http.cookies import WrappedRequest, WrappedResponse
+from frapy.http import Request, Response
+from frapy.http.cookies import WrappedRequest, WrappedResponse
 
 
 class WrappedRequestTest(TestCase):

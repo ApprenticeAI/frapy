@@ -41,7 +41,7 @@ Proposed changes
 - spider manager will be striped out of Crawler class, as it will no longer
   need it
 - ``SPIDER_MODULES`` and ``SPIDER_MANAGER_CLASS`` settings will be removed and
-  replaced by entries on ``scrapy.cfg``. Thus spider managers won't need
+  replaced by entries on ``frapy.cfg``. Thus spider managers won't need
   project settings to configure themselves
 - CrawlerProcess will be remove, since crawlers will be created independently
   with a required spider class and optional ``SettingsReader`` instance
@@ -125,7 +125,7 @@ Setting priorities
 
 There will be 5 setting priorities used by default:
 
-- 0: global defaults (those in ``scrapy.settings.default_settings``)
+- 0: global defaults (those in ``frapy.settings.default_settings``)
 - 10: per-command defaults (for example, shell runs with ``KEEP_ALIVE=True``)
 - 20: project settings (those in ``settings.py``)
 - 30: per-spider settings (those returned by ``Spider.custom_settings`` class method)
@@ -148,7 +148,7 @@ There are a couple of issues here:
 Deprecated code
 ---------------
 
-``scrapy.conf.settings`` singleton is a deprecated implementation concerning
+``frapy.conf.settings`` singleton is a deprecated implementation concerning
 settings load. Could be maintained as it is, but the singleton should
 implement new ``SettingsReader`` interface in order to work.
 
@@ -162,25 +162,25 @@ should be loaded outside and passed to the crawler object, which will require a
 spider class to be instantiated.
 
 This new spider manager will not have access to the settings (they won't be
-loaded yet) so it will use scrapy.cfg to configure itself.
+loaded yet) so it will use frapy.cfg to configure itself.
 
-The ``scrapy.cfg`` would look like this::
+The ``frapy.cfg`` would look like this::
 
     [settings]
     default = myproject.settings
 
     [spiders]
-    manager = scrapy.spidermanager.SpiderManager
+    manager = frapy.spidermanager.SpiderManager
     modules = myproject.spiders
 
 - ``manager`` replaces ``SPIDER_MANAGER_CLASS`` setting and will, if omitted,
-  default to ``scrapy.spidermanager.SpiderManager``
+  default to ``frapy.spidermanager.SpiderManager``
 - ``modules`` replaces ``SPIDER_MODULES`` setting and will be required
 
 These ideas translate to the following changes on the ``SpiderManager`` class:
 
 - ``__init__(spider_modules)`` -> ``__init__()``. ``spider_modules`` will be
-  looked in ``scrapy.cfg``.
+  looked in ``frapy.cfg``.
 
 - ``create('spider_name', **spider_kargs)`` -> ``load('spider_name')``. This
   will return a spider class, not an instance. It's basically a ``__get__``
@@ -189,8 +189,8 @@ These ideas translate to the following changes on the ``SpiderManager`` class:
 - All remaining functions should be deprecated or remove accordingly, since a
   crawler reference is no longer needed.
 
-- New helper ``get_spider_manager_class_from_scrapycfg`` in
-  ``scrapy/utils/spidermanager.py``.
+- New helper ``get_spider_manager_class_from_frapycfg`` in
+  ``frapy/utils/spidermanager.py``.
 
 
 Spiders
@@ -301,8 +301,8 @@ Proposed (new) startup process
 
     # execute in cmdline
 
-    smcls = get_spider_manager_class_from_scrapycfg()
-    sm = smcls() # loads spiders from module defined in scrapy.cfg
+    smcls = get_spider_manager_class_from_frapycfg()
+    sm = smcls() # loads spiders from module defined in frapy.cfg
     spidercls = sm.load(spider_name) # returns spider class, not instance
 
     settings = get_project_settings() # loads settings.py

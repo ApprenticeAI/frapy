@@ -7,12 +7,12 @@ about: Suggest an idea for an enhancement or new feature
 
 Thanks for taking an interest in Scrapy!
 
-If you have a question that starts with "How to...", please see the Scrapy Community page: https://scrapy.org/community/.
+If you have a question that starts with "How to...", please see the Scrapy Community page: https://frapy.org/community/.
 The GitHub issue tracker's purpose is to deal with bug reports and feature requests for the project itself.
 
-Keep in mind that by filing an issue, you are expected to comply with Scrapy's Code of Conduct, including treating everyone with respect: https://github.com/scrapy/scrapy/blob/master/CODE_OF_CONDUCT.md
+Keep in mind that by filing an issue, you are expected to comply with Scrapy's Code of Conduct, including treating everyone with respect: https://github.com/frapy/frapy/blob/master/CODE_OF_CONDUCT.md
 
-The following is a suggested template to structure your pull request, you can find more guidelines at https://doc.scrapy.org/en/latest/contributing.html#writing-patches and https://doc.scrapy.org/en/latest/contributing.html#submitting-patches
+The following is a suggested template to structure your pull request, you can find more guidelines at https://doc.frapy.org/en/latest/contributing.html#writing-patches and https://doc.frapy.org/en/latest/contributing.html#submitting-patches
 
 -->
 

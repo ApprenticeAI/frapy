@@ -52,7 +52,7 @@ the changes to middlewares involve mainly building deferred chains with the
 middleware methods and adding the missing method to each callback/errback
 chain. The proposed API for each middleware is described below.
 
-See |scrapy core v2| - a diagram draft for the process architecture.
+See |frapy core v2| - a diagram draft for the process architecture.
 
 Global changes to all middlewares
 =================================
@@ -185,4 +185,4 @@ Open issues (to resolve)
    - opt 2: call another method? like Request.schmw_errback / dlmw_errback?
    - opt 3: use an exception wrapper? SchedulerError() DownloaderError()?
 
-.. |scrapy core v2| image:: scrapy_core_v2.jpg
+.. |frapy core v2| image:: frapy_core_v2.jpg

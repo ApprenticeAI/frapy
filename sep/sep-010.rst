@@ -11,7 +11,7 @@ SEP-010: REST API
 =================
 
 This SEP proposes a JSON REST API for controlling Scrapy in server-mode, which
-is launched with: ``scrapy-ctl.py start``
+is launched with: ``frapy-ctl.py start``
 
 Operations
 ==========

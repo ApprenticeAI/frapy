@@ -1,6 +1,6 @@
 import unittest
 
-from scrapy.link import Link
+from frapy.link import Link
 
 
 class LinkTest(unittest.TestCase):

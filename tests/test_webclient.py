@@ -20,12 +20,12 @@ except ImportError:
 from twisted.internet.defer import inlineCallbacks
 from twisted.protocols.policies import WrappingFactory
 
-from scrapy.core.downloader import webclient as client
-from scrapy.core.downloader.contextfactory import ScrapyClientContextFactory
-from scrapy.http import Headers, Request
-from scrapy.settings import Settings
-from scrapy.utils.misc import create_instance
-from scrapy.utils.python import to_bytes, to_unicode
+from frapy.core.downloader import webclient as client
+from frapy.core.downloader.contextfactory import ScrapyClientContextFactory
+from frapy.http import Headers, Request
+from frapy.settings import Settings
+from frapy.utils.misc import create_instance
+from frapy.utils.python import to_bytes, to_unicode
 from tests.mockserver import (
     BrokenDownloadResource,
     ErrorResource,
@@ -115,8 +115,8 @@ class ParseUrlTestCase(unittest.TestCase):
             ),
             ("https://127.0.0.1:12345/", ("https", lip + ":12345", lip, 12345, "/")),
             (
-                "http://scrapytest.org/foo ",
-                ("http", "scrapytest.org", "scrapytest.org", 80, "/foo"),
+                "http://frapytest.org/foo ",
+                ("http", "frapytest.org", "frapytest.org", 80, "/foo"),
             ),
             ("http://egg:7890 ", ("http", "egg:7890", "egg", 7890, "/")),
         )
@@ -246,7 +246,7 @@ class ScrapyHTTPPageGetterTests(unittest.TestCase):
         return testvalue
 
     def test_non_standard_line_endings(self):
-        # regression test for: http://dev.scrapy.org/ticket/258
+        # regression test for: http://dev.frapy.org/ticket/258
         factory = client.ScrapyHTTPClientFactory(Request(url="http://foo/bar"))
         protocol = client.ScrapyHTTPPageGetter()
         protocol.factory = factory

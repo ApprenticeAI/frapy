@@ -5,11 +5,11 @@ from testfixtures import LogCapture
 from twisted.internet import defer
 from twisted.trial.unittest import TestCase as TrialTestCase
 
-from scrapy.http import Request, Response
-from scrapy.settings import Settings
-from scrapy.spidermiddlewares.httperror import HttpError, HttpErrorMiddleware
-from scrapy.spiders import Spider
-from scrapy.utils.test import get_crawler
+from frapy.http import Request, Response
+from frapy.settings import Settings
+from frapy.spidermiddlewares.httperror import HttpError, HttpErrorMiddleware
+from frapy.spiders import Spider
+from frapy.utils.test import get_crawler
 from tests.mockserver import MockServer
 from tests.spiders import MockServerSpider
 
@@ -63,7 +63,7 @@ class TestHttpErrorMiddleware(TestCase):
         crawler = get_crawler(Spider)
         self.spider = Spider.from_crawler(crawler, name="foo")
         self.mw = HttpErrorMiddleware(Settings({}))
-        self.req = Request("http://scrapytest.org")
+        self.req = Request("http://frapytest.org")
         self.res200, self.res404 = _responses(self.req, [200, 404])
 
     def test_process_spider_input(self):
@@ -86,7 +86,7 @@ class TestHttpErrorMiddleware(TestCase):
     def test_handle_httpstatus_list(self):
         res = self.res404.copy()
         res.request = Request(
-            "http://scrapytest.org", meta={"handle_httpstatus_list": [404]}
+            "http://frapytest.org", meta={"handle_httpstatus_list": [404]}
         )
         self.assertIsNone(self.mw.process_spider_input(res, self.spider))
 
@@ -100,7 +100,7 @@ class TestHttpErrorMiddlewareSettings(TestCase):
     def setUp(self):
         self.spider = Spider("foo")
         self.mw = HttpErrorMiddleware(Settings({"HTTPERROR_ALLOWED_CODES": (402,)}))
-        self.req = Request("http://scrapytest.org")
+        self.req = Request("http://frapytest.org")
         self.res200, self.res404, self.res402 = _responses(self.req, [200, 404, 402])
 
     def test_process_spider_input(self):
@@ -112,7 +112,7 @@ class TestHttpErrorMiddlewareSettings(TestCase):
 
     def test_meta_overrides_settings(self):
         request = Request(
-            "http://scrapytest.org", meta={"handle_httpstatus_list": [404]}
+            "http://frapytest.org", meta={"handle_httpstatus_list": [404]}
         )
         res404 = self.res404.copy()
         res404.request = request
@@ -134,7 +134,7 @@ class TestHttpErrorMiddlewareHandleAll(TestCase):
     def setUp(self):
         self.spider = Spider("foo")
         self.mw = HttpErrorMiddleware(Settings({"HTTPERROR_ALLOW_ALL": True}))
-        self.req = Request("http://scrapytest.org")
+        self.req = Request("http://frapytest.org")
         self.res200, self.res404, self.res402 = _responses(self.req, [200, 404, 402])
 
     def test_process_spider_input(self):
@@ -143,7 +143,7 @@ class TestHttpErrorMiddlewareHandleAll(TestCase):
 
     def test_meta_overrides_settings(self):
         request = Request(
-            "http://scrapytest.org", meta={"handle_httpstatus_list": [404]}
+            "http://frapytest.org", meta={"handle_httpstatus_list": [404]}
         )
         res404 = self.res404.copy()
         res404.request = request
@@ -157,10 +157,10 @@ class TestHttpErrorMiddlewareHandleAll(TestCase):
         crawler = get_crawler(_HttpErrorSpider)
         mw = HttpErrorMiddleware.from_crawler(crawler)
         request_httpstatus_false = Request(
-            "http://scrapytest.org", meta={"handle_httpstatus_all": False}
+            "http://frapytest.org", meta={"handle_httpstatus_all": False}
         )
         request_httpstatus_true = Request(
-            "http://scrapytest.org", meta={"handle_httpstatus_all": True}
+            "http://frapytest.org", meta={"handle_httpstatus_all": True}
         )
         res404 = self.res404.copy()
         res404.request = request_httpstatus_false

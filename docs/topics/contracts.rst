@@ -28,7 +28,7 @@ following example:
 
 This callback is tested using three built-in contracts:
 
-.. module:: scrapy.contracts.default
+.. module:: frapy.contracts.default
 
 .. class:: UrlContract
 
@@ -40,7 +40,7 @@ This callback is tested using three built-in contracts:
 
 .. class:: CallbackKeywordArgumentsContract
 
-    This contract (``@cb_kwargs``) sets the :attr:`cb_kwargs <scrapy.Request.cb_kwargs>`
+    This contract (``@cb_kwargs``) sets the :attr:`cb_kwargs <frapy.Request.cb_kwargs>`
     attribute for the sample request. It must be a valid JSON dictionary.
     ::
 
@@ -76,10 +76,10 @@ create and load your own contracts in the project by using the
         "myproject.contracts.ItemValidate": 10,
     }
 
-Each contract must inherit from :class:`~scrapy.contracts.Contract` and can
+Each contract must inherit from :class:`~frapy.contracts.Contract` and can
 override three methods:
 
-.. module:: scrapy.contracts
+.. module:: frapy.contracts
 
 .. class:: Contract(method, *args)
 
@@ -93,7 +93,7 @@ override three methods:
     .. method:: Contract.adjust_request_args(args)
 
         This receives a ``dict`` as an argument containing default arguments
-        for request object. :class:`~scrapy.Request` is used by default,
+        for request object. :class:`~frapy.Request` is used by default,
         but this can be changed with the ``request_cls`` attribute.
         If multiple contracts in chain have this attribute defined, the last one is used.
 
@@ -109,11 +109,11 @@ override three methods:
         This allows processing the output of the callback. Iterators are
         converted to lists before being passed to this hook.
 
-Raise :class:`~scrapy.exceptions.ContractFail` from
-:class:`~scrapy.contracts.Contract.pre_process` or
-:class:`~scrapy.contracts.Contract.post_process` if expectations are not met:
+Raise :class:`~frapy.exceptions.ContractFail` from
+:class:`~frapy.contracts.Contract.pre_process` or
+:class:`~frapy.contracts.Contract.post_process` if expectations are not met:
 
-.. autoclass:: scrapy.exceptions.ContractFail
+.. autoclass:: frapy.exceptions.ContractFail
 
 Here is a demo contract which checks the presence of a custom header in the
 response received:
@@ -121,8 +121,8 @@ response received:
 .. skip: next
 .. code-block:: python
 
-    from scrapy.contracts import Contract
-    from scrapy.exceptions import ContractFail
+    from frapy.contracts import Contract
+    from frapy.exceptions import ContractFail
 
 
     class HasHeaderContract(Contract):
@@ -143,17 +143,17 @@ response received:
 Detecting check runs
 ====================
 
-When ``scrapy check`` is running, the ``SCRAPY_CHECK`` environment variable is
+When ``frapy check`` is running, the ``SCRAPY_CHECK`` environment variable is
 set to the ``true`` string. You can use :data:`os.environ` to perform any change to
-your spiders or your settings when ``scrapy check`` is used:
+your spiders or your settings when ``frapy check`` is used:
 
 .. code-block:: python
 
     import os
-    import scrapy
+    import frapy
 
 
-    class ExampleSpider(scrapy.Spider):
+    class ExampleSpider(frapy.Spider):
         name = "example"
 
         def __init__(self):

@@ -1,7 +1,7 @@
 from testfixtures import LogCapture
 from twisted.internet import defer
 
-from scrapy.exceptions import StopDownload
+from frapy.exceptions import StopDownload
 from tests.test_engine import (
     AttrsItemsSpider,
     CrawlerRun,
@@ -32,7 +32,7 @@ class HeadersReceivedEngineTest(EngineTest):
                 yield run.run()
                 log.check_present(
                     (
-                        "scrapy.core.downloader.handlers.http11",
+                        "frapy.core.downloader.handlers.http11",
                         "DEBUG",
                         f"Download stopped for <GET http://localhost:{run.portno}/redirected> from"
                         " signal handler HeadersReceivedCrawlerRun.headers_received",
@@ -40,7 +40,7 @@ class HeadersReceivedEngineTest(EngineTest):
                 )
                 log.check_present(
                     (
-                        "scrapy.core.downloader.handlers.http11",
+                        "frapy.core.downloader.handlers.http11",
                         "DEBUG",
                         f"Download stopped for <GET http://localhost:{run.portno}/> from signal"
                         " handler HeadersReceivedCrawlerRun.headers_received",
@@ -48,7 +48,7 @@ class HeadersReceivedEngineTest(EngineTest):
                 )
                 log.check_present(
                     (
-                        "scrapy.core.downloader.handlers.http11",
+                        "frapy.core.downloader.handlers.http11",
                         "DEBUG",
                         f"Download stopped for <GET http://localhost:{run.portno}/numbers> from"
                         " signal handler HeadersReceivedCrawlerRun.headers_received",

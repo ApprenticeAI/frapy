@@ -6,11 +6,11 @@ from testfixtures import LogCapture
 from twisted.internet import defer
 from twisted.trial.unittest import TestCase as TwistedTestCase
 
-from scrapy.core.scheduler import BaseScheduler
-from scrapy.http import Request
-from scrapy.spiders import Spider
-from scrapy.utils.request import fingerprint
-from scrapy.utils.test import get_crawler
+from frapy.core.scheduler import BaseScheduler
+from frapy.http import Request
+from frapy.spiders import Spider
+from frapy.utils.request import fingerprint
+from frapy.utils.test import get_crawler
 from tests.mockserver import MockServer
 
 PATHS = ["/a", "/b", "/c"]

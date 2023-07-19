@@ -9,10 +9,10 @@ from twisted.web import server
 from twisted.web.error import SchemeNotSupported
 from twisted.web.http import H2_ENABLED
 
-from scrapy.http import Request
-from scrapy.spiders import Spider
-from scrapy.utils.misc import create_instance
-from scrapy.utils.test import get_crawler
+from frapy.http import Request
+from frapy.spiders import Spider
+from frapy.utils.misc import create_instance
+from frapy.utils.test import get_crawler
 from tests.mockserver import ssl_context_factory
 from tests.test_downloader_handlers import (
     Http11MockServerTestCase,
@@ -30,7 +30,7 @@ class Https2TestCase(Https11TestCase):
 
     @classmethod
     def setUpClass(cls):
-        from scrapy.core.downloader.handlers.http2 import H2DownloadHandler
+        from frapy.core.downloader.handlers.http2 import H2DownloadHandler
 
         cls.download_handler_cls = H2DownloadHandler
 
@@ -43,7 +43,7 @@ class Https2TestCase(Https11TestCase):
 
     @defer.inlineCallbacks
     def test_download_with_maxsize_very_large_file(self):
-        with mock.patch("scrapy.core.http2.stream.logger") as logger:
+        with mock.patch("frapy.core.http2.stream.logger") as logger:
             request = Request(self.getURL("largechunkedfile"))
 
             def check(logger):
@@ -128,7 +128,7 @@ class Https2TestCase(Https11TestCase):
         d.addCallback(
             lambda _: log.check_present(
                 (
-                    "scrapy.core.http2.stream",
+                    "frapy.core.http2.stream",
                     "WARNING",
                     f"Ignoring bad Content-Length header "
                     f"{bad_content_length!r} of request {request}, sending "
@@ -199,7 +199,7 @@ class Https2CustomCiphers(Https11CustomCiphers):
 
     @classmethod
     def setUpClass(cls):
-        from scrapy.core.downloader.handlers.http2 import H2DownloadHandler
+        from frapy.core.downloader.handlers.http2 import H2DownloadHandler
 
         cls.download_handler_cls = H2DownloadHandler
 
@@ -209,7 +209,7 @@ class Http2MockServerTestCase(Http11MockServerTestCase):
 
     settings_dict = {
         "DOWNLOAD_HANDLERS": {
-            "https": "scrapy.core.downloader.handlers.http2.H2DownloadHandler"
+            "https": "frapy.core.downloader.handlers.http2.H2DownloadHandler"
         }
     }
 
@@ -227,7 +227,7 @@ class Https2ProxyTestCase(Http11ProxyTestCase):
 
     @classmethod
     def setUpClass(cls):
-        from scrapy.core.downloader.handlers.http2 import H2DownloadHandler
+        from frapy.core.downloader.handlers.http2 import H2DownloadHandler
 
         cls.download_handler_cls = H2DownloadHandler
 

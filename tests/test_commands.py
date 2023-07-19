@@ -22,12 +22,12 @@ from twisted import version as twisted_version
 from twisted.python.versions import Version
 from twisted.trial import unittest
 
-import scrapy
-from scrapy.commands import ScrapyCommand, ScrapyHelpFormatter, view
-from scrapy.commands.startproject import IGNORE
-from scrapy.settings import Settings
-from scrapy.utils.python import to_unicode
-from scrapy.utils.test import get_testenv
+import frapy
+from frapy.commands import ScrapyCommand, ScrapyHelpFormatter, view
+from frapy.commands.startproject import IGNORE
+from frapy.settings import Settings
+from frapy.utils.python import to_unicode
+from frapy.utils.test import get_testenv
 from tests.test_crawler import ExceptionSpider, NoRequestsSpider
 
 
@@ -47,14 +47,14 @@ class CommandSettings(unittest.TestCase):
         )
         self.command.process_options(args, opts)
         self.assertIsInstance(
-            self.command.settings["FEEDS"], scrapy.settings.BaseSettings
+            self.command.settings["FEEDS"], frapy.settings.BaseSettings
         )
         self.assertEqual(dict(self.command.settings["FEEDS"]), json.loads(feeds_json))
 
     def test_help_formatter(self):
-        formatter = ScrapyHelpFormatter(prog="scrapy")
+        formatter = ScrapyHelpFormatter(prog="frapy")
         part_strings = [
-            "usage: scrapy genspider [options] <name> <domain>\n\n",
+            "usage: frapy genspider [options] <name> <domain>\n\n",
             "\n",
             "optional arguments:\n",
             "\n",
@@ -63,7 +63,7 @@ class CommandSettings(unittest.TestCase):
         self.assertEqual(
             formatter._join_parts(part_strings),
             (
-                "Usage\n=====\n  scrapy genspider [options] <name> <domain>\n\n\n"
+                "Usage\n=====\n  frapy genspider [options] <name> <domain>\n\n\n"
                 "Optional Arguments\n==================\n\n"
                 "Global Options\n--------------\n"
             ),
@@ -85,13 +85,13 @@ class ProjectTest(unittest.TestCase):
 
     def call(self, *new_args, **kwargs):
         with tempfile.TemporaryFile() as out:
-            args = (sys.executable, "-m", "scrapy.cmdline") + new_args
+            args = (sys.executable, "-m", "frapy.cmdline") + new_args
             return subprocess.call(
                 args, stdout=out, stderr=out, cwd=self.cwd, env=self.env, **kwargs
             )
 
     def proc(self, *new_args, **popen_kwargs):
-        args = (sys.executable, "-m", "scrapy.cmdline") + new_args
+        args = (sys.executable, "-m", "frapy.cmdline") + new_args
         p = subprocess.Popen(
             args,
             cwd=popen_kwargs.pop("cwd", self.cwd),
@@ -135,7 +135,7 @@ class StartprojectTest(ProjectTest):
         print(err, file=sys.stderr)
         self.assertEqual(p.returncode, 0)
 
-        assert Path(self.proj_path, "scrapy.cfg").exists()
+        assert Path(self.proj_path, "frapy.cfg").exists()
         assert Path(self.proj_path, "testproject").exists()
         assert Path(self.proj_mod_path, "__init__.py").exists()
         assert Path(self.proj_mod_path, "items.py").exists()
@@ -151,7 +151,7 @@ class StartprojectTest(ProjectTest):
         project_dir = mkdtemp()
         self.assertEqual(0, self.call("startproject", self.project_name, project_dir))
 
-        assert Path(project_dir, "scrapy.cfg").exists()
+        assert Path(project_dir, "frapy.cfg").exists()
         assert Path(project_dir, "testproject").exists()
         assert Path(project_dir, self.project_name, "__init__.py").exists()
         assert Path(project_dir, self.project_name, "items.py").exists()
@@ -186,7 +186,7 @@ class StartprojectTest(ProjectTest):
         print(err, file=sys.stderr)
         self.assertEqual(p.returncode, 0)
 
-        assert Path(project_path, "scrapy.cfg").exists()
+        assert Path(project_path, "frapy.cfg").exists()
         assert Path(project_path, project_name).exists()
         assert Path(project_path, project_name, "__init__.py").exists()
         assert Path(project_path, project_name, "items.py").exists()
@@ -231,7 +231,7 @@ class StartprojectTemplatesTest(ProjectTest):
         self.tmpl_proj = str(Path(self.tmpl, "project"))
 
     def test_startproject_template_override(self):
-        copytree(Path(scrapy.__path__[0], "templates"), self.tmpl)
+        copytree(Path(frapy.__path__[0], "templates"), self.tmpl)
         Path(self.tmpl_proj, "root_template").write_bytes(b"")
         assert Path(self.tmpl_proj, "root_template").exists()
 
@@ -248,8 +248,8 @@ class StartprojectTemplatesTest(ProjectTest):
         """Check that generated files have the right permissions when the
         template folder has the same permissions as in the project, i.e.
         everything is writable."""
-        scrapy_path = scrapy.__path__[0]
-        project_template = Path(scrapy_path, "templates", "project")
+        frapy_path = frapy.__path__[0]
+        project_template = Path(frapy_path, "templates", "project")
         project_name = "startproject1"
         renamings = (
             ("module", project_name),
@@ -266,7 +266,7 @@ class StartprojectTemplatesTest(ProjectTest):
             (
                 sys.executable,
                 "-m",
-                "scrapy.cmdline",
+                "frapy.cmdline",
                 "startproject",
                 project_name,
             ),
@@ -285,10 +285,10 @@ class StartprojectTemplatesTest(ProjectTest):
         template folder has been made read-only, which is something that some
         systems do.
 
-        See https://github.com/scrapy/scrapy/pull/4604
+        See https://github.com/frapy/frapy/pull/4604
         """
-        scrapy_path = scrapy.__path__[0]
-        templates_dir = Path(scrapy_path, "templates")
+        frapy_path = frapy.__path__[0]
+        templates_dir = Path(frapy_path, "templates")
         project_template = Path(templates_dir, "project")
         project_name = "startproject2"
         renamings = (
@@ -317,7 +317,7 @@ class StartprojectTemplatesTest(ProjectTest):
             (
                 sys.executable,
                 "-m",
-                "scrapy.cmdline",
+                "frapy.cmdline",
                 "startproject",
                 project_name,
                 "--set",
@@ -336,8 +336,8 @@ class StartprojectTemplatesTest(ProjectTest):
     def test_startproject_permissions_unchanged_in_destination(self):
         """Check that preexisting folders and files in the destination folder
         do not see their permissions modified."""
-        scrapy_path = scrapy.__path__[0]
-        project_template = Path(scrapy_path, "templates", "project")
+        frapy_path = frapy.__path__[0]
+        project_template = Path(frapy_path, "templates", "project")
         project_name = "startproject3"
         renamings = (
             ("module", project_name),
@@ -377,7 +377,7 @@ class StartprojectTemplatesTest(ProjectTest):
             (
                 sys.executable,
                 "-m",
-                "scrapy.cmdline",
+                "frapy.cmdline",
                 "startproject",
                 project_name,
                 ".",
@@ -402,8 +402,8 @@ class StartprojectTemplatesTest(ProjectTest):
             yield
             os.umask(cur_mask)
 
-        scrapy_path = scrapy.__path__[0]
-        project_template = Path(scrapy_path, "templates", "project")
+        frapy_path = frapy.__path__[0]
+        project_template = Path(frapy_path, "templates", "project")
         project_name = "umaskproject"
         renamings = (
             ("module", project_name),
@@ -421,7 +421,7 @@ class StartprojectTemplatesTest(ProjectTest):
                 (
                     sys.executable,
                     "-m",
-                    "scrapy.cmdline",
+                    "frapy.cmdline",
                     "startproject",
                     project_name,
                 ),
@@ -657,9 +657,9 @@ class RunSpiderCommandTest(CommandTest):
     spider_filename = "myspider.py"
 
     debug_log_spider = """
-import scrapy
+import frapy
 
-class MySpider(scrapy.Spider):
+class MySpider(frapy.Spider):
     name = 'myspider'
 
     def start_requests(self):
@@ -668,9 +668,9 @@ class MySpider(scrapy.Spider):
 """
 
     badspider = """
-import scrapy
+import frapy
 
-class BadSpider(scrapy.Spider):
+class BadSpider(frapy.Spider):
     name = "bad"
     def start_requests(self):
         raise Exception("oops!")
@@ -707,14 +707,14 @@ class BadSpider(scrapy.Spider):
 
     def test_run_fail_spider(self):
         proc, _, _ = self.runspider(
-            "import scrapy\n" + inspect.getsource(ExceptionSpider)
+            "import frapy\n" + inspect.getsource(ExceptionSpider)
         )
         ret = proc.returncode
         self.assertNotEqual(ret, 0)
 
     def test_run_good_spider(self):
         proc, _, _ = self.runspider(
-            "import scrapy\n" + inspect.getsource(NoRequestsSpider)
+            "import frapy\n" + inspect.getsource(NoRequestsSpider)
         )
         ret = proc.returncode
         self.assertEqual(ret, 0)
@@ -725,15 +725,15 @@ class BadSpider(scrapy.Spider):
         self.assertIn("INFO: Spider opened", log)
 
     def test_runspider_dnscache_disabled(self):
-        # see https://github.com/scrapy/scrapy/issues/2811
+        # see https://github.com/frapy/frapy/issues/2811
         # The spider below should not be able to connect to localhost:12345,
         # which is intended,
         # but this should not be because of DNS lookup error
         # assumption: localhost will resolve in all cases (true?)
         dnscache_spider = """
-import scrapy
+import frapy
 
-class MySpider(scrapy.Spider):
+class MySpider(frapy.Spider):
     name = 'myspider'
     start_urls = ['http://localhost:12345']
 
@@ -747,16 +747,16 @@ class MySpider(scrapy.Spider):
     def test_runspider_log_short_names(self):
         log1 = self.get_log(self.debug_log_spider, args=("-s", "LOG_SHORT_NAMES=1"))
         self.assertIn("[myspider] DEBUG: It Works!", log1)
-        self.assertIn("[scrapy]", log1)
-        self.assertNotIn("[scrapy.core.engine]", log1)
+        self.assertIn("[frapy]", log1)
+        self.assertNotIn("[frapy.core.engine]", log1)
 
         log2 = self.get_log(self.debug_log_spider, args=("-s", "LOG_SHORT_NAMES=0"))
         self.assertIn("[myspider] DEBUG: It Works!", log2)
-        self.assertNotIn("[scrapy]", log2)
-        self.assertIn("[scrapy.core.engine]", log2)
+        self.assertNotIn("[frapy]", log2)
+        self.assertIn("[frapy.core.engine]", log2)
 
     def test_runspider_no_spider_found(self):
-        log = self.get_log("from scrapy.spiders import Spider\n")
+        log = self.get_log("from frapy.spiders import Spider\n")
         self.assertIn("No spider found in file", log)
 
     def test_runspider_file_not_found(self):
@@ -846,9 +846,9 @@ class MySpider(scrapy.Spider):
 
     def test_output(self):
         spider_code = """
-import scrapy
+import frapy
 
-class MySpider(scrapy.Spider):
+class MySpider(frapy.Spider):
     name = 'myspider'
 
     def start_requests(self):
@@ -864,9 +864,9 @@ class MySpider(scrapy.Spider):
     def test_overwrite_output(self):
         spider_code = """
 import json
-import scrapy
+import frapy
 
-class MySpider(scrapy.Spider):
+class MySpider(frapy.Spider):
     name = 'myspider'
 
     def start_requests(self):
@@ -890,9 +890,9 @@ class MySpider(scrapy.Spider):
 
     def test_output_and_overwrite_output(self):
         spider_code = """
-import scrapy
+import frapy
 
-class MySpider(scrapy.Spider):
+class MySpider(frapy.Spider):
     name = 'myspider'
 
     def start_requests(self):
@@ -906,9 +906,9 @@ class MySpider(scrapy.Spider):
 
     def test_output_stdout(self):
         spider_code = """
-import scrapy
+import frapy
 
-class MySpider(scrapy.Spider):
+class MySpider(frapy.Spider):
     name = 'myspider'
 
     def start_requests(self):
@@ -974,7 +974,7 @@ class ViewCommandTest(CommandTest):
         command = view.Command()
         command.settings = Settings()
         parser = argparse.ArgumentParser(
-            prog="scrapy",
+            prog="frapy",
             prefix_chars="-",
             formatter_class=ScrapyHelpFormatter,
             conflict_handler="resolve",
@@ -999,9 +999,9 @@ class CrawlCommandTest(CommandTest):
 
     def test_no_output(self):
         spider_code = """
-import scrapy
+import frapy
 
-class MySpider(scrapy.Spider):
+class MySpider(frapy.Spider):
     name = 'myspider'
 
     def start_requests(self):
@@ -1013,9 +1013,9 @@ class MySpider(scrapy.Spider):
 
     def test_output(self):
         spider_code = """
-import scrapy
+import frapy
 
-class MySpider(scrapy.Spider):
+class MySpider(frapy.Spider):
     name = 'myspider'
 
     def start_requests(self):
@@ -1031,9 +1031,9 @@ class MySpider(scrapy.Spider):
     def test_overwrite_output(self):
         spider_code = """
 import json
-import scrapy
+import frapy
 
-class MySpider(scrapy.Spider):
+class MySpider(frapy.Spider):
     name = 'myspider'
 
     def start_requests(self):
@@ -1057,9 +1057,9 @@ class MySpider(scrapy.Spider):
 
     def test_output_and_overwrite_output(self):
         spider_code = """
-import scrapy
+import frapy
 
-class MySpider(scrapy.Spider):
+class MySpider(frapy.Spider):
     name = 'myspider'
 
     def start_requests(self):

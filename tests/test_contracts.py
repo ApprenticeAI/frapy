@@ -4,19 +4,19 @@ from twisted.internet import defer
 from twisted.python import failure
 from twisted.trial import unittest
 
-from scrapy import FormRequest
-from scrapy.contracts import Contract, ContractsManager
-from scrapy.contracts.default import (
+from frapy import FormRequest
+from frapy.contracts import Contract, ContractsManager
+from frapy.contracts.default import (
     CallbackKeywordArgumentsContract,
     ReturnsContract,
     ScrapesContract,
     UrlContract,
 )
-from scrapy.http import Request
-from scrapy.item import Field, Item
-from scrapy.spidermiddlewares.httperror import HttpError
-from scrapy.spiders import Spider
-from scrapy.utils.test import get_crawler
+from frapy.http import Request
+from frapy.item import Field, Item
+from frapy.spidermiddlewares.httperror import HttpError
+from frapy.spiders import Spider
+from frapy.utils.test import get_crawler
 from tests.mockserver import MockServer
 
 
@@ -26,14 +26,14 @@ class TestItem(Item):
 
 
 class ResponseMock:
-    url = "http://scrapy.org"
+    url = "http://frapy.org"
 
 
 class CustomSuccessContract(Contract):
     name = "custom_success_contract"
 
     def adjust_request_args(self, args):
-        args["url"] = "http://scrapy.org"
+        args["url"] = "http://frapy.org"
         return args
 
 
@@ -49,7 +49,7 @@ class CustomFormContract(Contract):
     request_cls = FormRequest
 
     def adjust_request_args(self, args):
-        args["formdata"] = {"name": "scrapy"}
+        args["formdata"] = {"name": "frapy"}
         return args
 
 
@@ -58,14 +58,14 @@ class TestSpider(Spider):
 
     def returns_request(self, response):
         """method which returns request
-        @url http://scrapy.org
+        @url http://frapy.org
         @returns requests 1
         """
-        return Request("http://scrapy.org", callback=self.returns_item)
+        return Request("http://frapy.org", callback=self.returns_item)
 
     def returns_item(self, response):
         """method which returns item
-        @url http://scrapy.org
+        @url http://frapy.org
         @returns items 1 1
         """
         return TestItem(url=response.url)
@@ -73,14 +73,14 @@ class TestSpider(Spider):
     def returns_request_cb_kwargs(self, response, url):
         """method which returns request
         @url https://example.org
-        @cb_kwargs {"url": "http://scrapy.org"}
+        @cb_kwargs {"url": "http://frapy.org"}
         @returns requests 1
         """
         return Request(url, callback=self.returns_item_cb_kwargs)
 
     def returns_item_cb_kwargs(self, response, name):
         """method which returns item
-        @url http://scrapy.org
+        @url http://frapy.org
         @cb_kwargs {"name": "Scrapy"}
         @returns items 1 1
         """
@@ -88,7 +88,7 @@ class TestSpider(Spider):
 
     def returns_item_cb_kwargs_error_unexpected_keyword(self, response):
         """method which returns item
-        @url http://scrapy.org
+        @url http://frapy.org
         @cb_kwargs {"arg": "value"}
         @returns items 1 1
         """
@@ -96,35 +96,35 @@ class TestSpider(Spider):
 
     def returns_item_cb_kwargs_error_missing_argument(self, response, arg):
         """method which returns item
-        @url http://scrapy.org
+        @url http://frapy.org
         @returns items 1 1
         """
         return TestItem(url=response.url)
 
     def returns_dict_item(self, response):
         """method which returns item
-        @url http://scrapy.org
+        @url http://frapy.org
         @returns items 1 1
         """
         return {"url": response.url}
 
     def returns_fail(self, response):
         """method which returns item
-        @url http://scrapy.org
+        @url http://frapy.org
         @returns items 0 0
         """
         return TestItem(url=response.url)
 
     def returns_dict_fail(self, response):
         """method which returns item
-        @url http://scrapy.org
+        @url http://frapy.org
         @returns items 0 0
         """
         return {"url": response.url}
 
     def scrapes_item_ok(self, response):
         """returns item with name and url
-        @url http://scrapy.org
+        @url http://frapy.org
         @returns items 1 1
         @scrapes name url
         """
@@ -132,7 +132,7 @@ class TestSpider(Spider):
 
     def scrapes_dict_item_ok(self, response):
         """returns item with name and url
-        @url http://scrapy.org
+        @url http://frapy.org
         @returns items 1 1
         @scrapes name url
         """
@@ -140,7 +140,7 @@ class TestSpider(Spider):
 
     def scrapes_item_fail(self, response):
         """returns item with no name
-        @url http://scrapy.org
+        @url http://frapy.org
         @returns items 1 1
         @scrapes name url
         """
@@ -148,7 +148,7 @@ class TestSpider(Spider):
 
     def scrapes_dict_item_fail(self, response):
         """returns item with no name
-        @url http://scrapy.org
+        @url http://frapy.org
         @returns items 1 1
         @scrapes name url
         """
@@ -156,7 +156,7 @@ class TestSpider(Spider):
 
     def scrapes_multiple_missing_fields(self, response):
         """returns item with no name
-        @url http://scrapy.org
+        @url http://frapy.org
         @returns items 1 1
         @scrapes name url
         """
@@ -170,7 +170,7 @@ class TestSpider(Spider):
 
     def custom_form(self, response):
         """
-        @url http://scrapy.org
+        @url http://frapy.org
         @custom_form
         """
         pass

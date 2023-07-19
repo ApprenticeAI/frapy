@@ -36,8 +36,8 @@ by a string: the full Python path to the extension's class name. For example:
 .. code-block:: python
 
     EXTENSIONS = {
-        "scrapy.extensions.corestats.CoreStats": 500,
-        "scrapy.extensions.telnet.TelnetConsole": 500,
+        "frapy.extensions.corestats.CoreStats": 500,
+        "frapy.extensions.telnet.TelnetConsole": 500,
     }
 
 
@@ -71,7 +71,7 @@ included in the :setting:`EXTENSIONS_BASE` setting) you must set its order to
 .. code-block:: python
 
     EXTENSIONS = {
-        "scrapy.extensions.corestats.CoreStats": None,
+        "frapy.extensions.corestats.CoreStats": None,
     }
 
 Writing your own extension
@@ -86,7 +86,7 @@ Typically, extensions connect to :ref:`signals <topics-signals>` and perform
 tasks triggered by them.
 
 Finally, if the ``from_crawler`` method raises the
-:exc:`~scrapy.exceptions.NotConfigured` exception, the extension will be
+:exc:`~frapy.exceptions.NotConfigured` exception, the extension will be
 disabled. Otherwise, the extension will be enabled.
 
 Sample extension
@@ -107,8 +107,8 @@ Here is the code of such extension:
 .. code-block:: python
 
     import logging
-    from scrapy import signals
-    from scrapy.exceptions import NotConfigured
+    from frapy import signals
+    from frapy.exceptions import NotConfigured
 
     logger = logging.getLogger(__name__)
 
@@ -162,7 +162,7 @@ General purpose extensions
 Log Stats extension
 ~~~~~~~~~~~~~~~~~~~
 
-.. module:: scrapy.extensions.logstats
+.. module:: frapy.extensions.logstats
    :synopsis: Basic stats logging
 
 .. class:: LogStats
@@ -172,7 +172,7 @@ Log basic stats like crawled pages and scraped items.
 Core Stats extension
 ~~~~~~~~~~~~~~~~~~~~
 
-.. module:: scrapy.extensions.corestats
+.. module:: frapy.extensions.corestats
    :synopsis: Core stats collection
 
 .. class:: CoreStats
@@ -185,7 +185,7 @@ enabled (see :ref:`topics-stats`).
 Telnet console extension
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. module:: scrapy.extensions.telnet
+.. module:: frapy.extensions.telnet
    :synopsis: Telnet console
 
 .. class:: TelnetConsole
@@ -202,7 +202,7 @@ setting, and the server will listen in the port specified in
 Memory usage extension
 ~~~~~~~~~~~~~~~~~~~~~~
 
-.. module:: scrapy.extensions.memusage
+.. module:: frapy.extensions.memusage
    :synopsis: Memory usage extension
 
 .. class:: MemoryUsage
@@ -230,7 +230,7 @@ can be configured with the following settings:
 Memory debugger extension
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. module:: scrapy.extensions.memdebug
+.. module:: frapy.extensions.memdebug
    :synopsis: Memory debugger extension
 
 .. class:: MemoryDebugger
@@ -246,7 +246,7 @@ info will be stored in the stats.
 Close spider extension
 ~~~~~~~~~~~~~~~~~~~~~~
 
-.. module:: scrapy.extensions.closespider
+.. module:: frapy.extensions.closespider
    :synopsis: Close spider extension
 
 .. class:: CloseSpider
@@ -319,7 +319,7 @@ set), spiders won't be closed by number of errors.
 StatsMailer extension
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. module:: scrapy.extensions.statsmailer
+.. module:: frapy.extensions.statsmailer
    :synopsis: StatsMailer extension
 
 .. class:: StatsMailer
@@ -329,12 +329,12 @@ domain has finished scraping, including the Scrapy stats collected. The email
 will be sent to all recipients specified in the :setting:`STATSMAILER_RCPTS`
 setting.
 
-Emails can be sent using the :class:`~scrapy.mail.MailSender` class. To see a
+Emails can be sent using the :class:`~frapy.mail.MailSender` class. To see a
 full list of parameters, including examples on how to instantiate
-:class:`~scrapy.mail.MailSender` and use mail settings, see
+:class:`~frapy.mail.MailSender` and use mail settings, see
 :ref:`topics-email`.
 
-.. module:: scrapy.extensions.debug
+.. module:: frapy.extensions.debug
    :synopsis: Extensions for debugging Scrapy
 
 Debugging extensions
@@ -348,7 +348,7 @@ Stack trace dump extension
 Dumps information about the running process when a `SIGQUIT`_ or `SIGUSR2`_
 signal is received. The information dumped is the following:
 
-1. engine status (using ``scrapy.utils.engine.get_engine_status()``)
+1. engine status (using ``frapy.utils.engine.get_engine_status()``)
 2. live references (see :ref:`topics-leaks-trackrefs`)
 3. stack trace of all threads
 

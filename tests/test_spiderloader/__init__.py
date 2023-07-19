@@ -7,14 +7,14 @@ from pathlib import Path
 from twisted.trial import unittest
 from zope.interface.verify import verifyObject
 
-# ugly hack to avoid cyclic imports of scrapy.spiders when running this test
+# ugly hack to avoid cyclic imports of frapy.spiders when running this test
 # alone
-import scrapy
-from scrapy.crawler import CrawlerRunner
-from scrapy.http import Request
-from scrapy.interfaces import ISpiderLoader
-from scrapy.settings import Settings
-from scrapy.spiderloader import SpiderLoader
+import frapy
+from frapy.crawler import CrawlerRunner
+from frapy.http import Request
+from frapy.interfaces import ISpiderLoader
+from frapy.settings import Settings
+from frapy.spiderloader import SpiderLoader
 
 module_dir = Path(__file__).resolve().parent
 
@@ -55,19 +55,19 @@ class SpiderLoaderTest(unittest.TestCase):
 
     def test_find_by_request(self):
         self.assertEqual(
-            self.spider_loader.find_by_request(Request("http://scrapy1.org/test")),
+            self.spider_loader.find_by_request(Request("http://frapy1.org/test")),
             ["spider1"],
         )
         self.assertEqual(
-            self.spider_loader.find_by_request(Request("http://scrapy2.org/test")),
+            self.spider_loader.find_by_request(Request("http://frapy2.org/test")),
             ["spider2"],
         )
         self.assertEqual(
-            set(self.spider_loader.find_by_request(Request("http://scrapy3.org/test"))),
+            set(self.spider_loader.find_by_request(Request("http://frapy3.org/test"))),
             {"spider1", "spider2"},
         )
         self.assertEqual(
-            self.spider_loader.find_by_request(Request("http://scrapy999.org/test")), []
+            self.spider_loader.find_by_request(Request("http://frapy999.org/test")), []
         )
         self.assertEqual(
             self.spider_loader.find_by_request(Request("http://spider3.com")), []
@@ -110,7 +110,7 @@ class SpiderLoaderTest(unittest.TestCase):
         )
 
         crawler = runner.create_crawler("spider1")
-        self.assertTrue(issubclass(crawler.spidercls, scrapy.Spider))
+        self.assertTrue(issubclass(crawler.spidercls, frapy.Spider))
         self.assertEqual(crawler.spidercls.name, "spider1")
 
     def test_bad_spider_modules_exception(self):

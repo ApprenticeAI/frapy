@@ -2,9 +2,9 @@ import pickle
 import re
 import unittest
 
-from scrapy.http import HtmlResponse, XmlResponse
-from scrapy.link import Link
-from scrapy.linkextractors.lxmlhtml import LxmlLinkExtractor
+from frapy.http import HtmlResponse, XmlResponse
+from frapy.link import Link
+from frapy.linkextractors.lxmlhtml import LxmlLinkExtractor
 from tests import get_testdata
 
 

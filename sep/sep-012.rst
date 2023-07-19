@@ -46,7 +46,7 @@ OffsiteMiddleware
 ``OffsiteMiddleware`` will use ``spider.allowed_domains`` for determining the
 domain names of a spider
 
-scrapy-ctl.py
+frapy-ctl.py
 -------------
 
 crawl
@@ -76,7 +76,7 @@ example:
 
 ::
 
-   $ scrapy-ctl genspider google google.com
+   $ frapy-ctl genspider google google.com
 
    $ ls project/spiders/
    project/spiders/google.py

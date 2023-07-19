@@ -144,7 +144,7 @@ class BaseRobotParserTest:
 
 class PythonRobotParserTest(BaseRobotParserTest, unittest.TestCase):
     def setUp(self):
-        from scrapy.robotstxt import PythonRobotParser
+        from frapy.robotstxt import PythonRobotParser
 
         super()._setUp(PythonRobotParser)
 
@@ -162,7 +162,7 @@ class ReppyRobotParserTest(BaseRobotParserTest, unittest.TestCase):
         skip = "Reppy parser is not installed"
 
     def setUp(self):
-        from scrapy.robotstxt import ReppyRobotParser
+        from frapy.robotstxt import ReppyRobotParser
 
         super()._setUp(ReppyRobotParser)
 
@@ -177,7 +177,7 @@ class RerpRobotParserTest(BaseRobotParserTest, unittest.TestCase):
         skip = "Rerp parser is not installed"
 
     def setUp(self):
-        from scrapy.robotstxt import RerpRobotParser
+        from frapy.robotstxt import RerpRobotParser
 
         super()._setUp(RerpRobotParser)
 
@@ -192,7 +192,7 @@ class ProtegoRobotParserTest(BaseRobotParserTest, unittest.TestCase):
         skip = "Protego parser is not installed"
 
     def setUp(self):
-        from scrapy.robotstxt import ProtegoRobotParser
+        from frapy.robotstxt import ProtegoRobotParser
 
         super()._setUp(ProtegoRobotParser)
 

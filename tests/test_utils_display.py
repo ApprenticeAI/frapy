@@ -1,7 +1,7 @@
 from io import StringIO
 from unittest import TestCase, mock
 
-from scrapy.utils.display import pformat, pprint
+from frapy.utils.display import pformat, pprint
 
 
 class TestDisplay(TestCase):
@@ -45,7 +45,7 @@ class TestDisplay(TestCase):
         self.assertIn(pformat(self.object), self.colorized_strings)
 
     @mock.patch("sys.platform", "win32")
-    @mock.patch("scrapy.utils.display._enable_windows_terminal_processing")
+    @mock.patch("frapy.utils.display._enable_windows_terminal_processing")
     @mock.patch("platform.version")
     @mock.patch("sys.stdout.isatty")
     def test_pformat_windows_no_terminal_processing(
@@ -57,7 +57,7 @@ class TestDisplay(TestCase):
         self.assertEqual(pformat(self.object), self.plain_string)
 
     @mock.patch("sys.platform", "win32")
-    @mock.patch("scrapy.utils.display._enable_windows_terminal_processing")
+    @mock.patch("frapy.utils.display._enable_windows_terminal_processing")
     @mock.patch("platform.version")
     @mock.patch("sys.stdout.isatty")
     def test_pformat_windows(self, isatty, version, terminal_processing):

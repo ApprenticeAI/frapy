@@ -1,6 +1,6 @@
 [run]
 branch = true
-include = scrapy/*
+include = frapy/*
 omit =
   tests/*
 disable_warnings = include-ignored

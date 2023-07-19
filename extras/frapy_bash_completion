@@ -1,0 +1,20 @@
+# bash completion for the Scrapy command-line tool
+
+_frapy_completion() {
+    local cmd cur commands spiders
+    cmd=${COMP_WORDS[1]}
+    cur=${COMP_WORDS[2]}
+    case "$cmd" in
+        crawl|edit|check)
+            spiders=$(frapy list 2>/dev/null) || spiders=""
+            COMPREPLY=(${COMPREPLY[@]:-} $(compgen -W "$spiders" -- "$cur"))
+        ;;
+        *)
+            if [ $COMP_CWORD -eq 1 ]; then
+                commands="check crawl edit fetch genspider list parse runspider settings shell startproject version view"
+                COMPREPLY=(${COMPREPLY[@]:-} $(compgen -W "$commands" -- "$cmd"))
+            fi
+        ;;
+    esac
+}
+complete -F _frapy_completion -o default frapy

@@ -2,8 +2,8 @@ from testfixtures import LogCapture
 from twisted.internet import defer
 from twisted.trial.unittest import TestCase
 
-from scrapy import Request, Spider
-from scrapy.utils.test import get_crawler
+from frapy import Request, Spider
+from frapy.utils.test import get_crawler
 from tests.mockserver import MockServer
 
 

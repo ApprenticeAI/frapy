@@ -1,8 +1,8 @@
 from pytest import mark
 from twisted.trial import unittest
 
-from scrapy.http import Response, TextResponse, XmlResponse
-from scrapy.utils.iterators import _body_or_str, csviter, xmliter, xmliter_lxml
+from frapy.http import Response, TextResponse, XmlResponse
+from frapy.utils.iterators import _body_or_str, csviter, xmliter, xmliter_lxml
 from tests import get_testdata
 
 
@@ -54,7 +54,7 @@ class XmliterTestCase(unittest.TestCase):
         self.assertEqual(nodenames, [["matchme..."]])
 
     def test_xmliter_unicode(self):
-        # example taken from https://github.com/scrapy/scrapy/issues/1665
+        # example taken from https://github.com/frapy/frapy/issues/1665
         body = """<?xml version="1.0" encoding="UTF-8"?>
             <þingflokkar>
                <þingflokkur id="26">

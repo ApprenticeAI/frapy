@@ -7,8 +7,8 @@ from pytest import mark
 from w3lib import __version__ as w3lib_version
 from w3lib.encoding import resolve_encoding
 
-from scrapy.exceptions import NotSupported
-from scrapy.http import (
+from frapy.exceptions import NotSupported
+from frapy.http import (
     Headers,
     HtmlResponse,
     Request,
@@ -16,9 +16,9 @@ from scrapy.http import (
     TextResponse,
     XmlResponse,
 )
-from scrapy.link import Link
-from scrapy.selector import Selector
-from scrapy.utils.python import to_unicode
+from frapy.link import Link
+from frapy.selector import Selector
+from frapy.utils.python import to_unicode
 from tests import get_testdata
 
 
@@ -216,7 +216,7 @@ class BaseResponseTest(unittest.TestCase):
 
     @mark.xfail(
         parse_version(w3lib_version) < parse_version("2.1.1"),
-        reason="https://github.com/scrapy/w3lib/pull/207",
+        reason="https://github.com/frapy/w3lib/pull/207",
         strict=True,
     )
     def test_follow_whitespace_url(self):
@@ -224,7 +224,7 @@ class BaseResponseTest(unittest.TestCase):
 
     @mark.xfail(
         parse_version(w3lib_version) < parse_version("2.1.1"),
-        reason="https://github.com/scrapy/w3lib/pull/207",
+        reason="https://github.com/frapy/w3lib/pull/207",
         strict=True,
     )
     def test_follow_whitespace_link(self):
@@ -925,24 +925,24 @@ class XmlResponseTest(TextResponseTest):
 
     def test_selector_shortcuts_kwargs(self):
         body = b"""<?xml version="1.0" encoding="utf-8"?>
-        <xml xmlns:somens="http://scrapy.org">
+        <xml xmlns:somens="http://frapy.org">
         <somens:elem>value</somens:elem>
         </xml>"""
         response = self.response_class("http://www.example.com", body=body)
 
         self.assertEqual(
             response.xpath(
-                "//s:elem/text()", namespaces={"s": "http://scrapy.org"}
+                "//s:elem/text()", namespaces={"s": "http://frapy.org"}
             ).getall(),
             response.selector.xpath(
-                "//s:elem/text()", namespaces={"s": "http://scrapy.org"}
+                "//s:elem/text()", namespaces={"s": "http://frapy.org"}
             ).getall(),
         )
 
-        response.selector.register_namespace("s2", "http://scrapy.org")
+        response.selector.register_namespace("s2", "http://frapy.org")
         self.assertEqual(
             response.xpath(
-                "//s1:elem/text()", namespaces={"s1": "http://scrapy.org"}
+                "//s1:elem/text()", namespaces={"s1": "http://frapy.org"}
             ).getall(),
             response.selector.xpath("//s2:elem/text()").getall(),
         )

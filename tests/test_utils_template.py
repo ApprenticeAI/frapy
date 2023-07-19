@@ -3,9 +3,9 @@ from pathlib import Path
 from shutil import rmtree
 from tempfile import mkdtemp
 
-from scrapy.utils.template import render_templatefile
+from frapy.utils.template import render_templatefile
 
-__doctests__ = ["scrapy.utils.template"]
+__doctests__ = ["frapy.utils.template"]
 
 
 class UtilsRenderTemplateFileTestCase(unittest.TestCase):

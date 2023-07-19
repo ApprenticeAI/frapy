@@ -27,15 +27,15 @@ from twisted.internet import defer, reactor
 from twisted.trial import unittest
 from twisted.web import server, static, util
 
-from scrapy import signals
-from scrapy.core.engine import ExecutionEngine
-from scrapy.exceptions import CloseSpider, ScrapyDeprecationWarning
-from scrapy.http import Request
-from scrapy.item import Field, Item
-from scrapy.linkextractors import LinkExtractor
-from scrapy.spiders import Spider
-from scrapy.utils.signal import disconnect_all
-from scrapy.utils.test import get_crawler
+from frapy import signals
+from frapy.core.engine import ExecutionEngine
+from frapy.exceptions import CloseSpider, ScrapyDeprecationWarning
+from frapy.http import Request
+from frapy.item import Field, Item
+from frapy.linkextractors import LinkExtractor
+from frapy.spiders import Spider
+from frapy.utils.signal import disconnect_all
+from frapy.utils.test import get_crawler
 from tests import get_testdata, tests_datadir
 
 
@@ -60,8 +60,8 @@ class DataClassItem:
 
 
 class TestSpider(Spider):
-    name = "scrapytest.org"
-    allowed_domains = ["scrapytest.org", "localhost"]
+    name = "frapytest.org"
+    allowed_domains = ["frapytest.org", "localhost"]
 
     itemurl_re = re.compile(r"item\d+.html")
     name_re = re.compile(r"<h1>(.*?)</h1>", re.M)
@@ -524,7 +524,7 @@ class EngineTest(unittest.TestCase):
         args = (
             sys.executable,
             "-m",
-            "scrapy.cmdline",
+            "frapy.cmdline",
             "fetch",
             "-s",
             "CLOSESPIDER_TIMEOUT=0.001",

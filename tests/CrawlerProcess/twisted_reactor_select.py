@@ -1,8 +1,8 @@
-import scrapy
-from scrapy.crawler import CrawlerProcess
+import frapy
+from frapy.crawler import CrawlerProcess
 
 
-class SelectReactorSpider(scrapy.Spider):
+class SelectReactorSpider(frapy.Spider):
     name = "epoll_reactor"
 
 

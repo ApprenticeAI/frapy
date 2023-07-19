@@ -19,7 +19,7 @@ Proposed Implementation
 .. code-block:: python
 
    #!python
-   from scrapy.item.fields import BaseField
+   from frapy.item.fields import BaseField
 
 
    class ListField(BaseField):
@@ -46,8 +46,8 @@ Defining a list field
 .. code-block:: python
 
    #!python
-   from scrapy.item.models import Item
-   from scrapy.item.fields import ListField, TextField, DateField, IntegerField
+   from frapy.item.models import Item
+   from frapy.item.fields import ListField, TextField, DateField, IntegerField
 
 
    class Article(Item):
@@ -61,8 +61,8 @@ important to instantiate !ListField with field instances, not classes:
 .. code-block:: python
 
    #!python
-   from scrapy.item.models import Item
-   from scrapy.item.fields import ListField, TextField
+   from frapy.item.models import Item
+   from frapy.item.fields import ListField, TextField
 
 
    class Variant(Item):

@@ -24,7 +24,7 @@ class ScrapyUtilsTest(unittest.TestCase):
         dependencies, make sure that the version of Twisted is the pinned
         version.
 
-        See https://github.com/scrapy/scrapy/pull/4814#issuecomment-706230011
+        See https://github.com/frapy/frapy/pull/4814#issuecomment-706230011
         """
         if not os.environ.get("_SCRAPY_PINNED", None):
             self.skipTest("Not in a pinned environment")

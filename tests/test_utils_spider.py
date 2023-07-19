@@ -1,9 +1,9 @@
 import unittest
 
-from scrapy import Spider
-from scrapy.http import Request
-from scrapy.item import Item
-from scrapy.utils.spider import iter_spider_classes, iterate_spider_output
+from frapy import Spider
+from frapy.http import Request
+from frapy.item import Item
+from frapy.utils.spider import iter_spider_classes, iterate_spider_output
 
 
 class MySpider1(Spider):
@@ -17,7 +17,7 @@ class MySpider2(Spider):
 class UtilsSpidersTestCase(unittest.TestCase):
     def test_iterate_spider_output(self):
         i = Item()
-        r = Request("http://scrapytest.org")
+        r = Request("http://frapytest.org")
         o = object()
 
         self.assertEqual(list(iterate_spider_output(i)), [i])

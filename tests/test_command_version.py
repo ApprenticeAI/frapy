@@ -3,8 +3,8 @@ import sys
 from twisted.internet import defer
 from twisted.trial import unittest
 
-import scrapy
-from scrapy.utils.testproc import ProcessTest
+import frapy
+from frapy.utils.testproc import ProcessTest
 
 
 class VersionTest(ProcessTest, unittest.TestCase):
@@ -16,7 +16,7 @@ class VersionTest(ProcessTest, unittest.TestCase):
         _, out, _ = yield self.execute([])
         self.assertEqual(
             out.strip().decode(encoding),
-            f"Scrapy {scrapy.__version__}",
+            f"Scrapy {frapy.__version__}",
         )
 
     @defer.inlineCallbacks

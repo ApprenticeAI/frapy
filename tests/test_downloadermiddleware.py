@@ -7,12 +7,12 @@ from twisted.internet.defer import Deferred
 from twisted.python.failure import Failure
 from twisted.trial.unittest import TestCase
 
-from scrapy.core.downloader.middleware import DownloaderMiddlewareManager
-from scrapy.exceptions import _InvalidOutput
-from scrapy.http import Request, Response
-from scrapy.spiders import Spider
-from scrapy.utils.python import to_bytes
-from scrapy.utils.test import get_crawler, get_from_asyncio_queue
+from frapy.core.downloader.middleware import DownloaderMiddlewareManager
+from frapy.exceptions import _InvalidOutput
+from frapy.http import Request, Response
+from frapy.spiders import Spider
+from frapy.utils.python import to_bytes
+from frapy.utils.test import get_crawler, get_from_asyncio_queue
 
 
 class ManagerTestCase(TestCase):

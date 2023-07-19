@@ -31,10 +31,10 @@ from w3lib.url import file_uri_to_path, path_to_file_uri
 from zope.interface import implementer
 from zope.interface.verify import verifyObject
 
-import scrapy
-from scrapy.exceptions import NotConfigured, ScrapyDeprecationWarning
-from scrapy.exporters import CsvItemExporter, JsonItemExporter
-from scrapy.extensions.feedexport import (
+import frapy
+from frapy.exceptions import NotConfigured, ScrapyDeprecationWarning
+from frapy.exporters import CsvItemExporter, JsonItemExporter
+from frapy.extensions.feedexport import (
     BlockingFeedStorage,
     FeedExporter,
     FileFeedStorage,
@@ -45,9 +45,9 @@ from scrapy.extensions.feedexport import (
     StdoutFeedStorage,
     _FeedSlot,
 )
-from scrapy.settings import Settings
-from scrapy.utils.python import to_unicode
-from scrapy.utils.test import get_crawler, mock_google_cloud_storage, skip_if_no_boto
+from frapy.settings import Settings
+from frapy.utils.python import to_unicode
+from frapy.utils.test import get_crawler, mock_google_cloud_storage, skip_if_no_boto
 from tests.mockserver import MockFTPServer, MockServer
 from tests.spiders import ItemSpider
 
@@ -94,7 +94,7 @@ class FileFeedStorageTest(unittest.TestCase):
     def _store(self, feed_options=None) -> Path:
         path = Path(self.mktemp()).resolve()
         storage = FileFeedStorage(str(path), feed_options=feed_options)
-        spider = scrapy.Spider("default")
+        spider = frapy.Spider("default")
         file = storage.open(spider)
         file.write(b"content")
         storage.store(file)
@@ -112,7 +112,7 @@ class FileFeedStorageTest(unittest.TestCase):
 
     @defer.inlineCallbacks
     def _assert_stores(self, storage, path: Path, expected_content=b"content"):
-        spider = scrapy.Spider("default")
+        spider = frapy.Spider("default")
         file = storage.open(spider)
         file.write(b"content")
         yield storage.store(file)
@@ -125,7 +125,7 @@ class FileFeedStorageTest(unittest.TestCase):
 
 class FTPFeedStorageTest(unittest.TestCase):
     def get_test_spider(self, settings=None):
-        class TestSpider(scrapy.Spider):
+        class TestSpider(frapy.Spider):
             name = "test_spider"
 
         crawler = get_crawler(settings_dict=settings)
@@ -201,7 +201,7 @@ class FTPFeedStorageTest(unittest.TestCase):
 
 class BlockingFeedStorageTest(unittest.TestCase):
     def get_test_spider(self, settings=None):
-        class TestSpider(scrapy.Spider):
+        class TestSpider(frapy.Spider):
             name = "test_spider"
 
         crawler = get_crawler(settings_dict=settings)
@@ -502,7 +502,7 @@ class StdoutFeedStorageTest(unittest.TestCase):
     def test_store(self):
         out = BytesIO()
         storage = StdoutFeedStorage("stdout:", _stdout=out)
-        file = storage.open(scrapy.Spider("default"))
+        file = storage.open(frapy.Spider("default"))
         file.write(b"content")
         yield storage.store(file)
         self.assertEqual(out.getvalue(), b"content")
@@ -583,14 +583,14 @@ class LogOnStoreFileStorage:
 class FeedExportTestBase(ABC, unittest.TestCase):
     __test__ = False
 
-    class MyItem(scrapy.Item):
-        foo = scrapy.Field()
-        egg = scrapy.Field()
-        baz = scrapy.Field()
+    class MyItem(frapy.Item):
+        foo = frapy.Field()
+        egg = frapy.Field()
+        baz = frapy.Field()
 
-    class MyItem2(scrapy.Item):
-        foo = scrapy.Field()
-        hello = scrapy.Field()
+    class MyItem2(frapy.Item):
+        foo = frapy.Field()
+        hello = frapy.Field()
 
     def _random_temp_filename(self, inter_dir="") -> Path:
         chars = [random.choice(ascii_letters + digits) for _ in range(15)]
@@ -609,7 +609,7 @@ class FeedExportTestBase(ABC, unittest.TestCase):
         Return exported data which a spider yielding ``items`` would return.
         """
 
-        class TestSpider(scrapy.Spider):
+        class TestSpider(frapy.Spider):
             name = "testspider"
 
             def parse(self, response):
@@ -625,7 +625,7 @@ class FeedExportTestBase(ABC, unittest.TestCase):
         Return exported data which a spider yielding no ``items`` would return.
         """
 
-        class TestSpider(scrapy.Spider):
+        class TestSpider(frapy.Spider):
             name = "testspider"
 
             def parse(self, response):
@@ -873,7 +873,7 @@ class FeedExportTest(FeedExportTestBase):
             mockserver = stack.enter_context(MockServer())
             stack.enter_context(
                 mock.patch(
-                    "scrapy.extensions.feedexport.FileFeedStorage.store",
+                    "frapy.extensions.feedexport.FileFeedStorage.store",
                     side_effect=KeyError("foo"),
                 )
             )
@@ -964,7 +964,7 @@ class FeedExportTest(FeedExportTestBase):
         listener = IsExportingListener()
         InstrumentedFeedSlot.subscribe__listener(listener)
 
-        with mock.patch("scrapy.extensions.feedexport._FeedSlot", InstrumentedFeedSlot):
+        with mock.patch("frapy.extensions.feedexport._FeedSlot", InstrumentedFeedSlot):
             _ = yield self.exported_data(items, settings)
             self.assertFalse(listener.start_without_finish)
             self.assertFalse(listener.finish_without_start)
@@ -982,7 +982,7 @@ class FeedExportTest(FeedExportTestBase):
         listener = IsExportingListener()
         InstrumentedFeedSlot.subscribe__listener(listener)
 
-        with mock.patch("scrapy.extensions.feedexport._FeedSlot", InstrumentedFeedSlot):
+        with mock.patch("frapy.extensions.feedexport._FeedSlot", InstrumentedFeedSlot):
             _ = yield self.exported_data(items, settings)
             self.assertFalse(listener.start_without_finish)
             self.assertFalse(listener.finish_without_start)
@@ -1003,7 +1003,7 @@ class FeedExportTest(FeedExportTestBase):
         listener = IsExportingListener()
         InstrumentedFeedSlot.subscribe__listener(listener)
 
-        with mock.patch("scrapy.extensions.feedexport._FeedSlot", InstrumentedFeedSlot):
+        with mock.patch("frapy.extensions.feedexport._FeedSlot", InstrumentedFeedSlot):
             _ = yield self.exported_data(items, settings)
             self.assertFalse(listener.start_without_finish)
             self.assertFalse(listener.finish_without_start)
@@ -1022,7 +1022,7 @@ class FeedExportTest(FeedExportTestBase):
         listener = IsExportingListener()
         InstrumentedFeedSlot.subscribe__listener(listener)
 
-        with mock.patch("scrapy.extensions.feedexport._FeedSlot", InstrumentedFeedSlot):
+        with mock.patch("frapy.extensions.feedexport._FeedSlot", InstrumentedFeedSlot):
             _ = yield self.exported_data(items, settings)
             self.assertFalse(listener.start_without_finish)
             self.assertFalse(listener.finish_without_start)
@@ -1213,13 +1213,13 @@ class FeedExportTest(FeedExportTestBase):
             def accepts(self, item):
                 return isinstance(item, MyItem)
 
-        class CustomFilter2(scrapy.extensions.feedexport.ItemFilter):
+        class CustomFilter2(frapy.extensions.feedexport.ItemFilter):
             def accepts(self, item):
                 if "foo" not in item.fields:
                     return False
                 return True
 
-        class CustomFilter3(scrapy.extensions.feedexport.ItemFilter):
+        class CustomFilter3(frapy.extensions.feedexport.ItemFilter):
             def accepts(self, item):
                 if isinstance(item, tuple(self.item_classes)) and item["foo"] == "bar1":
                     return True
@@ -1716,7 +1716,7 @@ class FeedPostProcessedExportsTest(FeedExportTestBase):
             "FEEDS": {
                 filename: {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.GzipPlugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.GzipPlugin"],
                 },
             },
         }
@@ -1742,14 +1742,14 @@ class FeedPostProcessedExportsTest(FeedExportTestBase):
             "FEEDS": {
                 self._named_tempfile("compresslevel_0"): {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.GzipPlugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.GzipPlugin"],
                     "gzip_compresslevel": 0,
                     "gzip_mtime": 0,
                     "gzip_filename": "",
                 },
                 self._named_tempfile("compresslevel_9"): {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.GzipPlugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.GzipPlugin"],
                     "gzip_compresslevel": 9,
                     "gzip_mtime": 0,
                     "gzip_filename": "",
@@ -1779,13 +1779,13 @@ class FeedPostProcessedExportsTest(FeedExportTestBase):
             "FEEDS": {
                 self._named_tempfile("mtime_123"): {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.GzipPlugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.GzipPlugin"],
                     "gzip_mtime": 123,
                     "gzip_filename": "",
                 },
                 self._named_tempfile("mtime_123456789"): {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.GzipPlugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.GzipPlugin"],
                     "gzip_mtime": 123456789,
                     "gzip_filename": "",
                 },
@@ -1814,13 +1814,13 @@ class FeedPostProcessedExportsTest(FeedExportTestBase):
             "FEEDS": {
                 self._named_tempfile("filename_FILE1"): {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.GzipPlugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.GzipPlugin"],
                     "gzip_mtime": 0,
                     "gzip_filename": "FILE1",
                 },
                 self._named_tempfile("filename_FILE2"): {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.GzipPlugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.GzipPlugin"],
                     "gzip_mtime": 0,
                     "gzip_filename": "FILE2",
                 },
@@ -1842,7 +1842,7 @@ class FeedPostProcessedExportsTest(FeedExportTestBase):
             "FEEDS": {
                 filename: {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.LZMAPlugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.LZMAPlugin"],
                 },
             },
         }
@@ -1868,12 +1868,12 @@ class FeedPostProcessedExportsTest(FeedExportTestBase):
             "FEEDS": {
                 self._named_tempfile("format_FORMAT_XZ"): {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.LZMAPlugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.LZMAPlugin"],
                     "lzma_format": lzma.FORMAT_XZ,
                 },
                 self._named_tempfile("format_FORMAT_ALONE"): {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.LZMAPlugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.LZMAPlugin"],
                     "lzma_format": lzma.FORMAT_ALONE,
                 },
             },
@@ -1901,12 +1901,12 @@ class FeedPostProcessedExportsTest(FeedExportTestBase):
             "FEEDS": {
                 self._named_tempfile("check_CHECK_NONE"): {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.LZMAPlugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.LZMAPlugin"],
                     "lzma_check": lzma.CHECK_NONE,
                 },
                 self._named_tempfile("check_CHECK_CRC256"): {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.LZMAPlugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.LZMAPlugin"],
                     "lzma_check": lzma.CHECK_SHA256,
                 },
             },
@@ -1934,12 +1934,12 @@ class FeedPostProcessedExportsTest(FeedExportTestBase):
             "FEEDS": {
                 self._named_tempfile("preset_PRESET_0"): {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.LZMAPlugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.LZMAPlugin"],
                     "lzma_preset": 0,
                 },
                 self._named_tempfile("preset_PRESET_9"): {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.LZMAPlugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.LZMAPlugin"],
                     "lzma_preset": 9,
                 },
             },
@@ -1966,7 +1966,7 @@ class FeedPostProcessedExportsTest(FeedExportTestBase):
             "FEEDS": {
                 filename: {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.LZMAPlugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.LZMAPlugin"],
                     "lzma_filters": filters,
                 },
             },
@@ -1985,7 +1985,7 @@ class FeedPostProcessedExportsTest(FeedExportTestBase):
             "FEEDS": {
                 filename: {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.Bz2Plugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.Bz2Plugin"],
                 },
             },
         }
@@ -2011,12 +2011,12 @@ class FeedPostProcessedExportsTest(FeedExportTestBase):
             "FEEDS": {
                 self._named_tempfile("compresslevel_1"): {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.Bz2Plugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.Bz2Plugin"],
                     "bz2_compresslevel": 1,
                 },
                 self._named_tempfile("compresslevel_9"): {
                     "format": "csv",
-                    "postprocessing": ["scrapy.extensions.postprocessing.Bz2Plugin"],
+                    "postprocessing": ["frapy.extensions.postprocessing.Bz2Plugin"],
                     "bz2_compresslevel": 9,
                 },
             },
@@ -2079,7 +2079,7 @@ class FeedPostProcessedExportsTest(FeedExportTestBase):
                     "format": "csv",
                     "postprocessing": [
                         self.MyPlugin1,
-                        "scrapy.extensions.postprocessing.Bz2Plugin",
+                        "frapy.extensions.postprocessing.Bz2Plugin",
                     ],
                     "plugin1_char": b"\n",
                 },
@@ -2087,7 +2087,7 @@ class FeedPostProcessedExportsTest(FeedExportTestBase):
                     "format": "csv",
                     "postprocessing": [
                         self.MyPlugin1,
-                        "scrapy.extensions.postprocessing.LZMAPlugin",
+                        "frapy.extensions.postprocessing.LZMAPlugin",
                     ],
                     "plugin1_char": b"\n",
                 },
@@ -2095,7 +2095,7 @@ class FeedPostProcessedExportsTest(FeedExportTestBase):
                     "format": "csv",
                     "postprocessing": [
                         self.MyPlugin1,
-                        "scrapy.extensions.postprocessing.GzipPlugin",
+                        "frapy.extensions.postprocessing.GzipPlugin",
                     ],
                     "plugin1_char": b"\n",
                 },
@@ -2583,7 +2583,7 @@ class BatchDeliveriesTest(FeedExportTestBase):
         storage = S3FeedStorage.from_crawler(crawler, uri)
         verifyObject(IFeedStorage, storage)
 
-        class TestSpider(scrapy.Spider):
+        class TestSpider(frapy.Spider):
             name = "testspider"
 
             def parse(self, response):
@@ -2646,7 +2646,7 @@ class StdoutFeedStoragePreFeedOptionsTest(unittest.TestCase):
             crawler = get_crawler(settings_dict=settings_dict)
             feed_exporter = FeedExporter.from_crawler(crawler)
 
-        spider = scrapy.Spider("default")
+        spider = frapy.Spider("default")
         with pytest.warns(
             ScrapyDeprecationWarning,
             match="StdoutFeedStorageWithoutFeedOptions does not support "
@@ -2679,7 +2679,7 @@ class FileFeedStoragePreFeedOptionsTest(unittest.TestCase):
             ):
                 crawler = get_crawler(settings_dict=settings_dict)
                 feed_exporter = FeedExporter.from_crawler(crawler)
-        spider = scrapy.Spider("default")
+        spider = frapy.Spider("default")
 
         with pytest.warns(
             ScrapyDeprecationWarning,
@@ -2719,7 +2719,7 @@ class S3FeedStoragePreFeedOptionsTest(unittest.TestCase):
             crawler = get_crawler(settings_dict=settings_dict)
             feed_exporter = FeedExporter.from_crawler(crawler)
 
-        spider = scrapy.Spider("default")
+        spider = frapy.Spider("default")
         spider.crawler = crawler
 
         with pytest.warns(
@@ -2741,7 +2741,7 @@ class S3FeedStoragePreFeedOptionsTest(unittest.TestCase):
             crawler = get_crawler(settings_dict=settings_dict)
             feed_exporter = FeedExporter.from_crawler(crawler)
 
-        spider = scrapy.Spider("default")
+        spider = frapy.Spider("default")
         spider.crawler = crawler
 
         with pytest.warns(
@@ -2782,7 +2782,7 @@ class FTPFeedStoragePreFeedOptionsTest(unittest.TestCase):
             crawler = get_crawler(settings_dict=settings_dict)
             feed_exporter = FeedExporter.from_crawler(crawler)
 
-        spider = scrapy.Spider("default")
+        spider = frapy.Spider("default")
         spider.crawler = crawler
 
         with pytest.warns(
@@ -2804,7 +2804,7 @@ class FTPFeedStoragePreFeedOptionsTest(unittest.TestCase):
             crawler = get_crawler(settings_dict=settings_dict)
             feed_exporter = FeedExporter.from_crawler(crawler)
 
-        spider = scrapy.Spider("default")
+        spider = frapy.Spider("default")
         spider.crawler = crawler
 
         with pytest.warns(
@@ -2840,7 +2840,7 @@ class URIParamsTest:
             uri="file:///tmp/%(name)s",
         )
         crawler, feed_exporter = self._crawler_feed_exporter(settings)
-        spider = scrapy.Spider(self.spider_name)
+        spider = frapy.Spider(self.spider_name)
         spider.crawler = crawler
 
         with warnings.catch_warnings():
@@ -2858,7 +2858,7 @@ class URIParamsTest:
             uri_params=uri_params,
         )
         crawler, feed_exporter = self._crawler_feed_exporter(settings)
-        spider = scrapy.Spider(self.spider_name)
+        spider = frapy.Spider(self.spider_name)
         spider.crawler = crawler
 
         with pytest.warns(
@@ -2877,7 +2877,7 @@ class URIParamsTest:
             uri_params=uri_params,
         )
         crawler, feed_exporter = self._crawler_feed_exporter(settings)
-        spider = scrapy.Spider(self.spider_name)
+        spider = frapy.Spider(self.spider_name)
         spider.crawler = crawler
 
         with warnings.catch_warnings():
@@ -2894,7 +2894,7 @@ class URIParamsTest:
             uri_params=uri_params,
         )
         crawler, feed_exporter = self._crawler_feed_exporter(settings)
-        spider = scrapy.Spider(self.spider_name)
+        spider = frapy.Spider(self.spider_name)
         spider.crawler = crawler
         with warnings.catch_warnings():
             warnings.simplefilter("error", ScrapyDeprecationWarning)
@@ -2911,7 +2911,7 @@ class URIParamsTest:
             uri_params=uri_params,
         )
         crawler, feed_exporter = self._crawler_feed_exporter(settings)
-        spider = scrapy.Spider(self.spider_name)
+        spider = frapy.Spider(self.spider_name)
         spider.crawler = crawler
         with warnings.catch_warnings():
             warnings.simplefilter("error", ScrapyDeprecationWarning)

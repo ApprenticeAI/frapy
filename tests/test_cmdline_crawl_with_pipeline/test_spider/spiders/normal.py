@@ -1,7 +1,7 @@
-import scrapy
+import frapy
 
 
-class NormalSpider(scrapy.Spider):
+class NormalSpider(frapy.Spider):
     name = "normal"
 
     custom_settings = {

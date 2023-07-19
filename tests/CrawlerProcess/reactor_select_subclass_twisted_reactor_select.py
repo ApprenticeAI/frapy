@@ -1,8 +1,8 @@
 from twisted.internet.main import installReactor
 from twisted.internet.selectreactor import SelectReactor
 
-import scrapy
-from scrapy.crawler import CrawlerProcess
+import frapy
+from frapy.crawler import CrawlerProcess
 
 
 class SelectReactorSubclass(SelectReactor):
@@ -13,7 +13,7 @@ reactor = SelectReactorSubclass()
 installReactor(reactor)
 
 
-class NoRequestsSpider(scrapy.Spider):
+class NoRequestsSpider(frapy.Spider):
     name = "no_request"
 
     def start_requests(self):

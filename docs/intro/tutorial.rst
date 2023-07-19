@@ -51,12 +51,12 @@ Creating a project
 Before you start scraping, you will have to set up a new Scrapy project. Enter a
 directory where you'd like to store your code and run::
 
-    scrapy startproject tutorial
+    frapy startproject tutorial
 
 This will create a ``tutorial`` directory with the following contents::
 
     tutorial/
-        scrapy.cfg            # deploy configuration file
+        frapy.cfg            # deploy configuration file
 
         tutorial/             # project's Python module, you'll import your code from here
             __init__.py
@@ -78,7 +78,7 @@ Our first Spider
 
 Spiders are classes that you define and that Scrapy uses to scrape information
 from a website (or a group of websites). They must subclass
-:class:`~scrapy.Spider` and define the initial requests to make,
+:class:`~frapy.Spider` and define the initial requests to make,
 optionally how to follow links in the pages, and how to parse the downloaded
 page content to extract data.
 
@@ -89,10 +89,10 @@ This is the code for our first Spider. Save it in a file named
 
     from pathlib import Path
 
-    import scrapy
+    import frapy
 
 
-    class QuotesSpider(scrapy.Spider):
+    class QuotesSpider(frapy.Spider):
         name = "quotes"
 
         def start_requests(self):
@@ -101,7 +101,7 @@ This is the code for our first Spider. Save it in a file named
                 "https://quotes.toscrape.com/page/2/",
             ]
             for url in urls:
-                yield scrapy.Request(url=url, callback=self.parse)
+                yield frapy.Request(url=url, callback=self.parse)
 
         def parse(self, response):
             page = response.url.split("/")[-2]
@@ -110,48 +110,48 @@ This is the code for our first Spider. Save it in a file named
             self.log(f"Saved file {filename}")
 
 
-As you can see, our Spider subclasses :class:`scrapy.Spider <scrapy.Spider>`
+As you can see, our Spider subclasses :class:`frapy.Spider <frapy.Spider>`
 and defines some attributes and methods:
 
-* :attr:`~scrapy.Spider.name`: identifies the Spider. It must be
+* :attr:`~frapy.Spider.name`: identifies the Spider. It must be
   unique within a project, that is, you can't set the same name for different
   Spiders.
 
-* :meth:`~scrapy.Spider.start_requests`: must return an iterable of
+* :meth:`~frapy.Spider.start_requests`: must return an iterable of
   Requests (you can return a list of requests or write a generator function)
   which the Spider will begin to crawl from. Subsequent requests will be
   generated successively from these initial requests.
 
-* :meth:`~scrapy.Spider.parse`: a method that will be called to handle
+* :meth:`~frapy.Spider.parse`: a method that will be called to handle
   the response downloaded for each of the requests made. The response parameter
-  is an instance of :class:`~scrapy.http.TextResponse` that holds
+  is an instance of :class:`~frapy.http.TextResponse` that holds
   the page content and has further helpful methods to handle it.
 
-  The :meth:`~scrapy.Spider.parse` method usually parses the response, extracting
+  The :meth:`~frapy.Spider.parse` method usually parses the response, extracting
   the scraped data as dicts and also finding new URLs to
-  follow and creating new requests (:class:`~scrapy.Request`) from them.
+  follow and creating new requests (:class:`~frapy.Request`) from them.
 
 How to run our spider
 ---------------------
 
 To put our spider to work, go to the project's top level directory and run::
 
-   scrapy crawl quotes
+   frapy crawl quotes
 
 This command runs the spider with name ``quotes`` that we've just added, that
 will send some requests for the ``quotes.toscrape.com`` domain. You will get an output
 similar to this::
 
     ... (omitted for brevity)
-    2016-12-16 21:24:05 [scrapy.core.engine] INFO: Spider opened
-    2016-12-16 21:24:05 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
-    2016-12-16 21:24:05 [scrapy.extensions.telnet] DEBUG: Telnet console listening on 127.0.0.1:6023
-    2016-12-16 21:24:05 [scrapy.core.engine] DEBUG: Crawled (404) <GET https://quotes.toscrape.com/robots.txt> (referer: None)
-    2016-12-16 21:24:05 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://quotes.toscrape.com/page/1/> (referer: None)
-    2016-12-16 21:24:05 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://quotes.toscrape.com/page/2/> (referer: None)
+    2016-12-16 21:24:05 [frapy.core.engine] INFO: Spider opened
+    2016-12-16 21:24:05 [frapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+    2016-12-16 21:24:05 [frapy.extensions.telnet] DEBUG: Telnet console listening on 127.0.0.1:6023
+    2016-12-16 21:24:05 [frapy.core.engine] DEBUG: Crawled (404) <GET https://quotes.toscrape.com/robots.txt> (referer: None)
+    2016-12-16 21:24:05 [frapy.core.engine] DEBUG: Crawled (200) <GET https://quotes.toscrape.com/page/1/> (referer: None)
+    2016-12-16 21:24:05 [frapy.core.engine] DEBUG: Crawled (200) <GET https://quotes.toscrape.com/page/2/> (referer: None)
     2016-12-16 21:24:05 [quotes] DEBUG: Saved file quotes-1.html
     2016-12-16 21:24:05 [quotes] DEBUG: Saved file quotes-2.html
-    2016-12-16 21:24:05 [scrapy.core.engine] INFO: Closing spider (finished)
+    2016-12-16 21:24:05 [frapy.core.engine] INFO: Closing spider (finished)
     ...
 
 Now, check the files in the current directory. You should notice that two new
@@ -165,30 +165,30 @@ for the respective URLs, as our ``parse`` method instructs.
 What just happened under the hood?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Scrapy schedules the :class:`scrapy.Request <scrapy.Request>` objects
+Scrapy schedules the :class:`frapy.Request <frapy.Request>` objects
 returned by the ``start_requests`` method of the Spider. Upon receiving a
-response for each one, it instantiates :class:`~scrapy.http.Response` objects
+response for each one, it instantiates :class:`~frapy.http.Response` objects
 and calls the callback method associated with the request (in this case, the
 ``parse`` method) passing the response as argument.
 
 
 A shortcut to the start_requests method
 ---------------------------------------
-Instead of implementing a :meth:`~scrapy.Spider.start_requests` method
-that generates :class:`scrapy.Request <scrapy.Request>` objects from URLs,
-you can just define a :attr:`~scrapy.Spider.start_urls` class attribute
+Instead of implementing a :meth:`~frapy.Spider.start_requests` method
+that generates :class:`frapy.Request <frapy.Request>` objects from URLs,
+you can just define a :attr:`~frapy.Spider.start_urls` class attribute
 with a list of URLs. This list will then be used by the default implementation
-of :meth:`~scrapy.Spider.start_requests` to create the initial requests
+of :meth:`~frapy.Spider.start_requests` to create the initial requests
 for your spider.
 
 .. code-block:: python
 
     from pathlib import Path
 
-    import scrapy
+    import frapy
 
 
-    class QuotesSpider(scrapy.Spider):
+    class QuotesSpider(frapy.Spider):
         name = "quotes"
         start_urls = [
             "https://quotes.toscrape.com/page/1/",
@@ -200,9 +200,9 @@ for your spider.
             filename = f"quotes-{page}.html"
             Path(filename).write_bytes(response.body)
 
-The :meth:`~scrapy.Spider.parse` method will be called to handle each
+The :meth:`~frapy.Spider.parse` method will be called to handle each
 of the requests for those URLs, even though we haven't explicitly told Scrapy
-to do so. This happens because :meth:`~scrapy.Spider.parse` is Scrapy's
+to do so. This happens because :meth:`~frapy.Spider.parse` is Scrapy's
 default callback method, which is called for requests without an explicitly
 assigned callback.
 
@@ -213,7 +213,7 @@ Extracting data
 The best way to learn how to extract data with Scrapy is trying selectors
 using the :ref:`Scrapy shell <topics-shell>`. Run::
 
-    scrapy shell 'https://quotes.toscrape.com/page/1/'
+    frapy shell 'https://quotes.toscrape.com/page/1/'
 
 .. note::
 
@@ -223,19 +223,19 @@ using the :ref:`Scrapy shell <topics-shell>`. Run::
 
    On Windows, use double quotes instead::
 
-       scrapy shell "https://quotes.toscrape.com/page/1/"
+       frapy shell "https://quotes.toscrape.com/page/1/"
 
 You will see something like::
 
     [ ... Scrapy log here ... ]
-    2016-09-19 12:09:27 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://quotes.toscrape.com/page/1/> (referer: None)
+    2016-09-19 12:09:27 [frapy.core.engine] DEBUG: Crawled (200) <GET https://quotes.toscrape.com/page/1/> (referer: None)
     [s] Available Scrapy objects:
-    [s]   scrapy     scrapy module (contains scrapy.Request, scrapy.Selector, etc)
-    [s]   crawler    <scrapy.crawler.Crawler object at 0x7fa91d888c90>
+    [s]   frapy     frapy module (contains frapy.Request, frapy.Selector, etc)
+    [s]   crawler    <frapy.crawler.Crawler object at 0x7fa91d888c90>
     [s]   item       {}
     [s]   request    <GET https://quotes.toscrape.com/page/1/>
     [s]   response   <200 https://quotes.toscrape.com/page/1/>
-    [s]   settings   <scrapy.settings.Settings object at 0x7fa91d888c10>
+    [s]   settings   <frapy.settings.Settings object at 0x7fa91d888c10>
     [s]   spider     <DefaultSpider 'default' at 0x7fa91c8af990>
     [s] Useful shortcuts:
     [s]   shelp()           Shell help (print this help)
@@ -255,8 +255,8 @@ object:
     [<Selector xpath='descendant-or-self::title' data='<title>Quotes to Scrape</title>'>]
 
 The result of running ``response.css('title')`` is a list-like object called
-:class:`~scrapy.selector.SelectorList`, which represents a list of
-:class:`~scrapy.Selector` objects that wrap around XML/HTML elements
+:class:`~frapy.selector.SelectorList`, which represents a list of
+:class:`~frapy.Selector` objects that wrap around XML/HTML elements
 and allow you to run further queries to fine-grain the selection or extract the
 data.
 
@@ -293,7 +293,7 @@ As an alternative, you could've written:
     >>> response.css("title::text")[0].get()
     'Quotes to Scrape'
 
-Accessing an index on a :class:`~scrapy.selector.SelectorList` instance will 
+Accessing an index on a :class:`~frapy.selector.SelectorList` instance will 
 raise an :exc:`IndexError` exception if there are no results:
 
 .. code-block:: pycon
@@ -304,7 +304,7 @@ raise an :exc:`IndexError` exception if there are no results:
     IndexError: list index out of range
 
 You might want to use ``.get()`` directly on the 
-:class:`~scrapy.selector.SelectorList` instance instead, which returns ``None`` 
+:class:`~frapy.selector.SelectorList` instance instead, which returns ``None`` 
 if there are no results:
 
 .. code-block:: pycon
@@ -315,9 +315,9 @@ There's a lesson here: for most scraping code, you want it to be resilient to
 errors due to things not being found on a page, so that even if some parts fail
 to be scraped, you can at least get **some** data.
 
-Besides the :meth:`~scrapy.selector.SelectorList.getall` and
-:meth:`~scrapy.selector.SelectorList.get` methods, you can also use
-the :meth:`~scrapy.selector.SelectorList.re` method to extract using
+Besides the :meth:`~frapy.selector.SelectorList.getall` and
+:meth:`~frapy.selector.SelectorList.get` methods, you can also use
+the :meth:`~frapy.selector.SelectorList.re` method to extract using
 :doc:`regular expressions <library/re>`:
 
 .. code-block:: pycon
@@ -400,10 +400,10 @@ like this:
         </div>
     </div>
 
-Let's open up scrapy shell and play a bit to find out how to extract the data
+Let's open up frapy shell and play a bit to find out how to extract the data
 we want::
 
-    scrapy shell 'https://quotes.toscrape.com'
+    frapy shell 'https://quotes.toscrape.com'
 
 We get a list of selectors for the quote HTML elements with:
 
@@ -475,10 +475,10 @@ in the callback, as you can see below:
 
 .. code-block:: python
 
-    import scrapy
+    import frapy
 
 
-    class QuotesSpider(scrapy.Spider):
+    class QuotesSpider(frapy.Spider):
         name = "quotes"
         start_urls = [
             "https://quotes.toscrape.com/page/1/",
@@ -495,9 +495,9 @@ in the callback, as you can see below:
 
 If you run this spider, it will output the extracted data with the log::
 
-    2016-09-19 18:57:19 [scrapy.core.scraper] DEBUG: Scraped from <200 https://quotes.toscrape.com/page/1/>
+    2016-09-19 18:57:19 [frapy.core.scraper] DEBUG: Scraped from <200 https://quotes.toscrape.com/page/1/>
     {'tags': ['life', 'love'], 'author': 'André Gide', 'text': '“It is better to be hated for what you are than to be loved for what you are not.”'}
-    2016-09-19 18:57:19 [scrapy.core.scraper] DEBUG: Scraped from <200 https://quotes.toscrape.com/page/1/>
+    2016-09-19 18:57:19 [frapy.core.scraper] DEBUG: Scraped from <200 https://quotes.toscrape.com/page/1/>
     {'tags': ['edison', 'failure', 'inspirational', 'paraphrased'], 'author': 'Thomas A. Edison', 'text': "“I have not failed. I've just found 10,000 ways that won't work.”"}
 
 
@@ -509,7 +509,7 @@ Storing the scraped data
 The simplest way to store the scraped data is by using :ref:`Feed exports
 <topics-feed-exports>`, with the following command::
 
-    scrapy crawl quotes -O quotes.json
+    frapy crawl quotes -O quotes.json
 
 That will generate a ``quotes.json`` file containing all scraped items,
 serialized in `JSON`_.
@@ -519,7 +519,7 @@ to append new content to any existing file. However, appending to a JSON file
 makes the file contents invalid JSON. When appending to a file, consider
 using a different serialization format, such as `JSON Lines`_::
 
-    scrapy crawl quotes -o quotes.jsonl
+    frapy crawl quotes -o quotes.jsonl
 
 The `JSON Lines`_ format is useful because it's stream-like, you can easily
 append new records to it. It doesn't have the same problem of JSON when you run
@@ -586,10 +586,10 @@ page, extracting data from it:
 
 .. code-block:: python
 
-    import scrapy
+    import frapy
 
 
-    class QuotesSpider(scrapy.Spider):
+    class QuotesSpider(frapy.Spider):
         name = "quotes"
         start_urls = [
             "https://quotes.toscrape.com/page/1/",
@@ -606,12 +606,12 @@ page, extracting data from it:
             next_page = response.css("li.next a::attr(href)").get()
             if next_page is not None:
                 next_page = response.urljoin(next_page)
-                yield scrapy.Request(next_page, callback=self.parse)
+                yield frapy.Request(next_page, callback=self.parse)
 
 
 Now, after extracting the data, the ``parse()`` method looks for the link to
 the next page, builds a full absolute URL using the
-:meth:`~scrapy.http.Response.urljoin` method (since the links can be
+:meth:`~frapy.http.Response.urljoin` method (since the links can be
 relative) and yields a new request to the next page, registering itself as
 callback to handle the data extraction for the next page and to keep the
 crawling going through all the pages.
@@ -635,14 +635,14 @@ A shortcut for creating Requests
 --------------------------------
 
 As a shortcut for creating Request objects you can use
-:meth:`response.follow <scrapy.http.TextResponse.follow>`:
+:meth:`response.follow <frapy.http.TextResponse.follow>`:
 
 .. code-block:: python
 
-    import scrapy
+    import frapy
 
 
-    class QuotesSpider(scrapy.Spider):
+    class QuotesSpider(frapy.Spider):
         name = "quotes"
         start_urls = [
             "https://quotes.toscrape.com/page/1/",
@@ -660,7 +660,7 @@ As a shortcut for creating Request objects you can use
             if next_page is not None:
                 yield response.follow(next_page, callback=self.parse)
 
-Unlike scrapy.Request, ``response.follow`` supports relative URLs directly - no
+Unlike frapy.Request, ``response.follow`` supports relative URLs directly - no
 need to call urljoin. Note that ``response.follow`` just returns a Request
 instance; you still have to yield this Request.
 
@@ -683,7 +683,7 @@ attribute automatically. So the code can be shortened further:
         yield response.follow(a, callback=self.parse)
 
 To create multiple requests from an iterable, you can use
-:meth:`response.follow_all <scrapy.http.TextResponse.follow_all>` instead:
+:meth:`response.follow_all <frapy.http.TextResponse.follow_all>` instead:
 
 .. code-block:: python
 
@@ -707,10 +707,10 @@ this time for scraping author information:
 
 .. code-block:: python
 
-    import scrapy
+    import frapy
 
 
-    class AuthorSpider(scrapy.Spider):
+    class AuthorSpider(frapy.Spider):
         name = "author"
 
         start_urls = ["https://quotes.toscrape.com/"]
@@ -737,9 +737,9 @@ authors pages calling the ``parse_author`` callback for each of them, and also
 the pagination links with the ``parse`` callback as we saw before.
 
 Here we're passing callbacks to
-:meth:`response.follow_all <scrapy.http.TextResponse.follow_all>` as positional
+:meth:`response.follow_all <frapy.http.TextResponse.follow_all>` as positional
 arguments to make the code shorter; it also works for
-:class:`~scrapy.Request`.
+:class:`~frapy.Request`.
 
 The ``parse_author`` callback defines a helper function to extract and cleanup the
 data from a CSS query and yields the Python dict with the author data.
@@ -755,7 +755,7 @@ Hopefully by now you have a good understanding of how to use the mechanism
 of following links and callbacks with Scrapy.
 
 As yet another example spider that leverages the mechanism of following links,
-check out the :class:`~scrapy.spiders.CrawlSpider` class for a generic
+check out the :class:`~frapy.spiders.CrawlSpider` class for a generic
 spider that implements a small rules engine that you can use to write your
 crawlers on top of it.
 
@@ -770,7 +770,7 @@ Using spider arguments
 You can provide command line arguments to your spiders by using the ``-a``
 option when running them::
 
-    scrapy crawl quotes -O quotes-humor.json -a tag=humor
+    frapy crawl quotes -O quotes-humor.json -a tag=humor
 
 These arguments are passed to the Spider's ``__init__`` method and become
 spider attributes by default.
@@ -781,10 +781,10 @@ with a specific tag, building the URL based on the argument:
 
 .. code-block:: python
 
-    import scrapy
+    import frapy
 
 
-    class QuotesSpider(scrapy.Spider):
+    class QuotesSpider(frapy.Spider):
         name = "quotes"
 
         def start_requests(self):
@@ -792,7 +792,7 @@ with a specific tag, building the URL based on the argument:
             tag = getattr(self, "tag", None)
             if tag is not None:
                 url = url + "tag/" + tag
-            yield scrapy.Request(url, self.parse)
+            yield frapy.Request(url, self.parse)
 
         def parse(self, response):
             for quote in response.css("div.quote"):

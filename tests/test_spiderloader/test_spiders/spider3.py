@@ -1,4 +1,4 @@
-from scrapy.spiders import Spider
+from frapy.spiders import Spider
 
 
 class Spider3(Spider):

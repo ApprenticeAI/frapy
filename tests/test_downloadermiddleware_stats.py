@@ -2,12 +2,12 @@ import warnings
 from itertools import product
 from unittest import TestCase
 
-from scrapy.downloadermiddlewares.stats import DownloaderStats
-from scrapy.exceptions import ScrapyDeprecationWarning
-from scrapy.http import Request, Response
-from scrapy.spiders import Spider
-from scrapy.utils.response import response_httprepr
-from scrapy.utils.test import get_crawler
+from frapy.downloadermiddlewares.stats import DownloaderStats
+from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.http import Request, Response
+from frapy.spiders import Spider
+from frapy.utils.response import response_httprepr
+from frapy.utils.test import get_crawler
 
 
 class MyException(Exception):
@@ -17,13 +17,13 @@ class MyException(Exception):
 class TestDownloaderStats(TestCase):
     def setUp(self):
         self.crawler = get_crawler(Spider)
-        self.spider = self.crawler._create_spider("scrapytest.org")
+        self.spider = self.crawler._create_spider("frapytest.org")
         self.mw = DownloaderStats(self.crawler.stats)
 
         self.crawler.stats.open_spider(self.spider)
 
-        self.req = Request("http://scrapytest.org")
-        self.res = Response("scrapytest.org", status=400)
+        self.req = Request("http://frapytest.org")
+        self.res = Response("frapytest.org", status=400)
 
     def assertStatsEqual(self, key, value):
         self.assertEqual(
@@ -45,10 +45,10 @@ class TestDownloaderStats(TestCase):
         headers = (
             {},
             {"lang": "en"},
-            {"lang": "en", "User-Agent": "scrapy"},
+            {"lang": "en", "User-Agent": "frapy"},
         )  # 0 headers, 1h and 2h
         test_responses = [  # form test responses with all combinations of body/headers
-            Response(url="scrapytest.org", status=200, body=r[0], headers=r[1])
+            Response(url="frapytest.org", status=200, body=r[0], headers=r[1])
             for r in product(body, headers)
         ]
         for test_response in test_responses:

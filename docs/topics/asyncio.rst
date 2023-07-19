@@ -19,10 +19,10 @@ Installing the asyncio reactor
 To enable :mod:`asyncio` support, set the :setting:`TWISTED_REACTOR` setting to
 ``'twisted.internet.asyncioreactor.AsyncioSelectorReactor'``.
 
-If you are using :class:`~scrapy.crawler.CrawlerRunner`, you also need to
+If you are using :class:`~frapy.crawler.CrawlerRunner`, you also need to
 install the :class:`~twisted.internet.asyncioreactor.AsyncioSelectorReactor`
 reactor manually. You can do that using
-:func:`~scrapy.utils.reactor.install_reactor`::
+:func:`~frapy.utils.reactor.install_reactor`::
 
     install_reactor('twisted.internet.asyncioreactor.AsyncioSelectorReactor')
 
@@ -56,7 +56,7 @@ So on Python 3.8+ the event loop class needs to be changed.
 .. versionchanged:: 2.6.0
    The event loop class is changed automatically when you change the
    :setting:`TWISTED_REACTOR` setting or call
-   :func:`~scrapy.utils.reactor.install_reactor`.
+   :func:`~frapy.utils.reactor.install_reactor`.
 
 To change the event loop class manually, call the following code before
 installing the reactor::
@@ -89,8 +89,8 @@ specifics of the Scrapy coroutine integration (the coroutines are wrapped into
 :class:`~twisted.internet.defer.Deferred` directly), and you need to wrap them into
 Futures. Scrapy provides two helpers for this:
 
-.. autofunction:: scrapy.utils.defer.deferred_to_future
-.. autofunction:: scrapy.utils.defer.maybe_deferred_to_future
+.. autofunction:: frapy.utils.defer.deferred_to_future
+.. autofunction:: frapy.utils.defer.maybe_deferred_to_future
 .. tip:: If you need to use these functions in code that aims to be compatible
          with lower versions of Scrapy that do not provide these functions,
          down to Scrapy 2.0 (earlier versions do not support
@@ -104,13 +104,13 @@ Enforcing asyncio as a requirement
 ==================================
 
 If you are writing a :ref:`component <topics-components>` that requires asyncio
-to work, use :func:`scrapy.utils.reactor.is_asyncio_reactor_installed` to
+to work, use :func:`frapy.utils.reactor.is_asyncio_reactor_installed` to
 :ref:`enforce it as a requirement <enforce-component-requirements>`. For
 example:
 
 .. code-block:: python
 
-    from scrapy.utils.reactor import is_asyncio_reactor_installed
+    from frapy.utils.reactor import is_asyncio_reactor_installed
 
 
     class MyComponent:

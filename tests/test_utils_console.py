@@ -1,6 +1,6 @@
 import unittest
 
-from scrapy.utils.console import get_shell_embed_func
+from frapy.utils.console import get_shell_embed_func
 
 try:
     import bpython

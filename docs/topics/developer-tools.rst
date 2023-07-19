@@ -85,7 +85,7 @@ First open the Scrapy shell at https://quotes.toscrape.com/ in a terminal:
 
 .. code-block:: none
 
-    $ scrapy shell "https://quotes.toscrape.com/"
+    $ frapy shell "https://quotes.toscrape.com/"
 
 Then, back to your web browser, right-click on the ``span`` tag, select
 ``Copy > XPath`` and paste it in the Scrapy shell like so:
@@ -179,7 +179,7 @@ we'll check another quite useful command from the Scrapy shell:
 
 .. code-block:: none
 
-  $ scrapy shell "quotes.toscrape.com/scroll"
+  $ frapy shell "quotes.toscrape.com/scroll"
   (...)
   >>> view(response)
 
@@ -245,11 +245,11 @@ also request each page to get every quote on the site:
 
 .. code-block:: python
 
-    import scrapy
+    import frapy
     import json
 
 
-    class QuoteSpider(scrapy.Spider):
+    class QuoteSpider(frapy.Spider):
         name = "quote"
         allowed_domains = ["quotes.toscrape.com"]
         page = 1
@@ -262,7 +262,7 @@ also request each page to get every quote on the site:
             if data["has_next"]:
                 self.page += 1
                 url = f"https://quotes.toscrape.com/api/quotes?page={self.page}"
-                yield scrapy.Request(url=url, callback=self.parse)
+                yield frapy.Request(url=url, callback=self.parse)
 
 This spider starts at the first page of the quotes-API. With each
 response, we parse the ``response.text`` and assign it to ``data``.
@@ -280,12 +280,12 @@ In more complex websites, it could be difficult to easily reproduce the
 requests, as we could need to add ``headers`` or ``cookies`` to make it work.
 In those cases you can export the requests in `cURL <https://curl.haxx.se/>`_
 format, by right-clicking on each of them in the network tool and using the
-:meth:`~scrapy.Request.from_curl()` method to generate an equivalent
+:meth:`~frapy.Request.from_curl()` method to generate an equivalent
 request:
 
 .. code-block:: python
 
-    from scrapy import Request
+    from frapy import Request
 
     request = Request.from_curl(
         "curl 'https://quotes.toscrape.com/api/quotes?page=1' -H 'User-Agent: Mozil"
@@ -298,13 +298,13 @@ request:
     )
 
 Alternatively, if you want to know the arguments needed to recreate that
-request you can use the :func:`~scrapy.utils.curl.curl_to_request_kwargs`
+request you can use the :func:`~frapy.utils.curl.curl_to_request_kwargs`
 function to get a dictionary with the equivalent arguments:
 
-.. autofunction:: scrapy.utils.curl.curl_to_request_kwargs
+.. autofunction:: frapy.utils.curl.curl_to_request_kwargs
 
 Note that to translate a cURL command into a Scrapy request,
-you may use `curl2scrapy <https://michael-shub.github.io/curl2scrapy/>`_.
+you may use `curl2frapy <https://michael-shub.github.io/curl2frapy/>`_.
 
 As you can see, with a few inspections in the `Network`-tool we
 were able to easily replicate the dynamic requests of the scrolling

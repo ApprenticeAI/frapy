@@ -1,12 +1,12 @@
 from twisted.internet import selectreactor
 
-import scrapy
-from scrapy.crawler import CrawlerProcess
+import frapy
+from frapy.crawler import CrawlerProcess
 
 selectreactor.install()
 
 
-class NoRequestsSpider(scrapy.Spider):
+class NoRequestsSpider(frapy.Spider):
     name = "no_request"
 
     def start_requests(self):

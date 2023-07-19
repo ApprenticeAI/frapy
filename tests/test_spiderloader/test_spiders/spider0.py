@@ -1,5 +1,5 @@
-from scrapy.spiders import Spider
+from frapy.spiders import Spider
 
 
 class Spider0(Spider):
-    allowed_domains = ["scrapy1.org", "scrapy3.org"]
+    allowed_domains = ["frapy1.org", "frapy3.org"]

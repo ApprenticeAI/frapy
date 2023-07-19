@@ -4,7 +4,7 @@
 Sending e-mail
 ==============
 
-.. module:: scrapy.mail
+.. module:: frapy.mail
    :synopsis: Email sending facility
 
 Although Python makes sending e-mails relatively easy via the :mod:`smtplib`
@@ -23,7 +23,7 @@ the standard ``__init__`` method:
 
 .. code-block:: python
 
-    from scrapy.mail import MailSender
+    from frapy.mail import MailSender
 
     mailer = MailSender()
 
@@ -87,7 +87,7 @@ rest of the framework.
         :ref:`these Scrapy settings <topics-email-settings>`.
 
         :param settings: the e-mail recipients
-        :type settings: :class:`scrapy.settings.Settings` object
+        :type settings: :class:`frapy.settings.Settings` object
 
     .. method:: send(to, subject, body, cc=None, attachs=(), mimetype='text/plain', charset=None)
 
@@ -133,7 +133,7 @@ writing any code (for those extensions and code that uses :class:`MailSender`).
 MAIL_FROM
 ---------
 
-Default: ``'scrapy@localhost'``
+Default: ``'frapy@localhost'``
 
 Sender email to use (``From:`` header) for sending emails.
 

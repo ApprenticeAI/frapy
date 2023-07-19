@@ -2,9 +2,9 @@ import asyncio
 import sys
 from typing import Optional
 
-from scrapy import Spider
-from scrapy.crawler import CrawlerProcess
-from scrapy.utils.defer import deferred_from_coro
+from frapy import Spider
+from frapy.crawler import CrawlerProcess
+from frapy.utils.defer import deferred_from_coro
 
 
 class UppercasePipeline:

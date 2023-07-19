@@ -13,10 +13,10 @@ spiders come in.
 
 Popular choices for deploying Scrapy spiders are:
 
-* :ref:`Scrapyd <deploy-scrapyd>` (open source)
-* :ref:`Zyte Scrapy Cloud <deploy-scrapy-cloud>` (cloud-based)
+* :ref:`Scrapyd <deploy-frapyd>` (open source)
+* :ref:`Zyte Scrapy Cloud <deploy-frapy-cloud>` (cloud-based)
 
-.. _deploy-scrapyd:
+.. _deploy-frapyd:
 
 Deploying to a Scrapyd Server
 =============================
@@ -24,13 +24,13 @@ Deploying to a Scrapyd Server
 `Scrapyd`_ is an open source application to run Scrapy spiders. It provides
 a server with HTTP API, capable of running and monitoring Scrapy spiders.
 
-To deploy spiders to Scrapyd, you can use the scrapyd-deploy tool provided by
-the `scrapyd-client`_ package. Please refer to the `scrapyd-deploy
+To deploy spiders to Scrapyd, you can use the frapyd-deploy tool provided by
+the `frapyd-client`_ package. Please refer to the `frapyd-deploy
 documentation`_ for more information.
 
 Scrapyd is maintained by some of the Scrapy developers.
 
-.. _deploy-scrapy-cloud:
+.. _deploy-frapy-cloud:
 
 Deploying to Zyte Scrapy Cloud
 ==============================
@@ -46,14 +46,14 @@ tool.
 Please refer to the `Zyte Scrapy Cloud documentation`_ for more information.
 
 Zyte Scrapy Cloud is compatible with Scrapyd and one can switch between
-them as needed - the configuration is read from the ``scrapy.cfg`` file
-just like ``scrapyd-deploy``.
+them as needed - the configuration is read from the ``frapy.cfg`` file
+just like ``frapyd-deploy``.
 
-.. _Deploying your project: https://scrapyd.readthedocs.io/en/latest/deploy.html
-.. _Scrapyd: https://github.com/scrapy/scrapyd
-.. _scrapyd-client: https://github.com/scrapy/scrapyd-client
-.. _scrapyd-deploy documentation: https://scrapyd.readthedocs.io/en/latest/deploy.html
+.. _Deploying your project: https://frapyd.readthedocs.io/en/latest/deploy.html
+.. _Scrapyd: https://github.com/frapy/frapyd
+.. _frapyd-client: https://github.com/frapy/frapyd-client
+.. _frapyd-deploy documentation: https://frapyd.readthedocs.io/en/latest/deploy.html
 .. _shub: https://shub.readthedocs.io/en/latest/
 .. _Zyte: https://zyte.com/
-.. _Zyte Scrapy Cloud: https://www.zyte.com/scrapy-cloud/
-.. _Zyte Scrapy Cloud documentation: https://docs.zyte.com/scrapy-cloud.html
+.. _Zyte Scrapy Cloud: https://www.zyte.com/frapy-cloud/
+.. _Zyte Scrapy Cloud documentation: https://docs.zyte.com/frapy-cloud.html

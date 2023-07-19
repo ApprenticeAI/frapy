@@ -1,9 +1,9 @@
 from unittest import TestCase, main
 
-from scrapy.downloadermiddlewares.decompression import DecompressionMiddleware
-from scrapy.http import Response, XmlResponse
-from scrapy.spiders import Spider
-from scrapy.utils.test import assert_samelines
+from frapy.downloadermiddlewares.decompression import DecompressionMiddleware
+from frapy.http import Response, XmlResponse
+from frapy.spiders import Spider
+from frapy.utils.test import assert_samelines
 from tests import get_testdata
 
 

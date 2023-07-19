@@ -6,7 +6,7 @@ import unittest
 import warnings
 from pathlib import Path
 
-from scrapy.utils.project import data_path, get_project_settings
+from frapy.utils.project import data_path, get_project_settings
 
 
 @contextlib.contextmanager
@@ -16,7 +16,7 @@ def inside_a_project():
 
     try:
         os.chdir(project_dir)
-        Path("scrapy.cfg").touch()
+        Path("frapy.cfg").touch()
 
         yield project_dir
     finally:
@@ -26,13 +26,13 @@ def inside_a_project():
 
 class ProjectUtilsTest(unittest.TestCase):
     def test_data_path_outside_project(self):
-        self.assertEqual(str(Path(".scrapy", "somepath")), data_path("somepath"))
+        self.assertEqual(str(Path(".frapy", "somepath")), data_path("somepath"))
         abspath = str(Path(os.path.sep, "absolute", "path"))
         self.assertEqual(abspath, data_path(abspath))
 
     def test_data_path_inside_project(self):
         with inside_a_project() as proj_path:
-            expected = Path(proj_path, ".scrapy", "somepath")
+            expected = Path(proj_path, ".frapy", "somepath")
             self.assertEqual(expected.resolve(), Path(data_path("somepath")).resolve())
             abspath = str(Path(os.path.sep, "absolute", "path").resolve())
             self.assertEqual(abspath, data_path(abspath))

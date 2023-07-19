@@ -10,11 +10,11 @@ Consider the following Scrapy spider below:
 .. skip: next
 .. code-block:: python
 
-    import scrapy
+    import frapy
     from myproject.items import MyItem
 
 
-    class MySpider(scrapy.Spider):
+    class MySpider(frapy.Spider):
         name = "myspider"
         start_urls = (
             "http://example.com/page1",
@@ -25,14 +25,14 @@ Consider the following Scrapy spider below:
             # <processing code not shown>
             # collect `item_urls`
             for item_url in item_urls:
-                yield scrapy.Request(item_url, self.parse_item)
+                yield frapy.Request(item_url, self.parse_item)
 
         def parse_item(self, response):
             # <processing code not shown>
             item = MyItem()
             # populate `item` fields
             # and extract item_details_url
-            yield scrapy.Request(
+            yield frapy.Request(
                 item_details_url, self.parse_details, cb_kwargs={"item": item}
             )
 
@@ -42,7 +42,7 @@ Consider the following Scrapy spider below:
 
 Basically this is a simple spider which parses two pages of items (the
 start_urls). Items also have a details page with additional information, so we
-use the ``cb_kwargs`` functionality of :class:`~scrapy.Request` to pass a
+use the ``cb_kwargs`` functionality of :class:`~frapy.Request` to pass a
 partially populated item.
 
 
@@ -60,8 +60,8 @@ simple to use, but does not allow debugging code inside a method.
 
 In order to see the item scraped from a specific url::
 
-    $ scrapy parse --spider=myspider -c parse_item -d 2 <item_url>
-    [ ... scrapy log lines crawling example.com spider ... ]
+    $ frapy parse --spider=myspider -c parse_item -d 2 <item_url>
+    [ ... frapy log lines crawling example.com spider ... ]
 
     >>> STATUS DEPTH LEVEL 2 <<<
     # Scraped Items  ------------------------------------------------------------
@@ -72,8 +72,8 @@ In order to see the item scraped from a specific url::
 
 Using the ``--verbose`` or ``-v`` option we can see the status at each depth level::
 
-    $ scrapy parse --spider=myspider -c parse_item -d 2 -v <item_url>
-    [ ... scrapy log lines crawling example.com spider ... ]
+    $ frapy parse --spider=myspider -c parse_item -d 2 -v <item_url>
+    [ ... frapy log lines crawling example.com spider ... ]
 
     >>> DEPTH LEVEL: 1 <<<
     # Scraped Items  ------------------------------------------------------------
@@ -93,7 +93,7 @@ Using the ``--verbose`` or ``-v`` option we can see the status at each depth lev
 Checking items scraped from a single start_url, can also be easily achieved
 using::
 
-    $ scrapy parse --spider=myspider -d 3 'http://example.com/page1'
+    $ frapy parse --spider=myspider -d 3 'http://example.com/page1'
 
 .. skip: end
 
@@ -113,7 +113,7 @@ Fortunately, the :command:`shell` is your bread and butter in this case (see
 
 .. code-block:: python
 
-    from scrapy.shell import inspect_response
+    from frapy.shell import inspect_response
 
 
     def parse_details(self, response, item=None):
@@ -134,7 +134,7 @@ you would use it:
 
 .. code-block:: python
 
-    from scrapy.utils.response import open_in_browser
+    from frapy.utils.response import open_in_browser
 
 
     def parse_details(self, response):
@@ -181,7 +181,7 @@ To debug spiders with Visual Studio Code you can use the following ``launch.json
                 "name": "Python: Launch Scrapy Spider",
                 "type": "python",
                 "request": "launch",
-                "module": "scrapy",
+                "module": "frapy",
                 "args": [
                     "runspider",
                     "${file}"

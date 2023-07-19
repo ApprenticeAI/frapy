@@ -5,14 +5,14 @@ import unittest
 from testfixtures import LogCapture
 from twisted.python.failure import Failure
 
-from scrapy.extensions import telnet
-from scrapy.utils.log import (
+from frapy.extensions import telnet
+from frapy.utils.log import (
     LogCounterHandler,
     StreamLogger,
     TopLevelFormatter,
     failure_to_exc_info,
 )
-from scrapy.utils.test import get_crawler
+from frapy.utils.test import get_crawler
 
 
 class FailureToExcInfoTest(unittest.TestCase):

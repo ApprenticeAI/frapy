@@ -7,9 +7,9 @@ from twisted.names import resolve
 from twisted.names.client import Resolver
 from twisted.python.runtime import platform
 
-from scrapy import Request, Spider
-from scrapy.crawler import CrawlerRunner
-from scrapy.utils.log import configure_logging
+from frapy import Request, Spider
+from frapy.crawler import CrawlerRunner
+from frapy.utils.log import configure_logging
 from tests.mockserver import MockDNSServer, MockServer
 
 

@@ -98,12 +98,12 @@ To check the contracts of a single spider:
 
 ::
 
-   scrapy-ctl.py check example.com
+   frapy-ctl.py check example.com
 
 Or to check all spiders:
 
 ::
 
-   scrapy-ctl.py check
+   frapy-ctl.py check
 
 No need to wait for the whole spider to run.

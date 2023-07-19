@@ -4,11 +4,11 @@ from pathlib import Path
 
 from twisted.internet import defer
 
-from scrapy.commands import parse
-from scrapy.settings import Settings
-from scrapy.utils.python import to_unicode
-from scrapy.utils.testproc import ProcessTest
-from scrapy.utils.testsite import SiteTest
+from frapy.commands import parse
+from frapy.settings import Settings
+from frapy.utils.python import to_unicode
+from frapy.utils.testproc import ProcessTest
+from frapy.utils.testsite import SiteTest
 from tests.test_commands import CommandTest
 
 
@@ -26,14 +26,14 @@ class ParseCommandTest(ProcessTest, SiteTest, CommandTest):
         self.spider_name = "parse_spider"
         (self.proj_mod_path / "spiders" / "myspider.py").write_text(
             f"""
-import scrapy
-from scrapy.linkextractors import LinkExtractor
-from scrapy.spiders import CrawlSpider, Rule
-from scrapy.utils.test import get_from_asyncio_queue
+import frapy
+from frapy.linkextractors import LinkExtractor
+from frapy.spiders import CrawlSpider, Rule
+from frapy.utils.test import get_from_asyncio_queue
 import asyncio
 
 
-class AsyncDefAsyncioReturnSpider(scrapy.Spider):
+class AsyncDefAsyncioReturnSpider(frapy.Spider):
     name = "asyncdef_asyncio_return"
 
     async def parse(self, response):
@@ -42,7 +42,7 @@ class AsyncDefAsyncioReturnSpider(scrapy.Spider):
         self.logger.info(f"Got response {{status}}")
         return [{{'id': 1}}, {{'id': 2}}]
 
-class AsyncDefAsyncioReturnSingleElementSpider(scrapy.Spider):
+class AsyncDefAsyncioReturnSingleElementSpider(frapy.Spider):
     name = "asyncdef_asyncio_return_single_element"
 
     async def parse(self, response):
@@ -51,7 +51,7 @@ class AsyncDefAsyncioReturnSingleElementSpider(scrapy.Spider):
         self.logger.info(f"Got response {{status}}")
         return {{'foo': 42}}
 
-class AsyncDefAsyncioGenLoopSpider(scrapy.Spider):
+class AsyncDefAsyncioGenLoopSpider(frapy.Spider):
     name = "asyncdef_asyncio_gen_loop"
 
     async def parse(self, response):
@@ -60,7 +60,7 @@ class AsyncDefAsyncioGenLoopSpider(scrapy.Spider):
             yield {{'foo': i}}
         self.logger.info(f"Got response {{response.status}}")
 
-class AsyncDefAsyncioSpider(scrapy.Spider):
+class AsyncDefAsyncioSpider(frapy.Spider):
     name = "asyncdef_asyncio"
 
     async def parse(self, response):
@@ -68,7 +68,7 @@ class AsyncDefAsyncioSpider(scrapy.Spider):
         status = await get_from_asyncio_queue(response.status)
         self.logger.debug(f"Got response {{status}}")
 
-class AsyncDefAsyncioGenExcSpider(scrapy.Spider):
+class AsyncDefAsyncioGenExcSpider(frapy.Spider):
     name = "asyncdef_asyncio_gen_exc"
 
     async def parse(self, response):
@@ -78,13 +78,13 @@ class AsyncDefAsyncioGenExcSpider(scrapy.Spider):
             if i > 5:
                 raise ValueError("Stopping the processing")
 
-class MySpider(scrapy.Spider):
+class MySpider(frapy.Spider):
     name = '{self.spider_name}'
 
     def parse(self, response):
         if getattr(self, 'test_arg', None):
             self.logger.debug('It Works!')
-        return [scrapy.Item(), dict(foo='bar')]
+        return [frapy.Item(), dict(foo='bar')]
 
     def parse_request_with_meta(self, response):
         foo = response.meta.get('foo', 'bar')
@@ -117,10 +117,10 @@ class MyGoodCrawlSpider(CrawlSpider):
     )
 
     def parse_item(self, response):
-        return [scrapy.Item(), dict(foo='bar')]
+        return [frapy.Item(), dict(foo='bar')]
 
     def parse(self, response):
-        return [scrapy.Item(), dict(nomatch='default')]
+        return [frapy.Item(), dict(nomatch='default')]
 
 
 class MyBadCrawlSpider(CrawlSpider):
@@ -132,7 +132,7 @@ class MyBadCrawlSpider(CrawlSpider):
     )
 
     def parse(self, response):
-        return [scrapy.Item(), dict(foo='bar')]
+        return [frapy.Item(), dict(foo='bar')]
 """,
             encoding="utf-8",
         )
@@ -420,7 +420,7 @@ ITEM_PIPELINES = {{'{self.project_name}.pipelines.MyPipeline': 1}}
         command = parse.Command()
         command.settings = Settings()
         parser = argparse.ArgumentParser(
-            prog="scrapy",
+            prog="frapy",
             formatter_class=argparse.HelpFormatter,
             conflict_handler="resolve",
             prefix_chars="-",

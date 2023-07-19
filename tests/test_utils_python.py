@@ -4,9 +4,9 @@ import platform
 
 from twisted.trial import unittest
 
-from scrapy.utils.asyncgen import as_async_generator, collect_asyncgen
-from scrapy.utils.defer import aiter_errback, deferred_f_from_coro_f
-from scrapy.utils.python import (
+from frapy.utils.asyncgen import as_async_generator, collect_asyncgen
+from frapy.utils.defer import aiter_errback, deferred_f_from_coro_f
+from frapy.utils.python import (
     MutableAsyncChain,
     MutableChain,
     binary_is_text,
@@ -18,7 +18,7 @@ from scrapy.utils.python import (
     without_none_values,
 )
 
-__doctests__ = ["scrapy.utils.python"]
+__doctests__ = ["frapy.utils.python"]
 
 
 class MutableChainTest(unittest.TestCase):

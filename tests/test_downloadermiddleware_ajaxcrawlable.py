@@ -1,11 +1,11 @@
 import unittest
 
-from scrapy.downloadermiddlewares.ajaxcrawl import AjaxCrawlMiddleware
-from scrapy.http import HtmlResponse, Request, Response
-from scrapy.spiders import Spider
-from scrapy.utils.test import get_crawler
+from frapy.downloadermiddlewares.ajaxcrawl import AjaxCrawlMiddleware
+from frapy.http import HtmlResponse, Request, Response
+from frapy.spiders import Spider
+from frapy.utils.test import get_crawler
 
-__doctests__ = ["scrapy.downloadermiddlewares.ajaxcrawl"]
+__doctests__ = ["frapy.downloadermiddlewares.ajaxcrawl"]
 
 
 class AjaxCrawlMiddlewareTest(unittest.TestCase):

@@ -3,7 +3,7 @@ import warnings
 from functools import partial
 from unittest import mock
 
-from scrapy.utils.misc import (
+from frapy.utils.misc import (
     is_generator_with_return_value,
     warn_on_generator_with_return_value,
 )
@@ -256,7 +256,7 @@ https://example.org
             self.assertEqual(len(w), 0)
 
     @mock.patch(
-        "scrapy.utils.misc.is_generator_with_return_value", new=_indentation_error
+        "frapy.utils.misc.is_generator_with_return_value", new=_indentation_error
     )
     def test_indentation_error(self):
         with warnings.catch_warnings(record=True) as w:

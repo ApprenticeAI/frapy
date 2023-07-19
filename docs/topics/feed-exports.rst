@@ -36,7 +36,7 @@ JSON
 
 -   Value for the ``format`` key in the :setting:`FEEDS` setting: ``json``
 
--   Exporter used: :class:`~scrapy.exporters.JsonItemExporter`
+-   Exporter used: :class:`~frapy.exporters.JsonItemExporter`
 
 -   See :ref:`this warning <json-with-large-data>` if you're using JSON with
     large feeds.
@@ -47,7 +47,7 @@ JSON lines
 ----------
 
 -   Value for the ``format`` key in the :setting:`FEEDS` setting: ``jsonlines``
--   Exporter used: :class:`~scrapy.exporters.JsonLinesItemExporter`
+-   Exporter used: :class:`~frapy.exporters.JsonLinesItemExporter`
 
 .. _topics-feed-format-csv:
 
@@ -56,7 +56,7 @@ CSV
 
 -   Value for the ``format`` key in the :setting:`FEEDS` setting: ``csv``
 
--   Exporter used: :class:`~scrapy.exporters.CsvItemExporter`
+-   Exporter used: :class:`~frapy.exporters.CsvItemExporter`
 
 -   To specify columns to export, their order and their column names, use
     :setting:`FEED_EXPORT_FIELDS`. Other feed exporters can also use this
@@ -69,7 +69,7 @@ XML
 ---
 
 -   Value for the ``format`` key in the :setting:`FEEDS` setting: ``xml``
--   Exporter used: :class:`~scrapy.exporters.XmlItemExporter`
+-   Exporter used: :class:`~frapy.exporters.XmlItemExporter`
 
 .. _topics-feed-format-pickle:
 
@@ -77,7 +77,7 @@ Pickle
 ------
 
 -   Value for the ``format`` key in the :setting:`FEEDS` setting: ``pickle``
--   Exporter used: :class:`~scrapy.exporters.PickleItemExporter`
+-   Exporter used: :class:`~frapy.exporters.PickleItemExporter`
 
 .. _topics-feed-format-marshal:
 
@@ -85,7 +85,7 @@ Marshal
 -------
 
 -   Value for the ``format`` key in the :setting:`FEEDS` setting: ``marshal``
--   Exporter used: :class:`~scrapy.exporters.MarshalItemExporter`
+-   Exporter used: :class:`~frapy.exporters.MarshalItemExporter`
 
 
 .. _topics-feed-storage:
@@ -284,10 +284,10 @@ You can filter items that you want to allow for a particular feed by using the
 ``item_classes`` option in :ref:`feeds options <feed-options>`. Only items of
 the specified types will be added to the feed.
 
-The ``item_classes`` option is implemented by the :class:`~scrapy.extensions.feedexport.ItemFilter`
+The ``item_classes`` option is implemented by the :class:`~frapy.extensions.feedexport.ItemFilter`
 class, which is the default value of the ``item_filter`` :ref:`feed option <feed-options>`.
 
-You can create your own custom filtering class by implementing :class:`~scrapy.extensions.feedexport.ItemFilter`'s
+You can create your own custom filtering class by implementing :class:`~frapy.extensions.feedexport.ItemFilter`'s
 method ``accepts`` and taking ``feed_options`` as an argument.
 
 For instance:
@@ -310,7 +310,7 @@ See :setting:`FEEDS` for examples.
 ItemFilter
 ----------
 
-.. autoclass:: scrapy.extensions.feedexport.ItemFilter
+.. autoclass:: frapy.extensions.feedexport.ItemFilter
    :members:
 
 
@@ -336,11 +336,11 @@ through the feed options. See :ref:`feed options <feed-options>` for examples.
 Built-in Plugins
 ----------------
 
-.. autoclass:: scrapy.extensions.postprocessing.GzipPlugin
+.. autoclass:: frapy.extensions.postprocessing.GzipPlugin
 
-.. autoclass:: scrapy.extensions.postprocessing.LZMAPlugin
+.. autoclass:: frapy.extensions.postprocessing.LZMAPlugin
 
-.. autoclass:: scrapy.extensions.postprocessing.Bz2Plugin
+.. autoclass:: frapy.extensions.postprocessing.Bz2Plugin
 
 .. _custom-plugins:
 
@@ -387,7 +387,7 @@ These are the settings used for configuring the feed exports:
 -   :setting:`FEED_EXPORTERS`
 -   :setting:`FEED_EXPORT_BATCH_ITEM_COUNT`
 
-.. currentmodule:: scrapy.extensions.feedexport
+.. currentmodule:: frapy.extensions.feedexport
 
 .. setting:: FEEDS
 
@@ -431,7 +431,7 @@ For instance::
             'format': 'csv',
             'fields': ['price', 'name'],
             'item_filter': 'myproject.filters.MyCustomFilter2',
-            'postprocessing': [MyPlugin1, 'scrapy.extensions.postprocessing.GzipPlugin'],
+            'postprocessing': [MyPlugin1, 'frapy.extensions.postprocessing.GzipPlugin'],
             'gzip_compresslevel': 5,
         },
     }
@@ -462,7 +462,7 @@ as a fallback value if that key is not provided for a specific feed definition:
 
 -   ``item_filter``: a :ref:`filter class <item-filter>` to filter items to export.
 
-    :class:`~scrapy.extensions.feedexport.ItemFilter` is used be default.
+    :class:`~frapy.extensions.feedexport.ItemFilter` is used be default.
 
     .. versionadded:: 2.6.0
 
@@ -529,7 +529,7 @@ Default: ``None``
 
 Use the ``FEED_EXPORT_FIELDS`` setting to define the fields to export, their
 order and their output names. See :attr:`BaseItemExporter.fields_to_export
-<scrapy.exporters.BaseItemExporter.fields_to_export>` for more information.
+<frapy.exporters.BaseItemExporter.fields_to_export>` for more information.
 
 .. setting:: FEED_EXPORT_INDENT
 
@@ -543,8 +543,8 @@ is a non-negative integer, then array elements and object members will be pretty
 with that indent level. An indent level of ``0`` (the default), or negative,
 will put each item on a new line. ``None`` selects the most compact representation.
 
-Currently implemented only by :class:`~scrapy.exporters.JsonItemExporter`
-and :class:`~scrapy.exporters.XmlItemExporter`, i.e. when you are exporting
+Currently implemented only by :class:`~frapy.exporters.JsonItemExporter`
+and :class:`~frapy.exporters.XmlItemExporter`, i.e. when you are exporting
 to ``.json`` or ``.xml``.
 
 .. setting:: FEED_STORE_EMPTY
@@ -600,11 +600,11 @@ Default:
 .. code-block:: python
 
     {
-        "": "scrapy.extensions.feedexport.FileFeedStorage",
-        "file": "scrapy.extensions.feedexport.FileFeedStorage",
-        "stdout": "scrapy.extensions.feedexport.StdoutFeedStorage",
-        "s3": "scrapy.extensions.feedexport.S3FeedStorage",
-        "ftp": "scrapy.extensions.feedexport.FTPFeedStorage",
+        "": "frapy.extensions.feedexport.FileFeedStorage",
+        "file": "frapy.extensions.feedexport.FileFeedStorage",
+        "stdout": "frapy.extensions.feedexport.StdoutFeedStorage",
+        "s3": "frapy.extensions.feedexport.S3FeedStorage",
+        "ftp": "frapy.extensions.feedexport.FTPFeedStorage",
     }
 
 A dict containing the built-in feed storage backends supported by Scrapy. You
@@ -638,14 +638,14 @@ Default:
 .. code-block:: python
 
     {
-        "json": "scrapy.exporters.JsonItemExporter",
-        "jsonlines": "scrapy.exporters.JsonLinesItemExporter",
-        "jsonl": "scrapy.exporters.JsonLinesItemExporter",
-        "jl": "scrapy.exporters.JsonLinesItemExporter",
-        "csv": "scrapy.exporters.CsvItemExporter",
-        "xml": "scrapy.exporters.XmlItemExporter",
-        "marshal": "scrapy.exporters.MarshalItemExporter",
-        "pickle": "scrapy.exporters.PickleItemExporter",
+        "json": "frapy.exporters.JsonItemExporter",
+        "jsonlines": "frapy.exporters.JsonLinesItemExporter",
+        "jsonl": "frapy.exporters.JsonLinesItemExporter",
+        "jl": "frapy.exporters.JsonLinesItemExporter",
+        "csv": "frapy.exporters.CsvItemExporter",
+        "xml": "frapy.exporters.XmlItemExporter",
+        "marshal": "frapy.exporters.MarshalItemExporter",
+        "pickle": "frapy.exporters.PickleItemExporter",
     }
 
 A dict containing the built-in feed exporters supported by Scrapy. You can
@@ -694,7 +694,7 @@ For instance, if your settings include:
 
 And your :command:`crawl` command line is::
 
-    scrapy crawl spidername -o "dirname/%(batch_id)d-filename%(batch_time)s.json"
+    frapy crawl spidername -o "dirname/%(batch_id)d-filename%(batch_time)s.json"
 
 The command line above can generate a directory tree like::
 
@@ -749,12 +749,12 @@ The function signature should be as follows:
    :type params: dict
 
    :param spider: source spider of the feed items
-   :type spider: scrapy.Spider
+   :type spider: frapy.Spider
 
    .. caution:: The function should return a new dictionary, modifying
                 the received ``params`` in-place is deprecated.
 
-For example, to include the :attr:`name <scrapy.Spider.name>` of the
+For example, to include the :attr:`name <frapy.Spider.name>` of the
 source spider in the feed URI:
 
 #.  Define the following function somewhere in your project:
@@ -774,7 +774,7 @@ source spider in the feed URI:
 
 #.  Use ``%(spider_name)s`` in your feed URI::
 
-        scrapy crawl <spider_name> -o "%(spider_name)s.jsonl"
+        frapy crawl <spider_name> -o "%(spider_name)s.jsonl"
 
 
 .. _URIs: https://en.wikipedia.org/wiki/Uniform_Resource_Identifier

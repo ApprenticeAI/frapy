@@ -19,8 +19,8 @@ from twisted.web.server import NOT_DONE_YET, GzipEncoderFactory, Site
 from twisted.web.static import File
 from twisted.web.util import redirectTo
 
-from scrapy.utils.python import to_bytes, to_unicode
-from scrapy.utils.test import get_testenv
+from frapy.utils.python import to_bytes, to_unicode
+from frapy.utils.test import get_testenv
 
 
 def getarg(request, name, default=None, type=None):

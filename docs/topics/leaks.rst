@@ -27,7 +27,7 @@ Common causes of memory leaks
 
 It happens quite often (sometimes by accident, sometimes on purpose) that the
 Scrapy developer passes objects referenced in Requests (for example, using the
-:attr:`~scrapy.Request.cb_kwargs` or :attr:`~scrapy.Request.meta`
+:attr:`~frapy.Request.cb_kwargs` or :attr:`~frapy.Request.meta`
 attributes or the request callback function) and that effectively bounds the
 lifetime of those referenced objects to the lifetime of the Request. This is,
 by far, the most common cause of memory leaks in Scrapy projects, and a quite
@@ -48,9 +48,9 @@ Too Many Requests?
 ------------------
 
 By default Scrapy keeps the request queue in memory; it includes
-:class:`~scrapy.Request` objects and all objects
-referenced in Request attributes (e.g. in :attr:`~scrapy.Request.cb_kwargs`
-and :attr:`~scrapy.Request.meta`).
+:class:`~frapy.Request` objects and all objects
+referenced in Request attributes (e.g. in :attr:`~frapy.Request.cb_kwargs`
+and :attr:`~frapy.Request.meta`).
 While not necessarily a leak, this can take a lot of memory. Enabling
 :ref:`persistent job queue <topics-jobs>` could help keeping memory usage
 in control.
@@ -66,7 +66,7 @@ Response, Item, Spider and Selector objects.
 
 You can enter the telnet console and inspect how many objects (of the classes
 mentioned above) are currently alive using the ``prefs()`` function which is an
-alias to the :func:`~scrapy.utils.trackref.print_live_refs` function::
+alias to the :func:`~frapy.utils.trackref.print_live_refs` function::
 
     telnet localhost 6023
 
@@ -84,7 +84,7 @@ As you can see, that report also shows the "age" of the oldest object in each
 class. If you're running multiple spiders per process chances are you can
 figure out which spider is leaking by looking at the oldest request or response.
 You can get the oldest object of each class using the
-:func:`~scrapy.utils.trackref.get_oldest` function (from the telnet console).
+:func:`~frapy.utils.trackref.get_oldest` function (from the telnet console).
 
 Which objects are tracked?
 --------------------------
@@ -92,11 +92,11 @@ Which objects are tracked?
 The objects tracked by ``trackrefs`` are all from these classes (and all its
 subclasses):
 
-* :class:`scrapy.Request`
-* :class:`scrapy.http.Response`
-* :class:`scrapy.Item`
-* :class:`scrapy.Selector`
-* :class:`scrapy.Spider`
+* :class:`frapy.Request`
+* :class:`frapy.http.Response`
+* :class:`frapy.Item`
+* :class:`frapy.Selector`
+* :class:`frapy.Spider`
 
 A real example
 --------------
@@ -140,17 +140,17 @@ Let's check the oldest response:
 
 .. code-block:: pycon
 
-    >>> from scrapy.utils.trackref import get_oldest
+    >>> from frapy.utils.trackref import get_oldest
     >>> r = get_oldest("HtmlResponse")
     >>> r.url
     'http://www.somenastyspider.com/product.php?pid=123'
 
 If you want to iterate over all objects, instead of getting the oldest one, you
-can use the :func:`scrapy.utils.trackref.iter_all` function:
+can use the :func:`frapy.utils.trackref.iter_all` function:
 
 .. code-block:: pycon
 
-    >>> from scrapy.utils.trackref import iter_all
+    >>> from frapy.utils.trackref import iter_all
     >>> [r.url for r in iter_all("HtmlResponse")]
     ['http://www.somenastyspider.com/product.php?pid=123',
     'http://www.somenastyspider.com/product.php?pid=584',
@@ -167,16 +167,16 @@ example, this won't show any live references to spiders:
 
 .. code-block:: pycon
 
-    >>> from scrapy.spiders import Spider
+    >>> from frapy.spiders import Spider
     >>> prefs(ignore=Spider)
 
-.. module:: scrapy.utils.trackref
+.. module:: frapy.utils.trackref
    :synopsis: Track references of live objects
 
-scrapy.utils.trackref module
+frapy.utils.trackref module
 ----------------------------
 
-Here are the functions available in the :mod:`~scrapy.utils.trackref` module.
+Here are the functions available in the :mod:`~frapy.utils.trackref` module.
 
 .. class:: object_ref
 

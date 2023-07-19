@@ -3,8 +3,8 @@ from pathlib import Path
 from twisted.internet import defer
 from twisted.trial import unittest
 
-from scrapy.utils.testproc import ProcessTest
-from scrapy.utils.testsite import SiteTest
+from frapy.utils.testproc import ProcessTest
+from frapy.utils.testsite import SiteTest
 from tests import NON_EXISTING_RESOLVABLE, tests_datadir
 
 
@@ -95,9 +95,9 @@ class ShellTest(ProcessTest, SiteTest, unittest.TestCase):
         self.assertEqual(errcode, 0, out)
 
     @defer.inlineCallbacks
-    def test_scrapy_import(self):
+    def test_frapy_import(self):
         url = self.url("/text")
-        code = f"fetch(scrapy.Request('{url}'))"
+        code = f"fetch(frapy.Request('{url}'))"
         errcode, out, _ = yield self.execute(["-c", code])
         self.assertEqual(errcode, 0, out)
 

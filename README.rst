@@ -1,5 +1,5 @@
-.. image:: https://scrapy.org/img/scrapylogo.png
-   :target: https://scrapy.org/
+.. image:: https://frapy.org/img/frapylogo.png
+   :target: https://frapy.org/
    
 ======
 Scrapy
@@ -13,28 +13,28 @@ Scrapy
    :target: https://pypi.python.org/pypi/Scrapy
    :alt: Supported Python Versions
 
-.. image:: https://github.com/scrapy/scrapy/workflows/Ubuntu/badge.svg
-   :target: https://github.com/scrapy/scrapy/actions?query=workflow%3AUbuntu
+.. image:: https://github.com/frapy/frapy/workflows/Ubuntu/badge.svg
+   :target: https://github.com/frapy/frapy/actions?query=workflow%3AUbuntu
    :alt: Ubuntu
 
-.. image:: https://github.com/scrapy/scrapy/workflows/macOS/badge.svg
-   :target: https://github.com/scrapy/scrapy/actions?query=workflow%3AmacOS
+.. image:: https://github.com/frapy/frapy/workflows/macOS/badge.svg
+   :target: https://github.com/frapy/frapy/actions?query=workflow%3AmacOS
    :alt: macOS
 
-.. image:: https://github.com/scrapy/scrapy/workflows/Windows/badge.svg
-   :target: https://github.com/scrapy/scrapy/actions?query=workflow%3AWindows
+.. image:: https://github.com/frapy/frapy/workflows/Windows/badge.svg
+   :target: https://github.com/frapy/frapy/actions?query=workflow%3AWindows
    :alt: Windows
 
 .. image:: https://img.shields.io/badge/wheel-yes-brightgreen.svg
    :target: https://pypi.python.org/pypi/Scrapy
    :alt: Wheel Status
 
-.. image:: https://img.shields.io/codecov/c/github/scrapy/scrapy/master.svg
-   :target: https://codecov.io/github/scrapy/scrapy?branch=master
+.. image:: https://img.shields.io/codecov/c/github/frapy/frapy/master.svg
+   :target: https://codecov.io/github/frapy/frapy?branch=master
    :alt: Coverage report
 
-.. image:: https://anaconda.org/conda-forge/scrapy/badges/version.svg
-   :target: https://anaconda.org/conda-forge/scrapy
+.. image:: https://anaconda.org/conda-forge/frapy/badges/version.svg
+   :target: https://anaconda.org/conda-forge/frapy
    :alt: Conda Version
 
 
@@ -48,10 +48,10 @@ a wide range of purposes, from data mining to monitoring and automated testing.
 Scrapy is maintained by Zyte_ (formerly Scrapinghub) and `many other
 contributors`_.
 
-.. _many other contributors: https://github.com/scrapy/scrapy/graphs/contributors
+.. _many other contributors: https://github.com/frapy/frapy/graphs/contributors
 .. _Zyte: https://www.zyte.com/
 
-Check the Scrapy homepage at https://scrapy.org for more information,
+Check the Scrapy homepage at https://frapy.org for more information,
 including a list of features.
 
 
@@ -68,36 +68,36 @@ The quick way:
 
 .. code:: bash
 
-    pip install scrapy
+    pip install frapy
 
 See the install section in the documentation at
-https://docs.scrapy.org/en/latest/intro/install.html for more details.
+https://docs.frapy.org/en/latest/intro/install.html for more details.
 
 Documentation
 =============
 
-Documentation is available online at https://docs.scrapy.org/ and in the ``docs``
+Documentation is available online at https://docs.frapy.org/ and in the ``docs``
 directory.
 
 Releases
 ========
 
-You can check https://docs.scrapy.org/en/latest/news.html for the release notes.
+You can check https://docs.frapy.org/en/latest/news.html for the release notes.
 
 Community (blog, twitter, mail list, IRC)
 =========================================
 
-See https://scrapy.org/community/ for details.
+See https://frapy.org/community/ for details.
 
 Contributing
 ============
 
-See https://docs.scrapy.org/en/master/contributing.html for details.
+See https://docs.frapy.org/en/master/contributing.html for details.
 
 Code of Conduct
 ---------------
 
-Please note that this project is released with a Contributor `Code of Conduct <https://github.com/scrapy/scrapy/blob/master/CODE_OF_CONDUCT.md>`_.
+Please note that this project is released with a Contributor `Code of Conduct <https://github.com/frapy/frapy/blob/master/CODE_OF_CONDUCT.md>`_.
 
 By participating in this project you agree to abide by its terms.
 Please report unacceptable behavior to opensource@zyte.com.
@@ -105,9 +105,9 @@ Please report unacceptable behavior to opensource@zyte.com.
 Companies using Scrapy
 ======================
 
-See https://scrapy.org/companies/ for a list.
+See https://frapy.org/companies/ for a list.
 
 Commercial Support
 ==================
 
-See https://scrapy.org/support/ for details.
+See https://frapy.org/support/ for details.

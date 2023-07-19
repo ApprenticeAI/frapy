@@ -3,8 +3,8 @@ from twisted.cred import credentials
 from twisted.internet import defer
 from twisted.trial import unittest
 
-from scrapy.extensions.telnet import TelnetConsole
-from scrapy.utils.test import get_crawler
+from frapy.extensions.telnet import TelnetConsole
+from frapy.utils.test import get_crawler
 
 
 class TelnetExtensionTest(unittest.TestCase):

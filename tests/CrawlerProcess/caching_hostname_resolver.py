@@ -1,10 +1,10 @@
 import sys
 
-import scrapy
-from scrapy.crawler import CrawlerProcess
+import frapy
+from frapy.crawler import CrawlerProcess
 
 
-class CachingHostnameResolverSpider(scrapy.Spider):
+class CachingHostnameResolverSpider(frapy.Spider):
     """
     Finishes in a finite amount of time (does not hang indefinitely in the DNS resolution)
     """
@@ -12,11 +12,11 @@ class CachingHostnameResolverSpider(scrapy.Spider):
     name = "caching_hostname_resolver_spider"
 
     def start_requests(self):
-        yield scrapy.Request(self.url)
+        yield frapy.Request(self.url)
 
     def parse(self, response):
         for _ in range(10):
-            yield scrapy.Request(
+            yield frapy.Request(
                 response.url, dont_filter=True, callback=self.ignore_response
             )
 
@@ -28,7 +28,7 @@ if __name__ == "__main__":
     process = CrawlerProcess(
         settings={
             "RETRY_ENABLED": False,
-            "DNS_RESOLVER": "scrapy.resolver.CachingHostnameResolver",
+            "DNS_RESOLVER": "frapy.resolver.CachingHostnameResolver",
         }
     )
     process.crawl(CachingHostnameResolverSpider, url=sys.argv[1])

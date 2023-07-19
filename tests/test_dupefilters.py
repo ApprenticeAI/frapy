@@ -7,11 +7,11 @@ from pathlib import Path
 
 from testfixtures import LogCapture
 
-from scrapy.core.scheduler import Scheduler
-from scrapy.dupefilters import RFPDupeFilter
-from scrapy.http import Request
-from scrapy.utils.python import to_bytes
-from scrapy.utils.test import get_crawler
+from frapy.core.scheduler import Scheduler
+from frapy.dupefilters import RFPDupeFilter
+from frapy.http import Request
+from frapy.utils.python import to_bytes
+from frapy.utils.test import get_crawler
 from tests.spiders import SimpleSpider
 
 
@@ -79,9 +79,9 @@ class RFPDupeFilterTest(unittest.TestCase):
 
     def test_filter(self):
         dupefilter = _get_dupefilter()
-        r1 = Request("http://scrapytest.org/1")
-        r2 = Request("http://scrapytest.org/2")
-        r3 = Request("http://scrapytest.org/2")
+        r1 = Request("http://frapytest.org/1")
+        r2 = Request("http://frapytest.org/2")
+        r3 = Request("http://frapytest.org/2")
 
         assert not dupefilter.request_seen(r1)
         assert dupefilter.request_seen(r1)
@@ -92,8 +92,8 @@ class RFPDupeFilterTest(unittest.TestCase):
         dupefilter.close("finished")
 
     def test_dupefilter_path(self):
-        r1 = Request("http://scrapytest.org/1")
-        r2 = Request("http://scrapytest.org/2")
+        r1 = Request("http://frapytest.org/1")
+        r2 = Request("http://frapytest.org/2")
 
         path = tempfile.mkdtemp()
         try:
@@ -123,8 +123,8 @@ class RFPDupeFilterTest(unittest.TestCase):
 
         """
         dupefilter = _get_dupefilter()
-        r1 = Request("http://scrapytest.org/index.html")
-        r2 = Request("http://scrapytest.org/INDEX.html")
+        r1 = Request("http://frapytest.org/index.html")
+        r2 = Request("http://frapytest.org/INDEX.html")
 
         assert not dupefilter.request_seen(r1)
         assert not dupefilter.request_seen(r2)
@@ -149,7 +149,7 @@ class RFPDupeFilterTest(unittest.TestCase):
         """Checks against adding duplicate \r to
         line endings on Windows platforms."""
 
-        r1 = Request("http://scrapytest.org/1")
+        r1 = Request("http://frapytest.org/1")
 
         path = tempfile.mkdtemp()
         crawler = get_crawler(settings_dict={"JOBDIR": path})
@@ -182,8 +182,8 @@ class RFPDupeFilterTest(unittest.TestCase):
             spider = SimpleSpider.from_crawler(crawler)
             dupefilter = _get_dupefilter(crawler=crawler)
 
-            r1 = Request("http://scrapytest.org/index.html")
-            r2 = Request("http://scrapytest.org/index.html")
+            r1 = Request("http://frapytest.org/index.html")
+            r2 = Request("http://frapytest.org/index.html")
 
             dupefilter.log(r1, spider)
             dupefilter.log(r2, spider)
@@ -191,9 +191,9 @@ class RFPDupeFilterTest(unittest.TestCase):
             assert crawler.stats.get_value("dupefilter/filtered") == 2
             log.check_present(
                 (
-                    "scrapy.dupefilters",
+                    "frapy.dupefilters",
                     "DEBUG",
-                    "Filtered duplicate request: <GET http://scrapytest.org/index.html> - no more"
+                    "Filtered duplicate request: <GET http://frapytest.org/index.html> - no more"
                     " duplicates will be shown (see DUPEFILTER_DEBUG to show all duplicates)",
                 )
             )
@@ -211,10 +211,10 @@ class RFPDupeFilterTest(unittest.TestCase):
             spider = SimpleSpider.from_crawler(crawler)
             dupefilter = _get_dupefilter(crawler=crawler)
 
-            r1 = Request("http://scrapytest.org/index.html")
+            r1 = Request("http://frapytest.org/index.html")
             r2 = Request(
-                "http://scrapytest.org/index.html",
-                headers={"Referer": "http://scrapytest.org/INDEX.html"},
+                "http://frapytest.org/index.html",
+                headers={"Referer": "http://frapytest.org/INDEX.html"},
             )
 
             dupefilter.log(r1, spider)
@@ -223,17 +223,17 @@ class RFPDupeFilterTest(unittest.TestCase):
             assert crawler.stats.get_value("dupefilter/filtered") == 2
             log.check_present(
                 (
-                    "scrapy.dupefilters",
+                    "frapy.dupefilters",
                     "DEBUG",
-                    "Filtered duplicate request: <GET http://scrapytest.org/index.html> (referer: None)",
+                    "Filtered duplicate request: <GET http://frapytest.org/index.html> (referer: None)",
                 )
             )
             log.check_present(
                 (
-                    "scrapy.dupefilters",
+                    "frapy.dupefilters",
                     "DEBUG",
-                    "Filtered duplicate request: <GET http://scrapytest.org/index.html>"
-                    " (referer: http://scrapytest.org/INDEX.html)",
+                    "Filtered duplicate request: <GET http://frapytest.org/index.html>"
+                    " (referer: http://frapytest.org/INDEX.html)",
                 )
             )
 
@@ -249,10 +249,10 @@ class RFPDupeFilterTest(unittest.TestCase):
             spider = SimpleSpider.from_crawler(crawler)
             dupefilter = _get_dupefilter(crawler=crawler)
 
-            r1 = Request("http://scrapytest.org/index.html")
+            r1 = Request("http://frapytest.org/index.html")
             r2 = Request(
-                "http://scrapytest.org/index.html",
-                headers={"Referer": "http://scrapytest.org/INDEX.html"},
+                "http://frapytest.org/index.html",
+                headers={"Referer": "http://frapytest.org/INDEX.html"},
             )
 
             dupefilter.log(r1, spider)
@@ -261,17 +261,17 @@ class RFPDupeFilterTest(unittest.TestCase):
             assert crawler.stats.get_value("dupefilter/filtered") == 2
             log.check_present(
                 (
-                    "scrapy.dupefilters",
+                    "frapy.dupefilters",
                     "DEBUG",
-                    "Filtered duplicate request: <GET http://scrapytest.org/index.html> (referer: None)",
+                    "Filtered duplicate request: <GET http://frapytest.org/index.html> (referer: None)",
                 )
             )
             log.check_present(
                 (
-                    "scrapy.dupefilters",
+                    "frapy.dupefilters",
                     "DEBUG",
-                    "Filtered duplicate request: <GET http://scrapytest.org/index.html>"
-                    " (referer: http://scrapytest.org/INDEX.html)",
+                    "Filtered duplicate request: <GET http://frapytest.org/index.html>"
+                    " (referer: http://frapytest.org/INDEX.html)",
                 )
             )
 

@@ -4,9 +4,9 @@ import unittest
 
 import queuelib
 
-from scrapy.http import Request
-from scrapy.spiders import Spider
-from scrapy.squeues import (
+from frapy.http import Request
+from frapy.spiders import Spider
+from frapy.squeues import (
     FifoMemoryQueue,
     LifoMemoryQueue,
     MarshalFifoDiskQueue,
@@ -14,7 +14,7 @@ from scrapy.squeues import (
     PickleFifoDiskQueue,
     PickleLifoDiskQueue,
 )
-from scrapy.utils.test import get_crawler
+from frapy.utils.test import get_crawler
 
 """
 Queues that handle requests
@@ -23,7 +23,7 @@ Queues that handle requests
 
 class BaseQueueTestCase(unittest.TestCase):
     def setUp(self):
-        self.tmpdir = tempfile.mkdtemp(prefix="scrapy-queue-tests-")
+        self.tmpdir = tempfile.mkdtemp(prefix="frapy-queue-tests-")
         self.qpath = self.tempfilename()
         self.qdir = self.mkdtemp()
         self.crawler = get_crawler(Spider)

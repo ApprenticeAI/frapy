@@ -7,13 +7,13 @@ from twisted.internet import defer
 from twisted.python.failure import Failure
 from twisted.trial.unittest import TestCase
 
-from scrapy.core.spidermw import SpiderMiddlewareManager
-from scrapy.exceptions import _InvalidOutput
-from scrapy.http import Request, Response
-from scrapy.spiders import Spider
-from scrapy.utils.asyncgen import collect_asyncgen
-from scrapy.utils.defer import deferred_from_coro, maybe_deferred_to_future
-from scrapy.utils.test import get_crawler
+from frapy.core.spidermw import SpiderMiddlewareManager
+from frapy.exceptions import _InvalidOutput
+from frapy.http import Request, Response
+from frapy.spiders import Spider
+from frapy.utils.asyncgen import collect_asyncgen
+from frapy.utils.defer import deferred_from_coro, maybe_deferred_to_future
+from frapy.utils.test import get_crawler
 
 
 class SpiderMiddlewareTestCase(TestCase):

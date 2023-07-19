@@ -30,7 +30,7 @@ Proposed Implementation of ItemField
 .. code-block:: python
 
    #!python
-   from scrapy.item.fields import BaseField
+   from frapy.item.fields import BaseField
 
 
    class ItemField(BaseField):
@@ -60,8 +60,8 @@ Defining an item containing ItemField's
 .. code-block:: python
 
    #!python
-   from scrapy.item.models import Item
-   from scrapy.item.fields import ListField, ItemField, TextField, UrlField, DecimalField
+   from frapy.item.models import Item
+   from frapy.item.fields import ListField, ItemField, TextField, UrlField, DecimalField
 
 
    class Supplier(Item):

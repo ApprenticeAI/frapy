@@ -2,9 +2,9 @@ from testfixtures import LogCapture
 from twisted.internet import defer
 from twisted.trial.unittest import TestCase
 
-from scrapy import Request, signals
-from scrapy.http.response import Response
-from scrapy.utils.test import get_crawler
+from frapy import Request, signals
+from frapy.http.response import Response
+from frapy.utils.test import get_crawler
 from tests.mockserver import MockServer
 from tests.spiders import SingleRequestSpider
 
@@ -136,7 +136,7 @@ class CrawlTestCase(TestCase):
 
         log.check_present(
             (
-                "scrapy.core.engine",
+                "frapy.core.engine",
                 "DEBUG",
                 f"Crawled (200) <GET {OVERRIDDEN_URL}> (referer: None)",
             ),

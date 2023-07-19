@@ -13,17 +13,17 @@ from twisted.python.versions import Version
 from twisted.trial import unittest
 from w3lib import __version__ as w3lib_version
 
-import scrapy
-from scrapy.crawler import Crawler, CrawlerProcess, CrawlerRunner
-from scrapy.exceptions import ScrapyDeprecationWarning
-from scrapy.extensions import telnet
-from scrapy.extensions.throttle import AutoThrottle
-from scrapy.settings import Settings, default_settings
-from scrapy.spiderloader import SpiderLoader
-from scrapy.utils.log import configure_logging, get_scrapy_root_handler
-from scrapy.utils.misc import load_object
-from scrapy.utils.spider import DefaultSpider
-from scrapy.utils.test import get_crawler, get_testenv
+import frapy
+from frapy.crawler import Crawler, CrawlerProcess, CrawlerRunner
+from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.extensions import telnet
+from frapy.extensions.throttle import AutoThrottle
+from frapy.settings import Settings, default_settings
+from frapy.spiderloader import SpiderLoader
+from frapy.utils.log import configure_logging, get_frapy_root_handler
+from frapy.utils.misc import load_object
+from frapy.utils.spider import DefaultSpider
+from frapy.utils.test import get_crawler, get_testenv
 from tests.mockserver import MockServer
 
 
@@ -72,7 +72,7 @@ class CrawlerTestCase(BaseCrawlerTest):
 
 class SpiderSettingsTestCase(unittest.TestCase):
     def test_spider_custom_settings(self):
-        class MySpider(scrapy.Spider):
+        class MySpider(frapy.Spider):
             name = "spider"
             custom_settings = {"AUTOTHROTTLE_ENABLED": True}
 
@@ -83,21 +83,21 @@ class SpiderSettingsTestCase(unittest.TestCase):
 
 class CrawlerLoggingTestCase(unittest.TestCase):
     def test_no_root_handler_installed(self):
-        handler = get_scrapy_root_handler()
+        handler = get_frapy_root_handler()
         if handler is not None:
             logging.root.removeHandler(handler)
 
-        class MySpider(scrapy.Spider):
+        class MySpider(frapy.Spider):
             name = "spider"
 
         get_crawler(MySpider)
-        assert get_scrapy_root_handler() is None
+        assert get_frapy_root_handler() is None
 
     def test_spider_custom_settings_log_level(self):
         log_file = Path(self.mktemp())
         log_file.write_text("previous message\n", encoding="utf-8")
 
-        class MySpider(scrapy.Spider):
+        class MySpider(frapy.Spider):
             name = "spider"
             custom_settings = {
                 "LOG_LEVEL": "INFO",
@@ -108,9 +108,9 @@ class CrawlerLoggingTestCase(unittest.TestCase):
             }
 
         configure_logging()
-        self.assertEqual(get_scrapy_root_handler().level, logging.DEBUG)
+        self.assertEqual(get_frapy_root_handler().level, logging.DEBUG)
         crawler = get_crawler(MySpider)
-        self.assertEqual(get_scrapy_root_handler().level, logging.INFO)
+        self.assertEqual(get_frapy_root_handler().level, logging.INFO)
         info_count = crawler.stats.get_value("log_count/INFO")
         logging.debug("debug message")
         logging.info("info message")
@@ -133,7 +133,7 @@ class CrawlerLoggingTestCase(unittest.TestCase):
         log_file = Path(self.mktemp())
         log_file.write_text("previous message\n", encoding="utf-8")
 
-        class MySpider(scrapy.Spider):
+        class MySpider(frapy.Spider):
             name = "spider"
             custom_settings = {
                 "LOG_FILE": str(log_file),
@@ -172,7 +172,7 @@ class CrawlerRunnerTestCase(BaseCrawlerTest):
             self.assertRaises(AttributeError, CrawlerRunner, settings)
             self.assertEqual(len(w), 1)
             self.assertIn("SPIDER_LOADER_CLASS", str(w[0].message))
-            self.assertIn("scrapy.interfaces.ISpiderLoader", str(w[0].message))
+            self.assertIn("frapy.interfaces.ISpiderLoader", str(w[0].message))
 
     def test_crawler_runner_accepts_dict(self):
         runner = CrawlerRunner({"foo": "bar"})
@@ -205,7 +205,7 @@ class CrawlerProcessTest(BaseCrawlerTest):
         self.assertOptionIsDefault(runner.settings, "RETRY_ENABLED")
 
 
-class ExceptionSpider(scrapy.Spider):
+class ExceptionSpider(frapy.Spider):
     name = "exception"
 
     @classmethod
@@ -213,7 +213,7 @@ class ExceptionSpider(scrapy.Spider):
         raise ValueError("Exception in from_crawler method")
 
 
-class NoRequestsSpider(scrapy.Spider):
+class NoRequestsSpider(frapy.Spider):
     name = "no_request"
 
     def start_requests(self):

@@ -1,8 +1,8 @@
-import scrapy
-from scrapy.crawler import CrawlerProcess
+import frapy
+from frapy.crawler import CrawlerProcess
 
 
-class AsyncioReactorSpider(scrapy.Spider):
+class AsyncioReactorSpider(frapy.Spider):
     name = "asyncio_reactor"
     custom_settings = {
         "TWISTED_REACTOR": "twisted.internet.asyncioreactor.AsyncioSelectorReactor",

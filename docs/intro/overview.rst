@@ -24,10 +24,10 @@ https://quotes.toscrape.com, following the pagination:
 
 .. code-block:: python
 
-    import scrapy
+    import frapy
 
 
-    class QuotesSpider(scrapy.Spider):
+    class QuotesSpider(frapy.Spider):
         name = "quotes"
         start_urls = [
             "https://quotes.toscrape.com/tag/humor/",
@@ -47,7 +47,7 @@ https://quotes.toscrape.com, following the pagination:
 Put this in a text file, name it to something like ``quotes_spider.py``
 and run the spider using the :command:`runspider` command::
 
-    scrapy runspider quotes_spider.py -o quotes.jsonl
+    frapy runspider quotes_spider.py -o quotes.jsonl
 
 When this finishes you will have in the ``quotes.jsonl`` file a list of the
 quotes in JSON Lines format, containing text and author, looking like this::
@@ -61,7 +61,7 @@ quotes in JSON Lines format, containing text and author, looking like this::
 What just happened?
 -------------------
 
-When you ran the command ``scrapy runspider quotes_spider.py``, Scrapy looked for a
+When you ran the command ``frapy runspider quotes_spider.py``, Scrapy looked for a
 Spider definition inside it and ran it through its crawler engine.
 
 The crawl started by making requests to the URLs defined in the ``start_urls``
@@ -119,7 +119,7 @@ scraping easy and efficient, such as:
 * Robust encoding support and auto-detection, for dealing with foreign,
   non-standard and broken encoding declarations.
 
-* :ref:`Strong extensibility support <extending-scrapy>`, allowing you to plug
+* :ref:`Strong extensibility support <extending-frapy>`, allowing you to plug
   in your own functionality using :ref:`signals <topics-signals>` and a
   well-defined API (middlewares, :ref:`extensions <topics-extensions>`, and
   :ref:`pipelines <topics-item-pipeline>`).
@@ -150,7 +150,7 @@ The next steps for you are to :ref:`install Scrapy <intro-install>`,
 a full-blown Scrapy project and `join the community`_. Thanks for your
 interest!
 
-.. _join the community: https://scrapy.org/community/
+.. _join the community: https://frapy.org/community/
 .. _web scraping: https://en.wikipedia.org/wiki/Web_scraping
 .. _Amazon Associates Web Services: https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html
 .. _Amazon S3: https://aws.amazon.com/s3/

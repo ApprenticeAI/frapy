@@ -6,28 +6,28 @@
 Command line tool
 =================
 
-Scrapy is controlled through the ``scrapy`` command-line tool, to be referred
+Scrapy is controlled through the ``frapy`` command-line tool, to be referred
 here as the "Scrapy tool" to differentiate it from the sub-commands, which we
 just call "commands" or "Scrapy commands".
 
 The Scrapy tool provides several commands, for multiple purposes, and each one
 accepts a different set of arguments and options.
 
-(The ``scrapy deploy`` command has been removed in 1.0 in favor of the
-standalone ``scrapyd-deploy``. See `Deploying your project`_.)
+(The ``frapy deploy`` command has been removed in 1.0 in favor of the
+standalone ``frapyd-deploy``. See `Deploying your project`_.)
 
 .. _topics-config-settings:
 
 Configuration settings
 ======================
 
-Scrapy will look for configuration parameters in ini-style ``scrapy.cfg`` files
+Scrapy will look for configuration parameters in ini-style ``frapy.cfg`` files
 in standard locations:
 
-1. ``/etc/scrapy.cfg`` or ``c:\scrapy\scrapy.cfg`` (system-wide),
-2. ``~/.config/scrapy.cfg`` (``$XDG_CONFIG_HOME``) and ``~/.scrapy.cfg`` (``$HOME``)
+1. ``/etc/frapy.cfg`` or ``c:\frapy\frapy.cfg`` (system-wide),
+2. ``~/.config/frapy.cfg`` (``$XDG_CONFIG_HOME``) and ``~/.frapy.cfg`` (``$HOME``)
    for global (user-wide) settings, and
-3. ``scrapy.cfg`` inside a Scrapy project's root (see next section).
+3. ``frapy.cfg`` inside a Scrapy project's root (see next section).
 
 Settings from these files are merged in the listed order of preference:
 user-defined values have higher priority than system-wide defaults
@@ -51,7 +51,7 @@ understand the directory structure of a Scrapy project.
 Though it can be modified, all Scrapy projects have the same file
 structure by default, similar to this::
 
-   scrapy.cfg
+   frapy.cfg
    myproject/
        __init__.py
        items.py
@@ -64,7 +64,7 @@ structure by default, similar to this::
            spider2.py
            ...
 
-The directory where the ``scrapy.cfg`` file resides is known as the *project
+The directory where the ``frapy.cfg`` file resides is known as the *project
 root directory*. That file contains the name of the python module that defines
 the project settings. Here is an example:
 
@@ -78,11 +78,11 @@ the project settings. Here is an example:
 Sharing the root directory between projects
 ===========================================
 
-A project root directory, the one that contains the ``scrapy.cfg``, may be
+A project root directory, the one that contains the ``frapy.cfg``, may be
 shared by multiple Scrapy projects, each with its own settings module.
 
 In that case, you must define one or more aliases for those settings modules
-under ``[settings]`` in your ``scrapy.cfg`` file:
+under ``[settings]`` in your ``frapy.cfg`` file:
 
 .. code-block:: ini
 
@@ -91,18 +91,18 @@ under ``[settings]`` in your ``scrapy.cfg`` file:
     project1 = myproject1.settings
     project2 = myproject2.settings
 
-By default, the ``scrapy`` command-line tool will use the ``default`` settings.
+By default, the ``frapy`` command-line tool will use the ``default`` settings.
 Use the ``SCRAPY_PROJECT`` environment variable to specify a different project
-for ``scrapy`` to use::
+for ``frapy`` to use::
 
-    $ scrapy settings --get BOT_NAME
+    $ frapy settings --get BOT_NAME
     Project 1 Bot
     $ export SCRAPY_PROJECT=project2
-    $ scrapy settings --get BOT_NAME
+    $ frapy settings --get BOT_NAME
     Project 2 Bot
 
 
-Using the ``scrapy`` tool
+Using the ``frapy`` tool
 =========================
 
 You can start by running the Scrapy tool with no arguments and it will print
@@ -111,7 +111,7 @@ some usage help and the available commands::
     Scrapy X.Y - no active project
 
     Usage:
-      scrapy <command> [options] [args]
+      frapy <command> [options] [args]
 
     Available commands:
       crawl         Run a spider
@@ -125,17 +125,17 @@ a project it would have printed something like this::
     Scrapy X.Y - project: myproject
 
     Usage:
-      scrapy <command> [options] [args]
+      frapy <command> [options] [args]
 
     [...]
 
 Creating projects
 -----------------
 
-The first thing you typically do with the ``scrapy`` tool is create your Scrapy
+The first thing you typically do with the ``frapy`` tool is create your Scrapy
 project::
 
-    scrapy startproject myproject [project_dir]
+    frapy startproject myproject [project_dir]
 
 That will create a Scrapy project under the ``project_dir`` directory.
 If ``project_dir`` wasn't specified, ``project_dir`` will be the same as ``myproject``.
@@ -144,18 +144,18 @@ Next, you go inside the new project directory::
 
     cd project_dir
 
-And you're ready to use the ``scrapy`` command to manage and control your
+And you're ready to use the ``frapy`` command to manage and control your
 project from there.
 
 Controlling projects
 --------------------
 
-You use the ``scrapy`` tool from inside your projects to control and manage
+You use the ``frapy`` tool from inside your projects to control and manage
 them.
 
 For example, to create a new spider::
 
-    scrapy genspider mydomain mydomain.com
+    frapy genspider mydomain mydomain.com
 
 Some Scrapy commands (like :command:`crawl`) must be run from inside a Scrapy
 project. See the :ref:`commands reference <topics-commands-ref>` below for more
@@ -177,11 +177,11 @@ This section contains a list of the available built-in commands with a
 description and some usage examples. Remember, you can always get more info
 about each command by running::
 
-    scrapy <command> -h
+    frapy <command> -h
 
 And you can see all available commands with::
 
-    scrapy -h
+    frapy -h
 
 There are two kinds of commands, those that only work from inside a Scrapy
 project (Project-specific commands) and those that also work without an active
@@ -214,7 +214,7 @@ Project-only commands:
 startproject
 ------------
 
-* Syntax: ``scrapy startproject <project_name> [project_dir]``
+* Syntax: ``frapy startproject <project_name> [project_dir]``
 * Requires project: *no*
 
 Creates a new Scrapy project named ``project_name``, under the ``project_dir``
@@ -223,14 +223,14 @@ If ``project_dir`` wasn't specified, ``project_dir`` will be the same as ``proje
 
 Usage example::
 
-    $ scrapy startproject myproject
+    $ frapy startproject myproject
 
 .. command:: genspider
 
 genspider
 ---------
 
-* Syntax: ``scrapy genspider [-t template] <name> <domain or URL>``
+* Syntax: ``frapy genspider [-t template] <name> <domain or URL>``
 * Requires project: *no*
 
 .. versionadded:: 2.6.0
@@ -240,18 +240,18 @@ Create a new spider in the current folder or in the current project's ``spiders`
 
 Usage example::
 
-    $ scrapy genspider -l
+    $ frapy genspider -l
     Available templates:
       basic
       crawl
       csvfeed
       xmlfeed
 
-    $ scrapy genspider example example.com
+    $ frapy genspider example example.com
     Created spider 'example' using template 'basic'
 
-    $ scrapy genspider -t crawl scrapyorg scrapy.org
-    Created spider 'scrapyorg' using template 'crawl'
+    $ frapy genspider -t crawl frapyorg frapy.org
+    Created spider 'frapyorg' using template 'crawl'
 
 This is just a convenience shortcut command for creating spiders based on
 pre-defined templates, but certainly not the only way to create spiders. You
@@ -263,7 +263,7 @@ command.
 crawl
 -----
 
-* Syntax: ``scrapy crawl <spider>``
+* Syntax: ``frapy crawl <spider>``
 * Requires project: *yes*
 
 Start crawling using a spider.
@@ -282,16 +282,16 @@ Supported options:
 
 Usage examples::
 
-    $ scrapy crawl myspider
+    $ frapy crawl myspider
     [ ... myspider starts crawling ... ]
 
-    $ scrapy -o myfile:csv myspider
+    $ frapy -o myfile:csv myspider
     [ ... myspider starts crawling and appends the result to the file myfile in csv format ... ]
 
-    $ scrapy -O myfile:json myspider
+    $ frapy -O myfile:json myspider
     [ ... myspider starts crawling and saves the result in myfile in json format overwriting the original content... ]
 
-    $ scrapy -o myfile -t csv myspider
+    $ frapy -o myfile -t csv myspider
     [ ... myspider starts crawling and appends the result to the file myfile in csv format ... ]
 
 .. command:: check
@@ -299,7 +299,7 @@ Usage examples::
 check
 -----
 
-* Syntax: ``scrapy check [-l] <spider>``
+* Syntax: ``frapy check [-l] <spider>``
 * Requires project: *yes*
 
 Run contract checks.
@@ -308,7 +308,7 @@ Run contract checks.
 
 Usage examples::
 
-    $ scrapy check -l
+    $ frapy check -l
     first_spider
       * parse
       * parse_item
@@ -316,7 +316,7 @@ Usage examples::
       * parse
       * parse_item
 
-    $ scrapy check
+    $ frapy check
     [FAILED] first_spider:parse_item
     >>> 'RetailPricex' field is missing
 
@@ -330,7 +330,7 @@ Usage examples::
 list
 ----
 
-* Syntax: ``scrapy list``
+* Syntax: ``frapy list``
 * Requires project: *yes*
 
 List all available spiders in the current project. The output is one spider per
@@ -338,7 +338,7 @@ line.
 
 Usage example::
 
-    $ scrapy list
+    $ frapy list
     spider1
     spider2
 
@@ -347,7 +347,7 @@ Usage example::
 edit
 ----
 
-* Syntax: ``scrapy edit <spider>``
+* Syntax: ``frapy edit <spider>``
 * Requires project: *yes*
 
 Edit the given spider using the editor defined in the ``EDITOR`` environment
@@ -359,14 +359,14 @@ debug spiders.
 
 Usage example::
 
-    $ scrapy edit spider1
+    $ frapy edit spider1
 
 .. command:: fetch
 
 fetch
 -----
 
-* Syntax: ``scrapy fetch <url>``
+* Syntax: ``frapy fetch <url>``
 * Requires project: *no*
 
 Downloads the given URL using the Scrapy downloader and writes the contents to
@@ -391,10 +391,10 @@ Supported options:
 
 Usage examples::
 
-    $ scrapy fetch --nolog http://www.example.com/some/page.html
+    $ frapy fetch --nolog http://www.example.com/some/page.html
     [ ... html content here ... ]
 
-    $ scrapy fetch --nolog --headers http://www.example.com/
+    $ frapy fetch --nolog --headers http://www.example.com/
     {'Accept-Ranges': ['bytes'],
      'Age': ['1263   '],
      'Connection': ['close     '],
@@ -410,7 +410,7 @@ Usage examples::
 view
 ----
 
-* Syntax: ``scrapy view <url>``
+* Syntax: ``frapy view <url>``
 * Requires project: *no*
 
 Opens the given URL in a browser, as your Scrapy spider would "see" it.
@@ -425,7 +425,7 @@ Supported options:
 
 Usage example::
 
-    $ scrapy view http://www.example.com/some/page.html
+    $ frapy view http://www.example.com/some/page.html
     [ ... browser starts ... ]
 
 .. command:: shell
@@ -433,7 +433,7 @@ Usage example::
 shell
 -----
 
-* Syntax: ``scrapy shell [url]``
+* Syntax: ``frapy shell [url]``
 * Requires project: *no*
 
 Starts the Scrapy shell for the given URL (if given) or empty if no URL is
@@ -453,19 +453,19 @@ Supported options:
 
 Usage example::
 
-    $ scrapy shell http://www.example.com/some/page.html
-    [ ... scrapy shell starts ... ]
+    $ frapy shell http://www.example.com/some/page.html
+    [ ... frapy shell starts ... ]
 
-    $ scrapy shell --nolog http://www.example.com/ -c '(response.status, response.url)'
+    $ frapy shell --nolog http://www.example.com/ -c '(response.status, response.url)'
     (200, 'http://www.example.com/')
 
     # shell follows HTTP redirects by default
-    $ scrapy shell --nolog http://httpbin.org/redirect-to?url=http%3A%2F%2Fexample.com%2F -c '(response.status, response.url)'
+    $ frapy shell --nolog http://httpbin.org/redirect-to?url=http%3A%2F%2Fexample.com%2F -c '(response.status, response.url)'
     (200, 'http://example.com/')
 
     # you can disable this with --no-redirect
     # (only for the URL passed as command line argument)
-    $ scrapy shell --no-redirect --nolog http://httpbin.org/redirect-to?url=http%3A%2F%2Fexample.com%2F -c '(response.status, response.url)'
+    $ frapy shell --no-redirect --nolog http://httpbin.org/redirect-to?url=http%3A%2F%2Fexample.com%2F -c '(response.status, response.url)'
     (302, 'http://httpbin.org/redirect-to?url=http%3A%2F%2Fexample.com%2F')
 
 
@@ -474,7 +474,7 @@ Usage example::
 parse
 -----
 
-* Syntax: ``scrapy parse <url> [options]``
+* Syntax: ``frapy parse <url> [options]``
 * Requires project: *yes*
 
 Fetches the given URL and parses it with the spider that handles it, using the
@@ -497,7 +497,7 @@ Supported options:
 
 * ``--pipelines``: process items through pipelines
 
-* ``--rules`` or ``-r``: use :class:`~scrapy.spiders.CrawlSpider`
+* ``--rules`` or ``-r``: use :class:`~frapy.spiders.CrawlSpider`
   rules to discover the callback (i.e. spider method) to use for parsing the
   response
 
@@ -520,8 +520,8 @@ Supported options:
 
 Usage example::
 
-    $ scrapy parse http://www.example.com/ -c parse_item
-    [ ... scrapy log lines crawling example.com spider ... ]
+    $ frapy parse http://www.example.com/ -c parse_item
+    [ ... frapy log lines crawling example.com spider ... ]
 
     >>> STATUS DEPTH LEVEL 1 <<<
     # Scraped Items  ------------------------------------------------------------
@@ -540,7 +540,7 @@ Usage example::
 settings
 --------
 
-* Syntax: ``scrapy settings [options]``
+* Syntax: ``frapy settings [options]``
 * Requires project: *no*
 
 Get the value of a Scrapy setting.
@@ -550,9 +550,9 @@ show the default Scrapy value for that setting.
 
 Example usage::
 
-    $ scrapy settings --get BOT_NAME
-    scrapybot
-    $ scrapy settings --get DOWNLOAD_DELAY
+    $ frapy settings --get BOT_NAME
+    frapybot
+    $ frapy settings --get DOWNLOAD_DELAY
     0
 
 .. command:: runspider
@@ -560,7 +560,7 @@ Example usage::
 runspider
 ---------
 
-* Syntax: ``scrapy runspider <spider_file.py>``
+* Syntax: ``frapy runspider <spider_file.py>``
 * Requires project: *no*
 
 Run a spider self-contained in a Python file, without having to create a
@@ -568,7 +568,7 @@ project.
 
 Example usage::
 
-    $ scrapy runspider myspider.py
+    $ frapy runspider myspider.py
     [ ... spider starts crawling ... ]
 
 .. command:: version
@@ -576,7 +576,7 @@ Example usage::
 version
 -------
 
-* Syntax: ``scrapy version [-v]``
+* Syntax: ``frapy version [-v]``
 * Requires project: *no*
 
 Prints the Scrapy version. If used with ``-v`` it also prints Python, Twisted
@@ -587,7 +587,7 @@ and Platform info, which is useful for bug reports.
 bench
 -----
 
-* Syntax: ``scrapy bench``
+* Syntax: ``frapy bench``
 * Requires project: *no*
 
 Run a quick benchmark test. :ref:`benchmarking`.
@@ -597,9 +597,9 @@ Custom project commands
 
 You can also add your custom project commands by using the
 :setting:`COMMANDS_MODULE` setting. See the Scrapy commands in
-`scrapy/commands`_ for examples on how to implement your commands.
+`frapy/commands`_ for examples on how to implement your commands.
 
-.. _scrapy/commands: https://github.com/scrapy/scrapy/tree/master/scrapy/commands
+.. _frapy/commands: https://github.com/frapy/frapy/tree/master/frapy/commands
 .. setting:: COMMANDS_MODULE
 
 COMMANDS_MODULE
@@ -616,13 +616,13 @@ Example:
 
     COMMANDS_MODULE = "mybot.commands"
 
-.. _Deploying your project: https://scrapyd.readthedocs.io/en/latest/deploy.html
+.. _Deploying your project: https://frapyd.readthedocs.io/en/latest/deploy.html
 
 Register commands via setup.py entry points
 -------------------------------------------
 
 You can also add Scrapy commands from an external library by adding a
-``scrapy.commands`` section in the entry points of the library ``setup.py``
+``frapy.commands`` section in the entry points of the library ``setup.py``
 file.
 
 The following example adds ``my_command`` command:
@@ -634,10 +634,10 @@ The following example adds ``my_command`` command:
   from setuptools import setup, find_packages
 
   setup(
-      name="scrapy-mymodule",
+      name="frapy-mymodule",
       entry_points={
-          "scrapy.commands": [
-              "my_command=my_scrapy_module.commands:MyCommand",
+          "frapy.commands": [
+              "my_command=my_frapy_module.commands:MyCommand",
           ],
       },
   )

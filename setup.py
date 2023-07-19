@@ -4,7 +4,7 @@ from pkg_resources import parse_version
 from setuptools import __version__ as setuptools_version
 from setuptools import find_packages, setup
 
-version = (Path(__file__).parent / "scrapy/VERSION").read_text("ascii").strip()
+version = (Path(__file__).parent / "frapy/VERSION").read_text("ascii").strip()
 
 
 def has_environment_marker_platform_impl_support():
@@ -54,11 +54,11 @@ else:
 setup(
     name="Scrapy",
     version=version,
-    url="https://scrapy.org",
+    url="https://frapy.org",
     project_urls={
-        "Documentation": "https://docs.scrapy.org/",
-        "Source": "https://github.com/scrapy/scrapy",
-        "Tracker": "https://github.com/scrapy/scrapy/issues",
+        "Documentation": "https://docs.frapy.org/",
+        "Source": "https://github.com/frapy/frapy",
+        "Tracker": "https://github.com/frapy/frapy/issues",
     },
     description="A high-level Web Crawling and Web Scraping framework",
     long_description=open("README.rst", encoding="utf-8").read(),
@@ -70,7 +70,7 @@ setup(
     packages=find_packages(exclude=("tests", "tests.*")),
     include_package_data=True,
     zip_safe=False,
-    entry_points={"console_scripts": ["scrapy = scrapy.cmdline:execute"]},
+    entry_points={"console_scripts": ["frapy = frapy.cmdline:execute"]},
     classifiers=[
         "Framework :: Scrapy",
         "Development Status :: 5 - Production/Stable",

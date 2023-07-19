@@ -1,9 +1,9 @@
 import unittest
 
-from scrapy.linkextractors import IGNORED_EXTENSIONS
-from scrapy.spiders import Spider
-from scrapy.utils.misc import arg_to_iter
-from scrapy.utils.url import (
+from frapy.linkextractors import IGNORED_EXTENSIONS
+from frapy.spiders import Spider
+from frapy.utils.misc import arg_to_iter
+from frapy.utils.url import (
     _is_filesystem_path,
     add_http_if_no_scheme,
     guess_scheme,
@@ -13,7 +13,7 @@ from scrapy.utils.url import (
     url_is_from_spider,
 )
 
-__doctests__ = ["scrapy.utils.url"]
+__doctests__ = ["frapy.utils.url"]
 
 
 class UrlUtilsTest(unittest.TestCase):
@@ -369,7 +369,7 @@ for k, args in enumerate(
         (
             r"C:\absolute\path\to\a\file.html",
             "file://",
-            "Windows filepath are not supported for scrapy shell",
+            "Windows filepath are not supported for frapy shell",
         ),
     ],
     start=1,

@@ -21,18 +21,18 @@ Having trouble? We'd like to help!
 
 * Try the :doc:`FAQ <faq>` -- it's got answers to some common questions.
 * Looking for specific information? Try the :ref:`genindex` or :ref:`modindex`.
-* Ask or search questions in `StackOverflow using the scrapy tag`_.
+* Ask or search questions in `StackOverflow using the frapy tag`_.
 * Ask or search questions in the `Scrapy subreddit`_.
-* Search for questions on the archives of the `scrapy-users mailing list`_.
-* Ask a question in the `#scrapy IRC channel`_,
+* Search for questions on the archives of the `frapy-users mailing list`_.
+* Ask a question in the `#frapy IRC channel`_,
 * Report bugs with Scrapy in our `issue tracker`_.
 * Join the Discord community `Scrapy Discord`_.
 
-.. _scrapy-users mailing list: https://groups.google.com/forum/#!forum/scrapy-users
-.. _Scrapy subreddit: https://www.reddit.com/r/scrapy/
-.. _StackOverflow using the scrapy tag: https://stackoverflow.com/tags/scrapy
-.. _#scrapy IRC channel: irc://irc.freenode.net/scrapy
-.. _issue tracker: https://github.com/scrapy/scrapy/issues
+.. _frapy-users mailing list: https://groups.google.com/forum/#!forum/frapy-users
+.. _Scrapy subreddit: https://www.reddit.com/r/frapy/
+.. _StackOverflow using the frapy tag: https://stackoverflow.com/tags/frapy
+.. _#frapy IRC channel: irc://irc.freenode.net/frapy
+.. _issue tracker: https://github.com/frapy/frapy/issues
 .. _Scrapy Discord: https://discord.gg/mv3yErfpvq
 
 
@@ -212,7 +212,7 @@ Solving specific problems
 :doc:`topics/asyncio`
     Use :mod:`asyncio` and :mod:`asyncio`-powered libraries.
 
-.. _extending-scrapy:
+.. _extending-frapy:
 
 Extending Scrapy
 ================

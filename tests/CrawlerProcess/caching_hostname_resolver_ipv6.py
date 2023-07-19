@@ -1,8 +1,8 @@
-import scrapy
-from scrapy.crawler import CrawlerProcess
+import frapy
+from frapy.crawler import CrawlerProcess
 
 
-class CachingHostnameResolverSpider(scrapy.Spider):
+class CachingHostnameResolverSpider(frapy.Spider):
     """
     Finishes without a twisted.internet.error.DNSLookupError exception
     """
@@ -15,7 +15,7 @@ if __name__ == "__main__":
     process = CrawlerProcess(
         settings={
             "RETRY_ENABLED": False,
-            "DNS_RESOLVER": "scrapy.resolver.CachingHostnameResolver",
+            "DNS_RESOLVER": "frapy.resolver.CachingHostnameResolver",
         }
     )
     process.crawl(CachingHostnameResolverSpider)

@@ -12,8 +12,8 @@ from warnings import catch_warnings, filterwarnings
 import lxml.etree
 from itemadapter import ItemAdapter
 
-from scrapy.exceptions import ScrapyDeprecationWarning
-from scrapy.exporters import (
+from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.exporters import (
     BaseItemExporter,
     CsvItemExporter,
     JsonItemExporter,
@@ -24,8 +24,8 @@ from scrapy.exporters import (
     PythonItemExporter,
     XmlItemExporter,
 )
-from scrapy.item import Field, Item
-from scrapy.utils.python import to_unicode
+from frapy.item import Field, Item
+from frapy.utils.python import to_unicode
 
 
 def custom_serializer(value):

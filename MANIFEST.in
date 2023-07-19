@@ -5,8 +5,8 @@ include LICENSE
 include MANIFEST.in
 include NEWS
 
-include scrapy/VERSION
-include scrapy/mime.types
+include frapy/VERSION
+include frapy/mime.types
 
 include codecov.yml
 include conftest.py
@@ -14,8 +14,8 @@ include pytest.ini
 include requirements-*.txt
 include tox.ini
 
-recursive-include scrapy/templates *
-recursive-include scrapy license.txt
+recursive-include frapy/templates *
+recursive-include frapy license.txt
 recursive-include docs *
 prune docs/build
 

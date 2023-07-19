@@ -1,7 +1,7 @@
 from twisted.internet import defer
 from twisted.trial.unittest import TestCase
 
-from scrapy.utils.test import get_crawler
+from frapy.utils.test import get_crawler
 from tests.mockserver import MockServer
 from tests.spiders import ErrorSpider, FollowAllSpider, ItemSpider
 

@@ -11,12 +11,12 @@ import attr
 from itemadapter import ItemAdapter
 from twisted.trial import unittest
 
-from scrapy.exceptions import ScrapyDeprecationWarning
-from scrapy.http import Request, Response
-from scrapy.item import Field, Item
-from scrapy.pipelines.images import ImageException, ImagesPipeline, NoimagesDrop
-from scrapy.settings import Settings
-from scrapy.utils.python import to_bytes
+from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.http import Request, Response
+from frapy.item import Field, Item
+from frapy.pipelines.images import ImageException, ImagesPipeline, NoimagesDrop
+from frapy.settings import Settings
+from frapy.utils.python import to_bytes
 
 try:
     from PIL import Image

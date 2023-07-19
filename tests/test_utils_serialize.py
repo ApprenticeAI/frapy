@@ -7,8 +7,8 @@ from decimal import Decimal
 import attr
 from twisted.internet import defer
 
-from scrapy.http import Request, Response
-from scrapy.utils.serialize import ScrapyJSONEncoder
+from frapy.http import Request, Response
+from frapy.utils.serialize import ScrapyJSONEncoder
 
 
 class JsonEncoderTestCase(unittest.TestCase):

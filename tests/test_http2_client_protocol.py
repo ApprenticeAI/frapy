@@ -27,9 +27,9 @@ from twisted.web.http import Request as TxRequest
 from twisted.web.server import NOT_DONE_YET, Site
 from twisted.web.static import File
 
-from scrapy.http import JsonRequest, Request, Response
-from scrapy.settings import Settings
-from scrapy.spiders import Spider
+from frapy.http import JsonRequest, Request, Response
+from frapy.settings import Settings
+from frapy.spiders import Spider
 from tests.mockserver import LeafResource, Status, ssl_context_factory
 
 
@@ -232,7 +232,7 @@ class Https2ClientProtocolTestCase(TestCase):
         uri = URI.fromBytes(bytes(self.get_url("/"), "utf-8"))
 
         self.conn_closed_deferred = Deferred()
-        from scrapy.core.http2.protocol import H2ClientFactory
+        from frapy.core.http2.protocol import H2ClientFactory
 
         h2_client_factory = H2ClientFactory(uri, Settings(), self.conn_closed_deferred)
         client_endpoint = SSL4ClientEndpoint(
@@ -392,7 +392,7 @@ class Https2ClientProtocolTestCase(TestCase):
     @inlineCallbacks
     def test_invalid_negotiated_protocol(self):
         with mock.patch(
-            "scrapy.core.http2.protocol.PROTOCOL_NAME", return_value=b"not-h2"
+            "frapy.core.http2.protocol.PROTOCOL_NAME", return_value=b"not-h2"
         ):
             request = Request(url=self.get_url("/status?n=200"))
             with self.assertRaises(ResponseFailed):
@@ -467,7 +467,7 @@ class Https2ClientProtocolTestCase(TestCase):
 
     @inlineCallbacks
     def _check_log_warnsize(self, request, warn_pattern, expected_body):
-        with self.assertLogs("scrapy.core.http2.stream", level="WARNING") as cm:
+        with self.assertLogs("frapy.core.http2.stream", level="WARNING") as cm:
             response = yield self.make_request(request)
             self.assertEqual(response.status, 200)
             self.assertEqual(response.request, request)
@@ -523,7 +523,7 @@ class Https2ClientProtocolTestCase(TestCase):
 
         def assert_inactive_stream(failure):
             self.assertIsNotNone(failure.check(ResponseFailed))
-            from scrapy.core.http2.stream import InactiveStreamClosed
+            from frapy.core.http2.stream import InactiveStreamClosed
 
             self.assertTrue(
                 any(isinstance(e, InactiveStreamClosed) for e in failure.value.reasons)
@@ -615,7 +615,7 @@ class Https2ClientProtocolTestCase(TestCase):
         request = Request(url)
 
         def assert_invalid_hostname(failure: Failure):
-            from scrapy.core.http2.stream import InvalidHostname
+            from frapy.core.http2.stream import InvalidHostname
 
             self.assertIsNotNone(failure.check(InvalidHostname))
             error_msg = str(failure.value)
@@ -654,7 +654,7 @@ class Https2ClientProtocolTestCase(TestCase):
 
         def assert_timeout_error(failure: Failure):
             for err in failure.value.reasons:
-                from scrapy.core.http2.protocol import H2ClientProtocol
+                from frapy.core.http2.protocol import H2ClientProtocol
 
                 if isinstance(err, TimeoutError):
                     self.assertIn(

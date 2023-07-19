@@ -32,12 +32,12 @@ How to use it
 
 To start a spider with persistence support enabled, run it like this::
 
-    scrapy crawl somespider -s JOBDIR=crawls/somespider-1
+    frapy crawl somespider -s JOBDIR=crawls/somespider-1
 
 Then, you can stop the spider safely at any time (by pressing Ctrl-C or sending
 a signal), and resume it later by issuing the same command::
 
-    scrapy crawl somespider -s JOBDIR=crawls/somespider-1
+    frapy crawl somespider -s JOBDIR=crawls/somespider-1
 
 .. _topics-keeping-persistent-state-between-batches:
 
@@ -78,10 +78,10 @@ on cookies.
 Request serialization
 ---------------------
 
-For persistence to work, :class:`~scrapy.Request` objects must be
+For persistence to work, :class:`~frapy.Request` objects must be
 serializable with :mod:`pickle`, except for the ``callback`` and ``errback``
 values passed to their ``__init__`` method, which must be methods of the
-running :class:`~scrapy.Spider` class.
+running :class:`~frapy.Spider` class.
 
 If you wish to log the requests that couldn't be serialized, you can set the
 :setting:`SCHEDULER_DEBUG` setting to ``True`` in the project's settings page.

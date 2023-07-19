@@ -35,12 +35,12 @@ Dataflow
 Modules and classes
 ===================
 
-- ``scrapy.contrib.itemparser.ItemParser``
-- ``scrapy.contrib.itemparser.XPathItemParser``
-- ``scrapy.contrib.itemparser.parsers.``MapConcat`` *(ex. ``TreeExpander``)*
-- ``scrapy.contrib.itemparser.parsers.``TakeFirst``
-- ``scrapy.contrib.itemparser.parsers.Join``
-- ``scrapy.contrib.itemparser.parsers.Identity``
+- ``frapy.contrib.itemparser.ItemParser``
+- ``frapy.contrib.itemparser.XPathItemParser``
+- ``frapy.contrib.itemparser.parsers.``MapConcat`` *(ex. ``TreeExpander``)*
+- ``frapy.contrib.itemparser.parsers.``TakeFirst``
+- ``frapy.contrib.itemparser.parsers.Join``
+- ``frapy.contrib.itemparser.parsers.Identity``
 
 Public API
 ==========
@@ -90,7 +90,7 @@ Usage example: declaring Item Parsers
 .. code-block:: python
 
    #!python
-   from scrapy.contrib.itemparser import XPathItemParser, parsers
+   from frapy.contrib.itemparser import XPathItemParser, parsers
 
 
    class ProductParser(XPathItemParser):

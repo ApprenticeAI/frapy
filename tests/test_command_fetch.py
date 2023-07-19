@@ -1,8 +1,8 @@
 from twisted.internet import defer
 from twisted.trial import unittest
 
-from scrapy.utils.testproc import ProcessTest
-from scrapy.utils.testsite import SiteTest
+from frapy.utils.testproc import ProcessTest
+from frapy.utils.testsite import SiteTest
 
 
 class FetchTest(ProcessTest, SiteTest, unittest.TestCase):

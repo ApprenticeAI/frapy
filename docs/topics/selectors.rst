@@ -48,7 +48,7 @@ Constructing selectors
 
 .. highlight:: python
 
-Response objects expose a :class:`~scrapy.Selector` instance
+Response objects expose a :class:`~frapy.Selector` instance
 on ``.selector`` attribute:
 
 .. code-block:: pycon
@@ -66,8 +66,8 @@ more shortcuts: ``response.xpath()`` and ``response.css()``:
     >>> response.css("span::text").get()
     'good'
 
-Scrapy selectors are instances of :class:`~scrapy.Selector` class
-constructed by passing either :class:`~scrapy.http.TextResponse` object or
+Scrapy selectors are instances of :class:`~frapy.Selector` class
+constructed by passing either :class:`~frapy.http.TextResponse` object or
 markup as a string (in ``text`` argument).
 
 Usually there is no need to construct Scrapy selectors manually:
@@ -81,18 +81,18 @@ Constructing from text:
 
 .. code-block:: pycon
 
-    >>> from scrapy.selector import Selector
+    >>> from frapy.selector import Selector
     >>> body = "<html><body><span>good</span></body></html>"
     >>> Selector(text=body).xpath("//span/text()").get()
     'good'
 
-Constructing from response - :class:`~scrapy.http.HtmlResponse` is one of
-:class:`~scrapy.http.TextResponse` subclasses:
+Constructing from response - :class:`~frapy.http.HtmlResponse` is one of
+:class:`~frapy.http.TextResponse` subclasses:
 
 .. code-block:: pycon
 
-    >>> from scrapy.selector import Selector
-    >>> from scrapy.http import HtmlResponse
+    >>> from frapy.selector import Selector
+    >>> from frapy.http import HtmlResponse
     >>> response = HtmlResponse(url="http://example.com", body=body)
     >>> Selector(response=response).xpath("//span/text()").get()
     'good'
@@ -107,7 +107,7 @@ To explain how to use the selectors we'll use the ``Scrapy shell`` (which
 provides interactive testing) and an example page located in the Scrapy
 documentation server:
 
-    https://docs.scrapy.org/en/latest/_static/selectors-sample1.html
+    https://docs.frapy.org/en/latest/_static/selectors-sample1.html
 
 .. _topics-selectors-htmlcode:
 
@@ -120,7 +120,7 @@ For the sake of completeness, here's its full HTML code:
 
 First, let's open the shell::
 
-    scrapy shell https://docs.scrapy.org/en/latest/_static/selectors-sample1.html
+    frapy shell https://docs.frapy.org/en/latest/_static/selectors-sample1.html
 
 Then, after the shell loads, you'll have the response available as ``response``
 shell variable, and its attached selector in ``response.selector`` attribute.
@@ -160,7 +160,7 @@ pseudo-elements:
     'Example website'
 
 As you can see, ``.xpath()`` and ``.css()`` methods return a
-:class:`~scrapy.selector.SelectorList` instance, which is a list of new
+:class:`~frapy.selector.SelectorList` instance, which is a list of new
 selectors. This API can be used for quickly selecting nested data:
 
 .. code-block:: pycon
@@ -197,7 +197,7 @@ of ``None``:
     'not-found'
 
 Instead of using e.g. ``'@src'`` XPath it is possible to query for attributes
-using ``.attrib`` property of a :class:`~scrapy.Selector`:
+using ``.attrib`` property of a :class:`~frapy.Selector`:
 
 .. code-block:: pycon
 
@@ -436,7 +436,7 @@ ID, or when selecting an unique element on a page):
 Using selectors with regular expressions
 ----------------------------------------
 
-:class:`~scrapy.Selector` also has a ``.re()`` method for extracting
+:class:`~frapy.Selector` also has a ``.re()`` method for extracting
 data using regular expressions. However, unlike using ``.xpath()`` or
 ``.css()`` methods, ``.re()`` returns a list of strings. So you
 can't construct nested ``.re()`` calls.
@@ -600,7 +600,7 @@ you can just select by class using CSS and then switch to XPath when needed:
 
 .. code-block:: pycon
     
-    >>> from scrapy import Selector
+    >>> from frapy import Selector
     >>> sel = Selector(
     ...     text='<div class="hero shout"><time datetime="2014-07-23 19:00">Special date</time></div>'
     ... )
@@ -621,7 +621,7 @@ Example:
 
 .. code-block:: pycon
 
-    >>> from scrapy import Selector
+    >>> from frapy import Selector
     >>> sel = Selector(
     ...     text="""
     ...     <ul class="list">
@@ -679,7 +679,7 @@ Example:
 
 .. code-block:: pycon
 
-    >>> from scrapy import Selector
+    >>> from frapy import Selector
     >>> sel = Selector(
     ...     text='<a href="#">Click here to go to the <strong>Next Page</strong></a>'
     ... )
@@ -772,7 +772,7 @@ Let's show an example that illustrates this with the Python Insider blog atom fe
 
 First, we open the shell with the url we want to scrape::
 
-    $ scrapy shell https://feeds.feedburner.com/PythonInsider
+    $ frapy shell https://feeds.feedburner.com/PythonInsider
 
 This is how the file starts::
 
@@ -849,7 +849,7 @@ Example selecting links in list item with a "class" attribute ending with a digi
 
 .. code-block:: pycon
 
-    >>> from scrapy import Selector
+    >>> from frapy import Selector
     >>> doc = """
     ... <div>
     ...     <ul>
@@ -1017,7 +1017,7 @@ Parsel also simplifies adding your own XPath extensions.
 Built-in Selectors reference
 ============================
 
-.. module:: scrapy.selector
+.. module:: frapy.selector
    :synopsis: Selector class
 
 Selector objects
@@ -1097,7 +1097,7 @@ Selector examples on HTML response
 
 Here are some :class:`Selector` examples to illustrate several concepts.
 In all cases, we assume there is already a :class:`Selector` instantiated with
-a :class:`~scrapy.http.HtmlResponse` object like this:
+a :class:`~frapy.http.HtmlResponse` object like this:
 
 .. code-block:: python
 
@@ -1133,7 +1133,7 @@ Selector examples on XML response
 ---------------------------------
 
 Here are some examples to illustrate concepts for :class:`Selector` objects
-instantiated with an :class:`~scrapy.http.XmlResponse` object:
+instantiated with an :class:`~frapy.http.XmlResponse` object:
 
 .. code-block:: python
 

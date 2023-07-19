@@ -37,7 +37,7 @@ Design goals and non-goals
 Goals:
 
 * simple to manage: adding or removing extensions should be just a matter of
-  adding or removing lines in a ``scrapy.cfg`` file
+  adding or removing lines in a ``frapy.cfg`` file
 * backward compatibility with enabling extension the "old way" (i.e. modifying
   settings directly)
 
@@ -49,11 +49,11 @@ Non-goals:
 Managing add-ons
 ================
 
-Add-ons are defined in the ``scrapy.cfg`` file, inside the ``[addons]``
+Add-ons are defined in the ``frapy.cfg`` file, inside the ``[addons]``
 section.
 
 To enable the "httpcache" addon, either shipped with Scrapy or in the Python
-search path, create an entry for it in your ``scrapy.cfg``, like this::
+search path, create an entry for it in your ``frapy.cfg``, like this::
 
     [addons]
     httpcache = 
@@ -83,7 +83,7 @@ Examples:
     def addon_configure(settings):
         settings.overrides["DOWNLOADER_MIDDLEWARES"].update(
             {
-                "scrapy.contrib.downloadermiddleware.httpcache.HttpCacheMiddleware": 900,
+                "frapy.contrib.downloadermiddleware.httpcache.HttpCacheMiddleware": 900,
             }
         )
 

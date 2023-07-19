@@ -11,7 +11,7 @@ try:
 except ImportError:
     from sybil.parsers.codeblock import CodeBlockParser as PythonCodeBlockParser
 
-from scrapy.http.response.html import HtmlResponse
+from frapy.http.response.html import HtmlResponse
 
 
 def load_response(url: str, filename: str) -> HtmlResponse:

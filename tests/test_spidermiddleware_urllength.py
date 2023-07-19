@@ -2,11 +2,11 @@ from unittest import TestCase
 
 from testfixtures import LogCapture
 
-from scrapy.http import Request, Response
-from scrapy.settings import Settings
-from scrapy.spidermiddlewares.urllength import UrlLengthMiddleware
-from scrapy.spiders import Spider
-from scrapy.utils.test import get_crawler
+from frapy.http import Request, Response
+from frapy.settings import Settings
+from frapy.spidermiddlewares.urllength import UrlLengthMiddleware
+from frapy.spiders import Spider
+from frapy.utils.test import get_crawler
 
 
 class TestUrlLengthMiddleware(TestCase):
@@ -19,9 +19,9 @@ class TestUrlLengthMiddleware(TestCase):
         self.stats = crawler.stats
         self.mw = UrlLengthMiddleware.from_settings(settings)
 
-        self.response = Response("http://scrapytest.org")
-        self.short_url_req = Request("http://scrapytest.org/")
-        self.long_url_req = Request("http://scrapytest.org/this_is_a_long_url")
+        self.response = Response("http://frapytest.org")
+        self.short_url_req = Request("http://frapytest.org/")
+        self.long_url_req = Request("http://frapytest.org/this_is_a_long_url")
         self.reqs = [self.short_url_req, self.long_url_req]
 
     def process_spider_output(self):

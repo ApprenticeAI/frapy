@@ -2,10 +2,10 @@ import unittest
 from datetime import datetime
 from unittest import mock
 
-from scrapy.extensions.corestats import CoreStats
-from scrapy.spiders import Spider
-from scrapy.statscollectors import DummyStatsCollector, StatsCollector
-from scrapy.utils.test import get_crawler
+from frapy.extensions.corestats import CoreStats
+from frapy.spiders import Spider
+from frapy.statscollectors import DummyStatsCollector, StatsCollector
+from frapy.utils.test import get_crawler
 
 
 class CoreStatsExtensionTest(unittest.TestCase):
@@ -13,7 +13,7 @@ class CoreStatsExtensionTest(unittest.TestCase):
         self.crawler = get_crawler(Spider)
         self.spider = self.crawler._create_spider("foo")
 
-    @mock.patch("scrapy.extensions.corestats.datetime")
+    @mock.patch("frapy.extensions.corestats.datetime")
     def test_core_stats_default_stats_collector(self, mock_datetime):
         fixed_datetime = datetime(2019, 12, 1, 11, 38)
         mock_datetime.utcnow = mock.Mock(return_value=fixed_datetime)

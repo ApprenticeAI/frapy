@@ -1,7 +1,7 @@
-import scrapy
+import frapy
 
 
-class ExceptionSpider(scrapy.Spider):
+class ExceptionSpider(frapy.Spider):
     name = "exception"
 
     custom_settings = {

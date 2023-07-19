@@ -1,16 +1,16 @@
 from unittest import TestCase
 
-from scrapy.http import Request, Response
-from scrapy.spidermiddlewares.depth import DepthMiddleware
-from scrapy.spiders import Spider
-from scrapy.statscollectors import StatsCollector
-from scrapy.utils.test import get_crawler
+from frapy.http import Request, Response
+from frapy.spidermiddlewares.depth import DepthMiddleware
+from frapy.spiders import Spider
+from frapy.statscollectors import StatsCollector
+from frapy.utils.test import get_crawler
 
 
 class TestDepthMiddleware(TestCase):
     def setUp(self):
         crawler = get_crawler(Spider)
-        self.spider = crawler._create_spider("scrapytest.org")
+        self.spider = crawler._create_spider("frapytest.org")
 
         self.stats = StatsCollector(crawler)
         self.stats.open_spider(self.spider)
@@ -18,10 +18,10 @@ class TestDepthMiddleware(TestCase):
         self.mw = DepthMiddleware(1, self.stats, True)
 
     def test_process_spider_output(self):
-        req = Request("http://scrapytest.org")
-        resp = Response("http://scrapytest.org")
+        req = Request("http://frapytest.org")
+        resp = Response("http://frapytest.org")
         resp.request = req
-        result = [Request("http://scrapytest.org")]
+        result = [Request("http://frapytest.org")]
 
         out = list(self.mw.process_spider_output(resp, result, self.spider))
         self.assertEqual(out, result)

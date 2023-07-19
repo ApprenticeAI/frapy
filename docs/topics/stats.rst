@@ -6,7 +6,7 @@ Stats Collection
 
 Scrapy provides a convenient facility for collecting stats in the form of
 key/values, where values are often counters. The facility is called the Stats
-Collector, and can be accessed through the :attr:`~scrapy.crawler.Crawler.stats`
+Collector, and can be accessed through the :attr:`~frapy.crawler.Crawler.stats`
 attribute of the :ref:`topics-api-crawler`, as illustrated by the examples in
 the :ref:`topics-stats-usecases` section below.
 
@@ -29,7 +29,7 @@ opened when the spider is opened, and closed when the spider is closed.
 Common Stats Collector uses
 ===========================
 
-Access the stats collector through the :attr:`~scrapy.crawler.Crawler.stats`
+Access the stats collector through the :attr:`~frapy.crawler.Crawler.stats`
 attribute. Here is an example of an extension that access stats:
 
 .. code-block:: python
@@ -88,7 +88,7 @@ available in Scrapy which extend the basic Stats Collector. You can select
 which Stats Collector to use through the :setting:`STATS_CLASS` setting. The
 default Stats Collector used is the :class:`MemoryStatsCollector`. 
 
-.. currentmodule:: scrapy.statscollectors
+.. currentmodule:: frapy.statscollectors
 
 MemoryStatsCollector
 --------------------

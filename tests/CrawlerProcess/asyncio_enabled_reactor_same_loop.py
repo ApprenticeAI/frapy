@@ -9,11 +9,11 @@ if sys.version_info >= (3, 8) and sys.platform == "win32":
 asyncio.set_event_loop(Loop())
 asyncioreactor.install(asyncio.get_event_loop())
 
-import scrapy  # noqa: E402
-from scrapy.crawler import CrawlerProcess  # noqa: E402
+import frapy  # noqa: E402
+from frapy.crawler import CrawlerProcess  # noqa: E402
 
 
-class NoRequestsSpider(scrapy.Spider):
+class NoRequestsSpider(frapy.Spider):
     name = "no_request"
 
     def start_requests(self):

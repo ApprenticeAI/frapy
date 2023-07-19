@@ -7,7 +7,7 @@ Linkfix - a companion to sphinx's linkcheck builder.
 Uses the linkcheck's output file to fix links in docs.
 
 Originally created for this issue:
-https://github.com/scrapy/scrapy/issues/606
+https://github.com/frapy/frapy/issues/606
 
 Author: dufferzafar
 """

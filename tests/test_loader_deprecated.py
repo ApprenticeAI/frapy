@@ -1,6 +1,6 @@
 """
 These tests are kept as references from the ones that were ported to a itemloaders library.
-Once we remove the references from scrapy, we can remove these tests.
+Once we remove the references from frapy, we can remove these tests.
 """
 
 import unittest
@@ -16,11 +16,11 @@ from itemloaders.processors import (
     TakeFirst,
 )
 
-from scrapy.item import Field, Item
-from scrapy.loader import ItemLoader
-from scrapy.loader.common import wrap_loader_context
-from scrapy.utils.deprecate import ScrapyDeprecationWarning
-from scrapy.utils.misc import extract_regex
+from frapy.item import Field, Item
+from frapy.loader import ItemLoader
+from frapy.loader.common import wrap_loader_context
+from frapy.utils.deprecate import ScrapyDeprecationWarning
+from frapy.utils.misc import extract_regex
 
 
 # test items
@@ -206,7 +206,7 @@ class BasicItemLoaderTest(unittest.TestCase):
 
         proc = MapCompose(filter_world, str.upper)
         self.assertEqual(
-            proc(["hello", "world", "this", "is", "scrapy"]),
+            proc(["hello", "world", "this", "is", "frapy"]),
             ["HELLO", "THIS", "IS", "SCRAPY"],
         )
 
@@ -238,8 +238,8 @@ class BasicItemLoaderTest(unittest.TestCase):
             url_in = MapCompose(lambda v: v.lower())
 
         il = ChildItemLoader()
-        il.add_value("url", "HTTP://scrapy.ORG")
-        self.assertEqual(il.get_output_value("url"), ["http://scrapy.org"])
+        il.add_value("url", "HTTP://frapy.ORG")
+        self.assertEqual(il.get_output_value("url"), ["http://frapy.org"])
         il.add_value("name", "marta")
         self.assertEqual(il.get_output_value("name"), ["Marta"])
 
@@ -248,7 +248,7 @@ class BasicItemLoaderTest(unittest.TestCase):
             summary_in = MapCompose(lambda v: v)
 
         il = ChildChildItemLoader()
-        il.add_value("url", "http://scrapy.org")
+        il.add_value("url", "http://frapy.org")
         self.assertEqual(il.get_output_value("url"), ["HTTP://SCRAPY.ORG"])
         il.add_value("name", "marta")
         self.assertEqual(il.get_output_value("name"), ["Marta"])
@@ -656,7 +656,7 @@ class ProcessorsTest(unittest.TestCase):
 
         proc = MapCompose(filter_world, str.upper)
         self.assertEqual(
-            proc(["hello", "world", "this", "is", "scrapy"]),
+            proc(["hello", "world", "this", "is", "frapy"]),
             ["HELLO", "THIS", "IS", "SCRAPY"],
         )
         proc = MapCompose(filter_world, str.upper)

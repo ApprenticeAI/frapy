@@ -3,8 +3,8 @@ import unittest
 import warnings
 from unittest import mock
 
-from scrapy.exceptions import ScrapyDeprecationWarning
-from scrapy.utils.deprecate import create_deprecated_class, update_classpath
+from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.utils.deprecate import create_deprecated_class, update_classpath
 
 
 class MyWarning(UserWarning):
@@ -270,29 +270,29 @@ class WarnWhenSubclassedTest(unittest.TestCase):
 
 
 @mock.patch(
-    "scrapy.utils.deprecate.DEPRECATION_RULES",
+    "frapy.utils.deprecate.DEPRECATION_RULES",
     [
-        ("scrapy.contrib.pipeline.", "scrapy.pipelines."),
-        ("scrapy.contrib.", "scrapy.extensions."),
+        ("frapy.contrib.pipeline.", "frapy.pipelines."),
+        ("frapy.contrib.", "frapy.extensions."),
     ],
 )
 class UpdateClassPathTest(unittest.TestCase):
     def test_old_path_gets_fixed(self):
         with warnings.catch_warnings(record=True) as w:
-            output = update_classpath("scrapy.contrib.debug.Debug")
-        self.assertEqual(output, "scrapy.extensions.debug.Debug")
+            output = update_classpath("frapy.contrib.debug.Debug")
+        self.assertEqual(output, "frapy.extensions.debug.Debug")
         self.assertEqual(len(w), 1)
-        self.assertIn("scrapy.contrib.debug.Debug", str(w[0].message))
-        self.assertIn("scrapy.extensions.debug.Debug", str(w[0].message))
+        self.assertIn("frapy.contrib.debug.Debug", str(w[0].message))
+        self.assertIn("frapy.extensions.debug.Debug", str(w[0].message))
 
     def test_sorted_replacement(self):
         with warnings.catch_warnings():
             warnings.simplefilter("ignore", ScrapyDeprecationWarning)
-            output = update_classpath("scrapy.contrib.pipeline.Pipeline")
-        self.assertEqual(output, "scrapy.pipelines.Pipeline")
+            output = update_classpath("frapy.contrib.pipeline.Pipeline")
+        self.assertEqual(output, "frapy.pipelines.Pipeline")
 
     def test_unmatched_path_stays_the_same(self):
         with warnings.catch_warnings(record=True) as w:
-            output = update_classpath("scrapy.unmatched.Path")
-        self.assertEqual(output, "scrapy.unmatched.Path")
+            output = update_classpath("frapy.unmatched.Path")
+        self.assertEqual(output, "frapy.unmatched.Path")
         self.assertEqual(len(w), 0)

@@ -1,3 +1,3 @@
-scrapy/downloadermiddlewares/cookies.py
-scrapy/extensions/statsmailer.py
-scrapy/extensions/memusage.py
+frapy/downloadermiddlewares/cookies.py
+frapy/extensions/statsmailer.py
+frapy/extensions/memusage.py

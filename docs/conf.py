@@ -27,7 +27,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 extensions = [
     "hoverxref.extension",
     "notfound.extension",
-    "scrapydocs",
+    "frapydocs",
     "sphinx.ext.autodoc",
     "sphinx.ext.coverage",
     "sphinx.ext.intersphinx",
@@ -56,10 +56,10 @@ copyright = f"2008–{datetime.now().year}, Scrapy developers"
 #
 # The short X.Y version.
 try:
-    import scrapy
+    import frapy
 
-    version = ".".join(map(str, scrapy.version_info[:2]))
-    release = scrapy.__version__
+    version = ".".join(map(str, frapy.version_info[:2]))
+    release = frapy.__version__
 except ImportError:
     version = ""
     release = ""
@@ -126,7 +126,7 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 # The style sheet to use for HTML and HTML Help pages. A file of that name
 # must exist either in Sphinx' static/ path, or in one of the custom paths
 # given in html_static_path.
-# html_style = 'scrapydoc.css'
+# html_style = 'frapydoc.css'
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
@@ -228,7 +228,7 @@ latex_documents = [
 # doing a linkcheck build.
 linkcheck_ignore = [
     "http://localhost:\d+",
-    "http://hg.scrapy.org",
+    "http://hg.frapy.org",
     "http://directory.google.com/",
 ]
 
@@ -250,24 +250,24 @@ coverage_ignore_pyobjects = [
     # Methods of downloader middlewares are not documented, only the classes
     # themselves, since downloader middlewares are controlled through Scrapy
     # settings.
-    r"^scrapy\.downloadermiddlewares\.\w*?\.(\w*?Middleware|DownloaderStats)\.",
+    r"^frapy\.downloadermiddlewares\.\w*?\.(\w*?Middleware|DownloaderStats)\.",
     # Base classes of downloader middlewares are implementation details that
     # are not meant for users.
-    r"^scrapy\.downloadermiddlewares\.\w*?\.Base\w*?Middleware",
+    r"^frapy\.downloadermiddlewares\.\w*?\.Base\w*?Middleware",
     # Private exception used by the command-line interface implementation.
-    r"^scrapy\.exceptions\.UsageError",
+    r"^frapy\.exceptions\.UsageError",
     # Methods of BaseItemExporter subclasses are only documented in
     # BaseItemExporter.
-    r"^scrapy\.exporters\.(?!BaseItemExporter\b)\w*?\.",
+    r"^frapy\.exporters\.(?!BaseItemExporter\b)\w*?\.",
     # Extension behavior is only modified through settings. Methods of
     # extension classes, as well as helper functions, are implementation
     # details that are not documented.
-    r"^scrapy\.extensions\.[a-z]\w*?\.[A-Z]\w*?\.",  # methods
-    r"^scrapy\.extensions\.[a-z]\w*?\.[a-z]",  # helper functions
+    r"^frapy\.extensions\.[a-z]\w*?\.[A-Z]\w*?\.",  # methods
+    r"^frapy\.extensions\.[a-z]\w*?\.[a-z]",  # helper functions
     # Never documented before, and deprecated now.
-    r"^scrapy\.linkextractors\.FilteringLinkExtractor$",
+    r"^frapy\.linkextractors\.FilteringLinkExtractor$",
     # Implementation detail of LxmlLinkExtractor
-    r"^scrapy\.linkextractors\.lxmlhtml\.LxmlParserLinkExtractor",
+    r"^frapy\.linkextractors\.lxmlhtml\.LxmlParserLinkExtractor",
 ]
 
 

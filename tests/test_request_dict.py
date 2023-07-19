@@ -3,10 +3,10 @@ import unittest
 import warnings
 from contextlib import suppress
 
-from scrapy import Request, Spider
-from scrapy.exceptions import ScrapyDeprecationWarning
-from scrapy.http import FormRequest, JsonRequest
-from scrapy.utils.request import request_from_dict
+from frapy import Request, Spider
+from frapy.exceptions import ScrapyDeprecationWarning
+from frapy.http import FormRequest, JsonRequest
+from frapy.utils.request import request_from_dict
 
 
 class CustomRequest(Request):
@@ -168,11 +168,11 @@ class DeprecatedMethodsRequestSerializationTest(RequestSerializationTest):
             warnings.simplefilter("always")
             with suppress(KeyError):
                 del sys.modules[
-                    "scrapy.utils.reqser"
+                    "frapy.utils.reqser"
                 ]  # delete module to reset the deprecation warning
 
-            from scrapy.utils.reqser import request_from_dict as _from_dict
-            from scrapy.utils.reqser import request_to_dict as _to_dict
+            from frapy.utils.reqser import request_from_dict as _from_dict
+            from frapy.utils.reqser import request_to_dict as _to_dict
 
             request_copy = _from_dict(_to_dict(request, spider), spider)
             self._assert_same_request(request, request_copy)
@@ -180,8 +180,8 @@ class DeprecatedMethodsRequestSerializationTest(RequestSerializationTest):
             self.assertEqual(len(caught), 1)
             self.assertTrue(issubclass(caught[0].category, ScrapyDeprecationWarning))
             self.assertEqual(
-                "Module scrapy.utils.reqser is deprecated, please use request.to_dict method"
-                " and/or scrapy.utils.request.request_from_dict instead",
+                "Module frapy.utils.reqser is deprecated, please use request.to_dict method"
+                " and/or frapy.utils.request.request_from_dict instead",
                 str(caught[0].message),
             )
 

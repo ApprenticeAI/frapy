@@ -12,9 +12,9 @@ class CheckCommandTest(CommandTest):
     def _write_contract(self, contracts, parse_def):
         self.spider.write_text(
             f"""
-import scrapy
+import frapy
 
-class CheckSpider(scrapy.Spider):
+class CheckSpider(frapy.Spider):
     name = '{self.spider_name}'
     start_urls = ['http://toscrape.com']
 
@@ -40,7 +40,7 @@ class CheckSpider(scrapy.Spider):
         @returns requests 1
         """
         parse_def = """
-        yield scrapy.Request(url='http://next-url.com')
+        yield frapy.Request(url='http://next-url.com')
         """
         self._test_contract(contracts, parse_def)
 
@@ -81,7 +81,7 @@ class CheckSpider(scrapy.Spider):
         """
         parse_def = """
         yield {'key1': 'val1', 'key2': 'val2'}
-        yield scrapy.Request(url='http://next-url.com')
+        yield frapy.Request(url='http://next-url.com')
         if len(cb_kwargs.items()) == 0:
             raise Exception("Callback args not set")
         """

@@ -10,18 +10,18 @@ from testfixtures import LogCapture
 from twisted.internet import defer
 from twisted.trial.unittest import TestCase
 
-from scrapy.http import Request
-from scrapy.utils.test import get_crawler
+from frapy.http import Request
+from frapy.utils.test import get_crawler
 from tests.mockserver import MockServer
 from tests.spiders import SimpleSpider, SingleRequestSpider
 
 
 class MitmProxy:
-    auth_user = "scrapy"
-    auth_pass = "scrapy"
+    auth_user = "frapy"
+    auth_pass = "frapy"
 
     def start(self):
-        from scrapy.utils.test import get_testenv
+        from frapy.utils.test import get_testenv
 
         script = """
 import sys
@@ -60,7 +60,7 @@ sys.exit(mitmdump())
 
 def _wrong_credentials(proxy_url):
     bad_auth_proxy = list(urlsplit(proxy_url))
-    bad_auth_proxy[1] = bad_auth_proxy[1].replace("scrapy:scrapy@", "wrong:wronger@")
+    bad_auth_proxy[1] = bad_auth_proxy[1].replace("frapy:frapy@", "wrong:wronger@")
     return urlunsplit(bad_auth_proxy)
 
 

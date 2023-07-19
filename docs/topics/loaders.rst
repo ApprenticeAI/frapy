@@ -4,7 +4,7 @@
 Item Loaders
 ============
 
-.. module:: scrapy.loader
+.. module:: frapy.loader
    :synopsis: Item Loader class
 
 Item Loaders provide a convenient mechanism for populating scraped :ref:`items
@@ -50,7 +50,7 @@ chapter <topics-items>`:
 
 .. code-block:: python
 
-    from scrapy.loader import ItemLoader
+    from frapy.loader import ItemLoader
     from myproject.items import Product
 
 
@@ -197,7 +197,7 @@ Item Loaders are declared using a class definition syntax. Here is an example:
 .. code-block:: python
 
     from itemloaders.processors import TakeFirst, MapCompose, Join
-    from scrapy.loader import ItemLoader
+    from frapy.loader import ItemLoader
 
 
     class ProductLoader(ItemLoader):
@@ -229,7 +229,7 @@ metadata. Here is an example:
 
 .. code-block:: python
 
-    import scrapy
+    import frapy
     from itemloaders.processors import Join, MapCompose, TakeFirst
     from w3lib.html import remove_tags
 
@@ -239,12 +239,12 @@ metadata. Here is an example:
             return value
 
 
-    class Product(scrapy.Item):
-        name = scrapy.Field(
+    class Product(frapy.Item):
+        name = frapy.Field(
             input_processor=MapCompose(remove_tags),
             output_processor=Join(),
         )
-        price = scrapy.Field(
+        price = frapy.Field(
             input_processor=MapCompose(remove_tags, filter_price),
             output_processor=TakeFirst(),
         )
@@ -252,7 +252,7 @@ metadata. Here is an example:
 
 .. code-block:: pycon
 
-    >>> from scrapy.loader import ItemLoader
+    >>> from frapy.loader import ItemLoader
     >>> il = ItemLoader(item=Product())
     >>> il.add_value("name", ["Welcome to my", "<strong>website</strong>"])
     >>> il.add_value("price", ["&euro;", "<span>1000</span>"])
@@ -324,7 +324,7 @@ There are several ways to modify Item Loader context values:
 ItemLoader objects
 ==================
 
-.. autoclass:: scrapy.loader.ItemLoader
+.. autoclass:: frapy.loader.ItemLoader
     :members:
     :inherited-members:
 

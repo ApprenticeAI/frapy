@@ -52,7 +52,7 @@ Sometimes you need to inspect the source code of a webpage (not the
 Use Scrapy’s :command:`fetch` command to download the webpage contents as seen
 by Scrapy::
 
-    scrapy fetch --nolog https://example.com > response.html
+    frapy fetch --nolog https://example.com > response.html
 
 If the desired data is in embedded JavaScript code within a ``<script/>``
 element, see :ref:`topics-parsing-javascript`.
@@ -62,9 +62,9 @@ download the webpage with an HTTP client like curl_ or wget_ and see if the
 information can be found in the response they get.
 
 If they get a response with the desired data, modify your Scrapy
-:class:`~scrapy.Request` to match that of the other HTTP client. For
+:class:`~frapy.Request` to match that of the other HTTP client. For
 example, try using the same user-agent string (:setting:`USER_AGENT`) or the
-same :attr:`~scrapy.Request.headers`.
+same :attr:`~frapy.Request.headers`.
 
 If they also get a response without the desired data, you’ll need to take
 steps to make your request more similar to that of the web browser. See
@@ -81,14 +81,14 @@ Use the :ref:`network tool <topics-network-tool>` of your web browser to see
 how your web browser performs the desired request, and try to reproduce that
 request with Scrapy.
 
-It might be enough to yield a :class:`~scrapy.Request` with the same HTTP
+It might be enough to yield a :class:`~frapy.Request` with the same HTTP
 method and URL. However, you may also need to reproduce the body, headers and
-form parameters (see :class:`~scrapy.FormRequest`) of that request.
+form parameters (see :class:`~frapy.FormRequest`) of that request.
 
 As all major browsers allow to export the requests in `cURL
 <https://curl.haxx.se/>`_ format, Scrapy incorporates the method
-:meth:`~scrapy.Request.from_curl()` to generate an equivalent
-:class:`~scrapy.Request` from a cURL command. To get more information
+:meth:`~frapy.Request.from_curl()` to generate an equivalent
+:class:`~frapy.Request` from a cURL command. To get more information
 visit :ref:`request from curl <requests-from-curl>` inside the network
 tool section.
 
@@ -105,7 +105,7 @@ probably not your request, but the target server. The target server might be
 buggy, overloaded, or :ref:`banning <bans>` some of your requests.
 
 Note that to translate a cURL command into a Scrapy request,
-you may use `curl2scrapy <https://michael-shub.github.io/curl2scrapy/>`_.
+you may use `curl2frapy <https://michael-shub.github.io/curl2frapy/>`_.
 
 .. _topics-handling-response-formats:
 
@@ -119,7 +119,7 @@ data from it depends on the type of response:
     <topics-selectors>` as usual.
 
 -   If the response is JSON, use :func:`json.loads` to load the desired data from
-    :attr:`response.text <scrapy.http.TextResponse.text>`:
+    :attr:`response.text <frapy.http.TextResponse.text>`:
 
     .. code-block:: python
 
@@ -127,7 +127,7 @@ data from it depends on the type of response:
 
     If the desired data is inside HTML or XML code embedded within JSON data,
     you can load that HTML or XML code into a
-    :class:`~scrapy.Selector` and then
+    :class:`~frapy.Selector` and then
     :ref:`use it <topics-selectors>` as usual:
 
     .. code-block:: python
@@ -139,13 +139,13 @@ data from it depends on the type of response:
 
 -   If the response is CSS, use a :doc:`regular expression <library/re>` to
     extract the desired data from
-    :attr:`response.text <scrapy.http.TextResponse.text>`.
+    :attr:`response.text <frapy.http.TextResponse.text>`.
 
 .. _topics-parsing-images:
 
 -   If the response is an image or another format based on images (e.g. PDF),
     read the response as bytes from
-    :attr:`response.body <scrapy.http.TextResponse.body>` and use an OCR
+    :attr:`response.body <frapy.http.TextResponse.body>` and use an OCR
     solution to extract the desired data as text.
 
     For example, you can use pytesseract_. To read a table from a PDF,
@@ -167,7 +167,7 @@ If the desired data is hardcoded in JavaScript, you first need to get the
 JavaScript code:
 
 -   If the JavaScript code is in a JavaScript file, simply read
-    :attr:`response.text <scrapy.http.TextResponse.text>`.
+    :attr:`response.text <frapy.http.TextResponse.text>`.
 
 -   If the JavaScript code is within a ``<script/>`` element of an HTML page,
     use :ref:`selectors <topics-selectors>` to extract the text within that
@@ -236,7 +236,7 @@ may need something that no request can give you, such as a screenshot of a
 webpage as seen in a web browser.
 
 In these cases use the Splash_ JavaScript-rendering service, along with
-`scrapy-splash`_ for seamless integration.
+`frapy-splash`_ for seamless integration.
 
 Splash returns as HTML the :ref:`DOM <topics-livedom>` of a webpage, so that
 you can parse it with :ref:`selectors <topics-selectors>`. It provides great
@@ -264,11 +264,11 @@ The following is a simple snippet to illustrate its usage within a Scrapy spider
 
 .. code-block:: python
 
-    import scrapy
+    import frapy
     from playwright.async_api import async_playwright
 
 
-    class PlaywrightSpider(scrapy.Spider):
+    class PlaywrightSpider(frapy.Spider):
         name = "playwright"
         start_urls = ["data:,"]  # avoid using the default Scrapy downloader
 
@@ -283,7 +283,7 @@ The following is a simple snippet to illustrate its usage within a Scrapy spider
 
 However, using `playwright-python`_ directly as in the above example
 circumvents most of the Scrapy components (middlewares, dupefilter, etc).
-We recommend using `scrapy-playwright`_ for a better integration.
+We recommend using `frapy-playwright`_ for a better integration.
 
 .. _AJAX: https://en.wikipedia.org/wiki/Ajax_%28programming%29
 .. _CSS: https://en.wikipedia.org/wiki/Cascading_Style_Sheets
@@ -297,8 +297,8 @@ We recommend using `scrapy-playwright`_ for a better integration.
 .. _playwright: https://github.com/microsoft/playwright
 .. _pyppeteer: https://pyppeteer.github.io/pyppeteer/
 .. _pytesseract: https://github.com/madmaze/pytesseract
-.. _scrapy-playwright: https://github.com/scrapy-plugins/scrapy-playwright
-.. _scrapy-splash: https://github.com/scrapy-plugins/scrapy-splash
+.. _frapy-playwright: https://github.com/frapy-plugins/frapy-playwright
+.. _frapy-splash: https://github.com/frapy-plugins/frapy-splash
 .. _tabula-py: https://github.com/chezou/tabula-py
 .. _wget: https://www.gnu.org/software/wget/
 .. _wgrep: https://github.com/stav/wgrep

@@ -6,7 +6,7 @@ import xmlrpc.client
 from unittest import mock
 from urllib.parse import parse_qs, unquote_to_bytes, urlparse
 
-from scrapy.http import (
+from frapy.http import (
     FormRequest,
     Headers,
     HtmlResponse,
@@ -14,8 +14,8 @@ from scrapy.http import (
     Request,
     XmlRpcRequest,
 )
-from scrapy.http.request import NO_CALLBACK
-from scrapy.utils.python import to_bytes, to_unicode
+from frapy.http.request import NO_CALLBACK
+from frapy.utils.python import to_bytes, to_unicode
 
 
 class RequestTest(unittest.TestCase):
@@ -68,7 +68,7 @@ class RequestTest(unittest.TestCase):
 
     def test_headers(self):
         # Different ways of setting headers attribute
-        url = "http://www.scrapy.org"
+        url = "http://www.frapy.org"
         headers = {b"Accept": "gzip", b"Custom-Header": "nothing to tell you"}
         r = self.request_class(url=url, headers=headers)
         p = self.request_class(url=url, headers=r.headers)
@@ -86,7 +86,7 @@ class RequestTest(unittest.TestCase):
                 self.assertIsInstance(s, bytes)
 
     def test_eq(self):
-        url = "http://www.scrapy.org"
+        url = "http://www.frapy.org"
         r1 = self.request_class(url=url)
         r2 = self.request_class(url=url)
         self.assertNotEqual(r1, r2)
@@ -97,45 +97,45 @@ class RequestTest(unittest.TestCase):
         self.assertEqual(len(set_), 2)
 
     def test_url(self):
-        r = self.request_class(url="http://www.scrapy.org/path")
-        self.assertEqual(r.url, "http://www.scrapy.org/path")
+        r = self.request_class(url="http://www.frapy.org/path")
+        self.assertEqual(r.url, "http://www.frapy.org/path")
 
     def test_url_quoting(self):
-        r = self.request_class(url="http://www.scrapy.org/blank%20space")
-        self.assertEqual(r.url, "http://www.scrapy.org/blank%20space")
-        r = self.request_class(url="http://www.scrapy.org/blank space")
-        self.assertEqual(r.url, "http://www.scrapy.org/blank%20space")
+        r = self.request_class(url="http://www.frapy.org/blank%20space")
+        self.assertEqual(r.url, "http://www.frapy.org/blank%20space")
+        r = self.request_class(url="http://www.frapy.org/blank space")
+        self.assertEqual(r.url, "http://www.frapy.org/blank%20space")
 
     def test_url_encoding(self):
-        r = self.request_class(url="http://www.scrapy.org/price/£")
-        self.assertEqual(r.url, "http://www.scrapy.org/price/%C2%A3")
+        r = self.request_class(url="http://www.frapy.org/price/£")
+        self.assertEqual(r.url, "http://www.frapy.org/price/%C2%A3")
 
     def test_url_encoding_other(self):
         # encoding affects only query part of URI, not path
         # path part should always be UTF-8 encoded before percent-escaping
-        r = self.request_class(url="http://www.scrapy.org/price/£", encoding="utf-8")
-        self.assertEqual(r.url, "http://www.scrapy.org/price/%C2%A3")
+        r = self.request_class(url="http://www.frapy.org/price/£", encoding="utf-8")
+        self.assertEqual(r.url, "http://www.frapy.org/price/%C2%A3")
 
-        r = self.request_class(url="http://www.scrapy.org/price/£", encoding="latin1")
-        self.assertEqual(r.url, "http://www.scrapy.org/price/%C2%A3")
+        r = self.request_class(url="http://www.frapy.org/price/£", encoding="latin1")
+        self.assertEqual(r.url, "http://www.frapy.org/price/%C2%A3")
 
     def test_url_encoding_query(self):
-        r1 = self.request_class(url="http://www.scrapy.org/price/£?unit=µ")
-        self.assertEqual(r1.url, "http://www.scrapy.org/price/%C2%A3?unit=%C2%B5")
+        r1 = self.request_class(url="http://www.frapy.org/price/£?unit=µ")
+        self.assertEqual(r1.url, "http://www.frapy.org/price/%C2%A3?unit=%C2%B5")
 
         # should be same as above
         r2 = self.request_class(
-            url="http://www.scrapy.org/price/£?unit=µ", encoding="utf-8"
+            url="http://www.frapy.org/price/£?unit=µ", encoding="utf-8"
         )
-        self.assertEqual(r2.url, "http://www.scrapy.org/price/%C2%A3?unit=%C2%B5")
+        self.assertEqual(r2.url, "http://www.frapy.org/price/%C2%A3?unit=%C2%B5")
 
     def test_url_encoding_query_latin1(self):
         # encoding is used for encoding query-string before percent-escaping;
         # path is still UTF-8 encoded before percent-escaping
         r3 = self.request_class(
-            url="http://www.scrapy.org/price/µ?currency=£", encoding="latin1"
+            url="http://www.frapy.org/price/µ?currency=£", encoding="latin1"
         )
-        self.assertEqual(r3.url, "http://www.scrapy.org/price/%C2%B5?currency=%A3")
+        self.assertEqual(r3.url, "http://www.frapy.org/price/%C2%B5?currency=%A3")
 
     def test_url_encoding_nonutf8_untouched(self):
         # percent-escaping sequences that do not match valid UTF-8 sequences
@@ -153,14 +153,14 @@ class RequestTest(unittest.TestCase):
         # characters.  Otherwise, in the future the IRI will be mapped to
         # "http://www.example.org/r%C3%A9sum%C3%A9.html", which is a different
         # URI from "http://www.example.org/r%E9sum%E9.html".
-        r1 = self.request_class(url="http://www.scrapy.org/price/%a3")
-        self.assertEqual(r1.url, "http://www.scrapy.org/price/%a3")
+        r1 = self.request_class(url="http://www.frapy.org/price/%a3")
+        self.assertEqual(r1.url, "http://www.frapy.org/price/%a3")
 
-        r2 = self.request_class(url="http://www.scrapy.org/r%C3%A9sum%C3%A9/%a3")
-        self.assertEqual(r2.url, "http://www.scrapy.org/r%C3%A9sum%C3%A9/%a3")
+        r2 = self.request_class(url="http://www.frapy.org/r%C3%A9sum%C3%A9/%a3")
+        self.assertEqual(r2.url, "http://www.frapy.org/r%C3%A9sum%C3%A9/%a3")
 
-        r3 = self.request_class(url="http://www.scrapy.org/résumé/%a3")
-        self.assertEqual(r3.url, "http://www.scrapy.org/r%C3%A9sum%C3%A9/%a3")
+        r3 = self.request_class(url="http://www.frapy.org/résumé/%a3")
+        self.assertEqual(r3.url, "http://www.frapy.org/r%C3%A9sum%C3%A9/%a3")
 
         r4 = self.request_class(url="http://www.example.org/r%E9sum%E9.html")
         self.assertEqual(r4.url, "http://www.example.org/r%E9sum%E9.html")
@@ -1450,7 +1450,7 @@ class XmlRpcRequestTest(RequestTest):
     default_headers = {b"Content-Type": [b"text/xml"]}
 
     def _test_request(self, **kwargs):
-        r = self.request_class("http://scrapytest.org/rpc2", **kwargs)
+        r = self.request_class("http://frapytest.org/rpc2", **kwargs)
         self.assertEqual(r.headers[b"Content-Type"], b"text/xml")
         self.assertEqual(
             r.body,

@@ -8,7 +8,7 @@ from io import StringIO
 from pathlib import Path
 from subprocess import PIPE, Popen
 
-from scrapy.utils.test import get_testenv
+from frapy.utils.test import get_testenv
 
 
 class CmdlineTest(unittest.TestCase):
@@ -18,7 +18,7 @@ class CmdlineTest(unittest.TestCase):
 
     def _execute(self, *new_args, **kwargs):
         encoding = getattr(sys.stdout, "encoding") or "utf-8"
-        args = (sys.executable, "-m", "scrapy.cmdline") + new_args
+        args = (sys.executable, "-m", "frapy.cmdline") + new_args
         proc = Popen(args, stdout=PIPE, stderr=PIPE, env=self.env, **kwargs)
         comm = proc.communicate()[0].strip()
         return comm.decode(encoding)
@@ -43,7 +43,7 @@ class CmdlineTest(unittest.TestCase):
             stats.print_stats()
             out.seek(0)
             stats = out.read()
-            self.assertIn(str(Path("scrapy", "commands", "version.py")), stats)
+            self.assertIn(str(Path("frapy", "commands", "version.py")), stats)
             self.assertIn("tottime", stats)
         finally:
             shutil.rmtree(path)

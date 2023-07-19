@@ -7,10 +7,10 @@ from weakref import WeakKeyDictionary
 import pytest
 from w3lib.url import canonicalize_url
 
-from scrapy.http import Request
-from scrapy.utils.deprecate import ScrapyDeprecationWarning
-from scrapy.utils.python import to_bytes
-from scrapy.utils.request import (
+from frapy.http import Request
+from frapy.utils.deprecate import ScrapyDeprecationWarning
+from frapy.utils.python import to_bytes
+from frapy.utils.request import (
     _deprecated_fingerprint_cache,
     _fingerprint_cache,
     _request_fingerprint_as_bytes,
@@ -19,7 +19,7 @@ from scrapy.utils.request import (
     request_fingerprint,
     request_httprepr,
 )
-from scrapy.utils.test import get_crawler
+from frapy.utils.test import get_crawler
 
 
 class UtilsRequestTest(unittest.TestCase):

@@ -1,8 +1,8 @@
-import scrapy
-from scrapy.crawler import CrawlerProcess
+import frapy
+from frapy.crawler import CrawlerProcess
 
 
-class NoRequestsSpider(scrapy.Spider):
+class NoRequestsSpider(frapy.Spider):
     name = "no_request"
 
     def start_requests(self):

@@ -3,11 +3,11 @@ import sys
 
 from queuelib.tests import test_queue as t
 
-from scrapy.http import Request
-from scrapy.item import Field, Item
-from scrapy.loader import ItemLoader
-from scrapy.selector import Selector
-from scrapy.squeues import (
+from frapy.http import Request
+from frapy.item import Field, Item
+from frapy.loader import ItemLoader
+from frapy.selector import Selector
+from frapy.squeues import (
     _MarshalFifoSerializationDiskQueue,
     _MarshalLifoSerializationDiskQueue,
     _PickleFifoSerializationDiskQueue,

@@ -1,5 +1,5 @@
 /.vagrant
-/scrapy.iml
+/frapy.iml
 *.pyc
 _trial_temp*
 dropin.cache

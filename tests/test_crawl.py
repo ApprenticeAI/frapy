@@ -12,13 +12,13 @@ from twisted.internet.ssl import Certificate
 from twisted.python.failure import Failure
 from twisted.trial.unittest import TestCase
 
-from scrapy import signals
-from scrapy.crawler import CrawlerRunner
-from scrapy.exceptions import StopDownload
-from scrapy.http import Request
-from scrapy.http.response import Response
-from scrapy.utils.python import to_unicode
-from scrapy.utils.test import get_crawler
+from frapy import signals
+from frapy.crawler import CrawlerRunner
+from frapy.exceptions import StopDownload
+from frapy.http import Request
+from frapy.http.response import Response
+from frapy.utils.python import to_unicode
+from frapy.utils.test import get_crawler
 from tests import NON_EXISTING_RESOLVABLE
 from tests.mockserver import MockServer
 from tests.spiders import (
@@ -162,7 +162,7 @@ class CrawlTestCase(TestCase):
 
     @defer.inlineCallbacks
     def test_start_requests_bug_before_yield(self):
-        with LogCapture("scrapy", level=logging.ERROR) as log:
+        with LogCapture("frapy", level=logging.ERROR) as log:
             crawler = get_crawler(BrokenStartRequestsSpider)
             yield crawler.crawl(fail_before_yield=1, mockserver=self.mockserver)
 
@@ -173,7 +173,7 @@ class CrawlTestCase(TestCase):
 
     @defer.inlineCallbacks
     def test_start_requests_bug_yielding(self):
-        with LogCapture("scrapy", level=logging.ERROR) as log:
+        with LogCapture("frapy", level=logging.ERROR) as log:
             crawler = get_crawler(BrokenStartRequestsSpider)
             yield crawler.crawl(fail_yielding=1, mockserver=self.mockserver)
 
@@ -297,7 +297,7 @@ with multiples lines
 
     @defer.inlineCallbacks
     def test_engine_status(self):
-        from scrapy.utils.engine import get_engine_status
+        from frapy.utils.engine import get_engine_status
 
         est = []
 
@@ -315,7 +315,7 @@ with multiples lines
 
     @defer.inlineCallbacks
     def test_format_engine_status(self):
-        from scrapy.utils.engine import format_engine_status
+        from frapy.utils.engine import format_engine_status
 
         est = []
 

@@ -1,6 +1,6 @@
 from twisted.trial import unittest
 
-from scrapy.core.downloader import Slot
+from frapy.core.downloader import Slot
 
 
 class SlotTest(unittest.TestCase):

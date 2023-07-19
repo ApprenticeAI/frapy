@@ -1,9 +1,9 @@
 from unittest import TestCase
 
-from scrapy.downloadermiddlewares.useragent import UserAgentMiddleware
-from scrapy.http import Request
-from scrapy.spiders import Spider
-from scrapy.utils.test import get_crawler
+from frapy.downloadermiddlewares.useragent import UserAgentMiddleware
+from frapy.http import Request
+from frapy.spiders import Spider
+from frapy.utils.test import get_crawler
 
 
 class UserAgentMiddlewareTest(TestCase):
@@ -14,7 +14,7 @@ class UserAgentMiddlewareTest(TestCase):
 
     def test_default_agent(self):
         spider, mw = self.get_spider_and_mw("default_useragent")
-        req = Request("http://scrapytest.org/")
+        req = Request("http://frapytest.org/")
         assert mw.process_request(req, spider) is None
         self.assertEqual(req.headers["User-Agent"], b"default_useragent")
 
@@ -23,7 +23,7 @@ class UserAgentMiddlewareTest(TestCase):
         spider, mw = self.get_spider_and_mw("default_useragent")
         spider.user_agent = None
         mw.spider_opened(spider)
-        req = Request("http://scrapytest.org/")
+        req = Request("http://frapytest.org/")
         assert mw.process_request(req, spider) is None
         assert req.headers.get("User-Agent") is None
 
@@ -31,7 +31,7 @@ class UserAgentMiddlewareTest(TestCase):
         spider, mw = self.get_spider_and_mw("default_useragent")
         spider.user_agent = "spider_useragent"
         mw.spider_opened(spider)
-        req = Request("http://scrapytest.org/")
+        req = Request("http://frapytest.org/")
         assert mw.process_request(req, spider) is None
         self.assertEqual(req.headers["User-Agent"], b"spider_useragent")
 
@@ -40,7 +40,7 @@ class UserAgentMiddlewareTest(TestCase):
         spider.user_agent = "spider_useragent"
         mw.spider_opened(spider)
         req = Request(
-            "http://scrapytest.org/", headers={"User-Agent": "header_useragent"}
+            "http://frapytest.org/", headers={"User-Agent": "header_useragent"}
         )
         assert mw.process_request(req, spider) is None
         self.assertEqual(req.headers["User-Agent"], b"header_useragent")
@@ -49,6 +49,6 @@ class UserAgentMiddlewareTest(TestCase):
         spider, mw = self.get_spider_and_mw(None)
         spider.user_agent = None
         mw.spider_opened(spider)
-        req = Request("http://scrapytest.org/")
+        req = Request("http://frapytest.org/")
         assert mw.process_request(req, spider) is None
         assert "User-Agent" not in req.headers

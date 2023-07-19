@@ -5,9 +5,9 @@ from twisted.internet import defer
 from twisted.internet.defer import Deferred
 from twisted.trial import unittest
 
-from scrapy import Request, Spider, signals
-from scrapy.utils.defer import deferred_to_future, maybe_deferred_to_future
-from scrapy.utils.test import get_crawler, get_from_asyncio_queue
+from frapy import Request, Spider, signals
+from frapy.utils.defer import deferred_to_future, maybe_deferred_to_future
+from frapy.utils.test import get_crawler, get_from_asyncio_queue
 from tests.mockserver import MockServer
 
 

@@ -4,10 +4,10 @@ from pathlib import Path
 
 from twisted.trial import unittest
 
-from scrapy.exceptions import NotConfigured
-from scrapy.extensions.spiderstate import SpiderState
-from scrapy.spiders import Spider
-from scrapy.utils.test import get_crawler
+from frapy.exceptions import NotConfigured
+from frapy.extensions.spiderstate import SpiderState
+from frapy.spiders import Spider
+from frapy.utils.test import get_crawler
 
 
 class SpiderStateTest(unittest.TestCase):

@@ -12,7 +12,7 @@ Supported Python versions
 Scrapy requires Python 3.7+, either the CPython implementation (default) or
 the PyPy implementation (see :ref:`python:implementations`).
 
-.. _intro-install-scrapy:
+.. _intro-install-frapy:
 
 Installing Scrapy
 =================
@@ -23,7 +23,7 @@ and macOS.
 
 To install Scrapy using ``conda``, run::
 
-  conda install -c conda-forge scrapy
+  conda install -c conda-forge frapy
 
 Alternatively, if you’re already familiar with installation of Python packages,
 you can install Scrapy and its dependencies from PyPI with::
@@ -106,7 +106,7 @@ to install `Anaconda`_ or `Miniconda`_ and use the package from the
 
 Once you've installed `Anaconda`_ or `Miniconda`_, install Scrapy with::
 
-  conda install -c conda-forge scrapy
+  conda install -c conda-forge frapy
 
 To install Scrapy on Windows using ``pip``:
 
@@ -128,7 +128,7 @@ To install Scrapy on Windows using ``pip``:
 
 #. Install the Visual Studio Build Tools.
 
-Now, you should be able to :ref:`install Scrapy <intro-install-scrapy>` using ``pip``.
+Now, you should be able to :ref:`install Scrapy <intro-install-frapy>` using ``pip``.
 
 .. _intro-install-ubuntu:
 
@@ -140,7 +140,7 @@ twisted and pyOpenSSL, and is compatible with recent Ubuntu distributions.
 But it should support older versions of Ubuntu too, like Ubuntu 14.04,
 albeit with potential issues with TLS connections.
 
-**Don't** use the ``python-scrapy`` package provided by Ubuntu, they are
+**Don't** use the ``python-frapy`` package provided by Ubuntu, they are
 typically too old and slow to catch up with latest Scrapy.
 
 
@@ -156,7 +156,7 @@ these dependencies::
 Inside a :ref:`virtualenv <intro-using-virtualenv>`,
 you can install Scrapy with ``pip`` after that::
 
-    pip install scrapy
+    pip install frapy
 
 .. note::
     The same non-Python dependencies can be used to install Scrapy in Debian
@@ -232,7 +232,7 @@ recommends (only needed when installing Scrapy). Installing on Linux has no spec
 issues besides installing build dependencies.
 Installing Scrapy with PyPy on Windows is not tested.
 
-You can check that Scrapy is installed correctly by running ``scrapy bench``.
+You can check that Scrapy is installed correctly by running ``frapy bench``.
 If this command gives errors such as
 ``TypeError: ... got 2 unexpected keyword arguments``, this means
 that setuptools was unable to pick up one PyPy-specific dependency.
@@ -265,7 +265,7 @@ reinstall Twisted with the :code:`tls` extra option::
 
     pip install twisted[tls]
 
-For details, see `Issue #2473 <https://github.com/scrapy/scrapy/issues/2473>`_.
+For details, see `Issue #2473 <https://github.com/frapy/frapy/issues/2473>`_.
 
 .. _Python: https://www.python.org/
 .. _pip: https://pip.pypa.io/en/latest/installing/

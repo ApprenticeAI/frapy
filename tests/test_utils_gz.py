@@ -3,8 +3,8 @@ from pathlib import Path
 
 from w3lib.encoding import html_to_unicode
 
-from scrapy.http import Response
-from scrapy.utils.gz import gunzip, gzip_magic_number
+from frapy.http import Response
+from frapy.utils.gz import gunzip, gzip_magic_number
 from tests import tests_datadir
 
 SAMPLEDIR = Path(tests_datadir, "compressed")

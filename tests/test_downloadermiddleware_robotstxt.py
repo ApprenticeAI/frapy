@@ -5,12 +5,12 @@ from twisted.internet.defer import Deferred, DeferredList, maybeDeferred
 from twisted.python import failure
 from twisted.trial import unittest
 
-from scrapy.downloadermiddlewares.robotstxt import RobotsTxtMiddleware
-from scrapy.downloadermiddlewares.robotstxt import logger as mw_module_logger
-from scrapy.exceptions import IgnoreRequest, NotConfigured
-from scrapy.http import Request, Response, TextResponse
-from scrapy.http.request import NO_CALLBACK
-from scrapy.settings import Settings
+from frapy.downloadermiddlewares.robotstxt import RobotsTxtMiddleware
+from frapy.downloadermiddlewares.robotstxt import logger as mw_module_logger
+from frapy.exceptions import IgnoreRequest, NotConfigured
+from frapy.http import Request, Response, TextResponse
+from frapy.http.request import NO_CALLBACK
+from frapy.settings import Settings
 from tests.test_robotstxt_interface import reppy_available, rerp_available
 
 
@@ -254,7 +254,7 @@ class RobotsTxtMiddlewareWithRerpTest(RobotsTxtMiddlewareTest):
     def setUp(self):
         super().setUp()
         self.crawler.settings.set(
-            "ROBOTSTXT_PARSER", "scrapy.robotstxt.RerpRobotParser"
+            "ROBOTSTXT_PARSER", "frapy.robotstxt.RerpRobotParser"
         )
 
 
@@ -265,5 +265,5 @@ class RobotsTxtMiddlewareWithReppyTest(RobotsTxtMiddlewareTest):
     def setUp(self):
         super().setUp()
         self.crawler.settings.set(
-            "ROBOTSTXT_PARSER", "scrapy.robotstxt.ReppyRobotParser"
+            "ROBOTSTXT_PARSER", "frapy.robotstxt.ReppyRobotParser"
         )

@@ -17,21 +17,21 @@ from twisted.web._newclient import ResponseFailed
 from twisted.web.http import _DataLoss
 from w3lib.url import path_to_file_uri
 
-from scrapy.core.downloader.handlers import DownloadHandlers
-from scrapy.core.downloader.handlers.datauri import DataURIDownloadHandler
-from scrapy.core.downloader.handlers.file import FileDownloadHandler
-from scrapy.core.downloader.handlers.http import HTTPDownloadHandler
-from scrapy.core.downloader.handlers.http10 import HTTP10DownloadHandler
-from scrapy.core.downloader.handlers.http11 import HTTP11DownloadHandler
-from scrapy.core.downloader.handlers.s3 import S3DownloadHandler
-from scrapy.exceptions import NotConfigured
-from scrapy.http import Headers, HtmlResponse, Request
-from scrapy.http.response.text import TextResponse
-from scrapy.responsetypes import responsetypes
-from scrapy.spiders import Spider
-from scrapy.utils.misc import create_instance
-from scrapy.utils.python import to_bytes
-from scrapy.utils.test import get_crawler, skip_if_no_boto
+from frapy.core.downloader.handlers import DownloadHandlers
+from frapy.core.downloader.handlers.datauri import DataURIDownloadHandler
+from frapy.core.downloader.handlers.file import FileDownloadHandler
+from frapy.core.downloader.handlers.http import HTTPDownloadHandler
+from frapy.core.downloader.handlers.http10 import HTTP10DownloadHandler
+from frapy.core.downloader.handlers.http11 import HTTP11DownloadHandler
+from frapy.core.downloader.handlers.s3 import S3DownloadHandler
+from frapy.exceptions import NotConfigured
+from frapy.http import Headers, HtmlResponse, Request
+from frapy.http.response.text import TextResponse
+from frapy.responsetypes import responsetypes
+from frapy.spiders import Spider
+from frapy.utils.misc import create_instance
+from frapy.utils.python import to_bytes
+from frapy.utils.test import get_crawler, skip_if_no_boto
 from tests import NON_EXISTING_RESOLVABLE
 from tests.mockserver import (
     Echo,
@@ -358,7 +358,7 @@ class HttpTestCase(unittest.TestCase):
         This is not strictly required by HTTP RFCs but can cause trouble
         for some web servers.
         See:
-        https://github.com/scrapy/scrapy/issues/823
+        https://github.com/frapy/frapy/issues/823
         https://issues.apache.org/jira/browse/TS-2902
         https://github.com/kennethreitz/requests/issues/405
         https://bugs.python.org/issue14721
@@ -484,7 +484,7 @@ class Http11TestCase(HttpTestCase):
 
     @defer.inlineCallbacks
     def test_download_with_maxsize_very_large_file(self):
-        with mock.patch("scrapy.core.downloader.handlers.http11.logger") as logger:
+        with mock.patch("frapy.core.downloader.handlers.http11.logger") as logger:
             request = Request(self.getURL("largechunkedfile"))
 
             def check(logger):
@@ -599,7 +599,7 @@ class Https11TestCase(Http11TestCase):
                 d.addCallback(self.assertEqual, b"0123456789")
                 yield d
                 log_capture.check_present(
-                    ("scrapy.core.downloader.tls", "DEBUG", self.tls_log_message)
+                    ("frapy.core.downloader.tls", "DEBUG", self.tls_log_message)
                 )
         finally:
             yield download_handler.close()
@@ -1030,7 +1030,7 @@ class S3TestCase(unittest.TestCase):
 
 
 class BaseFTPTestCase(unittest.TestCase):
-    username = "scrapy"
+    username = "frapy"
     password = "passwd"
     req_meta = {"ftp_user": username, "ftp_password": password}
 
@@ -1043,7 +1043,7 @@ class BaseFTPTestCase(unittest.TestCase):
     def setUp(self):
         from twisted.protocols.ftp import FTPFactory, FTPRealm
 
-        from scrapy.core.downloader.handlers.ftp import FTPDownloadHandler
+        from frapy.core.downloader.handlers.ftp import FTPDownloadHandler
 
         # setup dirs and test file
         self.directory = Path(self.mktemp())
@@ -1193,7 +1193,7 @@ class AnonymousFTPTestCase(BaseFTPTestCase):
     def setUp(self):
         from twisted.protocols.ftp import FTPFactory, FTPRealm
 
-        from scrapy.core.downloader.handlers.ftp import FTPDownloadHandler
+        from frapy.core.downloader.handlers.ftp import FTPDownloadHandler
 
         # setup dir and test file
         self.directory = Path(self.mktemp())

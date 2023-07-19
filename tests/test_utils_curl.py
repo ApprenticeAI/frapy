@@ -3,8 +3,8 @@ import warnings
 
 from w3lib.http import basic_auth_header
 
-from scrapy import Request
-from scrapy.utils.curl import curl_to_request_kwargs
+from frapy import Request
+from frapy.utils.curl import curl_to_request_kwargs
 
 
 class CurlToRequestKwargsTest(unittest.TestCase):

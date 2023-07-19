@@ -10,14 +10,14 @@ from twisted.internet._sslverify import ClientTLSOptions
 from twisted.internet.ssl import ClientContextFactory
 from twisted.python.versions import Version
 
-from scrapy.mail import MailSender
+from frapy.mail import MailSender
 
 
 class MailSenderTest(unittest.TestCase):
     def test_send(self):
         mailsender = MailSender(debug=True)
         mailsender.send(
-            to=["test@scrapy.org"],
+            to=["test@frapy.org"],
             subject="subject",
             body="body",
             _callback=self._catch_mail_sent,
@@ -25,12 +25,12 @@ class MailSenderTest(unittest.TestCase):
 
         assert self.catched_msg
 
-        self.assertEqual(self.catched_msg["to"], ["test@scrapy.org"])
+        self.assertEqual(self.catched_msg["to"], ["test@frapy.org"])
         self.assertEqual(self.catched_msg["subject"], "subject")
         self.assertEqual(self.catched_msg["body"], "body")
 
         msg = self.catched_msg["msg"]
-        self.assertEqual(msg["to"], "test@scrapy.org")
+        self.assertEqual(msg["to"], "test@frapy.org")
         self.assertEqual(msg["subject"], "subject")
         self.assertEqual(msg.get_payload(), "body")
         self.assertEqual(msg.get("Content-Type"), "text/plain")
@@ -38,17 +38,17 @@ class MailSenderTest(unittest.TestCase):
     def test_send_single_values_to_and_cc(self):
         mailsender = MailSender(debug=True)
         mailsender.send(
-            to="test@scrapy.org",
+            to="test@frapy.org",
             subject="subject",
             body="body",
-            cc="test@scrapy.org",
+            cc="test@frapy.org",
             _callback=self._catch_mail_sent,
         )
 
     def test_send_html(self):
         mailsender = MailSender(debug=True)
         mailsender.send(
-            to=["test@scrapy.org"],
+            to=["test@frapy.org"],
             subject="subject",
             body="<p>body</p>",
             mimetype="text/html",
@@ -67,7 +67,7 @@ class MailSenderTest(unittest.TestCase):
 
         mailsender = MailSender(debug=True)
         mailsender.send(
-            to=["test@scrapy.org"],
+            to=["test@frapy.org"],
             subject="subject",
             body="body",
             attachs=attachs,
@@ -75,12 +75,12 @@ class MailSenderTest(unittest.TestCase):
         )
 
         assert self.catched_msg
-        self.assertEqual(self.catched_msg["to"], ["test@scrapy.org"])
+        self.assertEqual(self.catched_msg["to"], ["test@frapy.org"])
         self.assertEqual(self.catched_msg["subject"], "subject")
         self.assertEqual(self.catched_msg["body"], "body")
 
         msg = self.catched_msg["msg"]
-        self.assertEqual(msg["to"], "test@scrapy.org")
+        self.assertEqual(msg["to"], "test@frapy.org")
         self.assertEqual(msg["subject"], "subject")
 
         payload = msg.get_payload()
@@ -100,7 +100,7 @@ class MailSenderTest(unittest.TestCase):
         body = "bödÿ-àéïöñß"
         mailsender = MailSender(debug=True)
         mailsender.send(
-            to=["test@scrapy.org"],
+            to=["test@frapy.org"],
             subject=subject,
             body=body,
             charset="utf-8",
@@ -127,7 +127,7 @@ class MailSenderTest(unittest.TestCase):
 
         mailsender = MailSender(debug=True)
         mailsender.send(
-            to=["test@scrapy.org"],
+            to=["test@frapy.org"],
             subject=subject,
             body=body,
             attachs=attachs,
@@ -157,10 +157,10 @@ class MailSenderTest(unittest.TestCase):
         mailsender = MailSender(debug=False, smtphost="smtp.testhost.com")
 
         factory = mailsender._create_sender_factory(
-            to_addrs=["test@scrapy.org"], msg="test", d=defer.Deferred()
+            to_addrs=["test@frapy.org"], msg="test", d=defer.Deferred()
         )
 
-        context = factory.buildProtocol("test@scrapy.org").context
+        context = factory.buildProtocol("test@frapy.org").context
         if twisted_version >= Version("twisted", 21, 2, 0):
             self.assertIsInstance(context, ClientTLSOptions)
         else:

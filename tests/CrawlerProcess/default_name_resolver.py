@@ -1,8 +1,8 @@
-import scrapy
-from scrapy.crawler import CrawlerProcess
+import frapy
+from frapy.crawler import CrawlerProcess
 
 
-class IPv6Spider(scrapy.Spider):
+class IPv6Spider(frapy.Spider):
     """
     Raises a twisted.internet.error.DNSLookupError:
     the default name resolver does not handle IPv6 addresses.

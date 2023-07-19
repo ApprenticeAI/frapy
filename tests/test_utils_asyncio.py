@@ -4,7 +4,7 @@ from unittest import TestCase
 
 from pytest import mark
 
-from scrapy.utils.reactor import (
+from frapy.utils.reactor import (
     install_reactor,
     is_asyncio_reactor_installed,
     set_asyncio_event_loop,

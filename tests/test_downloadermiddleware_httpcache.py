@@ -5,17 +5,17 @@ import time
 import unittest
 from contextlib import contextmanager
 
-from scrapy.downloadermiddlewares.httpcache import HttpCacheMiddleware
-from scrapy.exceptions import IgnoreRequest
-from scrapy.http import HtmlResponse, Request, Response
-from scrapy.settings import Settings
-from scrapy.spiders import Spider
-from scrapy.utils.test import get_crawler
+from frapy.downloadermiddlewares.httpcache import HttpCacheMiddleware
+from frapy.exceptions import IgnoreRequest
+from frapy.http import HtmlResponse, Request, Response
+from frapy.settings import Settings
+from frapy.spiders import Spider
+from frapy.utils.test import get_crawler
 
 
 class _BaseTest(unittest.TestCase):
-    storage_class = "scrapy.extensions.httpcache.DbmCacheStorage"
-    policy_class = "scrapy.extensions.httpcache.RFC2616Policy"
+    storage_class = "frapy.extensions.httpcache.DbmCacheStorage"
+    policy_class = "frapy.extensions.httpcache.RFC2616Policy"
 
     def setUp(self):
         self.yesterday = email.utils.formatdate(time.time() - 86400)
@@ -145,7 +145,7 @@ class DefaultStorageTest(_BaseTest):
 
 
 class DbmStorageTest(DefaultStorageTest):
-    storage_class = "scrapy.extensions.httpcache.DbmCacheStorage"
+    storage_class = "frapy.extensions.httpcache.DbmCacheStorage"
 
 
 class DbmStorageWithCustomDbmModuleTest(DbmStorageTest):
@@ -162,7 +162,7 @@ class DbmStorageWithCustomDbmModuleTest(DbmStorageTest):
 
 
 class FilesystemStorageTest(DefaultStorageTest):
-    storage_class = "scrapy.extensions.httpcache.FilesystemCacheStorage"
+    storage_class = "frapy.extensions.httpcache.FilesystemCacheStorage"
 
 
 class FilesystemStorageGzipTest(FilesystemStorageTest):
@@ -172,7 +172,7 @@ class FilesystemStorageGzipTest(FilesystemStorageTest):
 
 
 class DummyPolicyTest(_BaseTest):
-    policy_class = "scrapy.extensions.httpcache.DummyPolicy"
+    policy_class = "frapy.extensions.httpcache.DummyPolicy"
 
     def test_middleware(self):
         with self._middleware() as mw:
@@ -265,7 +265,7 @@ class DummyPolicyTest(_BaseTest):
 
 
 class RFC2616PolicyTest(DefaultStorageTest):
-    policy_class = "scrapy.extensions.httpcache.RFC2616Policy"
+    policy_class = "frapy.extensions.httpcache.RFC2616Policy"
 
     def _process_requestresponse(self, mw, request, response):
         result = None

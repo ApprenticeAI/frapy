@@ -2,10 +2,10 @@ import warnings
 from unittest import TestCase
 from urllib.parse import urlparse
 
-from scrapy.http import Request, Response
-from scrapy.spidermiddlewares.offsite import OffsiteMiddleware, PortWarning, URLWarning
-from scrapy.spiders import Spider
-from scrapy.utils.test import get_crawler
+from frapy.http import Request, Response
+from frapy.spidermiddlewares.offsite import OffsiteMiddleware, PortWarning, URLWarning
+from frapy.spiders import Spider
+from frapy.utils.test import get_crawler
 
 
 class TestOffsiteMiddleware(TestCase):
@@ -18,29 +18,29 @@ class TestOffsiteMiddleware(TestCase):
     def _get_spiderargs(self):
         return dict(
             name="foo",
-            allowed_domains=["scrapytest.org", "scrapy.org", "scrapy.test.org"],
+            allowed_domains=["frapytest.org", "frapy.org", "frapy.test.org"],
         )
 
     def test_process_spider_output(self):
-        res = Response("http://scrapytest.org")
+        res = Response("http://frapytest.org")
 
         onsite_reqs = [
-            Request("http://scrapytest.org/1"),
-            Request("http://scrapy.org/1"),
-            Request("http://sub.scrapy.org/1"),
+            Request("http://frapytest.org/1"),
+            Request("http://frapy.org/1"),
+            Request("http://sub.frapy.org/1"),
             Request("http://offsite.tld/letmepass", dont_filter=True),
-            Request("http://scrapy.test.org/"),
-            Request("http://scrapy.test.org:8000/"),
+            Request("http://frapy.test.org/"),
+            Request("http://frapy.test.org:8000/"),
         ]
         offsite_reqs = [
-            Request("http://scrapy2.org"),
+            Request("http://frapy2.org"),
             Request("http://offsite.tld/"),
-            Request("http://offsite.tld/scrapytest.org"),
-            Request("http://offsite.tld/rogue.scrapytest.org"),
-            Request("http://rogue.scrapytest.org.haha.com"),
-            Request("http://roguescrapytest.org"),
+            Request("http://offsite.tld/frapytest.org"),
+            Request("http://offsite.tld/rogue.frapytest.org"),
+            Request("http://rogue.frapytest.org.haha.com"),
+            Request("http://roguefrapytest.org"),
             Request("http://test.org/"),
-            Request("http://notscrapy.test.org/"),
+            Request("http://notfrapy.test.org/"),
         ]
         reqs = onsite_reqs + offsite_reqs
 
@@ -53,7 +53,7 @@ class TestOffsiteMiddleware2(TestOffsiteMiddleware):
         return dict(name="foo", allowed_domains=None)
 
     def test_process_spider_output(self):
-        res = Response("http://scrapytest.org")
+        res = Response("http://frapytest.org")
         reqs = [Request("http://a.com/b.html"), Request("http://b.com/1")]
         out = list(self.mw.process_spider_output(res, reqs, self.spider))
         self.assertEqual(out, reqs)
@@ -66,12 +66,12 @@ class TestOffsiteMiddleware3(TestOffsiteMiddleware2):
 
 class TestOffsiteMiddleware4(TestOffsiteMiddleware3):
     def _get_spiderargs(self):
-        bad_hostname = urlparse("http:////scrapytest.org").hostname
-        return dict(name="foo", allowed_domains=["scrapytest.org", None, bad_hostname])
+        bad_hostname = urlparse("http:////frapytest.org").hostname
+        return dict(name="foo", allowed_domains=["frapytest.org", None, bad_hostname])
 
     def test_process_spider_output(self):
-        res = Response("http://scrapytest.org")
-        reqs = [Request("http://scrapytest.org/1")]
+        res = Response("http://frapytest.org")
+        reqs = [Request("http://frapytest.org/1")]
         out = list(self.mw.process_spider_output(res, reqs, self.spider))
         self.assertEqual(out, reqs)
 
@@ -79,9 +79,9 @@ class TestOffsiteMiddleware4(TestOffsiteMiddleware3):
 class TestOffsiteMiddleware5(TestOffsiteMiddleware4):
     def test_get_host_regex(self):
         self.spider.allowed_domains = [
-            "http://scrapytest.org",
-            "scrapy.org",
-            "scrapy.test.org",
+            "http://frapytest.org",
+            "frapy.org",
+            "frapy.test.org",
         ]
         with warnings.catch_warnings(record=True) as w:
             warnings.simplefilter("always")
@@ -92,9 +92,9 @@ class TestOffsiteMiddleware5(TestOffsiteMiddleware4):
 class TestOffsiteMiddleware6(TestOffsiteMiddleware4):
     def test_get_host_regex(self):
         self.spider.allowed_domains = [
-            "scrapytest.org:8000",
-            "scrapy.org",
-            "scrapy.test.org",
+            "frapytest.org:8000",
+            "frapy.org",
+            "frapy.test.org",
         ]
         with warnings.catch_warnings(record=True) as w:
             warnings.simplefilter("always")

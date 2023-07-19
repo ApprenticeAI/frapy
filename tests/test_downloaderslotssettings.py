@@ -3,8 +3,8 @@ import time
 from twisted.internet import defer
 from twisted.trial.unittest import TestCase
 
-from scrapy.crawler import CrawlerRunner
-from scrapy.http import Request
+from frapy.crawler import CrawlerRunner
+from frapy.http import Request
 from tests.mockserver import MockServer
 from tests.spiders import MetaSpider
 

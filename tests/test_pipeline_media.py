@@ -7,18 +7,18 @@ from twisted.internet.defer import Deferred, inlineCallbacks
 from twisted.python.failure import Failure
 from twisted.trial import unittest
 
-from scrapy import signals
-from scrapy.http import Request, Response
-from scrapy.http.request import NO_CALLBACK
-from scrapy.pipelines.files import FileException
-from scrapy.pipelines.images import ImagesPipeline
-from scrapy.pipelines.media import MediaPipeline
-from scrapy.settings import Settings
-from scrapy.spiders import Spider
-from scrapy.utils.deprecate import ScrapyDeprecationWarning
-from scrapy.utils.log import failure_to_exc_info
-from scrapy.utils.signal import disconnect_all
-from scrapy.utils.test import get_crawler
+from frapy import signals
+from frapy.http import Request, Response
+from frapy.http.request import NO_CALLBACK
+from frapy.pipelines.files import FileException
+from frapy.pipelines.images import ImagesPipeline
+from frapy.pipelines.media import MediaPipeline
+from frapy.settings import Settings
+from frapy.spiders import Spider
+from frapy.utils.deprecate import ScrapyDeprecationWarning
+from frapy.utils.log import failure_to_exc_info
+from frapy.utils.signal import disconnect_all
+from frapy.utils.test import get_crawler
 
 try:
     from PIL import Image  # noqa: imported just to check for the import error

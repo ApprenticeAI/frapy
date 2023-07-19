@@ -1,7 +1,7 @@
 import unittest
 from unittest import mock
 
-from scrapy.item import ABCMeta, Field, Item, ItemMeta
+from frapy.item import ABCMeta, Field, Item, ItemMeta
 
 
 class ItemTest(unittest.TestCase):
@@ -274,7 +274,7 @@ class ItemMetaTest(unittest.TestCase):
                     # For rationale of this see:
                     # https://github.com/python/cpython/blob/ee1a81b77444c6715cbe610e951c655b6adab88b/Lib/test/test_super.py#L222
                     return (
-                        __class__  # noqa  https://github.com/scrapy/scrapy/issues/2836
+                        __class__  # noqa  https://github.com/frapy/frapy/issues/2836
                     )
 
             MyItem()
