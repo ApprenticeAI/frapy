@@ -61,7 +61,7 @@ setup(
         "Tracker": "https://github.com/frapy/frapy/issues",
     },
     description="A high-level Web Crawling and Web Scraping framework",
-    long_description=open("README.rst", encoding="utf-8").read(),
+    long_description="",
     author="Frapy developers",
     author_email="pablo@pablohoffman.com",
     maintainer="Pablo Hoffman",
